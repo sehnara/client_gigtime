@@ -24,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/*" element={<Home />} />
         <Route path="/hello" element={<Hello />} />
+        {/* <hr/>/ */}
       </Routes>
     </BrowserRouter>
   );
