@@ -1,9 +1,10 @@
 import React from "react";
+import LocationInput from "../component/LocationInput";
 
 const Home = () => {
   return (
-    <div className="text-red-500">
-      <p>hello</p>
+    <div>
+      <LocationInput />
     </div>
   );
 };

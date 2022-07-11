@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
-import Hello from "./pages/hello";
 
 function App() {
   //GET TEST
@@ -23,7 +22,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/*" element={<Home />} />
-        <Route path="/hello" element={<Hello />} />
       </Routes>
     </BrowserRouter>
   );
