@@ -5,7 +5,7 @@ type ButtonProps = {
   color?: string;
   width?: number;
   height?: number;
-  onClickEvent: () => {};
+  onClickEvent: () => void;
 };
 
 const Button = ({ title, color, width, height, onClickEvent }: ButtonProps) => {
@@ -16,7 +16,7 @@ const Button = ({ title, color, width, height, onClickEvent }: ButtonProps) => {
     <div>
       <button
         onClick={onClick}
-        className="text-xs text-white bg-cyan-500 w-full h-10 rounded-lg font-extrabold"
+        className="text-base text-white bg-cyan-500 w-full rounded-lg font-extrabold h-12"
       >
         {title}
       </button>

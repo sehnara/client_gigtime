@@ -7,6 +7,10 @@ import OwnerPage from "./pages/OwnerPage";
 import WorkerLocationPage from "./pages/WorkerLocationPage";
 import WorkerDistancePage from "./pages/WorkerDistancePage";
 import WorkerHomePage from "./pages/WorkerHomePage";
+import WorkerInterviewPage from "./pages/WorkerInterviewPage";
+import WorkerNearWorkPage from "./pages/WorkerNearWorkPage";
+import WorkerReserveWorkPage from "./pages/WorkerReserveWorkPage";
+import WorkMyPage from "./pages/WorkMyPage";
 
 function App() {
   return (
@@ -18,6 +22,14 @@ function App() {
         <Route path="/worker/location" element={<WorkerLocationPage />} />
         <Route path="/worker/distance" element={<WorkerDistancePage />} />
         <Route path="/worker/home" element={<WorkerHomePage />} />
+        {/* 면접 신청 페이지 */}
+        <Route path="/worker/interview" element={<WorkerInterviewPage />} />
+        {/* 주변 일감 */}
+        <Route path="/worker/nearWork" element={<WorkerNearWorkPage />} />
+        {/* 알바 예약*/}
+        <Route path="/worker/reserveWork" element={<WorkerReserveWorkPage />} />
+        {/* 마이 페이지 */}
+        <Route path="/worker/mypage" element={<WorkMyPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -9,6 +9,7 @@ type StoreCardProps = {
   minPay: number;
   storeImage?: string;
   ment?: string;
+  onClickEvent?: () => {};
 };
 
 function StoreCard({
@@ -18,9 +19,10 @@ function StoreCard({
   minPay,
   storeImage,
   ment,
+  onClickEvent,
 }: StoreCardProps) {
   return (
-    <div className="">
+    <div className="" onClick={onClickEvent}>
       {/* 상단부 */}
       <div className="rounded-2xl shadow-black flex ">
         {/* 사진 */}

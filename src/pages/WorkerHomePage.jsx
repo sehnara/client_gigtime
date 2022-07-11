@@ -1,7 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import StoreCard from "../components/StoreCard";
 
 const WorkerHomePage = () => {
+  const navigate = useNavigate();
+
+  const onNextPage = () => {
+    navigate("/worker/interview");
+  };
+
   return (
     <div className="font-sans">
       {/* 상단 */}
@@ -31,6 +38,7 @@ const WorkerHomePage = () => {
           distance={124}
           jobs={["카운터", "청소", "음료제조"]}
           minPay={9850}
+          onClickEvent={onNextPage}
         />
       </div>
     </div>
