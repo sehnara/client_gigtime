@@ -27,7 +27,6 @@ const Button = ({ title, color, width, height, onClickEvent }: ButtonProps) => {
 Button.defaultProps = {
   width: 100,
   height: 100,
-  color: "red",
 };
 
 export default Button;
