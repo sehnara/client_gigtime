@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       flex: {
         2: "2 2 0%",
+        3: "3 3 0%",
+        4: "4 4 0%",
+        10: "10 10 0%",
       },
       fontFamily: {
         'oxanium' : ['"Oxanium"', 'cursive'] 

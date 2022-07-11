@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "tailwindcss/tailwind.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import InitPage from "./pages/InitPage";
@@ -8,22 +7,12 @@ import OwnerPage from "./pages/OwnerPage";
 import WorkerLocationPage from "./pages/WorkerLocationPage";
 import WorkerDistancePage from "./pages/WorkerDistancePage";
 import WorkerHomePage from "./pages/WorkerHomePage";
+import WorkerInterviewPage from "./pages/WorkerInterviewPage";
+import WorkerNearWorkPage from "./pages/WorkerNearWorkPage";
+import WorkerReserveWorkPage from "./pages/WorkerReserveWorkPage";
+import WorkMyPage from "./pages/WorkMyPage";
 
 function App() {
-  //GET TEST
-  const getTest = async () => {
-    const response = await axios("http://localhost:8080/tweets").then((res) => {
-      const data = res.data;
-      const a = data.name;
-      console.log(a);
-    });
-    return response;
-  };
-
-  useEffect(() => {
-    getTest();
-  }, []);
-
   return (
     <BrowserRouter>
       <Routes>
@@ -33,6 +22,14 @@ function App() {
         <Route path="/worker/location" element={<WorkerLocationPage />} />
         <Route path="/worker/distance" element={<WorkerDistancePage />} />
         <Route path="/worker/home" element={<WorkerHomePage />} />
+        {/* 면접 신청 페이지 */}
+        <Route path="/worker/interview" element={<WorkerInterviewPage />} />
+        {/* 주변 일감 */}
+        <Route path="/worker/nearWork" element={<WorkerNearWorkPage />} />
+        {/* 알바 예약*/}
+        <Route path="/worker/reserveWork" element={<WorkerReserveWorkPage />} />
+        {/* 마이 페이지 */}
+        <Route path="/worker/mypage" element={<WorkMyPage />} />
       </Routes>
     </BrowserRouter>
   );
