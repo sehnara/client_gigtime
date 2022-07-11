@@ -9,6 +9,9 @@ module.exports = {
         4: "4 4 0%",
         10: "10 10 0%",
       },
+      width: {
+        128: "32rem",
+      },
     },
   },
   plugins: [],

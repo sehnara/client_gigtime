@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useReducer, useRef } from "react";
 import { FaRegComment } from "react-icons/fa";
 import { BsCoin } from "react-icons/bs";
+import { AiOutlineCalendar } from "react-icons/ai";
 
+type MODE = "NORMAL" | "NEAR";
+type WORK = {
+  date: string;
+  jobs: string;
+  pay: string;
+};
 type StoreCardProps = {
   store: string;
   distance: number;
@@ -9,7 +16,10 @@ type StoreCardProps = {
   minPay: number;
   storeImage?: string;
   ment?: string;
-  onClickEvent?: () => {};
+  mode: MODE;
+  works: WORK[];
+  onClickEvent?: () => void;
+  onDateClickEvent?: () => void;
 };
 
 function StoreCard({
@@ -19,10 +29,15 @@ function StoreCard({
   minPay,
   storeImage,
   ment,
+  mode,
+  works,
   onClickEvent,
+  onDateClickEvent,
 }: StoreCardProps) {
+  const ref = useRef(1);
+
   return (
-    <div className="" onClick={onClickEvent}>
+    <div className="mb-4" onClick={onClickEvent}>
       {/* 상단부 */}
       <div className="rounded-2xl shadow-black flex ">
         {/* 사진 */}
@@ -34,7 +49,15 @@ function StoreCard({
 
         <div>
           {/* 가게명 */}
-          <h3 className="mt-2 font-bold ">{store}</h3>
+          {mode === "NEAR" ? (
+            <div className="flex items-center ">
+              <h3 className="mt-2 font-bold ">{store}</h3>
+              <p className="text-gray-400 text-xs mt-3 ml-3">총 3건</p>
+            </div>
+          ) : (
+            <h3 className="mt-2 font-bold ">{store}</h3>
+          )}
+
           {/* 거리 */}
           <p className="mt-1">{distance}m</p>
           {/* 직종 */}
@@ -53,20 +76,48 @@ function StoreCard({
         </div>
       </div>
       {/* 하단부 */}
-      <div className="mt-2 p-4 shadow-lg rounded-lg">
-        {/* 사장님 멘트 */}
-        <div className="flex items-center">
-          <FaRegComment className="mr-2" />
-          <p className="text-xs">{ment}</p>
+      {mode === "NEAR" ? (
+        <div className="flex overflow-scroll p-2 w-">
+          {works.map((e) => {
+            ref.current += 1;
+            return (
+              <div
+                key={ref.current}
+                className="mt-2 p-4 shadow-lg rounded-lg"
+                onClick={onDateClickEvent}
+              >
+                {/* 시급 */}
+                <div className="flex items-center mt-2 w-52 mb-2">
+                  <BsCoin className="mr-2" />
+                  <p className="text-xs">
+                    시급 <span className="font-bold">{e.pay}</span>
+                  </p>
+                </div>
+                {/* 날짜 */}
+                <div className="flex items-center w-52">
+                  <AiOutlineCalendar className="mr-2" />
+                  <p className="text-xs">{e.date}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
-        {/* 시급 */}
-        <div className="flex items-center mt-2">
-          <BsCoin className="mr-2" />
-          <p className="text-xs">
-            시급 <span className="font-bold">{minPay}</span> ~
-          </p>
+      ) : (
+        <div className="mt-2 p-4 shadow-lg rounded-lg">
+          {/* 사장님 멘트 */}
+          <div className="flex items-center">
+            <FaRegComment className="mr-2" />
+            <p className="text-xs">{ment}</p>
+          </div>
+          {/* 시급 */}
+          <div className="flex items-center mt-2">
+            <BsCoin className="mr-2" />
+            <p className="text-xs">
+              시급 <span className="font-bold">{minPay}</span> ~
+            </p>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -74,6 +125,7 @@ function StoreCard({
 StoreCard.defaultProps = {
   ment: "즐겁게 일하실 분 기다립니다!",
   storeImage: "",
+  mode: "NORMAL",
 };
 
 export default StoreCard;

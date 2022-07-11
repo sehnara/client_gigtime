@@ -12,7 +12,7 @@ const SelectBox = ({ data, getData }: SelectBoxProp) => {
           <div
             onClick={() => getData(e)}
             key={e}
-            className="rounded-sm text-center py-2 shadow-sm  mx-2 my-2 hover:bg-cyan-500 hover:text-white cursor-pointer"
+            className="rounded-sm text-center py-2 shadow-sm  mx-2 my-2 hover:bg-cyan-500 hover:text-white cursor-pointer text-sm"
           >
             {e}
           </div>
