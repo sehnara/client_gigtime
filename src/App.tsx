@@ -3,7 +3,9 @@ import "tailwindcss/tailwind.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import InitPage from "./pages/InitPage";
 import LoginPage from "./pages/LoginPage";
-import OwnerPage from "./pages/OwnerPage";
+import OwnerStoreNamePage from "./pages/OwnerStoreNamePage";
+import OwnerStoreLocationPage from "./pages/OwnerStoreLocationPage";
+import OwnerMyPage from "./pages/OwnerMyPage";
 import WorkerLocationPage from "./pages/WorkerLocationPage";
 import WorkerDistancePage from "./pages/WorkerDistancePage";
 import WorkerHomePage from "./pages/WorkerHomePage";
@@ -41,8 +43,10 @@ function App() {
       <Routes>
         <Route path="/*" element={<InitPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/owner" element={<OwnerPage />} />
-        <Route path="/worker/location" element={<WorkerLocationPage />} />
+        <Route path="/owner/storename" element={<OwnerStoreNamePage />} />
+        <Route path="/owner/storelocation" element={<OwnerStoreLocationPage />} />
+        <Route path="/owner/mypage" element={<OwnerMyPage />} />
+        <Route path="/worker/location" element={<WorkerLocationPage title="내 위치"/>} />
         <Route path="/worker/distance" element={<WorkerDistancePage />} />
         <Route path="/worker/home" element={<WorkerHomePage />} />
         {/* 면접 신청 페이지 */}

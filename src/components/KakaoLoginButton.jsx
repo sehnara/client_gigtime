@@ -13,21 +13,27 @@ function KakaoLoginButton() {
     function kakaoLogin() {
         window.Kakao.Auth.login({
             scope: 'profile_nickname, account_email',
-            success: function() {
+            success: function(response) {
+                console.log(response);
                 window.Kakao.API.request({
                     url: '/v2/user/me',
                     success: (res) => {
+                        console.log(res);
                         const kakao_account = res.kakao_account;
                         const nickName = kakao_account.profile.nickname
                         const email = kakao_account.email
                         axios.post('/worker/signup', 
                             {
-                                nickname: `${nickName}`,
                                 email: `${email}`
                             }
                         )
                         .then(function (response) {
-                            navigate('/login');
+                            if (response === 'worker')
+                                navigate('/worker/nearWork');
+                            else if (response === 'owner')
+                                navigate('/owner/mypage')
+                            else
+                                navigate('/login')
                         })
                         .catch(function (error) {
                             console.log(error);
