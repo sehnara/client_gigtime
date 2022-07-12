@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 const WorkerHomePage = () => {
   const navigate = useNavigate();
   const state = useSelector((state) => state);
-  console.log(state.sign);
+  
   const onNextPage = () => {
     navigate("/worker/interview");
   };

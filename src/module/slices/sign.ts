@@ -26,7 +26,7 @@ export const sign = createSlice({
       state.location = action.payload;
     },
     setRange(state, action) {
-      state.range = action.payload;
+      state.range = Number(action.payload);
     },
   },
 });
