@@ -20,7 +20,7 @@ function KakaoLoginButton() {
                     success: (res) => {
                         console.log(res);
                         const kakao_account = res.kakao_account;
-                        const nickName = kakao_account.profile.nickname
+                        // const nickName = kakao_account.profile.nickname
                         const email = kakao_account.email
                         axios.post('/worker/signup', 
                             {
