@@ -12,6 +12,9 @@ module.exports = {
       width: {
         128: "32rem",
       },
+      fontFamily: {
+        oxanium: ['"Oxanium"', "cursive"],
+      },
     },
   },
   plugins: [],
