@@ -2,11 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import StoreCard from "../components/StoreCard";
 import { useDispatch, useSelector } from "react-redux";
+import man from "../images/worker.png";
 
 const WorkerHomePage = () => {
   const navigate = useNavigate();
   const state = useSelector((state) => state);
-  
+
   const onNextPage = () => {
     navigate("/worker/interview");
   };
@@ -29,7 +30,12 @@ const WorkerHomePage = () => {
           </p>
           <p className="text-2xl mb-0.5 font-medium">일 할 시간!</p>
         </div>
-        <img src="../images/walking.png" alt="walking man" />
+        <img
+          src={man}
+          alt="walking man"
+          width="150"
+          className="transform translate-x-12"eeee
+        />
       </div>
       {/* 하단 */}
       <div className="border-t-4 "></div>
