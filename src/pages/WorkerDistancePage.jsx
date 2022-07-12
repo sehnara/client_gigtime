@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { setRange } from "../module/slices/sign";
 
 const WorkerDistancePage = () => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
   const [distance, setDistance] = useState(0);
+  const signData = state.sign;
+
   const navigate = useNavigate();
 
   const onchangeDistance = (e) => {
@@ -13,7 +19,7 @@ const WorkerDistancePage = () => {
   // 다음 페이지로 가입시더
   const onNextPage = () => {
     // distance 값 처리해야함
-    console.log(distance);
+    dispatch(setRange(distance));
     navigate("/worker/home");
   };
 
