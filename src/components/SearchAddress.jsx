@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
-
 function SearchAddress(props) {
-
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = "";
-        console.log(data);
         if (data.addressType === "R") {
             if (data.bname !== "") {
                 extraAddress += data.bname;
@@ -16,7 +13,8 @@ function SearchAddress(props) {
                 extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
             }
             fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
-        }
+         }
+         /*sessionStorage.setItem('worker', {location :data.jibunaddress})*/
         console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 

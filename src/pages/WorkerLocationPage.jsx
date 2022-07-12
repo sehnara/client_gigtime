@@ -6,7 +6,6 @@ import SearchAddress from "../components/SearchAddress";
 
 const WorkerLocationPage = ( {title} ) => {
   const navigate = useNavigate();
-  
   function onClickToNext() {
     navigate('/worker/distance');
   }

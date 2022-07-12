@@ -10,6 +10,7 @@ function KakaoLoginButton() {
         }
     }, []);
 
+
     function kakaoLogin() {
         window.Kakao.Auth.login({
             scope: 'profile_nickname, account_email',
@@ -22,7 +23,7 @@ function KakaoLoginButton() {
                         const kakao_account = res.kakao_account;
                         const nickName = kakao_account.profile.nickname
                         const email = kakao_account.email
-                        axios.post('/worker/signup', 
+                        axios.post('http://localhost:4000/check/member', 
                             {
                                 email: `${email}`
                             }
@@ -32,12 +33,14 @@ function KakaoLoginButton() {
                                 navigate('/worker/nearWork');
                             else if (response === 'owner')
                                 navigate('/owner/mypage')
-                            else
+                            else{
                                 navigate('/login')
+                                console.log(response);
+                            }
                         })
                         .catch(function (error) {
                             console.log(error);
-                            navigate('/login');
+                            // navigate('/login');
                         })
                     }
                 });

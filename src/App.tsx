@@ -31,12 +31,12 @@ function App() {
   //   onTest();
   // }, []);
 
-  const users = useSelector<ReducerType, User[]>((state) => state.users);
-  const dispatch = useDispatch();
+  //const users = useSelector<ReducerType, User[]>((state) => state.users);
+  //const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(addUser({ id: 3, name: "강세훈" }));
-  }, []);
+  //useEffect(() => {
+   // dispatch(addUser({ id: 3, name: "강세훈" }));
+ //}, []);
 
   return (
     <BrowserRouter>
