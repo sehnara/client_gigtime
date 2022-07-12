@@ -11,8 +11,20 @@ import WorkerInterviewPage from "./pages/WorkerInterviewPage";
 import WorkerNearWorkPage from "./pages/WorkerNearWorkPage";
 import WorkerReserveWorkPage from "./pages/WorkerReserveWorkPage";
 import WorkMyPage from "./pages/WorkMyPage";
+import axios from "axios";
 
 function App() {
+  const onTest = async () => {
+    await axios
+      .get("http://localhost:4000/")
+      .then((res) => console.log(res.data))
+      .catch();
+  };
+
+  useEffect(() => {
+    onTest();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
