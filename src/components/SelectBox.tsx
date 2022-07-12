@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+
+type MODE = "NORMAL" | "RESERVE";
+
 type SelectBoxProp = {
   data: string[];
   getData: (e: any) => void;
+  mode?: MODE;
 };
 
-const SelectBox = ({ data, getData }: SelectBoxProp) => {
+const SelectBox = ({ data, getData, mode }: SelectBoxProp) => {
   return (
     <div className=" shadow-lg shadow-slate-300 h-40 overflow-scroll rounded-md">
       {data.map((e) => {
@@ -22,4 +26,7 @@ const SelectBox = ({ data, getData }: SelectBoxProp) => {
   );
 };
 
+SelectBox.defaultProps = {
+  mode: "NORMAL",
+};
 export default SelectBox;

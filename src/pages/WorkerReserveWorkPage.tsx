@@ -3,8 +3,11 @@ import Button from "../components/Button";
 import Header from "../components/Header";
 import { AiOutlineCalendar } from "react-icons/ai";
 import SelectBox from "../components/SelectBox";
+import { useNavigate } from "react-router-dom";
 
 const WorkerReserveWorkPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Header title="알바예약" />
@@ -38,9 +41,13 @@ const WorkerReserveWorkPage = () => {
         <p className="text-sm text-gray-500">
           1시간 단위로 알바 예약이 가능합니다.
         </p>
-        <div className="flex items-center w-52 my-4 ">
+        <div className="flex items-center w-full my-4">
           <AiOutlineCalendar className="mr-2" />
           <p className="text-xs">2022년 7월 22일 금요일</p>
+          {/* 직종 */}
+          <p className="text-xs ml-6 bg-gray-200 px-2 py-1 rounded-2xl">
+            카운터
+          </p>
         </div>
         <SelectBox
           getData={() => {
@@ -59,6 +66,7 @@ const WorkerReserveWorkPage = () => {
             "20:00~21:00",
             "21:00~22:00",
           ]}
+          mode={"RESERVE"}
         />
       </div>
       <div className="border-t-4 "></div>
@@ -98,7 +106,7 @@ const WorkerReserveWorkPage = () => {
         <Button
           title={"예약하기"}
           onClickEvent={() => {
-            console.log("");
+            navigate("/worker/mypage");
           }}
         />
       </div>
