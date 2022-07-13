@@ -4,6 +4,8 @@ import StoreCard from "../components/StoreCard";
 import { useDispatch, useSelector } from "react-redux";
 import man from "../images/worker.png";
 import axios from "axios";
+import { setCurrentOrder } from "../module/slices/order";
+import { setStoreId } from "../module/slices/store";
 
 const WorkerHomePage = () => {
   const navigate = useNavigate();
@@ -11,8 +13,10 @@ const WorkerHomePage = () => {
   const loc = state.sign.location.split(" ")
   const locName = `${loc[0]} ${loc[1]} ${loc[2]}`
   const [stores, setStores] = useState([])
+  const dispatch = useDispatch();
 
-  const onNextPage = () => {
+  const onNextPage = (e) => {
+    dispatch(setStoreId(e))
     navigate("/worker/interview");
   };
 
@@ -67,7 +71,10 @@ const WorkerHomePage = () => {
                 jobs={["카운터", "청소", "음료제조"]}
                 minPay={store.minimum_wage}
                 ment = {store.description}
-                onClickEvent={onNextPage}
+                onClickEvent={()=>{
+                  // console.log(store.store_id)
+                  onNextPage(store.store_id)}
+                }
               />
             )
           })
