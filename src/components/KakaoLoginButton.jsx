@@ -24,7 +24,7 @@ function KakaoLoginButton() {
                     success: (res) => {
                         console.log(res);
                         const kakao_account = res.kakao_account;
-                        // const nickName = kakao_account.profile.nickname
+                        const nickName = kakao_account.profile.nickname
                         const email = kakao_account.email
                         dispatch(setName(nickName));
                         dispatch(setEmail(email));
@@ -34,7 +34,7 @@ function KakaoLoginButton() {
                             }
                         )
                         .then(function (response) {
-                            console.log("넘악?")
+                            // console.log("넘악?")
                             if (response === 'worker')
                                 navigate('/worker/nearWork');
                             else if (response === 'owner')
