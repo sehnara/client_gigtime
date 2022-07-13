@@ -1,14 +1,14 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import SearchAddress from "../components/SearchAddress";
 
-const WorkerLocationPage = ({ title }) => {
+const WorkerLocationPage = ( {title, src} ) => {
   const navigate = useNavigate();
 
   function onClickToNext() {
-    navigate("/worker/distance");
+    navigate(src);
   }
 
   return (
