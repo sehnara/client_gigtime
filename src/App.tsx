@@ -10,7 +10,7 @@ import WorkerLocationPage from "./pages/WorkerLocationPage";
 import WorkerDistancePage from "./pages/WorkerDistancePage";
 import WorkerHomePage from "./pages/WorkerHomePage";
 import WorkerInterviewPage from "./pages/WorkerInterviewPage";
-import WorkerNearWorkPage from "./pages/WorkerNearWorkPage";
+import WorkerNearWorkPage from "./pages/WorkerNearWorkPage.jsx";
 import WorkerReserveWorkPage from "./pages/WorkerReserveWorkPage";
 import WorkMyPage from "./pages/WorkMyPage";
 import axios from "axios";

@@ -20,7 +20,13 @@ const WorkerDistancePage = () => {
   // 다음 페이지로 가입시더
   const onNextPage = () => {
     // distance 값 처리해야함
+    // console.log('>>>>>', signData)
+    sessionStorage.setItem("worker_id", 4)
     axios.post('http://localhost:4000/worker/signup',signData)
+    .then(res=> {
+      // console.log(res)
+      // sessionStorage.setItem("worker_id",4)
+    })
     .catch(function (error) {
         console.log(error);
     })
@@ -33,7 +39,7 @@ const WorkerDistancePage = () => {
     <div className="font-sans">
       {/* 상단 */}
       <div className=" m-8  flex items-center justify-between">
-        <h1 className="text-2xl font-bold">인천 서구 심곡동</h1>
+        <h1 className="text-2xl font-bold">{signData.location}</h1>
       </div>
       {/* 중반 */}
       <div className=" m-8 mt-10">

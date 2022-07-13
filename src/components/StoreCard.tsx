@@ -9,6 +9,7 @@ type WORK = {
   jobs: string;
   pay: string;
 };
+
 type StoreCardProps = {
   store: string;
   distance: number;
