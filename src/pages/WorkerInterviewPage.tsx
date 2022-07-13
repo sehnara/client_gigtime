@@ -57,6 +57,7 @@ const WorkerInterviewPage = () => {
       <div className="mx-8 m-4">
         <h3 className="font-bold mb-4">날짜선택</h3>
         <SelectBox
+          mode="NORMAL"
           getData={getDate}
           data={["2022년 7월 9일", "2022년 7월 24일", "2022년 7월 25일"]}
         />
@@ -66,6 +67,7 @@ const WorkerInterviewPage = () => {
       <div className="mx-8 m-4">
         <h3 className="font-bold mb-4">시간선택</h3>
         <SelectBox
+          mode="NORMAL"
           getData={getTime}
           data={["10:00~11:00", "11:00~12:00", "13:00~14:00"]}
         />

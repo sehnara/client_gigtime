@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 function JoinSelect({ src, title, text }) {
     const navigate = useNavigate();
     
+
     function clickToNextPage() {
         if (title === '사장님') {
             navigate('/owner/storename');

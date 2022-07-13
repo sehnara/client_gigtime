@@ -11,11 +11,34 @@ import WorkerLocationPage from "./pages/WorkerLocationPage";
 import WorkerDistancePage from "./pages/WorkerDistancePage";
 import WorkerHomePage from "./pages/WorkerHomePage";
 import WorkerInterviewPage from "./pages/WorkerInterviewPage";
-import WorkerNearWorkPage from "./pages/WorkerNearWorkPage";
+import WorkerNearWorkPage from "./pages/WorkerNearWorkPage.jsx";
 import WorkerReserveWorkPage from "./pages/WorkerReserveWorkPage";
 import WorkMyPage from "./pages/WorkMyPage";
+import axios from "axios";
+
+import { useDispatch, useSelector } from "react-redux";
+import { ReducerType } from "./module/rootReducer";
+import { addUser, User } from "./module/slices/users";
 
 function App() {
+  // const onTest = async () => {
+  //   await axios
+  //     .get("http://localhost:4000/")
+  //     .then((res) => console.log(res.data))
+  //     .catch();
+  // };
+
+  // useEffect(() => {
+  //   onTest();
+  // }, []);
+
+  //const users = useSelector<ReducerType, User[]>((state) => state.users);
+  //const dispatch = useDispatch();
+
+  //useEffect(() => {
+   // dispatch(addUser({ id: 3, name: "강세훈" }));
+ //}, []);
+
   return (
     <BrowserRouter>
       <Routes>
