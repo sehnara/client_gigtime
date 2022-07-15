@@ -48,7 +48,7 @@ function App() {
         <Route path="/owner/storelocation" element={<OwnerStoreLocationPage />} />
         <Route path="/owner/jobtype" element={<OwnerJobTypePage />} />
         <Route path="/owner/mypage" element={<OwnerMyPage />} />
-        <Route path="/worker/location" element={<WorkerLocationPage title="내 위치를" src='/worker/distance'/>} />
+        <Route path="/worker/location" element={<WorkerLocationPage title="내 위치" src='/worker/distance'/>} />
         <Route path="/worker/distance" element={<WorkerDistancePage />} />
         <Route path="/worker/home" element={<WorkerHomePage />} />
         {/* 면접 신청 페이지 */}
