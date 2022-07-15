@@ -52,7 +52,7 @@ function App() {
         />
         <Route path="/owner/jobtype" element={<OwnerJobTypePage />} />
         <Route path="/owner/mypage" element={<OwnerMyPage />} />
-        <Route path="/owner/recruit" element={<OwnerRecruitNoticePage />} />
+        <Route path="/owner/recruit" element={<OwnerRecruitNoticePage />} /> 
         <Route
           path="/worker/location"
           element={
