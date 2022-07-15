@@ -19,6 +19,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { ReducerType } from "./module/rootReducer";
 import { addUser, User } from "./module/slices/users";
+import OwnerRecruitNoticePage from "./pages/OwnerRecruitNoticePage";
 
 function App() {
   // const onTest = async () => {
@@ -36,8 +37,8 @@ function App() {
   //const dispatch = useDispatch();
 
   //useEffect(() => {
-   // dispatch(addUser({ id: 3, name: "강세훈" }));
- //}, []);
+  // dispatch(addUser({ id: 3, name: "강세훈" }));
+  //}, []);
 
   return (
     <BrowserRouter>
@@ -45,12 +46,22 @@ function App() {
         <Route path="/*" element={<InitPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/owner/storename" element={<OwnerStoreNamePage />} />
-        <Route path="/owner/storelocation" element={<OwnerStoreLocationPage />} />
+        <Route
+          path="/owner/storelocation"
+          element={<OwnerStoreLocationPage />}
+        />
         <Route path="/owner/jobtype" element={<OwnerJobTypePage />} />
         <Route path="/owner/mypage" element={<OwnerMyPage />} />
-        <Route path="/worker/location" element={<WorkerLocationPage title="내 위치" src='/worker/distance'/>} />
+        <Route path="/owner/recruit" element={<OwnerRecruitNoticePage />} />
+        <Route
+          path="/worker/location"
+          element={
+            <WorkerLocationPage title="내 위치" src="/worker/distance" />
+          }
+        />
         <Route path="/worker/distance" element={<WorkerDistancePage />} />
         <Route path="/worker/home" element={<WorkerHomePage />} />
+
         {/* 면접 신청 페이지 */}
         <Route path="/worker/interview" element={<WorkerInterviewPage />} />
         {/* 주변 일감 */}
