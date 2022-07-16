@@ -21,7 +21,7 @@ function OwnerCompletePage() {
         <h2 className="text-3xl font-bold">환영합니다!</h2>
         <img
           width={200}
-          className="transform translate-x-36 translate-y-16 "
+          className="transform translate-x-36 translate-y-14 "
           src={dog}
         />
       </div>

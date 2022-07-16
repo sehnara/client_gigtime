@@ -1,6 +1,6 @@
 import React from "react";
 
-type ButtonProps = {
+type CardButtonProps = {
   title: string;
   color?: string;
   width?: number;
@@ -8,7 +8,7 @@ type ButtonProps = {
   onClickEvent: () => void;
 };
 
-const Button = ({ title, color, width, height, onClickEvent }: ButtonProps) => {
+const CardButton = ({ title, color, width, height, onClickEvent }: CardButtonProps) => {
   const onClick = () => {
     onClickEvent();
   };
@@ -16,7 +16,7 @@ const Button = ({ title, color, width, height, onClickEvent }: ButtonProps) => {
     
       <button
         onClick={onClick}
-        className={`text-base text-white bg-cyan-500 w-${width} rounded-lg font-extrabold h-12 mt-3`}
+        className={`text-base text-white ${color} w-${width} rounded-lg font-extrabold h-${height} mt-3 m-1`}
       >
         {title}
       </button>
@@ -24,9 +24,9 @@ const Button = ({ title, color, width, height, onClickEvent }: ButtonProps) => {
   );
 };
 
-Button.defaultProps = {
+CardButton.defaultProps = {
   width: "full",
   height: 100,
 };
 
-export default Button;
+export default CardButton;

@@ -30,18 +30,18 @@ const WorkMyPage = () => {
   }, []);
   
   const danchooRef = useRef(1);
-  const [tab, setTab] = useState("면접시간표");
+  const [tab, setTab] = useState("면접관리");
 
   const setMenu = (data: string) => {
     setTab(data);
   };
 
   const data = [
-    { time: 49, text: "긱타임으로 일 한 시간" },
-    { time: 3, text: "긱타임에서 합격한 매장 수" },
-    { time: 8, text: "긱타임에서 면접 본 횟수" },
-    { time: 237, text: "긱타임에서 번 돈(만 원)" },
-    { time: 10, text: "어려운 사장님 도와준 시간" },
+    { time: 49, text: "긱타임에서 모집공고 낸 횟수" },
+    { time: 3, text: "긱타임에서 면접 본 횟수" },
+    { time: 8, text: "내 매장의 긱워커는 몇 명?" },
+    { time: 237, text: "월 평균 알바비 (만 원)" },
+    { time: 10, text: "도움 받은 시간 (긱 SOS)" },
   ];
   return (
     <>
