@@ -23,7 +23,7 @@ const mockDict = {
 const RecruitTable = () => {
   const keyRef = useRef(1);
   return (
-    <div className="m-4">
+    <div className="m-8">
       {mock.map((e) => {
         keyRef.current += 1;
         return (
