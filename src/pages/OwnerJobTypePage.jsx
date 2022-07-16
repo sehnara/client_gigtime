@@ -81,7 +81,7 @@ const OwnerJobTypePage = () => {
   function onClickToNext() {
     navigate('/owner/upload');
   }
-
+  
   return (
     <>
       <Header title="회원가입"/>
