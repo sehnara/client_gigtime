@@ -13,8 +13,7 @@ const [stores, setStores] = useState([]);
 useEffect(()=>{
     axios.post("http://localhost:4000/worker/show/hourly_orders", 
     {'worker_id':sessionStorage.getItem('worker_id')}).then((res)=>{
-      // console.log("^^^^^^^^", stores)
-      setStores(res.data)
+      setStores(res.data) 
     })
   },[])
 
@@ -38,7 +37,7 @@ useEffect(()=>{
       </div>
       {/* 중반 */}
       <div className="mx-8">
-        { stores.map((e) => {
+        {stores && stores.map((e) => {
           ref.current += 1;
           return (
             <StoreCard
