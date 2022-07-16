@@ -7,6 +7,9 @@ import OwnerStoreNamePage from "./pages/OwnerStoreNamePage";
 import OwnerStoreLocationPage from "./pages/OwnerStoreLocationPage";
 import OwnerJobTypePage from "./pages/OwnerJobTypePage";
 import OwnerMyPage from "./pages/OwnerMyPage";
+import OwnerCompletePage from "./pages/OwnerCompletePage";
+import OwnerUploadPage from "./pages/OwnerUploadPage";
+import OwnerWagePage from "./pages/OwnerWagePage";
 import WorkerLocationPage from "./pages/WorkerLocationPage";
 import WorkerDistancePage from "./pages/WorkerDistancePage";
 import WorkerHomePage from "./pages/WorkerHomePage";
@@ -47,6 +50,9 @@ function App() {
         <Route path="/owner/storename" element={<OwnerStoreNamePage />} />
         <Route path="/owner/storelocation" element={<OwnerStoreLocationPage />} />
         <Route path="/owner/jobtype" element={<OwnerJobTypePage />} />
+        <Route path="/owner/upload" element={<OwnerUploadPage />} />
+        <Route path="/owner/wage" element={<OwnerWagePage />} />
+        <Route path="/owner/complete" element={<OwnerCompletePage />} />
         <Route path="/owner/mypage" element={<OwnerMyPage />} />
         <Route path="/worker/location" element={<WorkerLocationPage title="내 위치" src='/worker/distance'/>} />
         <Route path="/worker/distance" element={<WorkerDistancePage />} />

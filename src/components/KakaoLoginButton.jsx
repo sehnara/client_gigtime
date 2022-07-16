@@ -34,7 +34,7 @@ function KakaoLoginButton() {
                             }
                         )
                         .then(function (response) {
-                            // console.log("넘악?")
+                            console.log("넘악?")
                             if (response === 'worker')
                                 navigate('/worker/nearWork');
                             else if (response === 'owner')

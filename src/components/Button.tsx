@@ -13,19 +13,19 @@ const Button = ({ title, color, width, height, onClickEvent }: ButtonProps) => {
     onClickEvent();
   };
   return (
-    <div>
+    
       <button
         onClick={onClick}
-        className="text-base text-white bg-cyan-500 w-full rounded-lg font-extrabold h-12 mt-5"
+        className={`text-base text-white bg-cyan-500 w-${width} rounded-lg font-extrabold h-12 mt-5`}
       >
         {title}
       </button>
-    </div>
+    
   );
 };
 
 Button.defaultProps = {
-  width: 100,
+  width: "full",
   height: 100,
 };
 
