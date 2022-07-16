@@ -2,7 +2,20 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      flex: {
+        2: "2 2 0%",
+        3: "3 3 0%",
+        4: "4 4 0%",
+        10: "10 10 0%",
+      },
+      width: {
+        128: "32rem",
+      },
+      fontFamily: {
+        oxanium: ['"Oxanium"', "cursive"],
+      },
+    },
   },
   plugins: [],
 };

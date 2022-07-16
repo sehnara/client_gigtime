@@ -1,10 +1,12 @@
 import React from "react";
+import KakaoLoginButton from "../components/KakaoLoginButton";
+
 
 const InitPage = () => {
   return (
-    <div>
-      <h1>GIG TIME</h1>
-      <h3>카카오로 시작하기</h3>
+    <div className="flex flex-col h-screen justify-center items-center">
+      <h1 className="font-oxanium text-6xl text-teal-500">GigTime</h1>
+      <KakaoLoginButton />
     </div>
   );
 };
