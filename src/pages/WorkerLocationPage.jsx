@@ -4,9 +4,11 @@ import BodyTop from "../components/BodyTop";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import SearchAddress from "../components/SearchAddress";
+import { useSelector, useDispatch } from "react-redux";
 
 const WorkerLocationPage = ( {title, src} ) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function onClickToNext() {
     navigate(src);

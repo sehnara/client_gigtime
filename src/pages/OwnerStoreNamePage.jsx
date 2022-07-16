@@ -4,20 +4,23 @@ import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import BodyTop from "../components/BodyTop";
 import InputValue from "../components/InputValue";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { setPhone, setStoreName } from "../module/slices/owner";
 
 const OwnerStoreNamePage = () => {
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
   const [storeValue, setStoreValue] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
   function onClickToNext() {
+    dispatch(setStoreName(storeValue));
+    dispatch(setPhone(phoneNumber));
     navigate('/owner/storelocation');
   } 
 
-  console.log(storeValue, phoneNumber);
-  
   return (
     <>
       <Header title="회원가입" />

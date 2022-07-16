@@ -45,6 +45,7 @@ const WorkerReserveWorkPage = () => {
       setWorkDates(res.data);
       }
     )
+
     await axios.post("http://localhost:4000/reserve/load_store", {
       'order_id' : Number(state.order.id)
     }).then(res=> {
@@ -52,22 +53,21 @@ const WorkerReserveWorkPage = () => {
     })
   }
 
-  // useEffect(() => {
-  //   console.log(selectedDate)
-  // }, [selectedDate])
-  
-
   const getWorkTime =(t)=> {
-    setSelectedDate([...selectedDate, t])
+    if(selectedDate.includes(Number(t))){
+      setSelectedDate(...selectedDate.filter(e => e === Number(t)))
+    }
+    else {
+      setSelectedDate([...selectedDate, Number(t)])
+    }
   }  
 
   const onReserve = async() => {
-    
     await axios.post("http://localhost:4000/worker/reservation/save", {
       'worker_id' : worker_id,
       'hourlyorder_id' : selectedDate
     }).then((res)=> {
-      console.log(res.data)
+      console.log("!!!!!!!!!!!!!!!!!", res.data)
     })
   }
 
@@ -117,6 +117,7 @@ const WorkerReserveWorkPage = () => {
           </p>
         </div>
         <SelectBox
+          selectedDate={selectedDate}
           getData={getWorkTime}
           data={workDates}
           mode={"RESERVE"}
@@ -132,11 +133,11 @@ const WorkerReserveWorkPage = () => {
         </div>
         <div className="flex items-center mb-3 text-sm text-gray-500">
           <p className="flex-1">근무시간</p>
-          <p className="flex-3">0시간</p>
+          <p className="flex-3">{selectedDate.length}시간</p>
         </div>
         <div className="flex items-center mb-3 text-sm text-gray-500">
           <p className="flex-1">임금</p>
-          <p className="flex-3 text-base font-bold">0원</p>
+          <p className="flex-3 text-base font-bold">{selectedDate.length * 10000}원</p>
         </div>
       </div>
       <div className="border-t-4 "></div>
@@ -158,9 +159,9 @@ const WorkerReserveWorkPage = () => {
 
         <Button
           title={"예약하기"}
-          onClickEvent={() => {
-            onReserve();
-            navigate("/worker/mypage");
+          onClickEvent={async() => {
+            await onReserve();
+            navigate("/worker/nearWork");
           }}
         />
       </div>
