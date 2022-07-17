@@ -6,7 +6,7 @@ const InitPage = () => {
   return (
     <div className="flex flex-col h-screen justify-center items-center">
       <h1 className="font-oxanium text-6xl text-teal-500">GigTime</h1>
-      <KakaoLoginButton />
+      <KakaoLoginButton mode="OWNER"/>
     </div>
   );
 };

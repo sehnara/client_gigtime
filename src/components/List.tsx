@@ -67,7 +67,7 @@ const List = ({ date, type, datas }: ListProps) => {
               );
             })
           : datas.map((e) => {
-              console.log(datas.indexOf(e));
+              // console.log(datas.indexOf(e));
               if (datas.indexOf(e) < 3) {
                 return (
                   <div

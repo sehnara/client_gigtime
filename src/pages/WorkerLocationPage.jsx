@@ -5,23 +5,26 @@ import Button from "../components/Button";
 import Header from "../components/Header";
 import SearchAddress from "../components/SearchAddress";
 import { useSelector, useDispatch } from "react-redux";
+import { setLocation } from "../module/slices/sign";
 
-const WorkerLocationPage = ( {title, src} ) => {
+const WorkerLocationPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const state = useSelector(state => state);
 
   function onClickToNext() {
-    navigate(src);
+    dispatch(setLocation)
+    navigate("/worker/distance");
   }
 
   return (
     <div className="font-sans">
       <Header title="회원가입" />
       {/* 상단 */}
-      <BodyTop title={title} />
+      <BodyTop title="내 위치" />
       {/* 중반 */}
       <div id="search" className="m-8 mt-10">
-        <p className="text-lg mb-5 font-bold">{title}를 설정해주세요</p>
+        <p className="text-lg mb-5 font-bold">내 위치를 설정해주세요</p>
         <SearchAddress />
         <Button title="완료" onClickEvent={onClickToNext} />
       </div>
