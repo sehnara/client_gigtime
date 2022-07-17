@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-type MODE = "NORMAL" | "RESERVE";
+type MODE = "NORMAL" | "RESERVE" | "TIME";
 
 
 type SelectBoxProp = {
@@ -31,7 +31,7 @@ const SelectBox = ({ selectedDate, data, getData, mode }: SelectBoxProp) => {
             key={e}
             className="rounded-sm text-center py-2 shadow-sm  mx-2 my-2 hover:bg-cyan-500 hover:text-white cursor-pointer text-sm"
           >
-            {e}
+            {mode === "TIME" ? e+'시' : e}
           </div>
         );
       })}

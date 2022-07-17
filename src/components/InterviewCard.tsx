@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { isCompositeComponent } from "react-dom/test-utils";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { BsFillCameraVideoFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -58,9 +59,9 @@ const InterviewCard = ({
       {/* 화상 면접 접근 카드 */}
       <div className="flex rounded-xl shadow-lg h-10 items-center p-4">
         <p className="flex-10 text-center">{interviewTime}</p>
-        <button className=" bg-cyan-500 px-2 py-1 rounded-lg ">
-          <BsFillCameraVideoFill onClick={linkClick} className="text-white" />
-        </button>
+        <a href="https://giant-walls-accept-192-249-28-220.loca.lt" target='_blank' className=" bg-cyan-500 px-2 py-1 rounded-lg ">
+          <BsFillCameraVideoFill onClick={()=>{}} className="text-white" />
+        </a>
       </div>
     </div>
   );

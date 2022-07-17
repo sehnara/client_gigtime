@@ -21,7 +21,7 @@ const WorkerLocationPage = ( {title, src} ) => {
       <BodyTop title={title} />
       {/* 중반 */}
       <div id="search" className="m-8 mt-10">
-        <p className="text-lg mb-5 font-bold">{title}를 설정해주세요</p>
+        <p className="text-lg mb-5 font-bold">{title} 설정해주세요</p>
         <SearchAddress />
         <Button title="완료" onClickEvent={onClickToNext} />
       </div>

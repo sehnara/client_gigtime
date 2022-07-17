@@ -133,11 +133,11 @@ const WorkerReserveWorkPage = () => {
         </div>
         <div className="flex items-center mb-3 text-sm text-gray-500">
           <p className="flex-1">근무시간</p>
-          <p className="flex-3">{selectedDate.length}시간</p>
+          <p className="flex-3">{selectedDate === []? 0 : selectedDate.length }시간</p>
         </div>
         <div className="flex items-center mb-3 text-sm text-gray-500">
           <p className="flex-1">임금</p>
-          <p className="flex-3 text-base font-bold">{selectedDate.length * 10000}원</p>
+          <p className="flex-3 text-base font-bold">{selectedDate === []? 0 : selectedDate.length *10000 }원</p>
         </div>
       </div>
       <div className="border-t-4 "></div>
