@@ -5,14 +5,17 @@ import Button from "../components/Button";
 import Header from "../components/Header";
 import InputValue from "../components/InputValue";
 import owner from '../images/owner.png'
+import { setDescription } from "../module/slices/owner";
+import { useSelector, useDispatch } from "react-redux";
 
 function OwnerUploadPage() {
     const [value, setValue] = useState("");
     const navigate = useNavigate();
-
-    console.log(value);
+    const dispatch = useDispatch();
+    const state = useSelector(state => state);
 
     function onClickToNext() {
+        dispatch(setDescription(value));
         navigate('/owner/wage');
     }
     
