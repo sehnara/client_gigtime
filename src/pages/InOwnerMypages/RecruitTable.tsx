@@ -32,6 +32,7 @@ const RecruitTable = () => {
             date={e.split(",")[0]}
             type={e.split(",")[1]}
             datas={mockDict["2022-07-16,서빙"]}
+            mode={"WORKER"}
           />
         );
       })}

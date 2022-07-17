@@ -58,7 +58,7 @@ function App() {
         <Route path="/owner/wage" element={<OwnerWagePage />} />
         <Route path="/owner/complete" element={<OwnerCompletePage />} />
         <Route path="/owner/mypage" element={<OwnerMyPage />} />
-        <Route path="/owner/recruit" element={<OwnerRecruitNoticePage />} /> 
+        <Route path="/owner/recruit" element={<OwnerRecruitNoticePage />} />
         <Route
           path="/worker/location"
           element={

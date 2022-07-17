@@ -13,10 +13,11 @@ const WorkMyPage = () => {
   const [name, setName] = useState('');
 
   useEffect(() => {
-    const ownerId = localStorage.getItem('owner_id');
-    axios.post('http://localhost:4000/onwer/name', 
+    const ownerId = sessionStorage.getItem('owner_id');
+    console.log(ownerId)
+    axios.post('http://localhost:4000/owner/name', 
       {
-        'owner_id' : ownerId,
+        'owner_id' : ownerId
       }
     )
     .then(function(res) {

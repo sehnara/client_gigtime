@@ -3,11 +3,13 @@ import InterviewCard from "../../components/InterviewCard";
 
 const InterviewTimeTable = ({ result }) => {
   const src = result;
+  console.log(src);
   
   return (
     <div className="overflow-scroll h-96">
       {src.map(el => (
         <InterviewCard 
+        key={el.store_name}
         date={el.interview_date}
         time={el.interview_time}
         rejectFlag={el.reject_flag}
