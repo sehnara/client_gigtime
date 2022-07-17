@@ -12,9 +12,18 @@ type ListProps = {
   mode: MODE;
   store?: string;
   address?: string;
+  price?: string;
 };
 
-const List = ({ date, type, datas, mode, store, address }: ListProps) => {
+const List = ({
+  date,
+  type,
+  datas,
+  mode,
+  store,
+  address,
+  price,
+}: ListProps) => {
   const [isStretch, setIsStretch] = useState(false);
 
   //   날짜 관련
@@ -51,7 +60,7 @@ const List = ({ date, type, datas, mode, store, address }: ListProps) => {
           </div>
           <div className="flex mt-1 items-center justify-between">
             <p className="text-xs">{address}</p>
-            <p className=" text-lg font-bold">총 {datas.length * 10000}원</p>
+            <p className=" text-lg font-bold">총 {price}원</p>
           </div>
         </div>
       ) : (
