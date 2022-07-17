@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import List from "../../components/List";
 
 const mockDict = {
@@ -22,7 +23,19 @@ const mockDict = {
 
 const WorkTimeTable = () => {
   const keyRef = useRef(1);
+  const [datas, setDatas] = useState()
 
+  const getData = async()=> {
+    await axios.post('http://localhost:4000/worker/mypage/work', {"worker_id" : sessionStorage.getItem("worker_id")}).then(res=>{
+      setDatas(res.data)
+    })
+  }
+  
+  console.log(datas) // -------------------
+  useEffect(()=>{
+    getData();
+  },[])
+  
   return (
     <div className="m-8">
       {mockDict.key.map((e) => {
