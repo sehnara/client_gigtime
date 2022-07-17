@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useRef, useState, useEffect } from "react";
 import DanChoo from "../components/DanChoo";
 import TabBar from "../components/TabBar";
+import NavBar from "../components/NavBar";
 import dogHeart from "../images/dog_heart.png";
 import InterviewTimeTable from "./InWorkerMyPages/InterviewTimeTable";
 import WinStores from "./InWorkerMyPages/WinStores";
@@ -12,7 +13,7 @@ const WorkMyPage = () => {
   const [name, setName] = useState('')
 
   useEffect(() => {
-    const workerId = localStorage.getItem('worker_id');
+    const workerId = sessionStorage.getItem('worker_id');
     axios.post('http://localhost:4000/mypage/interview', 
       {
         'worker_id' : workerId,
@@ -44,6 +45,7 @@ const WorkMyPage = () => {
   ];
   return (
     <div className=" my-4">
+    <NavBar/>
       {/* 상단 */}
       <div className="mx-8">
         <h1 className="text-lg font-bold mb-4">내 정보</h1>

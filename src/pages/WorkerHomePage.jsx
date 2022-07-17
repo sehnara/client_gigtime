@@ -6,6 +6,7 @@ import man from "../images/worker.png";
 import axios from "axios";
 import { setCurrentOrder } from "../module/slices/order";
 import { setStoreId } from "../module/slices/store";
+import NavBar from "../components/NavBar";
 
 const WorkerHomePage = () => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const WorkerHomePage = () => {
 
   return (
     <div className="font-sans">
+      <NavBar/>
       {/* 상단 */}
       <div className=" m-8  flex items-center justify-between">
         <h1 className="text-2xl font-bold">{locName}</h1>
@@ -68,7 +70,7 @@ const WorkerHomePage = () => {
                 key = {store.store_id} 
                 store={store.name}
                 distance={store.distance}
-                jobs={["카운터", "청소", "음료제조"]}
+                jobs={["카운터", "서빙"]}
                 minPay={store.minimum_wage}
                 ment = {store.description}
                 onClickEvent={()=>{

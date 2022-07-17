@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import SelectBox from "../components/SelectBox";
+import NavBar from "../components/NavBar";
 
 const WorkerInterviewPage = () => {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ const WorkerInterviewPage = () => {
   const [question, setQuestion] = useState("");
   const state :any = useSelector((state) => state);
   const [basic, setBasic] = useState<any>({});
+  const [times, setTimes] = useState<any>([]) 
+  const worker_id = sessionStorage.getItem('worder_id')
 
   const getDate = (date: string) => {
     setDate(date);
@@ -25,9 +28,11 @@ const WorkerInterviewPage = () => {
   };
 
   const onComplete = () => {
-    console.log(date, time, question);
-    navigate("/worker/nearWork");
+    onApply()
+    // navigate("/worker/nearWork");
+    navigate("/worker/mypage");
   };
+
   const getData = async()=> {
     await axios.post("http://localhost:4000/apply/load_store", {
       "store_id" : Number(state.store.id)
@@ -36,13 +41,37 @@ const WorkerInterviewPage = () => {
     })
   }
 
+  const getData2 = async()=> {
+    await axios.post("http://localhost:4000/apply/load_interview",{
+      "store_id" : Number(state.store.id), 'interview_month' : 7
+    }).then(res => {
+      // console.log("!!!!!!!!!!!",res)
+      setTimes(res.data)
+    })
+  }
+  
+  const onApply = async()=>{
+    await axios.post('http://localhost:4000/apply/submit', {
+      'interview_date' : date,
+      'interview_time' : Number(time),
+      'question' : question,
+      'worker_id': worker_id,
+      'store_id' : Number(state.store.id)
+    }).then(res => {
+      console.log(res.data)
+    })
+  }
+
+
   useEffect(()=>{
     getData()
+    getData2()
   },[])
 
   return (
     <div className="my-2">
       {/* 헤더 */}
+      <NavBar/>
       <Header title={"면접신청"} />
       {/* 이미지 */}
       <div className="bg-gray-200 w-full h-48"></div>
@@ -70,27 +99,30 @@ const WorkerInterviewPage = () => {
       <div className="border-t-4 "></div>
       {/* 날짜선택 */}
       <div className="mx-8 m-4">
-        <h3 className="font-bold mb-4">날짜선택</h3>
+        <h3 className="font-bold mb-4">날짜 선택</h3>
         <SelectBox
           mode="NORMAL"
           getData={getDate}
-          data={["2022년 7월 9일", "2022년 7월 24일", "2022년 7월 25일"]}
+          data={times && times.map((t:any) => {
+            return(t.date)
+          })}
         />
       </div>
       <div className="border-t-4 "></div>
       {/* 시간선택 */}
       <div className="mx-8 m-4">
-        <h3 className="font-bold mb-4">시간선택</h3>
+        <h3 className="font-bold mb-4">시간 선택</h3>
         <SelectBox
-          mode="NORMAL"
+          mode="TIME"
           getData={getTime}
-          data={["10:00~11:00", "11:00~12:00", "13:00~14:00"]}
+          data={date === null ? [10, 11, 13, 14, 15, 16, 17, 19, 20, 21] :times.filter((t:any) => t.date === date)[0].time}
+          // data ={}
         />
       </div>
       <div className="border-t-4 "></div>
       {/* 유형선택 */}
       <div className="mx-8 m-4">
-        <h3 className="font-bold mb-4">유형선택</h3>
+        <h3 className="font-bold mb-4">직무 정보</h3>
         {["카운터", "서빙", "설거지"].map((e) => {
           return (
             <button
@@ -105,7 +137,7 @@ const WorkerInterviewPage = () => {
       <div className="border-t-4 "></div>
       {/* 질문하기 */}
       <div className="mx-8 m-4">
-        <h3 className="font-bold mb-4">질문하기</h3>
+        <h3 className="font-bold mb-4">질문 하기</h3>
         <p className="text-gray-500 text-sm mb-2">
           사장님께 궁금한 내용을 남겨주세요
         </p>
@@ -123,11 +155,12 @@ const WorkerInterviewPage = () => {
         <h3 className="font-bold mb-4">신청정보</h3>
         <div className="flex items-center mb-3 text-gray-500">
           <p className="flex-1">면접일시</p>
-          <p className="flex-3">2022년 7월 24일 화요일</p>
+          <p className="flex-3">{`${date?.split('-')[0]}년 ${date?.split('-')[1]}월 ${date?.split('-')[2]}일 `}</p>
         </div>
         <div className="flex items-center mb-3 text-gray-500">
           <p className="flex-1">면접시간</p>
-          <p className="flex-3">11:00 ~ 12:00</p>
+          <p className="flex-3">{`${time}:00 ~ ${Number(time)+1}:00`}
+          </p>
         </div>
       </div>
       <div className="border-t-4 "></div>
