@@ -36,7 +36,7 @@ function KakaoLoginButton( {mode} ) {
                             console.log(">>>>>>", 2)
                             console.log(">>>>>>", response)
                             if (response.data[0] === 'worker'){
-                                sessionStorage.setItem("worker_id",response.data['worker_id'])
+                                sessionStorage.setItem("worker_id", response.data[1])
                                 dispatch(setLocation(response.data['address']));
                                 dispatch(setRange(response.data['range']));
                                 navigate('/worker/nearWork');}
@@ -46,7 +46,7 @@ function KakaoLoginButton( {mode} ) {
                                 navigate('/owner/mypage');
                             }
                             else{
-                                console.log(response.data['member_type'])
+                                console.log(response.data[0]);
                                 navigate('/login');
                                 console.log(response);
                             }

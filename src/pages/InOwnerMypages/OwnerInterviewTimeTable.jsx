@@ -18,7 +18,7 @@ const OwnerInterviewTimeTable = () => {
     )
     .then(function(res) {
       console.log(res);
-      setNowResult(res.data["now"]); // now:1
+      setNowResult(res.data["now"]);
       setWaitResult(res.data["wait"]);
       setWillResult(res.data["will"]);
       setCompleteResult(res.data["complete"]);
@@ -28,10 +28,10 @@ const OwnerInterviewTimeTable = () => {
     })
   }, []);
 
-  console.log(nowResult);
-  console.log(waitResult);
-  console.log(willResult);
-  console.log(completeResult);
+  // console.log(nowResult);
+  // console.log(waitResult);
+  // console.log(willResult);
+  // console.log(completeResult);
 
   return (
     <div className="m-8">
