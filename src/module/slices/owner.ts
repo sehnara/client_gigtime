@@ -28,20 +28,23 @@ export const owner = createSlice({
     minimum_wage: 0,
   },
   reducers: {
-    setName(state, action) {
+    setOwnerName(state, action) {
       state.name = action.payload;
     },
     setStoreName(state, action) {
         state.store_name = action.payload;
       },
-    setEmail(state, action) {
+    setOwnerEmail(state, action) {
       state.email = action.payload;
     },
     setPhone(state, action) {
       state.phone = action.payload;
     },
-    setLocation(state, action) {
+    setAddress(state, action) {
       state.location = action.payload;
+    },
+    setDescription(state, action) {
+      state.description = action.payload;
     },
     setStorejob(state, action) {
       state.store_jobs.push(action.payload as never);
@@ -58,5 +61,5 @@ export const owner = createSlice({
   },
 });
 
-export const { setName, setEmail, setLocation, setPhone,  setStorejob, setBackground, setLogo, setMinimumWage, setStoreName } = owner.actions;
+export const { setOwnerName, setOwnerEmail, setAddress, setPhone,  setStorejob, setBackground, setLogo, setMinimumWage, setStoreName, setDescription } = owner.actions;
 export default owner.reducer;

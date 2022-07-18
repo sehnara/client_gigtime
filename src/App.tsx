@@ -58,7 +58,7 @@ function App() {
         <Route
           path="/worker/location"
           element={
-            <WorkerLocationPage title="내 위치" src="/worker/distance" />
+            <WorkerLocationPage />
           }
         />
         <Route path="/worker/distance" element={<WorkerDistancePage />} />

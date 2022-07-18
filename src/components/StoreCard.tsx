@@ -80,7 +80,7 @@ function StoreCard({
             {mode === "OWNER_MYPAGE" ? `${address}` : `${distance}m`}
           </p>
           {/* 직종 */}
-          <div className="flex space-x-2 mt-2">
+          <div className="flex space-x-2 mt-2 overflow-scroll w-full">
             {jobs &&
               jobs.map((e) => {
                 return (

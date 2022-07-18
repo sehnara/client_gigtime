@@ -25,7 +25,8 @@ const RecruitTable = () => {
 
   const getData = async () => {
     await axios
-      .post("", { onwer_id: sessionStorage.getItem("onwer_id") })
+      .post("http://localhost:4000/owner/mypage/work", 
+      { 'owner_id': Number(sessionStorage.getItem("owner_id")) })
       .then((res) => {
         setData(res.data);
       });
@@ -34,9 +35,12 @@ const RecruitTable = () => {
     getData();
   }, []);
 
+  console.log(">>>>",data)
+
   return (
     <div className="m-8">
-      {mockDict.map((e) => {
+      {data.map((e) => {
+        console.log(data);
         keyRef.current += 1;
         return (
           <List

@@ -4,14 +4,17 @@ import BodyTop from "../components/BodyTop";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import InputValue from "../components/InputValue";
+import { setMinimumWage } from "../module/slices/owner";
+import { useSelector, useDispatch } from "react-redux";
 
 function OwnerWagePage() {
     const [value, setValue] = useState("");
     const navigate = useNavigate();
-
-    console.log(value);
+    const dispatch = useDispatch();
+    const state = useSelector(state => state);
 
     function onClickToNext() {
+        dispatch(setMinimumWage(value));
         navigate('/owner/complete');
     }
     

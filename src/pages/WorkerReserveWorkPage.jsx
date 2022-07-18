@@ -37,6 +37,7 @@ const WorkerReserveWorkPage = () => {
 
   const getData = async()=>{
     await axios.post("http://localhost:4000/worker/reservation/list", {
+      "worker_id" : sessionStorage.getItem('worker_id'),
       "order_id" : state.order.id,
       "work_date" : masage_date(state.order.date),
       "type" : state.order.type

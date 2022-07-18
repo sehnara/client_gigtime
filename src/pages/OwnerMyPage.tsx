@@ -9,23 +9,24 @@ import MyGigWorker from "./InOwnerMypages/MyGigWorker";
 import RecruitTable from "./InOwnerMypages/RecruitTable";
 
 const WorkMyPage = () => {
-  const [result, setResult] = useState([]);
-  const [name, setName] = useState("");
+  const [storename, setStorename] = useState('');
+  const [name, setName] = useState('');
 
   useEffect(() => {
-    const workerId = localStorage.getItem("worker_id");
-    axios
-      .post("http://localhost:4000/mypage/interview", {
-        worker_id: workerId,
-      })
-      .then(function (res) {
-        console.log(res);
-        setResult(res.data["result"]);
-        setName(res.data["name"]);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
+    const ownerId = sessionStorage.getItem('owner_id');
+    axios.post('http://localhost:4000/owner/name', 
+      {
+        'owner_id' : ownerId
+      }
+    )
+    .then(function(res) {
+      console.log(res);
+      setStorename(res.data["store"]);
+      setName(res.data["name"])
+    })
+    .catch(function(err) {
+      console.log(err)
+    })
   }, []);
 
   const danchooRef = useRef(1);
@@ -48,7 +49,7 @@ const WorkMyPage = () => {
       <div className=" my-4">
         {/* 상단 */}
         <div className="mx-8">
-          <h1 className="text-lg font-bold mb-4">가게이름</h1>
+          <h1 className="text-lg font-bold mb-4">{storename}</h1>
           {/* 상단 - 이름, 단추들, 강아지 한 마리*/}
           <h1 className="mb-4">
             <span className="font-bold">{name}</span>님
