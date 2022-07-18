@@ -21,6 +21,8 @@ const OwnerInterviewTimeTable = () => {
     .then(function (res) {
       if (res === 'success') {
         setIsClick(true);
+      } else {
+        console.log(res);
       }
     })
     .catch(function (err) {
@@ -38,6 +40,8 @@ const OwnerInterviewTimeTable = () => {
     .then(function (res) {
       if (res === 'success') {
         setIsClick(true);
+      } else {
+        console.log(res);
       }
     })
     .catch(function (err) {
@@ -55,6 +59,8 @@ const OwnerInterviewTimeTable = () => {
     .then(function (res) {
       if (res === 'success') {
         setIsClick(true);
+      } else {
+        console.log(res);
       }
     })
     .catch(function (err) {
@@ -72,6 +78,8 @@ const OwnerInterviewTimeTable = () => {
     .then(function (res) {
       if (res === 'success') {
         setIsClick(true);
+      } else {
+        console.log(res);
       }
     })
     .catch(function (err) {
