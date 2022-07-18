@@ -28,10 +28,10 @@ const OwnerInterviewTimeTable = () => {
     })
   }, []);
 
-  console.log(nowResult);
-  console.log(waitResult);
-  console.log(willResult);
-  console.log(completeResult);
+  // console.log(nowResult);
+  // console.log(waitResult);
+  // console.log(willResult);
+  // console.log(completeResult);
 
   return (
     <div className="m-8">
