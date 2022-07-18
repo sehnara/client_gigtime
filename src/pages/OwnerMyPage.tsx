@@ -14,7 +14,6 @@ const WorkMyPage = () => {
 
   useEffect(() => {
     const ownerId = sessionStorage.getItem('owner_id');
-    console.log(ownerId)
     axios.post('http://localhost:4000/owner/name', 
       {
         'owner_id' : ownerId

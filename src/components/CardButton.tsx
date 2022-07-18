@@ -5,12 +5,15 @@ type CardButtonProps = {
   color?: string;
   width?: number;
   height?: number;
-  onClickEvent: () => void;
+  // setIsClick:()=>void;
+  onClickEvent?: () => void;
 };
 
 const CardButton = ({ title, color, width, height, onClickEvent }: CardButtonProps) => {
   const onClick = () => {
-    onClickEvent();
+    onClickEvent&&onClickEvent();
+    // setIsClick(true)
+    // console.log("여기")
   };
   return (
     
