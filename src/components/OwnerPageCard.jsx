@@ -6,7 +6,7 @@ import question from "../images/question.png"
 import CardButton from "./CardButton";
 import GigWorker from "./GigWorker";
 
-function OwnerPageCard( { mode, date, name, time, description }) {
+function OwnerPageCard( { mode, date, name, time, description, onClickAllow, onClickReject, onClickPass, onClickFail}) {
     const interviewTime = `${time}:00 ~ ${time + 1}:00`;
     let dateSplit = date.split('-');
     return (
@@ -26,8 +26,8 @@ function OwnerPageCard( { mode, date, name, time, description }) {
                     {
                         mode === "WAIT" ?
                         <>
-                            <CardButton title="수락" color={"bg-cyan-500"} height={10}/>
-                            <CardButton title="거절" color={"bg-gray-400"} height={10}/>
+                            <CardButton onClickEvent={onClickAllow} title="수락" color={"bg-cyan-500"} height={10}/>
+                            <CardButton onClickEvent={onClickReject} title="거절" color={"bg-gray-400"} height={10}/>
                         </>
                         : mode === "WILL" ?  
                         <>
@@ -39,8 +39,8 @@ function OwnerPageCard( { mode, date, name, time, description }) {
                         </>
                         :
                         <>
-                            <CardButton title="합격" color={"bg-cyan-500"} height={10}/>
-                            <CardButton title="불합격" color={"bg-gray-400"} height={10}/>
+                            <CardButton onClickEvent={onClickPass} title="합격" color={"bg-cyan-500"} height={10}/>
+                            <CardButton onClickEvent={onClickFail} title="불합격" color={"bg-gray-400"} height={10}/>
                         </>
                     }
                     </div>
