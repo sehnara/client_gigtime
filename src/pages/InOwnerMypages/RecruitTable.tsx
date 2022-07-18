@@ -1,38 +1,54 @@
-import React, { useRef } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import List from "../../components/List";
 
-const mock = ["2022-07-16,카운터", "2022-07-16,서빙"];
-const mockDict = {
-  "2022-07-16,카운터": [
-    ["10:00", 10400, "kantWang"],
-    ["11:00", 10400, "kantWang"],
-    ["12:00", 10400, "kantWang"],
-    ["13:00", 10400, ""],
-    ["14:00", 10400, "kantWang"],
+const mockDict = [
+  [
+    "2022-08-20",
+    "설거지",
+    "2", // order_id
+    "20:00,10250,왕경업,14", // 마지막꺼는 hourly_order_id
+    "12:00,10265,왕경업,15",
+    "20:00,10250,왕경업,16", // 마지막꺼는 hourly_order_id
+    "12:00,10265,왕경업,17",
+    "20:00,10250,왕경업,18", // 마지막꺼는 hourly_order_id
+    "12:00,10265,왕경업,19",
   ],
-  "2022-07-16,서빙": [
-    ["16:00", 10400, "kantWang"],
-    ["17:00", 10400, "kantWang"],
-    ["19:00", 10400, "kantWang"],
-    ["20:00", 10400, ""],
-    ["21:00", 10400, "kantWang"],
-    ["22:00", 10400, "kantWang"],
-  ],
-};
+  // [
+  //     위와 같은 양식
+  // ],
+];
 
 const RecruitTable = () => {
   const keyRef = useRef(1);
+  const [data, setData] = useState([[]]);
+
+  const getData = async () => {
+    await axios
+      .post("http://localhost:4000/owner/mypage/work", 
+      { 'owner_id': Number(sessionStorage.getItem("owner_id")) })
+      .then((res) => {
+        setData(res.data);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(">>>>",data)
+
   return (
     <div className="m-8">
-      {mock.map((e) => {
+      {data.map((e) => {
+        console.log(data);
         keyRef.current += 1;
         return (
           <List
             key={keyRef.current}
-            date={e.split(",")[0]}
-            type={e.split(",")[1]}
-            datas={mockDict["2022-07-16,서빙"]}
-            mode={"WORKER"}
+            date={e[0]}
+            type={e[1]}
+            datas={e.slice(3)}
+            mode={"OWNER"}
           />
         );
       })}

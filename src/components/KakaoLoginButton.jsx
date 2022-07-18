@@ -35,18 +35,17 @@ function KakaoLoginButton( {mode} ) {
                         .then(function (response) {
                             console.log(">>>>>>", 2)
                             console.log(">>>>>>", response)
-                            if (response.data[0] === 'worker'){
-                                sessionStorage.setItem("worker_id", response.data[1])
+                            if (response.data['member_type'] === 'worker'){
+                                sessionStorage.setItem("worker_id", response.data['worker_id'])
                                 dispatch(setLocation(response.data['address']));
                                 dispatch(setRange(response.data['range']));
                                 navigate('/worker/nearWork');}
-                            else if (response.data[0] === 'owner'){
+                            else if (response.data['member_type'] === 'owner'){
                                 console.log(response.data);
-                                sessionStorage.setItem("owner_id", response.data[1]);
+                                sessionStorage.setItem("owner_id", response.data['owner_id']);
                                 navigate('/owner/mypage');
                             }
                             else{
-                                console.log(response.data[0]);
                                 navigate('/login');
                                 console.log(response);
                             }

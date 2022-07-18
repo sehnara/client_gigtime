@@ -1,27 +1,84 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import InputValue2 from "../components/InputValue2";
+
+// {
+//   'owner_id': 60,
+//   'store_name': '보리누리',
+  // 'type': '설거지',
+  // 'description': '설거지 알바 모집합니다',
+  // 'start_date': '2022-08-20',
+  // 'end_date': '2022-08-22',
+  // 'start_time': '10:00',
+  // 'end_time': '14:00',
+  // 'price': 10000 
+// }
+
+// '/owner/mypage/employment/button'
+// {
+//   'name': '보리누리',
+//   'address': '인천 서구 심곡동 123-4',
+//   'type': ['서빙', '뭐시기', ...]
+// }
 
 const OwnerRecruitNoticePage = () => {
   const [recruitData, setRecruitData] = useState({
     store_name: "",
     address: "",
+    types: "",
     description: "",
-    type: "",
     start_date: "",
     end_date: "",
-    start_dime: "",
-    end_dime: "",
+    start_time: "",
+    end_time: "",
     price: 0,
   });
 
+const [postData, setPostData] = useState({
+  'owner_id': sessionStorage.getItem("owner_id"),
+  'store_name': '',
+  'type': '',
+  'description': '',
+  'start_date': '',
+  'end_date': '',
+  'start_time': '',
+  'end_time': '',
+  'price': 0 
+})  
+const owner_id = sessionStorage.getItem('owner_id');
+const setValue = (_key, _value) => {
+  setRecruitData({ ...recruitData, [_key]: _value });
   console.log(recruitData);
+};
 
-  const setValue = (_key, _value) => {
-    setRecruitData({ ...recruitData, [_key]: _value });
-    console.log(recruitData);
-  };
+const getData = async() => {
+  await axios.post('http://localhost:4000/owner/mypage/employment/button', {'owner_id' : owner_id}).then(res => {
+    console.log("!!!!!!!",res.data)
+    setRecruitData({...recruitData, 'store_name': res.data.name,'address': res.data.address, 'types': res.data.types })
+  })
+}
+
+const onEnroll = async()=>{
+  await axios.post('http://localhost:4000/owner/employment',postData).thrn(res => {
+    console.log(res.data)
+  })
+}
+
+useEffect(()=>{
+  setPostData({...postData, 'store_name': recruitData.store_name, 'type': recruitData.types[0], 'description': recruitData.description,
+  'start_date': recruitData.start_date,
+  'end_date': recruitData.end_date,
+  'start_time': recruitData.start_time,
+  'end_time': recruitData.end_time,
+  'price': recruitData.price, })
+},[recruitData])
+
+  useEffect(()=>{
+    getData()
+  },[])
+
 
   return (
     <div className="">
@@ -47,9 +104,9 @@ const OwnerRecruitNoticePage = () => {
           label={"알바유형"}
           title={"알바유형 선택"}
           setValue={setValue}
-          dict_key={"type"}
-          dict_value={recruitData["type"]}
-          options={["알바유형 선택", "설거지", "각설이", "카운터"]}
+          dict_key={"types"}
+          dict_value={recruitData["types"]}
+          options={recruitData['types']}
         />
         {/* 상세설명 */}
         <InputValue2
@@ -132,7 +189,7 @@ const OwnerRecruitNoticePage = () => {
       </div>
 
       <div className="mx-8">
-        <Button title="등록하기" onClickEvent={() => {}} />
+        <Button title="모집공고" onClickEvent={onEnroll} />
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ const WorkerInterviewPage = () => {
   const state :any = useSelector((state) => state);
   const [basic, setBasic] = useState<any>({});
   const [times, setTimes] = useState<any>([]) 
-  const worker_id = sessionStorage.getItem('worder_id')
+  const worker_id = sessionStorage.getItem('worker_id')
 
   const getDate = (date: string) => {
     setDate(date);
