@@ -1,11 +1,11 @@
 import React from "react";
 import { AiOutlineCalendar } from "react-icons/ai";
 
-function DateText() {
+function DateText( {date} ) {
     return (
         <div className="flex items-center w-full mt-5">
             <AiOutlineCalendar />
-            <p className="text-xs ml-2">2022년 7월 23일</p>  
+            <p className="text-xs ml-2">{date[0]}년 {date[1]}월 {date[2]}일</p>  
         </div>
     );
 }

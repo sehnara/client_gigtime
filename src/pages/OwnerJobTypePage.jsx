@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import BodyTop from "../components/BodyTop";
 import Button from "../components/Button";
 import Header from "../components/Header";
+import { setStorejob } from "../module/slices/owner";
+import { useSelector, useDispatch } from "react-redux";
 
 const OwnerJobTypePage = () => {
   const jobType = [
@@ -75,10 +77,13 @@ const OwnerJobTypePage = () => {
   const [pick, setPick] = useState(jobType);
   const [select, setSelect] = useState([]);
   const navigate = useNavigate();
-  
-  console.log(select);
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
+
+  // console.log(select);
 
   function onClickToNext() {
+    dispatch(setStorejob(select));
     navigate('/owner/upload');
   }
   
