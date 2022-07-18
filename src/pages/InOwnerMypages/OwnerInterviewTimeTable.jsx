@@ -18,7 +18,7 @@ const OwnerInterviewTimeTable = () => {
     )
     .then(function(res) {
       console.log(res);
-      setNowResult(res.data["now"]); // now:1
+      setNowResult(res.data["now"]);
       setWaitResult(res.data["wait"]);
       setWillResult(res.data["will"]);
       setCompleteResult(res.data["complete"]);
@@ -52,7 +52,7 @@ const OwnerInterviewTimeTable = () => {
       <h1 className="text-lg font-bold mb-3">승인대기</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="WAIT"/> */}
-        {waitResult.map((el, index) => (
+        {waitResult && waitResult.map((el, index) => (
           <OwnerPageCard
           mode="WAIT"
           key={index}
@@ -66,7 +66,7 @@ const OwnerInterviewTimeTable = () => {
       <h1 className="text-lg font-bold mb-3">면접예정</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="WILL"/> */}
-        {willResult.map((el, index) => (
+        {willResult && willResult.map((el, index) => (
           <OwnerPageCard
           mode="WILL"
           key={index}
@@ -80,7 +80,7 @@ const OwnerInterviewTimeTable = () => {
       <h1 className="text-lg font-bold mb-3">면접완료</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="COMPLETE"/> */}
-        {completeResult.map((el, index) => (
+        {completeResult && completeResult.map((el, index) => (
           <OwnerPageCard
           mode="COMPLETE"
           key={index}
