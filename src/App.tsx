@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ReducerType } from "./module/rootReducer";
 import { addUser, User } from "./module/slices/users";
 import OwnerRecruitNoticePage from "./pages/OwnerRecruitNoticePage";
+import CommonInterviewPage from "./pages/CommonInterviewPage";
 
 function App() {
   // const onTest = async () => {
@@ -76,6 +77,8 @@ function App() {
         <Route path="/worker/reserveWork" element={<WorkerReserveWorkPage />} />
         {/* 마이 페이지 */}
         <Route path="/worker/mypage" element={<WorkMyPage />} />
+        {/* 면접 */}
+        <Route path="/interview" element={<CommonInterviewPage/>} />
       </Routes>
     </BrowserRouter>
   );

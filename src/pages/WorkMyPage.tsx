@@ -76,7 +76,21 @@ const WorkMyPage = () => {
         setTab={setMenu}
       />
       {tab === "면접시간표" ? (
-        <InterviewTimeTable result={result} />
+        <InterviewTimeTable 
+        result={result}
+      //   result={[
+      //     {
+      //         date: '11-11',
+      //         time: '11:11',
+      //         link: '11:11',
+      //         state: '1',
+      //         storeName: 'ㄴㄴㄴㄴㄴㄴㄴ',
+      //         storeAdd: 'ㅇㅇㅇㅇㅇㅇ',
+      //         storeType: '햐김',
+      //         interviewId: 23,
+      //     },
+      // ]}
+        />
       ) : tab === "알바시간표" ? (
         <WorkTimeTable />
       ) : (
