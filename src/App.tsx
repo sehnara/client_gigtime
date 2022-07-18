@@ -17,12 +17,8 @@ import WorkerInterviewPage from "./pages/WorkerInterviewPage";
 import WorkerNearWorkPage from "./pages/WorkerNearWorkPage.jsx";
 import WorkerReserveWorkPage from "./pages/WorkerReserveWorkPage.jsx";
 import WorkMyPage from "./pages/WorkMyPage";
-import axios from "axios";
-
-import { useDispatch, useSelector } from "react-redux";
-import { ReducerType } from "./module/rootReducer";
-import { addUser, User } from "./module/slices/users";
 import OwnerRecruitNoticePage from "./pages/OwnerRecruitNoticePage";
+import WorkerSpeedGetJob from "./pages/WorkerSpeedGetJob";
 
 function App() {
   // const onTest = async () => {
@@ -76,6 +72,8 @@ function App() {
         <Route path="/worker/reserveWork" element={<WorkerReserveWorkPage />} />
         {/* 마이 페이지 */}
         <Route path="/worker/mypage" element={<WorkMyPage />} />
+        {/* 바로 알바 */}
+        <Route path="/worker/speed" element={<WorkerSpeedGetJob />} />
       </Routes>
     </BrowserRouter>
   );

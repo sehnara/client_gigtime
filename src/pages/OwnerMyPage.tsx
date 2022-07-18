@@ -10,25 +10,24 @@ import RecruitTable from "./InOwnerMypages/RecruitTable";
 
 const WorkMyPage = () => {
   const [result, setResult] = useState([]);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
 
   useEffect(() => {
-    const workerId = localStorage.getItem('worker_id');
-    axios.post('http://localhost:4000/mypage/interview', 
-      {
-        'worker_id' : workerId,
-      }
-    )
-    .then(function(res) {
-      console.log(res);
-      setResult(res.data["result"]);
-      setName(res.data["name"])
-    })
-    .catch(function(err) {
-      console.log(err)
-    })
+    const workerId = localStorage.getItem("worker_id");
+    axios
+      .post("http://localhost:4000/mypage/interview", {
+        worker_id: workerId,
+      })
+      .then(function (res) {
+        console.log(res);
+        setResult(res.data["result"]);
+        setName(res.data["name"]);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }, []);
-  
+
   const danchooRef = useRef(1);
   const [tab, setTab] = useState("면접관리");
 
@@ -58,7 +57,9 @@ const WorkMyPage = () => {
         <div className="flex flex-wrap justify-center mb-4">
           {data.map((e) => {
             danchooRef.current += 1;
-            return <DanChoo time={e.time} text={e.text} key={danchooRef.current} />;
+            return (
+              <DanChoo time={e.time} text={e.text} key={danchooRef.current} />
+            );
           })}
           <img
             src={dogHeart}

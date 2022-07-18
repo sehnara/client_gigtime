@@ -25,6 +25,7 @@ const List = ({
   price,
 }: ListProps) => {
   const [isStretch, setIsStretch] = useState(false);
+  console.log(datas);
 
   //   날짜 관련
   const time = new Date(date);
@@ -56,28 +57,29 @@ const List = ({
           </div>
           <div className="flex space-x-2 mt-4">
             <p className="font-bold">{store}</p>
-            <p className="text-xs bg-gray-100 px-2 py-1 rounded-2xl">{type}</p>
+            {/* <p className="text-xs bg-gray-100 px-2 py-1 rounded-2xl">{type}</p> */}
           </div>
           <div className="flex mt-1 items-center justify-between">
             <p className="text-xs">{address}</p>
-            <p className=" text-lg font-bold">총 {price}원</p>
+            {/* <p className=" text-lg font-bold">총 {price}원</p> */}
           </div>
         </div>
       ) : (
         <div className="flex space-x-2 items-center">
           <AiOutlineCalendar />
           <p className="text-xs ">{`${year}년 ${month}월 ${day}일 ${yoil}요일`}</p>
-          <div className="text-xs bg-gray-100 px-2 py-1 rounded-2xl">
+          {/* <div className="text-xs bg-gray-100 px-2 py-1 rounded-2xl">
             {type}
-          </div>
+          </div> */}
         </div>
       )}
       {/* --------------------------------------------------------------------- */}
+      {/* 20:00,10250,왕경업,14 */}
       <div className="w-full  rounded-xl shadow-xl pb-1">
         {mode === "WORKER" ? (
           ""
         ) : (
-          <p className="absolute transform translate-x-72 translate-y-5 text-xs text-gray-500">
+          <p className="absolute transform translate-x-64 translate-y-5 text-xs text-gray-500">
             {`총 ${datas.length}시간`}
           </p>
         )}

@@ -27,7 +27,7 @@ const mockDict = {
 
 const WorkTimeTable = () => {
   const keyRef = useRef(1);
-  const [datas, setDatas] = useState();
+  const [datas, setDatas] = useState({ key: String });
 
   const getData = async () => {
     await axios
