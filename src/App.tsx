@@ -19,6 +19,7 @@ import WorkerReserveWorkPage from "./pages/WorkerReserveWorkPage.jsx";
 import WorkMyPage from "./pages/WorkMyPage";
 import OwnerRecruitNoticePage from "./pages/OwnerRecruitNoticePage";
 import WorkerSpeedGetJob from "./pages/WorkerSpeedGetJob";
+import WorkerSpeedResultPage from "./pages/WorkerSpeedResultPage";
 
 function App() {
   // const onTest = async () => {
@@ -55,12 +56,7 @@ function App() {
         <Route path="/owner/complete" element={<OwnerCompletePage />} />
         <Route path="/owner/mypage" element={<OwnerMyPage />} />
         <Route path="/owner/recruit" element={<OwnerRecruitNoticePage />} />
-        <Route
-          path="/worker/location"
-          element={
-            <WorkerLocationPage />
-          }
-        />
+        <Route path="/worker/location" element={<WorkerLocationPage />} />
         <Route path="/worker/distance" element={<WorkerDistancePage />} />
         <Route path="/worker/home" element={<WorkerHomePage />} />
 
@@ -74,6 +70,11 @@ function App() {
         <Route path="/worker/mypage" element={<WorkMyPage />} />
         {/* 바로 알바 */}
         <Route path="/worker/speed" element={<WorkerSpeedGetJob />} />
+        {/* 바로 알바 결과*/}
+        <Route
+          path="/worker/speed/result"
+          element={<WorkerSpeedResultPage />}
+        />
       </Routes>
     </BrowserRouter>
   );

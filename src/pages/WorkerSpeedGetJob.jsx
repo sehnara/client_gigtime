@@ -6,21 +6,29 @@ import InputValue2 from "../components/InputValue2";
 const WorkerSpeedGetJob = () => {
   const [recruitData, setRecruitData] = useState({
     type: "",
-    start_date: "",
+    end_date: "",
     start_time: "",
     end_time: "",
     price: 0,
   });
 
-  console.log(recruitData);
+  const [isPopUp, setIsPopUp] = useState(false);
 
   const setValue = (_key, _value) => {
     setRecruitData({ ...recruitData, [_key]: _value });
     console.log(recruitData);
   };
 
+  const mockData = [131385, 131875, 132120, 132420, 132910];
+
   return (
     <div>
+      {isPopUp && (
+        <div
+          onClick={() => setIsPopUp(!isPopUp)}
+          className="flex bg-black/[.8] absolute w-full h-full "
+        ></div>
+      )}
       <Header title="바로알바" />
       <div className="mx-8">
         <InputValue2
@@ -87,9 +95,17 @@ const WorkerSpeedGetJob = () => {
           dict_value={recruitData["price"]}
         />
         <Button
-          title="등록하기"
+          title={
+            recruitData.type !== "" &&
+            recruitData.end_date !== "" &&
+            recruitData.start_time !== "" &&
+            recruitData.end_time !== "" &&
+            recruitData.price !== ""
+              ? "일하러가기"
+              : "김치"
+          }
           onClickEvent={() => {
-            console.log(recruitData);
+            setIsPopUp(!isPopUp);
           }}
         />
       </div>
@@ -98,3 +114,13 @@ const WorkerSpeedGetJob = () => {
 };
 
 export default WorkerSpeedGetJob;
+
+//    {
+//     "worker_id": 1,
+//     "work_date": "2022-08-20",
+//     "start_times": [
+//         "10:00",
+//         "11:00",
+//        ...
+//         ]
+// }
