@@ -15,11 +15,11 @@ const WorkMyPage = () => {
   useEffect(() => {
     const workerId = sessionStorage.getItem("worker_id");
     axios
-      .post("http://localhost:4000/mypage/interview", {
+      .post("http://localhost:4000/worker/mypage/interview", {
         worker_id: workerId,
       })
       .then(function (res) {
-        console.log(res);
+        console.log(res.data);
         setResult(res.data["result"]);
         setName(res.data["name"]);
       })

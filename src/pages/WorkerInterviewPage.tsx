@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
@@ -12,10 +12,10 @@ const WorkerInterviewPage = () => {
   const [date, setDate] = useState<string | null>(null);
   const [time, setTime] = useState<string | null>(null);
   const [question, setQuestion] = useState("");
-  const state :any = useSelector((state) => state);
+  const state: any = useSelector((state) => state);
   const [basic, setBasic] = useState<any>({});
-  const [times, setTimes] = useState<any>([]) 
-  const worker_id = sessionStorage.getItem('worker_id')
+  const [times, setTimes] = useState<any>([]);
+  const worker_id = sessionStorage.getItem("worker_id");
 
   const getDate = (date: string) => {
     setDate(date);
@@ -28,50 +28,57 @@ const WorkerInterviewPage = () => {
   };
 
   const onComplete = () => {
-    onApply()
+    onApply();
     // navigate("/worker/nearWork");
     navigate("/worker/mypage");
   };
 
-  const getData = async()=> {
-    await axios.post("http://localhost:4000/apply/load_store", {
-      "store_id" : Number(state.store.id)
-    }).then(res => {
-      setBasic(res.data)
-    })
-  }
+  const getData = async () => {
+    await axios
+      .post("http://localhost:4000/apply/load_store", {
+        store_id: Number(state.store.id),
+      })
+      .then((res) => {
+        // console.log(">>>>>>>", res.data);
+        setBasic(res.data);
+      });
+  };
 
-  const getData2 = async()=> {
-    await axios.post("http://localhost:4000/apply/load_interview",{
-      "store_id" : Number(state.store.id), 'interview_month' : 7
-    }).then(res => {
-      // console.log("!!!!!!!!!!!",res)
-      setTimes(res.data)
-    })
-  }
-  
-  const onApply = async()=>{
-    await axios.post('http://localhost:4000/apply/submit', {
-      'interview_date' : date,
-      'interview_time' : Number(time),
-      'question' : question,
-      'worker_id': worker_id,
-      'store_id' : Number(state.store.id)
-    }).then(res => {
-      console.log(res.data)
-    })
-  }
+  const getData2 = async () => {
+    await axios
+      .post("http://localhost:4000/apply/load_interview", {
+        store_id: Number(state.store.id),
+        interview_month: 7,
+      })
+      .then((res) => {
+        // console.log("!!!!!!!!!!!",res)
+        setTimes(res.data);
+      });
+  };
 
+  const onApply = async () => {
+    await axios
+      .post("http://localhost:4000/apply/submit", {
+        interview_date: date,
+        interview_time: Number(time),
+        question: question,
+        worker_id: worker_id,
+        store_id: Number(state.store.id),
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+  };
 
-  useEffect(()=>{
-    getData()
-    getData2()
-  },[])
+  useEffect(() => {
+    getData();
+    getData2();
+  }, []);
 
   return (
     <div className="my-2">
       {/* 헤더 */}
-      <NavBar/>
+      <NavBar />
       <Header title={"면접신청"} />
       {/* 이미지 */}
       <div className="bg-gray-200 w-full h-48"></div>
@@ -84,7 +91,7 @@ const WorkerInterviewPage = () => {
         <div className="flex items-center mb-3 text-gray-500">
           <p className="flex-1">담당자</p>
           <p className="flex-3">
-          <span className="text-sm">{basic && basic.owner_name}님</span>
+            <span className="text-sm">{basic && basic.owner_name}님</span>
           </p>
         </div>
         <div className="flex items-center mb-3 text-gray-500">
@@ -103,9 +110,13 @@ const WorkerInterviewPage = () => {
         <SelectBox
           mode="NORMAL"
           getData={getDate}
-          data={times && times.map((t:any) => {
-            return(t.date)
-          })}
+          data={
+            times &&
+            times.map((t: any) => {
+              return t.date;
+            })
+          }
+          selectedDay={date}
         />
       </div>
       <div className="border-t-4 "></div>
@@ -115,8 +126,12 @@ const WorkerInterviewPage = () => {
         <SelectBox
           mode="TIME"
           getData={getTime}
-          data={date === null ? [10, 11, 13, 14, 15, 16, 17, 19, 20, 21] :times.filter((t:any) => t.date === date)[0].time}
-          // data ={}
+          data={
+            date === null
+              ? [10, 11, 13, 14, 15, 16, 17, 19, 20, 21]
+              : times.filter((t: any) => t.date === date)[0].time
+          }
+          selectedTime={time}
         />
       </div>
       <div className="border-t-4 "></div>
@@ -155,12 +170,19 @@ const WorkerInterviewPage = () => {
         <h3 className="font-bold mb-4">신청정보</h3>
         <div className="flex items-center mb-3 text-gray-500">
           <p className="flex-1">면접일시</p>
-          <p className="flex-3">{`${date?.split('-')[0]}년 ${date?.split('-')[1]}월 ${date?.split('-')[2]}일 `}</p>
+          <p className="flex-3">
+            {date?.split("-")[0] === undefined
+              ? "날짜를 지정해주세요"
+              : `${date?.split("-")[0]}년 ${date?.split("-")[1]}월 ${
+                  date?.split("-")[2]
+                }일 `}
+          </p>
         </div>
         <div className="flex items-center mb-3 text-gray-500">
           <p className="flex-1">면접시간</p>
-          <p className="flex-3">{`${time}:00 ~ ${Number(time)+1}:00`}
-          </p>
+          <p className="flex-3">{`${time === null ? "00" : time}:00 ~ ${
+            time === null ? "00" : Number(time) + 1
+          }:00`}</p>
         </div>
       </div>
       <div className="border-t-4 "></div>

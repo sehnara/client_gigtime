@@ -20,6 +20,7 @@ import WorkMyPage from "./pages/WorkMyPage";
 import OwnerRecruitNoticePage from "./pages/OwnerRecruitNoticePage";
 import WorkerSpeedGetJob from "./pages/WorkerSpeedGetJob";
 import WorkerSpeedResultPage from "./pages/WorkerSpeedResultPage";
+import CommonInterviewPage from "./pages/CommonInterviewPage";
 
 function App() {
   // const onTest = async () => {
@@ -68,6 +69,8 @@ function App() {
         <Route path="/worker/reserveWork" element={<WorkerReserveWorkPage />} />
         {/* 마이 페이지 */}
         <Route path="/worker/mypage" element={<WorkMyPage />} />
+        {/* 면접 */}
+        <Route path="/interview" element={<CommonInterviewPage />} />
         {/* 바로 알바 */}
         <Route path="/worker/speed" element={<WorkerSpeedGetJob />} />
         {/* 바로 알바 결과*/}

@@ -9,24 +9,23 @@ import MyGigWorker from "./InOwnerMypages/MyGigWorker";
 import RecruitTable from "./InOwnerMypages/RecruitTable";
 
 const WorkMyPage = () => {
-  const [storename, setStorename] = useState('');
-  const [name, setName] = useState('');
+  const [storename, setStorename] = useState("");
+  const [name, setName] = useState("");
 
   useEffect(() => {
-    const ownerId = sessionStorage.getItem('owner_id');
-    axios.post('http://localhost:4000/owner/name', 
-      {
-        'owner_id' : ownerId
-      }
-    )
-    .then(function(res) {
-      console.log(res);
-      setStorename(res.data["store"]);
-      setName(res.data["name"])
-    })
-    .catch(function(err) {
-      console.log(err)
-    })
+    const ownerId = sessionStorage.getItem("owner_id");
+    axios
+      .post("http://localhost:4000/owner/mypage", {
+        owner_id: ownerId,
+      })
+      .then(function (res) {
+        // console.log(">>>>", res.data);
+        setStorename(res.data["store"]);
+        setName(res.data["name"]);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }, []);
 
   const danchooRef = useRef(1);

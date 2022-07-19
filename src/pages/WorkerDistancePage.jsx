@@ -17,23 +17,25 @@ const WorkerDistancePage = () => {
     dispatch(setRange(e.target.value));
   };
 
-  // 다음 페이지로 가입시더
-  const onNextPage = () => {
-    // distance 값 처리해야함
-    // console.log('>>>>>', signData)
-    sessionStorage.setItem("worker_id", 4)
-    axios.post('http://localhost:4000/worker/signup',signData)
-    .then(res=> {
-      // console.log(res)
-      // sessionStorage.setItem("worker_id",4)
-    })
-    .catch(function (error) {
+  const setSignData = async () => {
+    await axios
+      .post("http://localhost:4000/worker/signup", signData)
+      .then((res) => {
+        console.log("res.data >>>>", res.data);
+        sessionStorage.setItem("worker_id", res.data);
+      })
+      .then(() => {
+        navigate("/worker/home");
+      })
+      .catch(function (error) {
         console.log(error);
-    })
-    navigate("/worker/home");
+      });
   };
 
-  
+  // 다음 페이지로 가입시더
+  const onNextPage = () => {
+    setSignData();
+  };
 
   return (
     <div className="font-sans">
@@ -45,8 +47,8 @@ const WorkerDistancePage = () => {
       <div className=" m-8 mt-10">
         <p className="text-lg mb-0.5 font-bold">거리를 설정해주세요</p>
         <p className="text-xs text-gray-500 mt-2">
-          반경 <span className="font-extrabold">{signData.range}m</span> 안에 있는
-          일감 정보가 검색됩니다.
+          반경 <span className="font-extrabold">{signData.range}m</span> 안에
+          있는 일감 정보가 검색됩니다.
         </p>
         <input
           type="range"

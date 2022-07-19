@@ -14,16 +14,13 @@ function masage_date(date_timestamp, mode) {
   let month = (date.getMonth() + 1).toString();
   let day = date.getDate().toString();
 
-  if (month.length === 1)
-      month = '0' + month;
+  if (month.length === 1) month = "0" + month;
 
-  if (day.length === 1)
-      day = '0' + day;
-  if(mode === 'korean'){
-    return (year + '년 ' + month + '월 ' + day + "일");
-  }
-  else{
-    return (year + '-' + month + '-' + day);
+  if (day.length === 1) day = "0" + day;
+  if (mode === "korean") {
+    return year + "년 " + month + "월 " + day + "일";
+  } else {
+    return year + "-" + month + "-" + day;
   }
 }
 
@@ -31,50 +28,55 @@ const WorkerReserveWorkPage = () => {
   const navigate = useNavigate();
   const state = useSelector((state) => state);
   const [workDates, setWorkDates] = useState([]);
-  const [selectedDate, setSelectedDate] = useState([]); 
+  const [selectedDate, setSelectedDate] = useState([]);
   const [storeData, setStoreData] = useState({});
   const worker_id = Number(sessionStorage.getItem("worker_id"));
 
-  const getData = async()=>{
-    await axios.post("http://localhost:4000/worker/reservation/list", {
-      "worker_id" : sessionStorage.getItem('worker_id'),
-      "order_id" : state.order.id,
-      "work_date" : masage_date(state.order.date),
-      "type" : state.order.type
-      }
-    ).then((res)=>{
-      setWorkDates(res.data);
-      }
-    )
+  console.log(">>>>>", workDates);
+  const getData = async () => {
+    await axios
+      .post("http://localhost:4000/worker/reservation/list", {
+        worker_id: sessionStorage.getItem("worker_id"),
+        order_id: state.order.id,
+        work_date: masage_date(state.order.date),
+        type: state.order.type,
+      })
+      .then((res) => {
+        setWorkDates(res.data);
+      });
 
-    await axios.post("http://localhost:4000/reserve/load_store", {
-      'order_id' : Number(state.order.id)
-    }).then(res=> {
-      setStoreData(res.data)
-    })
-  }
+    await axios
+      .post("http://localhost:4000/reserve/load_store", {
+        order_id: Number(state.order.id),
+      })
+      .then((res) => {
+        setStoreData(res.data);
+      });
+  };
 
-  const getWorkTime =(t)=> {
-    if(selectedDate.includes(Number(t))){
-      setSelectedDate(...selectedDate.filter(e => e === Number(t)))
+  const getWorkTime = (t) => {
+    if (selectedDate.includes(Number(t))) {
+      setSelectedDate([...selectedDate.filter((e) => e !== t)]);
+    } else {
+      setSelectedDate([...selectedDate, Number(t)]);
     }
-    else {
-      setSelectedDate([...selectedDate, Number(t)])
-    }
-  }  
+  };
 
-  const onReserve = async() => {
-    await axios.post("http://localhost:4000/worker/reservation/save", {
-      'worker_id' : worker_id,
-      'hourlyorder_id' : selectedDate
-    }).then((res)=> {
-      console.log("!!!!!!!!!!!!!!!!!", res.data)
-    })
-  }
+  const onReserve = async () => {
+    await axios
+      .post("http://localhost:4000/worker/reservation/save", {
+        worker_id: worker_id,
+        hourlyorder_id: selectedDate,
+      })
+      .then((res) => {
+        console.log("!!!!!!!!!!!!!!!!!", res.data);
+      });
+  };
 
+  console.log("selectedDate >>>", selectedDate);
   useEffect(() => {
     getData();
-  }, [])
+  }, []);
 
   return (
     <div>
@@ -90,7 +92,8 @@ const WorkerReserveWorkPage = () => {
         <div className="flex items-center mb-3 text-gray-500">
           <p className="flex-1">담당자</p>
           <p className="flex-3">
-            {storeData.owner_name}<span className="text-sm">님</span>
+            {storeData.owner_name}
+            <span className="text-sm">님</span>
           </p>
         </div>
         <div className="flex items-center mb-3 text-gray-500">
@@ -111,7 +114,7 @@ const WorkerReserveWorkPage = () => {
         </p>
         <div className="flex items-center w-full my-4">
           <AiOutlineCalendar className="mr-2" />
-          <p className="text-xs">{masage_date(state.order.date, 'korean')}</p>
+          <p className="text-xs">{masage_date(state.order.date, "korean")}</p>
           {/* 직종 */}
           <p className="text-xs ml-6 bg-gray-200 px-2 py-1 rounded-2xl">
             {state.order.type}
@@ -130,15 +133,19 @@ const WorkerReserveWorkPage = () => {
         <h3 className="font-bold mb-4">예약정보</h3>
         <div className="flex items-center mb-3 text-sm text-gray-500">
           <p className="flex-1">근무날짜</p>
-          <p className="flex-3">{masage_date(state.order.date, 'korean')}</p>
+          <p className="flex-3">{masage_date(state.order.date, "korean")}</p>
         </div>
         <div className="flex items-center mb-3 text-sm text-gray-500">
           <p className="flex-1">근무시간</p>
-          <p className="flex-3">{selectedDate === []? 0 : selectedDate.length }시간</p>
+          <p className="flex-3">
+            {selectedDate === [] ? 0 : selectedDate.length}시간
+          </p>
         </div>
         <div className="flex items-center mb-3 text-sm text-gray-500">
           <p className="flex-1">임금</p>
-          <p className="flex-3 text-base font-bold">{selectedDate === []? 0 : selectedDate.length *10000 }원</p>
+          <p className="flex-3 text-base font-bold">
+            {selectedDate === [] ? 0 : selectedDate.length * 10000}원
+          </p>
         </div>
       </div>
       <div className="border-t-4 "></div>
@@ -160,7 +167,7 @@ const WorkerReserveWorkPage = () => {
 
         <Button
           title={"예약하기"}
-          onClickEvent={async() => {
+          onClickEvent={async () => {
             await onReserve();
             navigate("/worker/nearWork");
           }}

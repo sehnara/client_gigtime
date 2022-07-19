@@ -9,85 +9,80 @@ const OwnerInterviewTimeTable = () => {
   const [willResult, setWillResult] = useState([]);
   const [completeResult, setCompleteResult] = useState([]);
   // 1.
-  const [isClick, setIsClick] = useState(true);
+  const [isClick, setIsClick] = useState(false);
+  console.log(">>>>>>>", isClick);
+
   // 2. 버튼 클릭 시 axios 설정 => if(res.data === 'success') setIsClick(true)
-  const onClickAllow = async(id) => {
-    
-    await axios.post('http://localhost:4000/owner/interview/accept',
-      {
-        'interview_id' : id,
-        'value': true
-      }
-    )
-    .then( (res)=> {
-      console.log("------------------2")
-      console.log("4444444444", res.data)
-      if (res === 'success') {
-        setIsClick(true);
-      } else {
-        console.log(res);
-      }
-    })
-    .catch(function (err) {
-      console.log(err);
-    })
-  }
+  const onClickAllow = async (id) => {
+    await axios
+      .post("http://localhost:4000/owner/mypage/interview/accept", {
+        interview_id: id,
+        value: true,
+      })
+      .then((res) => {
+        if (res === "success") {
+          setIsClick(true);
+        } else {
+          console.log(res);
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  };
 
   function onClickReject(id) {
-    axios.post('http://localhost:4000/owner/interview/accept',
-      {
-        'interview_id' : id,
-        'value': false
-      }
-    )
-    .then(function (res) {
-      if (res === 'success') {
-        setIsClick(true);
-      } else {
-        console.log(res);
-      }
-    })
-    .catch(function (err) {
-      console.log(err);
-    })
+    axios
+      .post("http://localhost:4000/owner/mypage/interview/accept", {
+        interview_id: id,
+        value: false,
+      })
+      .then(function (res) {
+        if (res === "success") {
+          setIsClick(true);
+        } else {
+          console.log(res);
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
 
   function onClickPass(id) {
-    axios.post('http://localhost:4000/owner/interview/result',
-      {
-        'interview_id' : id,
-        'value': true
-      }
-    )
-    .then(function (res) {
-      if (res === 'success') {
-        setIsClick(true);
-      } else {
-        console.log(res);
-      }
-    })
-    .catch(function (err) {
-      console.log(err);
-    })
+    axios
+      .post("http://localhost:4000/owner/mypage/interview/result", {
+        interview_id: id,
+        value: true,
+      })
+      .then(function (res) {
+        if (res === "success") {
+          setIsClick(true);
+        } else {
+          console.log(res);
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
 
   function onClickFail(id) {
-    axios.post('http://localhost:4000/owner/interview/result',
-      {
-        'interview_id' : id,
-        'value': false
-      }
-    )
-    .then(function (res) {
-      if (res === 'success') {
-        setIsClick(true);
-      } else {
-        console.log(res);
-      }
-    })
-    .catch(function (err) {
-      console.log(err);
-    })
+    axios
+      .post("http://localhost:4000/owner/mypage/interview/result", {
+        interview_id: id,
+        value: false,
+      })
+      .then(function (res) {
+        if (res === "success") {
+          setIsClick(true);
+        } else {
+          console.log(res);
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
   // 3. isClick을 useEffect [] 안에 넣어줌
   // 4. useEffect 끝에 false로 바꿔 줌
@@ -96,10 +91,10 @@ const OwnerInterviewTimeTable = () => {
     const ownerId = sessionStorage.getItem("owner_id");
     axios
       .post("http://localhost:4000/owner/interview", {
-        'owner_id': ownerId,
+        owner_id: ownerId,
       })
       .then(function (res) {
-        console.log(">>>>>",res.data)
+        console.log(">>>>>", res.data);
         setNowResult(res.data["now"]);
         setWaitResult(res.data["wait"]);
         setWillResult(res.data["will"]);
@@ -108,29 +103,28 @@ const OwnerInterviewTimeTable = () => {
       .catch(function (err) {
         console.log(err);
       });
-      setIsClick(false)
+    setIsClick(false);
   }, [isClick]);
 
-  console.log("2222222222",isClick)
+  console.log("2222222222", isClick);
 
   return (
     <div className="m-8">
       <h1 className="text-lg font-bold mb-3">입장대기</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="NOW"/> */}
-        {nowResult && 
+        {nowResult &&
           nowResult.map((el) => (
-          <OwnerPageCard
-            mode="NOW"
-            key={el.interview_id}
-            date={el.interview_date}
-            name={el.worker_name}
-            time={el.interview_time}
-            description={el.question}
-            id={el.interview_id}
-            
-          />
-        ))}
+            <OwnerPageCard
+              mode="NOW"
+              key={el.interview_id}
+              date={el.interview_date}
+              name={el.worker_name}
+              time={el.interview_time}
+              description={el.question}
+              id={el.interview_id}
+            />
+          ))}
       </div>
       <h1 className="text-lg font-bold mb-3">승인대기</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">

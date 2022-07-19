@@ -54,12 +54,12 @@ function StoreCard({
   return (
     <div className="mb-4" onClick={onClickEvent}>
       {/* 상단부 */}
-      <div className="rounded-2xl shadow-black flex ">
+      <div className="rounded-2xl shadow-gray-500 flex  shadow p-2">
         {/* 사진 */}
         {storeImage === "" ? (
           <div className="w-24 h-24 rounded-xl bg-slate-300 mr-4"></div>
         ) : (
-          <img src={storeImage} />
+          <img className=" w-24 h-24 rounded-xl mr-4" src={storeImage} />
         )}
 
         <div>

@@ -1,25 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { RiCreativeCommonsZeroLine } from "react-icons/ri";
 import List from "../../components/List";
-
-const mockDict = [
-  [
-    "2022-08-20",
-    "커피커피",
-    "서빙",
-    "대전 유성구 전민로 38",
-    "10:00,10255",
-    "11:00,10255",
-  ],
-  [
-    "2022-08-20",
-    "광세족발",
-    "설거지",
-    "대전 유성구 전민로22번길 51",
-    "16:00,10250",
-  ],
-];
 
 const WorkTimeTable = () => {
   const keyRef = useRef(1);
@@ -51,7 +32,6 @@ const WorkTimeTable = () => {
           keyRef.current += 1;
           let hours = new Array();
 
-          /* for문 안쓰고 어떻게 하나.. */
           for (let i = 4; i < e.length; i++) {
             hours.push(e[i]);
           }
