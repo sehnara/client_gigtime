@@ -8,6 +8,7 @@ import { setCurrentOrder } from "../module/slices/order";
 import { setStoreId } from "../module/slices/store";
 import NavBar from "../components/NavBar";
 import Empty from "../components/Empty";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const WorkerHomePage = () => {
   const navigate = useNavigate();
@@ -60,9 +61,9 @@ const WorkerHomePage = () => {
     <div className="font-sans">
       <button
         onClick={() => navigate("/worker/speed")}
-        className="bg-cyan-500 text-2xl rounded-full w-16 h-16 font-bold text-white fixed bottom-0 right-0 m-4 "
+        className="flex justify-center items-center  bg-cyan-500 text-3xl font-extrabold rounded-full w-16 h-16  text-white fixed bottom-0 right-0 m-4 "
       >
-        바로알바
+        <AiOutlinePlus />
       </button>
       <NavBar />
       {/* 상단 */}

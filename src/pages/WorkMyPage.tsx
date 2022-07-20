@@ -8,6 +8,7 @@ import InterviewTimeTable from "./InWorkerMyPages/InterviewTimeTable";
 import WinStores from "./InWorkerMyPages/WinStores";
 import WorkTimeTable from "./InWorkerMyPages/WorkTimeTable";
 import { useNavigate } from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const WorkMyPage = () => {
   const [result, setResult] = useState([]);
@@ -47,9 +48,9 @@ const WorkMyPage = () => {
     <div className=" my-4">
       <button
         onClick={() => navigate("/worker/speed")}
-        className="bg-cyan-500 text-2xl rounded-full w-16 h-16 font-bold text-white fixed bottom-0 right-0 m-4 "
+        className="flex justify-center items-center  bg-cyan-500 text-3xl font-extrabold rounded-full w-16 h-16  text-white fixed bottom-0 right-0 m-4 "
       >
-        바로알바
+        <AiOutlinePlus />
       </button>
       <NavBar />
       {/* 상단 */}
