@@ -17,12 +17,10 @@ import WorkerInterviewPage from "./pages/WorkerInterviewPage";
 import WorkerNearWorkPage from "./pages/WorkerNearWorkPage.jsx";
 import WorkerReserveWorkPage from "./pages/WorkerReserveWorkPage.jsx";
 import WorkMyPage from "./pages/WorkMyPage";
-import axios from "axios";
-
-import { useDispatch, useSelector } from "react-redux";
-import { ReducerType } from "./module/rootReducer";
-import { addUser, User } from "./module/slices/users";
 import OwnerRecruitNoticePage from "./pages/OwnerRecruitNoticePage";
+import WorkerSpeedGetJob from "./pages/WorkerSpeedGetJob";
+import WorkerSpeedResultPage from "./pages/WorkerSpeedResultPage";
+import CommonInterviewPage from "./pages/CommonInterviewPage";
 
 function App() {
   // const onTest = async () => {
@@ -59,12 +57,7 @@ function App() {
         <Route path="/owner/complete" element={<OwnerCompletePage />} />
         <Route path="/owner/mypage" element={<OwnerMyPage />} />
         <Route path="/owner/recruit" element={<OwnerRecruitNoticePage />} />
-        <Route
-          path="/worker/location"
-          element={
-            <WorkerLocationPage />
-          }
-        />
+        <Route path="/worker/location" element={<WorkerLocationPage />} />
         <Route path="/worker/distance" element={<WorkerDistancePage />} />
         <Route path="/worker/home" element={<WorkerHomePage />} />
 
@@ -76,6 +69,15 @@ function App() {
         <Route path="/worker/reserveWork" element={<WorkerReserveWorkPage />} />
         {/* 마이 페이지 */}
         <Route path="/worker/mypage" element={<WorkMyPage />} />
+        {/* 면접 */}
+        <Route path="/interview" element={<CommonInterviewPage />} />
+        {/* 바로 알바 */}
+        <Route path="/worker/speed" element={<WorkerSpeedGetJob />} />
+        {/* 바로 알바 결과*/}
+        <Route
+          path="/worker/speed/result"
+          element={<WorkerSpeedResultPage />}
+        />
       </Routes>
     </BrowserRouter>
   );

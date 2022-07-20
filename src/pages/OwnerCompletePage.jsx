@@ -18,35 +18,38 @@ function OwnerCompletePage() {
   }, []);
 
   async function onClickToRecruit() {
-    await axios.post("http://localhost:4000/owner/signup", 
-      state.owner
-    )
-    .then(function (response) {
-      if (response === "success") {
-        navigate("/owner/recruit");
-      } else {
-        console.log(response);
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+    await axios
+      .post("http://localhost:4000/owner/signup", state.owner)
+      .then(function (response) {
+        console.log("response >>", response.data);
+        if (response.data["result"] === "success") {
+          sessionStorage.setItem("owner_id", response.data["owner_id"]);
+          navigate("/owner/recruit");
+        } else {
+          // console.log(response.data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
+  console.log("!!!!@!#", state.owner);
+
   async function onClickToHome() {
-    await axios.post("http://localhost:4000/owner/signup", 
-      state.owner
-    )
-    .then(function (response) {
-      if (response === "success") {
-        navigate("/owner/mypage");
-      } else {
-        console.log(response);
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+    await axios
+      .post("http://localhost:4000/owner/signup", state.owner)
+      .then(function (response) {
+        if (response.data["result"] === "success") {
+          sessionStorage.setItem("owner_id", response.data["owner_id"]);
+          navigate("/owner/mypage");
+        } else {
+          // console.log(response.data["owner_id"]);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (

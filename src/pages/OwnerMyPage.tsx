@@ -7,28 +7,28 @@ import dogHeart from "../images/dog_heart.png";
 import OwnerInterviewTimeTable from "./InOwnerMypages/OwnerInterviewTimeTable";
 import MyGigWorker from "./InOwnerMypages/MyGigWorker";
 import RecruitTable from "./InOwnerMypages/RecruitTable";
+import { useNavigate } from "react-router-dom";
 
 const WorkMyPage = () => {
-  const [storename, setStorename] = useState('');
-  const [name, setName] = useState('');
+  const [storename, setStorename] = useState("");
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const ownerId = sessionStorage.getItem('owner_id');
-    axios.post('http://localhost:4000/owner/name', 
-      {
-        'owner_id' : ownerId
-      }
-    )
-    .then(function(res) {
-      console.log(res);
-      setStorename(res.data["store"]);
-      setName(res.data["name"])
-    })
-    .catch(function(err) {
-      console.log(err)
-    })
+    const ownerId = sessionStorage.getItem("owner_id");
+    axios
+      .post("http://localhost:4000/owner/mypage", {
+        owner_id: ownerId,
+      })
+      .then(function (res) {
+        setStorename(res.data["store"]);
+        setName(res.data["name"]);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }, []);
-  
+
   const danchooRef = useRef(1);
   const [tab, setTab] = useState("면접관리");
 
@@ -45,6 +45,12 @@ const WorkMyPage = () => {
   ];
   return (
     <>
+      <button
+        onClick={() => navigate("/owner/recruit")}
+        className="bg-cyan-500 rounded-full w-16 h-16 font-bold text-white fixed bottom-0 right-0 m-4"
+      >
+        모집
+      </button>
       <Header title="마이 페이지" />
       <div className=" my-4">
         {/* 상단 */}
@@ -58,7 +64,9 @@ const WorkMyPage = () => {
         <div className="flex flex-wrap justify-center mb-4">
           {data.map((e) => {
             danchooRef.current += 1;
-            return <DanChoo time={e.time} text={e.text} key={danchooRef.current} />;
+            return (
+              <DanChoo time={e.time} text={e.text} key={danchooRef.current} />
+            );
           })}
           <img
             src={dogHeart}

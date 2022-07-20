@@ -2,6 +2,7 @@ import { faTruckMedical } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
+import Empty from "./Empty";
 
 type MODE = "WORKER" | "OWNER";
 
@@ -46,14 +47,20 @@ const List = ({
       : time.getDay() === 6
       ? "토"
       : "일";
-
+  console.log(date);
   return (
     <div className="mb-8">
       {mode === "WORKER" ? (
         <div>
           <div className="flex space-x-2 items-center">
-            <AiOutlineCalendar />
-            <p className="text-xs ">{`${year}년 ${month}월 ${day}일 ${yoil}요일`}</p>
+            {date == undefined ? (
+              <Empty text={"일"} margin={4} />
+            ) : (
+              <div>
+                <AiOutlineCalendar />
+                <p className="text-xs ">{`${year}년 ${month}월 ${day}일 ${yoil}요일`}</p>
+              </div>
+            )}
           </div>
           <div className="flex space-x-2 mt-4">
             <p className="font-bold">{store}</p>
@@ -66,23 +73,30 @@ const List = ({
         </div>
       ) : (
         <div className="flex space-x-2 items-center">
-          <AiOutlineCalendar />
-          <p className="text-xs ">{`${year}년 ${month}월 ${day}일 ${yoil}요일`}</p>
-          {/* <div className="text-xs bg-gray-100 px-2 py-1 rounded-2xl">
-            {type}
-          </div> */}
+          {date == undefined ? (
+            <Empty text={"모집 내역"} margin={4} />
+          ) : (
+            <div>
+              <AiOutlineCalendar />
+              <p className="text-xs ">{`${year}년 ${month}월 ${day}일 ${yoil}요일`}</p>
+            </div>
+          )}
         </div>
       )}
       {/* --------------------------------------------------------------------- */}
       {/* 20:00,10250,왕경업,14 */}
-      <div className="w-full  rounded-xl shadow-xl pb-1">
-        {mode === "WORKER" ? (
-          ""
-        ) : (
-          <p className="absolute transform translate-x-64 translate-y-5 text-xs text-gray-500">
-            {`총 ${datas.length}시간`}
-          </p>
-        )}
+      <div
+        className={`w-full  rounded-xl ${
+          date === undefined ? "" : "shadow-xl"
+        } pb-1`}
+      >
+        {mode === "WORKER"
+          ? ""
+          : date !== undefined && (
+              <p className="absolute transform translate-x-64 translate-y-5 text-xs text-gray-500">
+                {`총 ${datas.length}시간`}
+              </p>
+            )}
         {mode === "WORKER" ? (
           ""
         ) : (
