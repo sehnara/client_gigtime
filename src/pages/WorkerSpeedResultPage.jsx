@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import { AiOutlineArrowDown } from "react-icons/ai";
+import axios from "axios";
 
 const WorkerSpeedResultPage = () => {
   const location = useLocation();
@@ -20,6 +21,20 @@ const WorkerSpeedResultPage = () => {
     return starts;
   }
 
+  const onReserve = async () => {
+    await axios
+      .post("http://localhost:4000/worker/suggestion/submit", {
+        worker_id: sessionStorage.getItem("worker_id"),
+        hourly_order_id: loc.map((i) => i.id),
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .then(() => {
+        navigate("/worker/home");
+      });
+  };
+
   return (
     <div className="h-full w-full">
       <Header title={"바로알바 신청하기"} />
@@ -31,8 +46,8 @@ const WorkerSpeedResultPage = () => {
                 key={index}
                 className="flex space-x-2 x-full items-center mb-4 border rounded-lg p-2"
               >
-                <p className=" text-2xl flex-1">{loc[i].time}</p>
-                <p className="flex-3 text-xl ">{loc[i].store}</p>
+                <p className="text-2xl flex-1">{loc[i].time}</p>
+                <p className="flex-5 text-lg ml-4 ">{loc[i].store}</p>
               </div>
               <AiOutlineArrowDown className="text-2xl mb-4" />
             </div>
@@ -54,10 +69,7 @@ const WorkerSpeedResultPage = () => {
         <p className="text-3xl font-bold text-right mb-8">
           총 <span className="text-cyan-500 text-4xl">{totalPrice}</span>원
         </p>
-        <Button
-          title={"알바신청하기"}
-          onClickEvent={() => navigate("/worker/home")}
-        />
+        <Button title={"알바신청하기"} onClickEvent={onReserve} />
       </div>
     </div>
   );

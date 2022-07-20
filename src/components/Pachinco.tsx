@@ -10,8 +10,6 @@ type PachincoType = {
 };
 
 const Pachinco = ({ result, moneys, speed, visits }: PachincoType) => {
-  // console.log("***********", moneys);
-
   const [prevMoney, setPrevMoney] = useState<number>(0);
   const [money, setMoney] = useState<number>(0);
   const [sec, setSec] = useState<number>(0);
@@ -45,7 +43,7 @@ const Pachinco = ({ result, moneys, speed, visits }: PachincoType) => {
       <div className="w-2/4">
         {sec === moneys.length ? (
           <Button
-            title={"바로알바 신청"}
+            title={"다음으로"}
             onClickEvent={() =>
               navigate("/worker/speed/result", {
                 state: { visits, totalPrice: money },

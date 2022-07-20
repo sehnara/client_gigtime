@@ -49,6 +49,7 @@ const setTimes = (start, end) => {
 
 const WorkerSpeedGetJob = () => {
   const [isPopUp, setIsPopUp] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [recruitData, setRecruitData] = useState({
     type: "",
     end_date: "",
@@ -73,8 +74,13 @@ const WorkerSpeedGetJob = () => {
       })
       .then((res) => {
         setResult(res.data);
+      })
+      .then(() => {
+        setIsOpen(true);
       });
   };
+
+  console.log("(((((((((((", result);
 
   useEffect(() => {
     if (isPopUp) {
@@ -84,16 +90,16 @@ const WorkerSpeedGetJob = () => {
 
   return (
     <div>
-      {isPopUp && (
+      {isOpen && (
         <div
-          onClick={() => setIsPopUp(!isPopUp)}
+          onClick={() => setIsOpen(!isOpen)}
           className="flex bg-black/[.8] absolute w-full h-full "
         >
           <Pachinco
-            // result={result}
-            moneys={mockData}
+            result={result}
+            moneys={result.p_history}
             speed={80}
-            visits={mockVisit}
+            visits={result.visit}
           />
         </div>
       )}
