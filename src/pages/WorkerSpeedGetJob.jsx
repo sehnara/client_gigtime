@@ -39,7 +39,11 @@ const setTimes = (start, end) => {
       i <= Number(end.split(":")[0]);
       i++
     ) {
-      arr.push(`0${i}:00`);
+      if (i < 10) {
+        arr.push(`0${i}:00`);
+      } else {
+        arr.push(`${i}:00`);
+      }
     }
   } else {
     return [];
@@ -80,7 +84,7 @@ const WorkerSpeedGetJob = () => {
       });
   };
 
-  console.log("(((((((((((", result);
+  // console.log("(((((((((((", result);
 
   useEffect(() => {
     if (isPopUp) {
