@@ -32,7 +32,7 @@ const WorkerReserveWorkPage = () => {
   const [storeData, setStoreData] = useState({});
   const worker_id = Number(sessionStorage.getItem("worker_id"));
 
-  console.log(">>>>>", workDates);
+  // console.log(">>>>>", workDates);
   const getData = async () => {
     await axios
       .post("http://localhost:4000/worker/reservation/list", {
@@ -69,7 +69,7 @@ const WorkerReserveWorkPage = () => {
         hourlyorder_id: selectedDate,
       })
       .then((res) => {
-        console.log("!!!!!!!!!!!!!!!!!", res.data);
+        // console.log("!!!!!!!!!!!!!!!!!", res.data);
       });
   };
 

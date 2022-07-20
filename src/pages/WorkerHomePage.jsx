@@ -58,6 +58,12 @@ const WorkerHomePage = () => {
 
   return (
     <div className="font-sans">
+      <button
+        onClick={() => navigate("/worker/speed")}
+        className="bg-cyan-500 text-2xl rounded-full w-16 h-16 font-bold text-white fixed bottom-0 right-0 m-4 "
+      >
+        바로알바
+      </button>
       <NavBar />
       {/* 상단 */}
       <div className=" m-8  flex items-center justify-between">

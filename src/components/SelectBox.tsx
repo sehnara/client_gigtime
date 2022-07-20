@@ -19,7 +19,7 @@ const SelectBox = ({
   getData,
   mode,
 }: SelectBoxProp) => {
-  console.log("^^^^^^^^^^^^^", selectedDate);
+  // console.log("^^^^^^^^^^^^^", selectedDate);
 
   return (
     <div className="shadow-lg shadow-slate-300 h-40 overflow-scroll rounded-md">
