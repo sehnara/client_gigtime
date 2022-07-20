@@ -13,7 +13,7 @@ module.exports = {
                 128: "32rem",
             },
             fontFamily: {
-                oxanium: ['"Oxanium"', "cursive"],
+                jua: ['"Jua"', "sans-serif"],
             },
             translate: {
                 '-1/2': '-50%'

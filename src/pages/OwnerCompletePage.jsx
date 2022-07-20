@@ -56,8 +56,8 @@ function OwnerCompletePage() {
     <div className="h-screen pt-40">
       <div className="m-8">
         <h2 className="text-3xl font-bold">
-          <span className="text-cyan-500">긱</span>
-          타임의
+          <span className="text-cyan-500">바로알바</span>
+          의
         </h2>
         <h2 className="text-3xl font-bold">가족이 되신것을</h2>
         <h2 className="text-3xl font-bold">환영합니다!</h2>

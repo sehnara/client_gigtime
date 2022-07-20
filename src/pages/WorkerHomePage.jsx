@@ -71,9 +71,9 @@ const WorkerHomePage = () => {
         <div className="flex-column">
           <p className="text-2xl mb-0.5 font-medium">이제는</p>
           <p className="text-2xl mb-0.5 font-medium">
-            <span className="text-cyan-500  font-extrabold">긱!</span> 하게
+            <span className="text-cyan-500  font-extrabold">바로 알바</span>
           </p>
-          <p className="text-2xl mb-0.5 font-medium">일 할 시간!</p>
+          <p className="text-2xl mb-0.5 font-medium">할 시간!</p>
         </div>
         <img
           src={man}
