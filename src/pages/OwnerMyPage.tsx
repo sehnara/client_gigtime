@@ -7,10 +7,12 @@ import dogHeart from "../images/dog_heart.png";
 import OwnerInterviewTimeTable from "./InOwnerMypages/OwnerInterviewTimeTable";
 import MyGigWorker from "./InOwnerMypages/MyGigWorker";
 import RecruitTable from "./InOwnerMypages/RecruitTable";
+import { useNavigate } from "react-router-dom";
 
 const WorkMyPage = () => {
   const [storename, setStorename] = useState("");
   const [name, setName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const ownerId = sessionStorage.getItem("owner_id");
@@ -19,7 +21,6 @@ const WorkMyPage = () => {
         owner_id: ownerId,
       })
       .then(function (res) {
-        // console.log(">>>>", res.data);
         setStorename(res.data["store"]);
         setName(res.data["name"]);
       })
@@ -44,6 +45,12 @@ const WorkMyPage = () => {
   ];
   return (
     <>
+      <button
+        onClick={() => navigate("/owner/recruit")}
+        className="bg-cyan-500 rounded-full w-16 h-16 font-bold text-white fixed bottom-0 right-0 m-4"
+      >
+        모집
+      </button>
       <Header title="마이 페이지" />
       <div className=" my-4">
         {/* 상단 */}

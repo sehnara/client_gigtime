@@ -72,11 +72,16 @@ const InterviewCard = ({
         {/* 가게명 */}
         <h3 className="font-bold text-base">{storeName}</h3>
         {/* 직종 */}
-        {storeType.map((el, index) => (
-          <p className="text-xs ml-6 bg-gray-200 px-2 py-1 rounded-2xl">
-            {el[index]}
-          </p>
-        ))}
+        <div className="flex ml-2 overflow-hidden w-full">
+          {storeType.map((el, index) => (
+            <p
+              key={index}
+              className="text-xs w-96 text-center mr-1 bg-gray-200 px-2 py-1 rounded-2xl"
+            >
+              {el}
+            </p>
+          ))}
+        </div>
       </div>
       {/* 주소 */}
       <p className="mb-3 text-gray-500 text-sm mt-1">{storeAdd}</p>

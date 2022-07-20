@@ -51,7 +51,6 @@ const OwnerRecruitNoticePage = () => {
   });
   const setValue = (_key, _value) => {
     setRecruitData({ ...recruitData, [_key]: _value });
-    console.log(recruitData);
   };
 
   const getData = async () => {
@@ -121,7 +120,7 @@ const OwnerRecruitNoticePage = () => {
           label={"알바유형"}
           title={"알바유형 선택"}
           setValue={setValue}
-          dict_key={"types"}
+          dict_key={"type"}
           dict_value={recruitData["types"]}
           options={recruitData["types"]}
         />
