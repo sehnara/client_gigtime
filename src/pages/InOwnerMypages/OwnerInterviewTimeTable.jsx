@@ -117,7 +117,6 @@ const OwnerInterviewTimeTable = () => {
           nowResult.map((el) => (
             <OwnerPageCard
               mode="NOW"
-              key={el.interview_id}
               date={el.interview_date}
               name={el.worker_name}
               time={el.interview_time}
@@ -134,7 +133,6 @@ const OwnerInterviewTimeTable = () => {
             <OwnerPageCard
               mode="WAIT"
               id={el.interview_id}
-              key={el.interview_id}
               date={el.interview_date}
               name={el.worker_name}
               time={el.interview_time}
@@ -153,7 +151,6 @@ const OwnerInterviewTimeTable = () => {
             <OwnerPageCard
               mode="WILL"
               id={el.interview_id}
-              key={el.interview_id}
               date={el.interview_date}
               name={el.worker_name}
               time={el.interview_time}
@@ -169,7 +166,6 @@ const OwnerInterviewTimeTable = () => {
             <OwnerPageCard
               mode="COMPLETE"
               id={el.interview_id}
-              key={el.interview_id}
               date={el.interview_date}
               name={el.worker_name}
               time={el.interview_time}

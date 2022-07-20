@@ -28,7 +28,7 @@ function OwnerPageCard({
     // 인터뷰 페이지로 이동
     navigate("/interview", {
       state: {
-        room: key,
+        room: id,
         isOwner: true,
       },
     });
