@@ -193,7 +193,7 @@ const CommonInterviewPage = () => {
     if (isOwner) {
       // 상점 주인일 경우 axios 통신 후 이동
       axios
-        .post("http://localhost:4000/owner/interview/exit", {
+        .post("http://localhost:4000/owner/mypage/interview/exit", {
           interview_id: roomID,
         })
         .then((res) => {

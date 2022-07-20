@@ -62,7 +62,7 @@ const WorkMyPage = () => {
         })}
         <img
           src={dogHeart}
-          alt="도그"
+          alt="핫도그"
           width={120}
           height={100}
           className="transform translate-x-3 translate-y-5"
