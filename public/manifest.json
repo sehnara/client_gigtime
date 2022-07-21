@@ -1,25 +1,63 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "바로알바",
+  "name": "바로알바",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "description": "지역기반 시간단위 구인구직 플랫폼",
+  "dir": "ltr",
+  "orientation": "any",
+  "scope": "/",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/x-icon",
+      "purpose": "any maskable"
     },
     {
-      "src": "logo192.png",
+      "src": "./maskable_icon_x48.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "48x48",
+      "purpose": "any maskable"
     },
     {
-      "src": "logo512.png",
+      "src": "./maskable_icon_x72.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "72x72",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./maskable_icon_x96.png",
+      "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./maskable_icon_x128.png",
+      "type": "image/png",
+      "sizes": "128x128",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./maskable_icon_x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./maskable_icon_x384.png",
+      "type": "image/png",
+      "sizes": "384x384",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./maskable_icon_x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "categories": []
 }
