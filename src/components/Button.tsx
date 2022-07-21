@@ -5,22 +5,29 @@ type ButtonProps = {
   color?: string;
   width?: number;
   height?: number;
+  active?: boolean;
   onClickEvent: () => void;
 };
 
-const Button = ({ title, color, width, height, onClickEvent }: ButtonProps) => {
+const Button = ({
+  active,
+  title,
+  color,
+  width,
+  height,
+  onClickEvent,
+}: ButtonProps) => {
   const onClick = () => {
     onClickEvent();
   };
   return (
-    
-      <button
-        onClick={onClick}
-        className={`text-base text-white bg-cyan-500 w-${width} rounded-lg font-extrabold h-12 mt-3`}
-      >
-        {title}
-      </button>
-    
+    <button
+      disabled={active && active}
+      onClick={onClick}
+      className={` text-base text-white bg-cyan-500 w-${width} rounded-lg font-extrabold h-12 mt-3`}
+    >
+      {title}
+    </button>
   );
 };
 

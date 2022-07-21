@@ -10,6 +10,7 @@ import {
 } from "../module/slices/order";
 import Empty from "../components/Empty";
 import NavBar from "../components/NavBar";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const WorkerNearWorkPage = () => {
   const state = useSelector((state) => state);
@@ -51,6 +52,12 @@ const WorkerNearWorkPage = () => {
 
   return (
     <div>
+      <button
+        onClick={() => navigate("/worker/speed")}
+        className="flex justify-center items-center  bg-cyan-500 text-3xl font-extrabold rounded-full w-16 h-16  text-white fixed bottom-0 right-0 m-4 "
+      >
+        <AiOutlinePlus />
+      </button>
       <NavBar />
       {/* 상단 */}
       <div className=" m-8  flex items-center justify-between">

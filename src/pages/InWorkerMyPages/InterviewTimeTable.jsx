@@ -16,7 +16,7 @@ const InterviewTimeTable = ({ result }) => {
           resultFlag={el.result_flag}
           link={el.link}
           state={el.state}
-          interviewId={el.interviewId}
+          interviewId={el.interview_id}
           storeName={el.store_name}
           storeAdd={el.store_address}
           storeType={el.store_type}

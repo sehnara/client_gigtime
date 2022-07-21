@@ -8,13 +8,12 @@ import InterviewTimeTable from "./InWorkerMyPages/InterviewTimeTable";
 import WinStores from "./InWorkerMyPages/WinStores";
 import WorkTimeTable from "./InWorkerMyPages/WorkTimeTable";
 import { useNavigate } from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const WorkMyPage = () => {
   const [result, setResult] = useState([]);
   const [name, setName] = useState("");
   const navigate = useNavigate();
-
-
   useEffect(() => {
     const workerId = sessionStorage.getItem("worker_id");
     axios
@@ -32,7 +31,7 @@ const WorkMyPage = () => {
   }, []);
 
   const danchooRef = useRef(1);
-  const [tab, setTab] = useState("면접시간표");
+  const [tab, setTab] = useState("알바시간표");
 
   const setMenu = (data: string) => {
     setTab(data);
@@ -47,6 +46,12 @@ const WorkMyPage = () => {
   ];
   return (
     <div className=" my-4">
+      <button
+        onClick={() => navigate("/worker/speed")}
+        className="flex justify-center items-center  bg-cyan-500 text-3xl font-extrabold rounded-full w-16 h-16  text-white fixed bottom-0 right-0 m-4 "
+      >
+        <AiOutlinePlus />
+      </button>
       <NavBar />
       {/* 상단 */}
       <div className="mx-8">
@@ -75,13 +80,13 @@ const WorkMyPage = () => {
       {/* TAB BAR  */}
       <TabBar
         tab={tab}
-        menu={["면접시간표", "알바시간표", "합격한 곳"]}
+        menu={["알바시간표", "면접시간표", "합격한 곳"]}
         setTab={setMenu}
       />
-      {tab === "면접시간표" ? (
-        <InterviewTimeTable result={result} />
-      ) : tab === "알바시간표" ? (
+      {tab === "알바시간표" ? (
         <WorkTimeTable />
+      ) : tab === "면접시간표" ? (
+        <InterviewTimeTable result={result} />
       ) : (
         <WinStores />
       )}
