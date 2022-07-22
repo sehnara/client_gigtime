@@ -1,10 +1,10 @@
 {
   "short_name": "바로알바",
   "name": "바로알바",
-  "start_url": "/",
+  "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
+  "theme_color": "#20B0C3",
+  "background_color": "#F5F5F5",
   "description": "지역기반 시간단위 구인구직 플랫폼",
   "dir": "ltr",
   "orientation": "any",

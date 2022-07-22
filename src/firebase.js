@@ -1,5 +1,5 @@
-import firebase, { initializeApp } from "firebase/app";
-import { getMessaging, getToken } from "firebase/messaging";
+import { initializeApp } from "firebase/app";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB1UuKZoQe0t4wQMS5N4b6ooQLlWaefBbE",
@@ -11,31 +11,32 @@ const firebaseConfig = {
   measurementId: "G-YW9DEY0J7D",
 };
 
-const app = initializeApp(firebaseConfig);
-const messaging = getMessaging(app);
-const { REACT_APP_VAPID_KEY } = process.env;
-const publicKey = REACT_APP_VAPID_KEY;
+const firebaseApp = initializeApp(firebaseConfig);
+const messaging = getMessaging(firebaseApp);
 
-export const getToken = async (setTokenFound) => {
-  let currentToken = "";
-
-  try {
-    currentToken = await messaging.getToken({ vapidKey: publicKey });
-    if (currentToken) {
-      setTokenFound(true);
-    } else {
-      setTokenFound(false);
-    }
-  } catch (error) {
-    console.log("An error occured while retrieving token", error);
-  }
-  return currentToken;
+export const fetchToken = (setTokenFonud, setFcmToken) => {
+  return getToken(messaging, {
+    vapidKey:
+      "BBIOrOvpq0Y-0o861mFSUUNfIOzthK_1juPWbrQayghnu7Fev4V9ZIB2SABu0x7lKgynEXtR40fGDBujypIH8ck",
+  })
+    .then((currentToken) => {
+      if (currentToken) {
+        setTokenFonud(true);
+        setFcmToken(currentToken);
+      } else {
+        console.log("no token found");
+        setTokenFonud(false);
+        setFcmToken("");
+      }
+    })
+    .catch((err) => {
+      console.log("error occured", err);
+    });
 };
 
-export const onMessageListener = () => {
+export const onMessageListener = () =>
   new Promise((resolve) => {
-    messaging.onMessage((payload) => {
-      resolve(payload);
+    onMessage(messaging, (payload) => {
+      resolve();
     });
   });
-};

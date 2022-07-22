@@ -22,7 +22,28 @@ import WorkerSpeedGetJob from "./pages/WorkerSpeedGetJob";
 import WorkerSpeedResultPage from "./pages/WorkerSpeedResultPage";
 import CommonInterviewPage from "./pages/CommonInterviewPage";
 
+/*FIREBASE*/
+import { fetchToken, onMessageListener } from "./firebase";
+
 function App() {
+  const [show, setShow] = useState(false);
+  const [notification, setNotification] = useState({ title: "", body: "" });
+  const [isTokenFound, setIsTokenFound] = useState(false);
+  const [getFcmToken, setFcmToken] = useState("");
+
+  fetchToken(setIsTokenFound, setFcmToken);
+  onMessageListener()
+    .then((payload) => {
+      setNotification({
+        title: payload.notification.title,
+        body: payload.notification.body,
+      });
+      setShow(true);
+    })
+    .catch((err) => {
+      console.log("failed", err);
+    });
+
   return (
     <BrowserRouter>
       <Routes>
