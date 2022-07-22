@@ -36,7 +36,7 @@ const MyGigWorker = () => {
       ) : (
         <div>
           <h1 className="text-lg mb-3">
-            총 <strong>{workers.length}명</strong>의 긱워커
+            총 <strong>{workers.length}명</strong>의 알바생
           </h1>
           <div className="w-full h-full rounded-xl shadow-lg shadow-black-500 mr-2 mb-2 text-center flex flex-col p-4">
             {workers &&

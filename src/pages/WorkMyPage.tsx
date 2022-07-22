@@ -38,11 +38,11 @@ const WorkMyPage = () => {
   };
 
   const data = [
-    { time: 49, text: "긱타임으로 일 한 시간" },
-    { time: 3, text: "긱타임에서 합격한 매장 수" },
-    { time: 8, text: "긱타임에서 면접 본 횟수" },
-    { time: 237, text: "긱타임에서 번 돈(만 원)" },
-    { time: 10, text: "어려운 사장님 도와준 시간" },
+    { time: 49, text: "바로알바로 일 한 시간" },
+    { time: 3, text: "바로알바에서 합격한 매장 수" },
+    { time: 8, text: "바로알바에서 면접 본 횟수" },
+    { time: 237, text: "바로알바에서 수익(만 원)" },
+    { time: 10, text: "바로알바 가입한지 (일)" },
   ];
   return (
     <div className=" my-4">
@@ -90,6 +90,12 @@ const WorkMyPage = () => {
       ) : (
         <WinStores />
       )}
+      <button
+        // onClick={() => navigate("/chatlist")}
+        className="bg-cyan-500 rounded-full w-16 h-16 font-bold text-white fixed bottom-0 right-0 m-4"
+      >
+        채팅
+      </button>
     </div>
   );
 };

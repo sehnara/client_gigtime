@@ -46,6 +46,12 @@ const WorkMyPage = () => {
   return (
     <>
       <button
+        // onClick={() => navigate("/chatlist")}
+        className="bg-cyan-500 rounded-full w-16 h-16 font-bold text-white fixed bottom-20 right-0 m-4"
+      >
+        채팅
+      </button>
+      <button
         onClick={() => navigate("/owner/recruit")}
         className="bg-cyan-500 rounded-full w-16 h-16 font-bold text-white fixed bottom-0 right-0 m-4"
       >
@@ -80,7 +86,7 @@ const WorkMyPage = () => {
         {/* TAB BAR  */}
         <TabBar
           tab={tab}
-          menu={["모집내역", "면접관리", "나의 긱워커"]}
+          menu={["모집내역", "면접관리", "나의 알바생"]}
           setTab={setMenu}
         />
         {tab === "면접관리" ? (
