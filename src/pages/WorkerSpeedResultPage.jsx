@@ -23,7 +23,7 @@ const WorkerSpeedResultPage = () => {
 
     const onReserve = async () => {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/worker/suggestion/submit', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/suggestion/submit`, {
                 worker_id: sessionStorage.getItem('worker_id'),
                 hourly_order_id: loc.map((i) => i.id),
             })

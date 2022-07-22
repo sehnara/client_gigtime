@@ -17,7 +17,7 @@ const WorkMyPage = () => {
     useEffect(() => {
         const workerId = sessionStorage.getItem('worker_id');
         axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/worker/mypage/interview', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/mypage/interview`, {
                 worker_id: workerId,
             })
             .then(function (res) {

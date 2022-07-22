@@ -29,7 +29,7 @@ const WorkerHomePage = () => {
 
     useEffect(() => {
         axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/worker/addr/range', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/addr/range`, {
                 worker_id: sessionStorage.getItem('worker_id'),
             })
             .then((res) => {
@@ -41,7 +41,7 @@ const WorkerHomePage = () => {
 
     const getStoreList = async () => {
         await axios
-            .post('`${process.env.REACT_APP_ROUTE_PATH}` + "/store/list', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/store/list`, {
                 worker_id: sessionStorage.getItem('worker_id'),
             })
             .then((res) => {

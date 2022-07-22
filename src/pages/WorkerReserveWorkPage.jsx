@@ -34,7 +34,7 @@ const WorkerReserveWorkPage = () => {
 
     const getData = async () => {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/worker/reservation/list', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/reservation/list`, {
                 worker_id: sessionStorage.getItem('worker_id'),
                 order_id: state.order.id,
                 work_date: masage_date(state.order.date),
@@ -45,7 +45,7 @@ const WorkerReserveWorkPage = () => {
             });
 
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/reserve/load_store', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/reserve/load_store`, {
                 order_id: Number(state.order.id),
             })
             .then((res) => {
@@ -63,7 +63,7 @@ const WorkerReserveWorkPage = () => {
 
     const onReserve = async () => {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/worker/reservation/save', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/reservation/save`, {
                 worker_id: worker_id,
                 hourlyorder_id: selectedDate,
             })

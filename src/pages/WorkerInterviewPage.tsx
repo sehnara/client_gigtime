@@ -35,7 +35,7 @@ const WorkerInterviewPage = () => {
 
     const getData = async () => {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/apply/load_store', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/load_store`, {
                 store_id: Number(state.store.id),
             })
             .then((res) => {
@@ -46,7 +46,7 @@ const WorkerInterviewPage = () => {
 
     const getData2 = async () => {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/apply/load_interview', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/load_interview`, {
                 store_id: Number(state.store.id),
                 interview_month: 7,
             })
@@ -58,7 +58,7 @@ const WorkerInterviewPage = () => {
 
     const onApply = async () => {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/apply/submit', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/submit`, {
                 interview_date: date,
                 interview_time: Number(time),
                 question: question,

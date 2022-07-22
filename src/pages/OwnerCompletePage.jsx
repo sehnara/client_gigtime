@@ -19,7 +19,7 @@ function OwnerCompletePage() {
 
     async function onClickToRecruit() {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/signup', state.owner)
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/signup`, state.owner)
             .then(function (response) {
                 console.log('response >>', response.data);
                 if (response.data['result'] === 'success') {
@@ -38,7 +38,7 @@ function OwnerCompletePage() {
 
     async function onClickToHome() {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/signup', state.owner)
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/signup`, state.owner)
             .then(function (response) {
                 if (response.data['result'] === 'success') {
                     sessionStorage.setItem('owner_id', response.data['owner_id']);

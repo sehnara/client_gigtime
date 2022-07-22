@@ -12,7 +12,7 @@ const MyGigWorker = () => {
     useEffect(() => {
         const ownerId = sessionStorage.getItem('owner_id');
         axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/mypage/myWorker', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/myWorker`, {
                 owner_id: ownerId,
             })
             .then((res) => {

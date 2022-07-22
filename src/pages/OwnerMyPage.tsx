@@ -17,7 +17,7 @@ const WorkMyPage = () => {
     useEffect(() => {
         const ownerId = sessionStorage.getItem('owner_id');
         axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/mypage', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage`, {
                 owner_id: ownerId,
             })
             .then(function (res) {

@@ -61,7 +61,7 @@ const WorkerSpeedGetJob = () => {
 
     const getDatas = async () => {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/worker/suggestion', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/suggestion`, {
                 worker_id: 1, //sessionStorage.getItem("worker_id"),
                 work_date: recruitData.end_date,
                 start_times: setTimes(recruitData.start_time, recruitData.end_time),

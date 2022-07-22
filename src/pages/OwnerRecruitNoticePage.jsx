@@ -55,7 +55,7 @@ const OwnerRecruitNoticePage = () => {
 
     const getData = async () => {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/mypage/employment/button', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/employment/button`, {
                 owner_id: owner_id,
             })
             .then((res) => {
@@ -70,7 +70,7 @@ const OwnerRecruitNoticePage = () => {
     };
 
     const onEnroll = async () => {
-        await axios.post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/employment', postData).then((res) => {
+        await axios.post(`${process.env.REACT_APP_ROUTE_PATH}/owner/employment`, postData).then((res) => {
             navigate('/owner/mypage');
             console.log(res.data);
         });

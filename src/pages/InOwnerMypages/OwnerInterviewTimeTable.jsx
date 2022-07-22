@@ -15,7 +15,7 @@ const OwnerInterviewTimeTable = () => {
     // 2. 버튼 클릭 시 axios 설정 => if(res.data === 'success') setIsClick(true)
     const onClickAllow = async (id) => {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/mypage/interview/accept', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/accept`, {
                 interview_id: id,
                 value: true,
             })
@@ -33,7 +33,7 @@ const OwnerInterviewTimeTable = () => {
 
     function onClickReject(id) {
         axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/mypage/interview/accept', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/accept`, {
                 interview_id: id,
                 value: false,
             })
@@ -51,7 +51,7 @@ const OwnerInterviewTimeTable = () => {
 
     function onClickPass(id) {
         axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/mypage/interview/result', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/result`, {
                 interview_id: id,
                 value: true,
             })
@@ -69,7 +69,7 @@ const OwnerInterviewTimeTable = () => {
 
     function onClickFail(id) {
         axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/mypage/interview/result', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/result`, {
                 interview_id: id,
                 value: false,
             })
@@ -90,7 +90,7 @@ const OwnerInterviewTimeTable = () => {
     useEffect(() => {
         const ownerId = sessionStorage.getItem('owner_id');
         axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/interview', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/interview`, {
                 owner_id: ownerId,
             })
             .then(function (res) {

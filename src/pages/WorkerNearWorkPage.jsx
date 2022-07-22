@@ -16,7 +16,7 @@ const WorkerNearWorkPage = () => {
     const [range, setRange] = useState('');
     const getData = async () => {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/worker/show/hourly_orders', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/show/hourly_orders`, {
                 worker_id: sessionStorage.getItem('worker_id'),
             })
             .then((res) => {
@@ -28,7 +28,7 @@ const WorkerNearWorkPage = () => {
     useEffect(() => {
         getData();
         axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/worker/addr/range', {
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/addr/range`, {
                 worker_id: sessionStorage.getItem('worker_id'),
             })
             .then((res) => {

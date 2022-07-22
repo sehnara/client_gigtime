@@ -25,7 +25,7 @@ const RecruitTable = () => {
 
     const getData = async () => {
         await axios
-            .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/mypage/work', { owner_id: Number(sessionStorage.getItem('owner_id')) })
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/work`, { owner_id: Number(sessionStorage.getItem('owner_id')) })
             .then((res) => {
                 setData(res.data);
             });

@@ -187,7 +187,7 @@ const CommonInterviewPage = () => {
         if (isOwner) {
             // 상점 주인일 경우 axios 통신 후 이동
             axios
-                .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/owner/mypage/interview/exit', {
+                .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/exit`, {
                     interview_id: roomID,
                 })
                 .then((res) => {

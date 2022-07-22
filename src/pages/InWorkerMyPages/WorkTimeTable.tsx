@@ -9,7 +9,7 @@ const WorkTimeTable = () => {
     const getData = async () => {
         try {
             await axios
-                .post(`${process.env.REACT_APP_ROUTE_PATH}` + '/worker/mypage/work', {
+                .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/mypage/work`, {
                     worker_id: sessionStorage.getItem('worker_id'),
                 })
                 .then((res) => {
