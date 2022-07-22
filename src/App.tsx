@@ -22,26 +22,7 @@ import WorkerSpeedGetJob from "./pages/WorkerSpeedGetJob";
 import WorkerSpeedResultPage from "./pages/WorkerSpeedResultPage";
 import CommonInterviewPage from "./pages/CommonInterviewPage";
 
-
 function App() {
-  // const onTest = async () => {
-  //   await axios
-  //     .get("http://localhost:4000/")
-  //     .then((res) => console.log(res.data))
-  //     .catch();
-  // };
-
-  // useEffect(() => {
-  //   onTest();
-  // }, []);
-
-  //const users = useSelector<ReducerType, User[]>((state) => state.users);
-  //const dispatch = useDispatch();
-
-  //useEffect(() => {
-  // dispatch(addUser({ id: 3, name: "강세훈" }));
-  //}, []);
-
   return (
     <BrowserRouter>
       <Routes>
