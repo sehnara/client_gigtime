@@ -30,9 +30,9 @@ const InterviewCard = ({
   storeAdd,
   storeType,
 }: InterviewCardProps) => {
-  const navigate = useNavigate();
-  let dateSplit: string[] = date.split("-");
-  const interviewTime = `${time}:00 ~ ${time + 1}:00`;
+    const navigate = useNavigate();
+    let dateSplit: string[] = date.split('-');
+    const interviewTime = `${time}:00 ~ ${time + 1}:00`;
 
   const interviewWorker = () => {
     // 없으면 alert
