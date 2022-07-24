@@ -19,7 +19,7 @@ const data = [
   { time: 10, text: "도움 받은 시간 (긱 SOS)" },
 ];
 
-export type ANGEL_STATE = "NONE" | "POSTING" | "SEARCHING";
+export type ANGEL_STATE = "NONE" | "POSTING" | "SEARCHING" | "RESULT";
 
 const WorkMyPage = () => {
   // STATE -------------------------------------
@@ -77,7 +77,9 @@ const WorkMyPage = () => {
   return (
     <>
       {/* 바로알바 팝업 페이지 */}
-      {(isAngel === "POSTING" || isAngel === "SEARCHING") && (
+      {(isAngel === "POSTING" ||
+        isAngel === "SEARCHING" ||
+        isAngel === "RESULT") && (
         <div className="absolute bg-black/[.9] z-10  w-full h-full flex flex-col justify-center items-center">
           <h1 className="text-white text-5xl font-bold mb-2">알바 천사</h1>
 
@@ -92,17 +94,64 @@ const WorkMyPage = () => {
                 가게와 가까운 알바생부터 매칭 중
               </div>
             </>
+          ) : isAngel === "RESULT" ? (
+            <div className="flex flex-col justify-center items-center">
+              <p className="text-cyan-400 text-2xl font-bold my-8 ">
+                매칭 완료
+              </p>
+              {/* 1.요청 직종 */}
+              <div className="text-white w-screen px-16 mb-2">
+                <div className="flex w-full ">
+                  <p className="pr-4">요청 직종 : </p>
+                  <p>요리사</p>
+                </div>
+              </div>
+              {/* 2. 요청 시간 */}
+              <div className="text-white w-screen px-16 mb-2">
+                <div className="flex w-full ">
+                  <p className="pr-4">요청 시간 : </p>
+                  <p>10:00 ~ 13:00</p>
+                </div>
+              </div>
+              {/* 3. 요청 시급 */}
+              <div className="text-white w-screen px-16 mb-2">
+                <div className="flex w-full ">
+                  <p className="pr-4">시급 : </p>
+                  <p>10000원</p>
+                </div>
+              </div>
+              <div className="border m-4 w-2/3 text-center"></div>
+              {/* 4. 매칭 인물 */}
+              <div className="text-white w-screen px-16 mb-2">
+                <div className="flex w-full ">
+                  <p className="pr-4">매칭된 가족원 : </p>
+                  <p>강세훈</p>
+                </div>
+              </div>
+              {/* 5. 매칭 거리 */}
+              <div className="text-white w-screen px-16 mb-2">
+                <div className="flex w-full ">
+                  <p className="pr-4">가게와의 거리 : </p>
+                  <p>20m</p>
+                </div>
+              </div>{" "}
+              <Button
+                title={"나가기"}
+                onClickEvent={() => setAngel("NONE")}
+                width={64}
+              />
+            </div>
           ) : (
             <>
               <img src={magnifier} className="w-52 h-52 mb-4 " />
               <div>
                 <p className="text-white text-sm">
-                  - <span className="text-cyan-400 font-bold">오늘 하루</span>{" "}
+                  - <span className="text-cyan-500 font-bold">오늘 하루</span>
                   내에 알바 구인 가능
                 </p>
                 <p className="text-white text-sm">
                   - 현재 시간 기준{" "}
-                  <span className="text-cyan-400 font-bold">1시간 이후</span>
+                  <span className="text-cyan-500 font-bold">1시간 이후</span>
                   부터 구인 가능
                 </p>
               </div>
