@@ -84,8 +84,6 @@ const WorkerSpeedGetJob = () => {
       });
   };
 
-  // console.log("(((((((((((", result);
-
   useEffect(() => {
     if (isPopUp) {
       getDatas();

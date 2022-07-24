@@ -58,7 +58,7 @@ const WorkerNearWorkPage = () => {
       >
         <AiOutlinePlus />
       </button>
-      <NavBar />
+      <NavBar mode={"WORKER"} />
       {/* 상단 */}
       <div className=" m-8  flex items-center justify-between">
         <h1 className="text-2xl font-bold w-2/3">{loc}</h1>
