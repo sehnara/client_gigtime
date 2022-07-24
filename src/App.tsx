@@ -21,26 +21,37 @@ import OwnerRecruitNoticePage from "./pages/OwnerRecruitNoticePage";
 import WorkerSpeedGetJob from "./pages/WorkerSpeedGetJob";
 import WorkerSpeedResultPage from "./pages/WorkerSpeedResultPage";
 import CommonInterviewPage from "./pages/CommonInterviewPage";
-
+import { firebaseApp } from "./firebase";
 
 function App() {
-  // const onTest = async () => {
-  //   await axios
-  //     .get("http://localhost:4000/")
-  //     .then((res) => console.log(res.data))
-  //     .catch();
-  // };
+  const [isTokenFound, setTokenFound] = useState(false);
+  const [myToken, setMyToken] = useState("");
+  const firebaseMessaging = firebaseApp.messaging();
 
-  // useEffect(() => {
-  //   onTest();
-  // }, []);
+  firebaseMessaging
+    .requestPermission()
+    .then(() => {
+      return firebaseMessaging.getToken(); // 등록 토큰 받기
+    })
+    .then(function (token: any) {
+      console.log(token); //토큰 출력
+      setMyToken(token);
+    })
+    .catch(function (error: any) {
+      console.log("FCM Error : ", error);
+    });
 
-  //const users = useSelector<ReducerType, User[]>((state) => state.users);
-  //const dispatch = useDispatch();
+  firebaseMessaging.onMessage((payload: any) => {
+    // console.log(payload.notification.body);
 
-  //useEffect(() => {
-  // dispatch(addUser({ id: 3, name: "강세훈" }));
-  //}, []);
+    const { title, body } = payload.notification;
+    alert(
+      "알림 ::: " +
+        payload.notification.title +
+        "//////" +
+        payload.notification.body
+    );
+  });
 
   return (
     <BrowserRouter>
