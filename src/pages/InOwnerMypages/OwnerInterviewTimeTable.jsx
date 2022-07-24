@@ -10,6 +10,7 @@ const OwnerInterviewTimeTable = () => {
   const [completeResult, setCompleteResult] = useState([]);
   // 1.
   const [isClick, setIsClick] = useState(false);
+  console.log(">>>>>>>", isClick);
 
   // 2. 버튼 클릭 시 axios 설정 => if(res.data === 'success') setIsClick(true)
   const onClickAllow = async (id) => {
@@ -26,7 +27,7 @@ const OwnerInterviewTimeTable = () => {
         }
       })
       .catch(function (err) {
-        // console.log(err);
+        console.log(err);
       });
   };
 
@@ -93,7 +94,7 @@ const OwnerInterviewTimeTable = () => {
         owner_id: ownerId,
       })
       .then(function (res) {
-        // console.log(">>>>>", res.data);
+        console.log(">>>>>", res.data);
         setNowResult(res.data["now"]);
         setWaitResult(res.data["wait"]);
         setWillResult(res.data["will"]);
@@ -104,6 +105,8 @@ const OwnerInterviewTimeTable = () => {
       });
     setIsClick(false);
   }, [isClick]);
+
+  console.log("2222222222", isClick);
 
   return (
     <div className="m-8">

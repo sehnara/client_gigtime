@@ -26,7 +26,7 @@ const List = ({
   price,
 }: ListProps) => {
   const [isStretch, setIsStretch] = useState(false);
-  // console.log(datas);
+  console.log(datas);
 
   //   날짜 관련
   const time = new Date(date);
