@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import {AiOutlineHome, AiOutlineUsergroupAdd } from "react-icons/ai";
+import {
+  AiFillHome,
+  AiOutlineHome,
+  AiOutlineUsergroupAdd,
+} from "react-icons/ai";
 import { MdOutlineQrCodeScanner } from "react-icons/md";
 import { TbBarcode } from "react-icons/tb";
 import { BsChatDots } from "react-icons/bs";
