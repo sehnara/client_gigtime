@@ -7,7 +7,7 @@ const WinStores = () => {
 
   const getData = async () => {
     await axios
-      .post("http://localhost:4000/worker/mypage/myStore", {
+      .post("/worker/mypage/myStore", {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => setData(res.data));

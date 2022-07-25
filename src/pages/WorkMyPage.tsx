@@ -10,14 +10,23 @@ import WorkTimeTable from "./InWorkerMyPages/WorkTimeTable";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 
+const data = [
+  { time: 49, text: "바로알바로 일 한 시간" },
+  { time: 3, text: "바로알바에서 합격한 매장 수" },
+  { time: 8, text: "바로알바에서 면접 본 횟수" },
+  { time: 237, text: "바로알바에서 수익(만 원)" },
+  { time: 10, text: "바로알바 가입한지 (일)" },
+];
+
 const WorkMyPage = () => {
   const [result, setResult] = useState([]);
   const [name, setName] = useState("");
   const navigate = useNavigate();
+
   useEffect(() => {
     const workerId = sessionStorage.getItem("worker_id");
     axios
-      .post("http://localhost:4000/worker/mypage/interview", {
+      .post("/worker/mypage/interview", {
         worker_id: workerId,
       })
       .then(function (res) {
@@ -37,13 +46,6 @@ const WorkMyPage = () => {
     setTab(data);
   };
 
-  const data = [
-    { time: 49, text: "바로알바로 일 한 시간" },
-    { time: 3, text: "바로알바에서 합격한 매장 수" },
-    { time: 8, text: "바로알바에서 면접 본 횟수" },
-    { time: 237, text: "바로알바에서 수익(만 원)" },
-    { time: 10, text: "바로알바 가입한지 (일)" },
-  ];
   return (
     <div className=" my-4">
       <button

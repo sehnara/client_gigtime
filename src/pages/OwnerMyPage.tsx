@@ -30,10 +30,15 @@ const WorkMyPage = () => {
   const danchooRef = useRef(1);
 
   // [바로알바 인풋값]
+  const times = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24,
+  ].map((i) => new Date(Date.now() + 3600000 * i).toISOString());
+
   const [angelData, setAngelData] = useState({
-    types: ["설거지", "유유", "경경"],
-    startTimes: ["01:00", "02:00", "03:00"],
-    endTimes: ["01:00", "02:00", "03:00"],
+    types: [],
+    startTimes: times,
+    endTimes: times,
     price: "",
   });
 
@@ -44,15 +49,44 @@ const WorkMyPage = () => {
     price: "",
   });
 
-  // [처음 데이터 받아올 때,]
-  // useEffect(() => {
-  //   axios.post("http://localhost:4000/", {
-  //     owner_id: sessionStorage.getItem("owner_id"),
-  //   });
-  // }, []);
+  // [처음 데이터 받아올 때, 1]
+  useEffect(() => {
+    axios
+      .get("/owner/angel", {
+        params: {
+          owner_id: sessionStorage.getItem("owner_id"),
+        },
+      })
+      .then((res: any) => {
+        setAngelData({ ...angelData, types: res.data.type });
+      });
+  }, []);
 
-  // [확인 눌렀을 때, POST 누르면]
-  const postAngel = () => {};
+  // [확인 눌렀을 때, POST 누르면 2]
+  const postAngel = async () => {
+    await axios
+      .post("/owner/angel/call", {
+        owner_id: sessionStorage.getItem("owner_id"),
+        type: selectedData.type,
+        start_time: selectedData.startTime,
+        end_time: selectedData.endTime,
+        price: selectedData.price,
+      })
+      .then((res: any) => {
+        if (res.data === "success") {
+          setAngel("SEARCHING");
+        } else {
+          alert(
+            "알바천사 서비스 사용에 어려움이 있습니다. 잠시후 다시 시도해주세요."
+          );
+        }
+      });
+  };
+
+  // [RESULT 페이지, 사장님 결과 확인]
+  const getAngel = async () => {
+    await axios.get("/owner/angel/info", {});
+  };
 
   // FUNCTION ----------------------------------
   const setMenu = (data: string) => {
@@ -62,14 +96,14 @@ const WorkMyPage = () => {
   useEffect(() => {
     const ownerId = sessionStorage.getItem("owner_id");
     axios
-      .post("http://localhost:4000/owner/mypage", {
+      .post("/owner/mypage", {
         owner_id: ownerId,
       })
-      .then(function (res) {
+      .then(function (res: any) {
         setStorename(res.data["store"]);
         setName(res.data["name"]);
       })
-      .catch(function (err) {
+      .catch(function (err: any) {
         console.log(err);
       });
   }, []);
@@ -262,7 +296,7 @@ const WorkMyPage = () => {
                 </button>
                 <button
                   onClick={() => {
-                    setAngel("SEARCHING");
+                    postAngel();
                   }}
                   className="text-white bg-cyan-500 p-3 font-bold  rounded-lg flex-1"
                 >

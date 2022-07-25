@@ -69,7 +69,7 @@ const WorkerSpeedGetJob = () => {
 
   const getDatas = async () => {
     await axios
-      .post("http://localhost:4000/worker/suggestion", {
+      .post("/worker/suggestion", {
         worker_id: 1, //sessionStorage.getItem("worker_id"),
         work_date: recruitData.end_date,
         start_times: setTimes(recruitData.start_time, recruitData.end_time),

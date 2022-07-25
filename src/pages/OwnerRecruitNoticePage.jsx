@@ -55,7 +55,7 @@ const OwnerRecruitNoticePage = () => {
 
   const getData = async () => {
     await axios
-      .post("http://localhost:4000/owner/mypage/employment/button", {
+      .post("/owner/mypage/employment/button", {
         owner_id: owner_id,
       })
       .then((res) => {
@@ -70,12 +70,10 @@ const OwnerRecruitNoticePage = () => {
   };
 
   const onEnroll = async () => {
-    await axios
-      .post("http://localhost:4000/owner/employment", postData)
-      .then((res) => {
-        navigate("/owner/mypage");
-        console.log(res.data);
-      });
+    await axios.post("/owner/employment", postData).then((res) => {
+      navigate("/owner/mypage");
+      console.log(res.data);
+    });
   };
 
   useEffect(() => {

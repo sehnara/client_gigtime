@@ -12,7 +12,7 @@ const MyGigWorker = () => {
   useEffect(() => {
     const ownerId = sessionStorage.getItem("owner_id");
     axios
-      .post("http://localhost:4000/owner/mypage/myWorker", {
+      .post("/owner/mypage/myWorker", {
         owner_id: ownerId,
       })
       .then((res) => {

@@ -35,7 +35,7 @@ const WorkerInterviewPage = () => {
 
   const getData = async () => {
     await axios
-      .post("http://localhost:4000/apply/load_store", {
+      .post("/apply/load_store", {
         store_id: Number(state.store.id),
       })
       .then((res) => {
@@ -46,7 +46,7 @@ const WorkerInterviewPage = () => {
 
   const getData2 = async () => {
     await axios
-      .post("http://localhost:4000/apply/load_interview", {
+      .post("/apply/load_interview", {
         store_id: Number(state.store.id),
         interview_month: 7,
       })
@@ -58,7 +58,7 @@ const WorkerInterviewPage = () => {
 
   const onApply = async () => {
     await axios
-      .post("http://localhost:4000/apply/submit", {
+      .post("/apply/submit", {
         interview_date: date,
         interview_time: Number(time),
         question: question,

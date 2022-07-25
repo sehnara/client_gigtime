@@ -14,7 +14,7 @@ const OwnerInterviewTimeTable = () => {
   // 2. 버튼 클릭 시 axios 설정 => if(res.data === 'success') setIsClick(true)
   const onClickAllow = async (id) => {
     await axios
-      .post("http://localhost:4000/owner/mypage/interview/accept", {
+      .post("/owner/mypage/interview/accept", {
         interview_id: id,
         value: true,
       })
@@ -32,7 +32,7 @@ const OwnerInterviewTimeTable = () => {
 
   function onClickReject(id) {
     axios
-      .post("http://localhost:4000/owner/mypage/interview/accept", {
+      .post("/owner/mypage/interview/accept", {
         interview_id: id,
         value: false,
       })
@@ -50,7 +50,7 @@ const OwnerInterviewTimeTable = () => {
 
   function onClickPass(id) {
     axios
-      .post("http://localhost:4000/owner/mypage/interview/result", {
+      .post("/owner/mypage/interview/result", {
         interview_id: id,
         value: true,
       })
@@ -68,7 +68,7 @@ const OwnerInterviewTimeTable = () => {
 
   function onClickFail(id) {
     axios
-      .post("http://localhost:4000/owner/mypage/interview/result", {
+      .post("/owner/mypage/interview/result", {
         interview_id: id,
         value: false,
       })
@@ -89,7 +89,7 @@ const OwnerInterviewTimeTable = () => {
   useEffect(() => {
     const ownerId = sessionStorage.getItem("owner_id");
     axios
-      .post("http://localhost:4000/owner/interview", {
+      .post("/owner/interview", {
         owner_id: ownerId,
       })
       .then(function (res) {

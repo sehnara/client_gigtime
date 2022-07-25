@@ -9,7 +9,7 @@ const WorkTimeTable = () => {
   const getData = async () => {
     try {
       await axios
-        .post("http://localhost:4000/worker/mypage/work", {
+        .post("/worker/mypage/work", {
           worker_id: sessionStorage.getItem("worker_id"),
         })
         .then((res) => {

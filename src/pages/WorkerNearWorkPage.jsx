@@ -20,7 +20,7 @@ const WorkerNearWorkPage = () => {
   const [range, setRange] = useState("");
   const getData = async () => {
     await axios
-      .post("http://localhost:4000/worker/show/hourly_orders", {
+      .post("/worker/show/hourly_orders", {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
@@ -32,7 +32,7 @@ const WorkerNearWorkPage = () => {
   useEffect(() => {
     getData();
     axios
-      .post("http://localhost:4000/worker/addr/range", {
+      .post("/worker/addr/range", {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {

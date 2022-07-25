@@ -23,7 +23,7 @@ const WorkerSpeedResultPage = () => {
 
   const onReserve = async () => {
     await axios
-      .post("http://localhost:4000/worker/suggestion/submit", {
+      .post("/worker/suggestion/submit", {
         worker_id: sessionStorage.getItem("worker_id"),
         hourly_order_id: loc.map((i) => i.id),
       })

@@ -19,7 +19,7 @@ const WorkerDistancePage = () => {
 
   const setSignData = async () => {
     await axios
-      .post("http://localhost:4000/worker/signup", signData)
+      .post("/worker/signup", signData)
       .then((res) => {
         console.log("res.data >>>>", res.data);
         sessionStorage.setItem("worker_id", res.data);

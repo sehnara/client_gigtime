@@ -29,7 +29,7 @@ const WorkerHomePage = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:4000/worker/addr/range", {
+      .post("/worker/addr/range", {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
@@ -41,7 +41,7 @@ const WorkerHomePage = () => {
 
   const getStoreList = async () => {
     await axios
-      .post("http://localhost:4000/store/list", {
+      .post("/store/list", {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {

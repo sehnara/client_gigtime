@@ -22,6 +22,8 @@ import WorkerSpeedGetJob from "./pages/WorkerSpeedGetJob";
 import WorkerSpeedResultPage from "./pages/WorkerSpeedResultPage";
 import CommonInterviewPage from "./pages/CommonInterviewPage";
 import { firebaseApp } from "./firebase";
+import WorkerQrCode from "./pages/WorkerQrCode";
+import OwnerQrCode from "./pages/OwnerQrCode";
 
 function App() {
   const [isTokenFound, setTokenFound] = useState(false);
@@ -44,12 +46,10 @@ function App() {
   firebaseMessaging.onMessage((payload: any) => {
     // console.log(payload.notification.body);
 
-    const { title, body } = payload.notification;
+    const { title, body } = payload.data;
+    const data = JSON.parse(body);
     alert(
-      "알림 ::: " +
-        payload.notification.title +
-        "//////" +
-        payload.notification.body
+      "알림 ::: " + title + "//////" + data["result"] + "///" + data.content
     );
   });
 
@@ -90,6 +90,10 @@ function App() {
           path="/worker/speed/result"
           element={<WorkerSpeedResultPage />}
         />
+        {/* QRCODE - WORKER */}
+        <Route path="/worker/qrCode" element={<WorkerQrCode />} />
+        {/* QRCODE - OWNER */}
+        <Route path="/owner/qrCode" element={<OwnerQrCode />} />
       </Routes>
     </BrowserRouter>
   );

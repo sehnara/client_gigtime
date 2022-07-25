@@ -19,7 +19,7 @@ function OwnerCompletePage() {
 
   async function onClickToRecruit() {
     await axios
-      .post("http://localhost:4000/owner/signup", state.owner)
+      .post("/owner/signup", state.owner)
       .then(function (response) {
         console.log("response >>", response.data);
         if (response.data["result"] === "success") {
@@ -38,7 +38,7 @@ function OwnerCompletePage() {
 
   async function onClickToHome() {
     await axios
-      .post("http://localhost:4000/owner/signup", state.owner)
+      .post("/owner/signup", state.owner)
       .then(function (response) {
         if (response.data["result"] === "success") {
           sessionStorage.setItem("owner_id", response.data["owner_id"]);
@@ -56,8 +56,7 @@ function OwnerCompletePage() {
     <div className="h-screen pt-40">
       <div className="m-8">
         <h2 className="text-3xl font-bold">
-          <span className="text-cyan-500">바로알바</span>
-          의
+          <span className="text-cyan-500">바로알바</span>의
         </h2>
         <h2 className="text-3xl font-bold">가족이 되신것을</h2>
         <h2 className="text-3xl font-bold">환영합니다!</h2>

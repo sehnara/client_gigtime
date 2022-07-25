@@ -34,7 +34,7 @@ const WorkerReserveWorkPage = () => {
 
   const getData = async () => {
     await axios
-      .post("http://localhost:4000/worker/reservation/list", {
+      .post("/worker/reservation/list", {
         worker_id: sessionStorage.getItem("worker_id"),
         order_id: state.order.id,
         work_date: masage_date(state.order.date),
@@ -45,7 +45,7 @@ const WorkerReserveWorkPage = () => {
       });
 
     await axios
-      .post("http://localhost:4000/reserve/load_store", {
+      .post("/reserve/load_store", {
         order_id: Number(state.order.id),
       })
       .then((res) => {
@@ -63,7 +63,7 @@ const WorkerReserveWorkPage = () => {
 
   const onReserve = async () => {
     await axios
-      .post("http://localhost:4000/worker/reservation/save", {
+      .post("/worker/reservation/save", {
         worker_id: worker_id,
         hourlyorder_id: selectedDate,
       })

@@ -31,7 +31,7 @@ function KakaoLoginButton() {
             dispatch(setEmail(kakao_account.email));
 
             await axios
-              .post("http://localhost:4000/check/member", {
+              .post("/check/member", {
                 email: `${kakao_account.email}`,
               })
               .then(function (response) {

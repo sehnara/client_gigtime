@@ -25,8 +25,9 @@ const RecruitTable = () => {
 
   const getData = async () => {
     await axios
-      .post("http://localhost:4000/owner/mypage/work", 
-      { 'owner_id': Number(sessionStorage.getItem("owner_id")) })
+      .post("/owner/mypage/work", {
+        owner_id: Number(sessionStorage.getItem("owner_id")),
+      })
       .then((res) => {
         setData(res.data);
       });
@@ -35,7 +36,7 @@ const RecruitTable = () => {
     getData();
   }, []);
 
-  console.log(">>>>",data)
+  console.log(">>>>", data);
 
   return (
     <div className="m-8">
