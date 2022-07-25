@@ -46,7 +46,7 @@ const WorkMyPage = () => {
   return (
     <>
       <button
-        // onClick={() => navigate("/chatlist")}
+        onClick={() => navigate("/chatlist")}
         className="bg-cyan-500 rounded-full w-16 h-16 font-bold text-white fixed bottom-20 right-0 m-4"
       >
         채팅

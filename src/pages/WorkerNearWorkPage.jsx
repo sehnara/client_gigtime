@@ -22,50 +22,54 @@ const WorkerNearWorkPage = () => {
   const [itemIndex, setItemIndex] = useState(0);
   const [items, setItems] = useState(4);
   const [result, setResult] = useState([]);
-  
+
   const getData = async () => {
     await axios
-    .post("http://localhost:4000/worker/show/hourly_orders", {
-      worker_id: sessionStorage.getItem("worker_id"),
-    })
-    .then((res) => {
-      console.log(">>>>>>>>>>>>", res.data);
-      setStores(res.data);
-      setResult(res.data.slice(itemIndex, items));
-    });
+      .post("http://localhost:4000/worker/show/hourly_orders", {
+        worker_id: sessionStorage.getItem("worker_id"),
+      })
+      .then((res) => {
+        console.log(">>>>>>>>>>>>", res.data);
+        setStores(res.data);
+        setResult(res.data.slice(itemIndex, items));
+      });
   };
-  
+
   useEffect(() => {
     getData();
     axios
-    .post("http://localhost:4000/worker/addr/range", {
-      worker_id: sessionStorage.getItem("worker_id"),
-    })
-    .then((res) => {
-    //   console.log("31313", res.data)
-      setLoc(res.data[0].location);
-      setRange(res.data[0].range);
-    });
+      .post("http://localhost:4000/worker/addr/range", {
+        worker_id: sessionStorage.getItem("worker_id"),
+      })
+      .then((res) => {
+        //   console.log("31313", res.data)
+        setLoc(res.data[0].location);
+        setRange(res.data[0].range);
+      });
   }, []);
-  
-  // console.log(stores);
 
   const _infiniteScroll = useCallback(() => {
-    let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
-    let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+    let scrollHeight = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight
+    );
+    let scrollTop = Math.max(
+      document.documentElement.scrollTop,
+      document.body.scrollTop
+    );
     let clientHeight = document.documentElement.clientHeight;
 
-    if(scrollTop + clientHeight === scrollHeight) {
+    if (scrollTop + clientHeight === scrollHeight) {
       setItemIndex(itemIndex + 4);
       setResult(result.concat(stores.slice(itemIndex + 4, itemIndex + 8)));
     }
   }, [itemIndex, result]);
 
   useEffect(() => {
-    window.addEventListener('scroll', _infiniteScroll, true);
-    return () => window.removeEventListener('scroll', _infiniteScroll, true);
+    window.addEventListener("scroll", _infiniteScroll, true);
+    return () => window.removeEventListener("scroll", _infiniteScroll, true);
   }, [_infiniteScroll]);
-  
+
   const ref = useRef(1);
   const navigate = useNavigate();
   const nextPage = (data) => {

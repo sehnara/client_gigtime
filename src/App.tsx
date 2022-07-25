@@ -21,7 +21,9 @@ import OwnerRecruitNoticePage from "./pages/OwnerRecruitNoticePage";
 import WorkerSpeedGetJob from "./pages/WorkerSpeedGetJob";
 import WorkerSpeedResultPage from "./pages/WorkerSpeedResultPage";
 import CommonInterviewPage from "./pages/CommonInterviewPage";
-
+import ChatListPage from "./pages/ChatListPage";
+import ChatRoomPage from "./pages/ChatRoomPage";
+import io from "socket.io-client";
 
 function App() {
   // const onTest = async () => {
@@ -41,6 +43,8 @@ function App() {
   //useEffect(() => {
   // dispatch(addUser({ id: 3, name: "강세훈" }));
   //}, []);
+  const SOCKET_SERVER_URL = "http://localhost:4000";
+  const socket = io.connect(SOCKET_SERVER_URL);
 
   return (
     <BrowserRouter>
@@ -61,7 +65,8 @@ function App() {
         <Route path="/worker/location" element={<WorkerLocationPage />} />
         <Route path="/worker/distance" element={<WorkerDistancePage />} />
         <Route path="/worker/home" element={<WorkerHomePage />} />
-
+        <Route path="/chatlist" element={<ChatListPage socket={socket}/>} />
+        <Route path="/chatroom" element={<ChatRoomPage socket={socket}/>} />
         {/* 면접 신청 페이지 */}
         <Route path="/worker/interview" element={<WorkerInterviewPage />} />
         {/* 주변 일감 */}
@@ -71,7 +76,7 @@ function App() {
         {/* 마이 페이지 */}
         <Route path="/worker/mypage" element={<WorkMyPage />} />
         {/* 면접 */}
-        <Route path="/interview" element={<CommonInterviewPage />} />
+        <Route path="/interview" element={<CommonInterviewPage socket={socket}/>} />
         {/* 바로 알바 */}
         <Route path="/worker/speed" element={<WorkerSpeedGetJob />} />
         {/* 바로 알바 결과*/}
