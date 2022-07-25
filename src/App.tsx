@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "tailwindcss/tailwind.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import InitPage from "./pages/InitPage";
 import LoginPage from "./pages/LoginPage";
 import OwnerStoreNamePage from "./pages/OwnerStoreNamePage";
@@ -24,6 +24,7 @@ import CommonInterviewPage from "./pages/CommonInterviewPage";
 import { firebaseApp } from "./firebase";
 import WorkerQrCode from "./pages/WorkerQrCode";
 import OwnerQrCode from "./pages/OwnerQrCode";
+import OwnerAngelResult from "./pages/WorkerAngelResult";
 
 function App() {
   const [isTokenFound, setTokenFound] = useState(false);
@@ -37,6 +38,7 @@ function App() {
     })
     .then(function (token: any) {
       console.log(token); //토큰 출력
+      sessionStorage.setItem("FCM_TOKEN", token);
       setMyToken(token);
     })
     .catch(function (error: any) {
@@ -44,13 +46,37 @@ function App() {
     });
 
   firebaseMessaging.onMessage((payload: any) => {
-    // console.log(payload.notification.body);
-
     const { title, body } = payload.data;
     const data = JSON.parse(body);
-    alert(
-      "알림 ::: " + title + "//////" + data["result"] + "///" + data.content
-    );
+
+    if (title === "알바천사 콜") {
+      sessionStorage.setItem("angel_id", data["angel_id"]);
+      if (
+        window.confirm(
+          title + " : " + data["store_name"] + "에서 알바천사 호출하셨습니다."
+        )
+      ) {
+        // navigation("/worker/AngelResult");
+      }
+    } else if (title === "알바천사 결과") {
+      if (data["result"] === "success") {
+        sessionStorage.setItem("angel_id", data["angel_id"]);
+        if (
+          window.confirm(
+            title +
+              " : " +
+              "알바천사 " +
+              data["worker_name"] +
+              "님이 수락하셨습니다."
+          )
+        ) {
+          // navigation("/owner/mypage");
+        }
+      } else {
+        alert(title + " : " + "지금 날아올 알바천사가 없습니다.");
+      }
+    } else {
+    }
   });
 
   return (
@@ -90,10 +116,14 @@ function App() {
           path="/worker/speed/result"
           element={<WorkerSpeedResultPage />}
         />
+
         {/* QRCODE - WORKER */}
         <Route path="/worker/qrCode" element={<WorkerQrCode />} />
         {/* QRCODE - OWNER */}
         <Route path="/owner/qrCode" element={<OwnerQrCode />} />
+
+        {/* 알바천사 - OWNER */}
+        <Route path="/worker/AngelResult" element={<OwnerAngelResult />} />
       </Routes>
     </BrowserRouter>
   );

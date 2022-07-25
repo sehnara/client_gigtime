@@ -49,9 +49,20 @@ const WorkMyPage = () => {
     price: "",
   });
 
-  // [처음 데이터 받아올 때, 1]
-  useEffect(() => {
-    axios
+  const getData = async () => {
+    const ownerId = sessionStorage.getItem("owner_id");
+    await axios
+      .post("/owner/mypage", {
+        owner_id: ownerId,
+      })
+      .then(function (res: any) {
+        setStorename(res.data["store"]);
+        setName(res.data["name"]);
+      })
+      .catch(function (err: any) {
+        console.log(err);
+      });
+    await axios
       .get("/owner/angel", {
         params: {
           owner_id: sessionStorage.getItem("owner_id"),
@@ -60,7 +71,21 @@ const WorkMyPage = () => {
       .then((res: any) => {
         setAngelData({ ...angelData, types: res.data.type });
       });
+  };
+
+  // [처음 데이터 받아올 때, 1]
+  useEffect(() => {
+    getData();
   }, []);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("angel_id")) {
+      setAngel("RESULT");
+    }
+    return () => {
+      sessionStorage.removeItem("angel_id");
+    };
+  }, [sessionStorage.getItem("angel_id")]);
 
   // [확인 눌렀을 때, POST 누르면 2]
   const postAngel = async () => {
@@ -93,20 +118,6 @@ const WorkMyPage = () => {
     setTab(data);
   };
 
-  useEffect(() => {
-    const ownerId = sessionStorage.getItem("owner_id");
-    axios
-      .post("/owner/mypage", {
-        owner_id: ownerId,
-      })
-      .then(function (res: any) {
-        setStorename(res.data["store"]);
-        setName(res.data["name"]);
-      })
-      .catch(function (err: any) {
-        console.log(err);
-      });
-  }, []);
   // COMPONENT ----------------------------------
   return (
     <>
@@ -205,7 +216,7 @@ const WorkMyPage = () => {
                     });
                   }}
                 >
-                  {angelData &&
+                  {angelData.types !== [] &&
                     angelData.types.map((i, index) => {
                       return (
                         <option key={index} value={i}>
@@ -233,7 +244,10 @@ const WorkMyPage = () => {
                     angelData.startTimes.map((i, index) => {
                       return (
                         <option key={index} value={i}>
-                          {i}
+                          {i.split("T")[0] +
+                            "  " +
+                            i.split("T")[1].split(":")[0] +
+                            ":00"}
                         </option>
                       );
                     })}
@@ -257,7 +271,10 @@ const WorkMyPage = () => {
                     angelData.endTimes.map((i, index) => {
                       return (
                         <option key={index} value={i}>
-                          {i}
+                          {i.split("T")[0] +
+                            "  " +
+                            i.split("T")[1].split(":")[0] +
+                            ":00"}
                         </option>
                       );
                     })}
