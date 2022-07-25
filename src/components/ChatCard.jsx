@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function ChatCard( { caller, key, receiverName, lastChat, date, time } ) {
+function ChatCard( { caller, receiverName, lastChat, time, roomId} ) {
     const navigate = useNavigate();
-    
+
     function toNextPage() {
         navigate("/chatroom", {
             state: {
-                roomId: key,
+                roomId: roomId,
                 caller: caller,
                 receiverName: receiverName
             }
@@ -19,7 +19,7 @@ function ChatCard( { caller, key, receiverName, lastChat, date, time } ) {
         <div className="w-full h-20 rounded-xl shadow-lg shadow-black-500 p-4 border-2 mb-2" onClick={toNextPage}>
                     <div className="flex justify-between">
                         <p className="font-bold">{receiverName}</p>
-                        <p className="text-xs">{date}</p>
+                        {/* <p className="text-xs">{date}</p> */}
                     </div>
                     <div className="mt-2 flex justify-between">
                         <p className="text-xs">{lastChat}</p>

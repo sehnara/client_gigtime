@@ -49,7 +49,7 @@ function ChatRoomPage( { socket } ) {
                 send_user_id: userId,
                 send_user_type: userType,
                 message: currentMessage,
-                time: year + '-' + month + '-' + date + " " + hours + ":" + minutes
+                createdAt: year + '-' + month + '-' + date + " " + hours + ":" + minutes
             };
     
         await socket.emit("send_message", messageData);

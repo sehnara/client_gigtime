@@ -10,26 +10,20 @@ function ChatListPage( {socket} ) {
 
     const getData = async() => {
         if (sessionStorage.getItem("worker_id")) {
-            await axios.post("http://localhost:4000/", {
+            await axios.post("http://localhost:4000/chatting/room/list", {
                 id: sessionStorage.getItem("worker_id"),
                 type: "worker",
             })
             .then((res) => {
                 setChatData(res.data);
-                chatData.map((el) => {
-                    return socket.emit("join_chat_room", el.room_id); 
-                })
             });
         } else {
-            await axios.post("http://localhost:4000/", {
+            await axios.post("http://localhost:4000/chatting/room/list", {
                 id: sessionStorage.getItem("owner_id"),
                 type: "owner",
             })
             .then((res) => {
                 setChatData(res.data);
-                chatData.map((el) => {
-                    return socket.emit("join_chat_room", el.room_id); 
-                })
             });
         }
     }
@@ -40,7 +34,9 @@ function ChatListPage( {socket} ) {
 
     useEffect(() => {
         socket.on("receive_message", (data) => {
+            console.log("??????")
             setLastChatData(data);
+            console.log(lastChatData);
         });
     }, [socket]);
 
@@ -48,19 +44,24 @@ function ChatListPage( {socket} ) {
         <>
             <Header title="채팅 목록" />
             <div className="m-8 flex flex-col overflow-scroll">
-                <ChatCard key={3} caller={"김건엽"} receiverName={"강세훈"} lastChat={"난 알바를 가기가 싫어"} date={"2022-07-25"} time={"7시 15분"}/>
-                {chatData.map((el) => {
+                {/* <ChatCard key={3} caller={"김건엽"} receiverName={"강세훈"} lastChat={"난 알바를 가기가 싫어"} date={"2022-07-25"} time={"7시 15분"}/> */}
+                {chatData.map((el, index) => {
+                    socket.emit("join_chat_room", el.room_id);
+
                     if(el.room_id === lastChatData.room_id){
                         el.last_chat = lastChatData.message;
+                        el.time= lastChatData.createdAt;
+                        console.log(el.last_chat)
+                        console.log(el.time)
                     }
                     return (
                         <ChatCard 
-                            key={el.room_id}
+                            key={index}
                             receiverName={el.receiver_name}
                             lastChat={el.last_chat}
                             caller={el.caller_name}
-                            date={el.date}
                             time={el.time}
+                            roomId = {el.room_id}
                         />
                     );
                 })}
