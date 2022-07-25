@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {AiOutlineHome, AiOutlineUsergroupAdd } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineUsergroupAdd } from "react-icons/ai";
 import { MdOutlineQrCodeScanner } from "react-icons/md";
 import { TbBarcode } from "react-icons/tb";
 import { BsChatDots } from "react-icons/bs";
@@ -20,10 +20,48 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
     <div className="w-full flex space-x-12 px-8 py-4 fixed bottom-0 bg-white shadow-xl shadow-inner items-center justify-center ">
       {mode === "WORKER" ? (
         <>
-          <button onClick={() => navigate("/worker/nearWork")}>홈</button>
-          <button onClick={() => navigate("/worker/home")}>면접신청</button>
-          <button onClick={() => navigate("/worker/mypage")}>마이페이지</button>
-          <button onClick={() => navigate("/worker/mypage")}>마이페이지</button>
+          <button
+            onClick={() => {
+              navigate("/worker/nearWork");
+            }}
+            className="text-2xl flex flex-col items-center"
+          >
+            <AiOutlineHome />
+            <p className="text-xs">홈</p>
+          </button>
+          <button
+            onClick={() => {
+              navigate("/worker/recruit");
+            }}
+            className="text-2xl flex flex-col items-center"
+          >
+            <AiOutlineUsergroupAdd />
+            <p className="text-xs"></p>
+          </button>
+          <button
+            onClick={() => {
+              navigate("/worker/qrCode");
+            }}
+            className="text-2xl flex flex-col items-center"
+          >
+            <MdOutlineQrCodeScanner className=" bg-cyan-500 p-3 w-16 h-16 rounded-full text-white absolute bottom-6 shadow-lg shadow-slate-300" />
+            <p className="text-xs">출첵</p>
+          </button>
+          <button
+            onClick={() => navigate("/worker/speed")}
+            className="text-2xl flex flex-col items-center"
+          >
+            <FiZap />
+            <p className="text-xs">바로</p>
+          </button>
+          <button
+            onClick={() => {
+              navigate("/worker/nearWork");
+            }}
+            className="text-2xl flex flex-col items-center"
+          >
+            <BsChatDots /> <p className="text-xs">채팅</p>
+          </button>
         </>
       ) : (
         <>
@@ -47,7 +85,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
           </button>
           <button
             onClick={() => {
-              navigate("/owner/recruit");
+              navigate("/owner/qrCode");
             }}
             className="text-2xl flex flex-col items-center"
           >
