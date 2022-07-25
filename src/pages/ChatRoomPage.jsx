@@ -11,18 +11,11 @@ function ChatRoomPage( { socket } ) {
     const [userId, setUserId] = useState("");
     const location = useLocation();
     const receiverName = location.state.receiverName
+    const caller = location.state.caller;
 
     const sendMessage = async () => {
         if (currentMessage !== "") {
-            if (sessionStorage.getItem("worker_id")) {
-                setUserType("worker");
-                setUserId(sessionStorage.getItem("worker_id"));
-            } else {
-                setUserType("owner");
-                setUserId(sessionStorage.getItem("owner_id"));
-            }
             const roomId = location.state.roomId;
-            const caller = location.state.caller;
             
             const year = new Date(Date.now()).getFullYear();
             let month = (new Date(Date.now()).getMonth() + 1);
@@ -59,6 +52,16 @@ function ChatRoomPage( { socket } ) {
     };
 
     useEffect(() => {
+        if (sessionStorage.getItem("worker_id")) {
+            setUserType("worker");
+            setUserId(sessionStorage.getItem("worker_id"));
+        } else {
+            setUserType("owner");
+            setUserId(sessionStorage.getItem("owner_id"));
+        }
+    }, [])
+
+    useEffect(() => {
         socket.on("receive_message", (data) => {
             setMessageList((list) => [...list, data]);
         });
@@ -75,32 +78,35 @@ function ChatRoomPage( { socket } ) {
                 <div className="h-96 rounded border-2">
                     <ScrollToBottom className="w-full h-full overflow-y-scroll overflow-x-hidden">
                         {messageList.map((messageContent) => {
-                            userType === messageContent.send_user_type ? 
-                            (<div className="h-auto p-3 flex justify-end">
-                                <div className="w-40">
-                                    <div className="w-auto h-auto min-h-[40px] max-w-full bg-cyan-500 rounded-lg pt-3 pl-2 text-sm text-white braek-words">
-                                        <p>{messageContent.message}</p>
+                            if (caller === messageContent.caller_name) {
+                                return (
+                                    <div className="h-auto p-3 flex justify-end">
+                                        <div className="w-40">
+                                            <div className="w-auto h-auto min-h-[40px] max-w-full bg-cyan-500 rounded-lg pt-3 pl-2 text-sm text-white braek-words">
+                                                <p>{messageContent.message}</p>
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <p className="font-bold text-sm">{messageContent.caller_name}</p>
+                                                <p className="text-xs">{messageContent.createdAt}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="flex flex-col">
-                                        <p className="font-bold text-sm">{messageContent.caller_name}</p>
-                                        <p className="text-xs">{messageContent.time}</p>
+                                )
+                            } else {
+                                return (
+                                    <div className="h-auto p-3 flex">
+                                        <div className="w-40">
+                                            <div className="w-auto h-auto min-h-[40px] max-w-full bg-gray-500 rounded-lg pt-3 pl-2 text-sm text-white braek-words">
+                                                <p>{messageContent.message}</p>
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <p className="font-bold text-sm">{messageContent.caller_name}</p>
+                                                <p className="text-xs">{messageContent.createdAt}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            )
-                            :
-                            (<div className="h-auto p-3 flex">
-                                <div className="w-40">
-                                    <div className="w-auto h-auto min-h-[40px] max-w-full bg-gray-500 rounded-lg pt-3 pl-2 text-sm text-white braek-words">
-                                        <p>{messageContent.message}</p>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <p className="font-bold text-sm">{messageContent.caller_name}</p>
-                                        <p className="text-xs">{messageContent.time}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            )
+                                )
+                            }
                         })}
                         {/* <div className="h-auto p-3 flex">
                             <div className="w-40">
@@ -139,7 +145,7 @@ function ChatRoomPage( { socket } ) {
                             e.key === "Enter" && sendMessage();
                         }}
                     />
-                    <button className="h-full w-2/12 border-2 rounded">&#9658;</button>
+                    <button className="h-full w-2/12 border-2 rounded" onClick={sendMessage}>&#9658;</button>
                 </div>
             </div>
         </>

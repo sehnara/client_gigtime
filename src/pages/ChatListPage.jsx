@@ -16,6 +16,7 @@ function ChatListPage( {socket} ) {
             })
             .then((res) => {
                 setChatData(res.data);
+                console.log(res.data);
             });
         } else {
             await axios.post("http://localhost:4000/chatting/room/list", {
@@ -24,6 +25,7 @@ function ChatListPage( {socket} ) {
             })
             .then((res) => {
                 setChatData(res.data);
+                console.log(res.data);
             });
         }
     }
@@ -34,9 +36,7 @@ function ChatListPage( {socket} ) {
 
     useEffect(() => {
         socket.on("receive_message", (data) => {
-            console.log("??????")
             setLastChatData(data);
-            console.log(lastChatData);
         });
     }, [socket]);
 
@@ -53,6 +53,7 @@ function ChatListPage( {socket} ) {
                         el.time= lastChatData.createdAt;
                         console.log(el.last_chat)
                         console.log(el.time)
+                        console.log(el.caller_name)
                     }
                     return (
                         <ChatCard 
