@@ -47,20 +47,19 @@ function App() {
 
   firebaseMessaging.onMessage((payload: any) => {
     const { title, body } = payload.data;
+    const link = payload.link;
     const data = JSON.parse(body);
 
     if (title === "알바천사 콜") {
-      sessionStorage.setItem("angel_id", data["angel_id"]);
       if (
         window.confirm(
           title + " : " + data["store_name"] + "에서 알바천사 호출하셨습니다."
         )
       ) {
-        // navigation("/worker/AngelResult");
+        sessionStorage.setItem("angel_id", data["angel_id"]);
       }
     } else if (title === "알바천사 결과") {
       if (data["result"] === "success") {
-        sessionStorage.setItem("angel_id", data["angel_id"]);
         if (
           window.confirm(
             title +
@@ -70,7 +69,7 @@ function App() {
               "님이 수락하셨습니다."
           )
         ) {
-          // navigation("/owner/mypage");
+          sessionStorage.setItem("angel_id", data["angel_id"]);
         }
       } else {
         alert(title + " : " + "지금 날아올 알바천사가 없습니다.");

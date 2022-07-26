@@ -4,12 +4,17 @@ import { useNavigate } from "react-router-dom";
 
 type HeaderProps = {
   title: string;
+  onClickEvent?: string;
 };
 
-const Header = ({ title }: HeaderProps) => {
+const Header = ({ title, onClickEvent }: HeaderProps) => {
   const navigate = useNavigate();
   const onClick = () => {
-    navigate(-1);
+    if (onClickEvent) {
+      navigate(onClickEvent);
+    } else {
+      navigate(-1);
+    }
   };
   return (
     <div className="mx-8 py-4 flex items-center">
