@@ -1,27 +1,27 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import BodyTop from "../components/BodyTop";
-import Button from "../components/Button";
-import Header from "../components/Header";
-import InputValue from "../components/InputValue";
-import { setMinimumWage } from "../module/slices/owner";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import BodyTop from '../components/BodyTop';
+import Button from '../components/Button';
+import Header from '../components/Header';
+import InputValue from '../components/InputValue';
+import { setMinimumWage } from '../module/slices/owner';
+import { useSelector, useDispatch } from 'react-redux';
 
 function OwnerWagePage() {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const state = useSelector(state => state);
+    const state = useSelector((state) => state);
 
     function onClickToNext() {
         dispatch(setMinimumWage(value));
         navigate('/owner/complete');
     }
-    
+
     return (
         <>
             <Header title="회원가입" />
-            <BodyTop title="최저시급"/>
+            <BodyTop title="최저시급" />
             <div id="search" className="m-8 mt-10">
                 <div className="mb-4">
                     <p className="text-lg font-bold">알바생이 받게 될</p>
@@ -34,8 +34,8 @@ function OwnerWagePage() {
                         <p className="text-slate-500">설정하신 최저시급 정보가 포함됩니다.</p>
                     </div>
                 </div>
-                <InputValue placeHorder={"최저시급 입력하기"} value={value} setValue={setValue}/>
-                <Button onClickEvent={onClickToNext} title="회원가입 완료"/>
+                <InputValue placeHorder={'최저시급 입력하기'} value={value} setValue={setValue} />
+                <Button onClickEvent={onClickToNext} title="회원가입 완료" />
             </div>
         </>
     );

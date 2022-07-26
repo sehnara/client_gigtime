@@ -13,6 +13,7 @@ import NavBar from "../components/NavBar";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useCallback } from "react";
 
+
 const WorkerNearWorkPage = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const WorkerNearWorkPage = () => {
 
   const getData = async () => {
     await axios
-      .post("/worker/show/hourly_orders", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/show/hourly_orders`, {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
@@ -38,11 +39,10 @@ const WorkerNearWorkPage = () => {
   useEffect(() => {
     getData();
     axios
-      .post("/worker/addr/range", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/addr/range`, {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
-        //   console.log("31313", res.data)
         setLoc(res.data[0].location);
         setRange(res.data[0].range);
       });
@@ -69,6 +69,7 @@ const WorkerNearWorkPage = () => {
     window.addEventListener("scroll", _infiniteScroll, true);
     return () => window.removeEventListener("scroll", _infiniteScroll, true);
   }, [_infiniteScroll]);
+
 
   const ref = useRef(1);
   const navigate = useNavigate();

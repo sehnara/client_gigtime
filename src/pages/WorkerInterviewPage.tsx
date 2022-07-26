@@ -35,7 +35,7 @@ const WorkerInterviewPage = () => {
 
   const getData = async () => {
     await axios
-      .post("/apply/load_store", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/load_store`, {
         store_id: Number(state.store.id),
       })
       .then((res) => {
@@ -46,7 +46,7 @@ const WorkerInterviewPage = () => {
 
   const getData2 = async () => {
     await axios
-      .post("/apply/load_interview", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/load_interview`, {
         store_id: Number(state.store.id),
         interview_month: 7,
       })
@@ -58,7 +58,7 @@ const WorkerInterviewPage = () => {
 
   const onApply = async () => {
     await axios
-      .post("/apply/submit", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/submit`, {
         interview_date: date,
         interview_time: Number(time),
         question: question,
@@ -81,7 +81,13 @@ const WorkerInterviewPage = () => {
       <NavBar />
       <Header title={"면접신청"} />
       {/* 이미지 */}
-      <div className="bg-gray-200 w-full h-48"></div>
+
+      {/* <div className="bg-gray-200 w-full h-48"></div> */}
+      <img
+        className="bg-gray-200 w-full h-48"
+        src={`${process.env.REACT_APP_S3_PATH}${basic.background_image}`}
+      />
+
       {/* 멘트 */}
       <p className="px-8 py-4"></p>
       <div className="border-t-4 "></div>

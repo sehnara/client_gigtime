@@ -61,7 +61,9 @@ function App() {
         )
       ) {
         sessionStorage.setItem("angel_id", data["angel_id"]);
-        window.location.assign("https://heobo.shop/worker/AngelResult");
+        window.location.assign(
+          `${process.env.REACT_APP_ROUTE_PATH}/worker/AngelResult`
+        );
       }
     } else if (title === "알바천사 결과") {
       // OWNER
@@ -76,7 +78,9 @@ function App() {
           )
         ) {
           sessionStorage.setItem("angel_id", data["angel_id"]);
-          window.location.assign("https://heobo.shop/owner/mypage");
+          window.location.assign(
+            `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage`
+          );
         }
       } else {
         alert(title + " : " + "지금 날아올 알바천사가 없습니다.");
@@ -85,9 +89,8 @@ function App() {
     }
   });
 
-  const SOCKET_SERVER_URL = "http://localhost:4000";
+  const SOCKET_SERVER_URL = `${process.env.REACT_APP_SOCKET_SERVER}`;
   const socket = io.connect(SOCKET_SERVER_URL);
-
   return (
     <BrowserRouter>
       <Routes>

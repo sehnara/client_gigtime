@@ -14,10 +14,13 @@ const OwnerInterviewTimeTable = () => {
   // 2. 버튼 클릭 시 axios 설정 => if(res.data === 'success') setIsClick(true)
   const onClickAllow = async (id) => {
     await axios
-      .post("/owner/mypage/interview/accept", {
-        interview_id: id,
-        value: true,
-      })
+      .post(
+        `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/accept`,
+        {
+          interview_id: id,
+          value: true,
+        }
+      )
       .then((res) => {
         if (res === "success") {
           setIsClick(true);
@@ -26,16 +29,19 @@ const OwnerInterviewTimeTable = () => {
         }
       })
       .catch(function (err) {
-        // console.log(err);
+        console.log(err);
       });
   };
 
   function onClickReject(id) {
     axios
-      .post("/owner/mypage/interview/accept", {
-        interview_id: id,
-        value: false,
-      })
+      .post(
+        `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/accept`,
+        {
+          interview_id: id,
+          value: false,
+        }
+      )
       .then(function (res) {
         if (res === "success") {
           setIsClick(true);
@@ -50,10 +56,13 @@ const OwnerInterviewTimeTable = () => {
 
   function onClickPass(id) {
     axios
-      .post("/owner/mypage/interview/result", {
-        interview_id: id,
-        value: true,
-      })
+      .post(
+        `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/result`,
+        {
+          interview_id: id,
+          value: true,
+        }
+      )
       .then(function (res) {
         if (res === "success") {
           setIsClick(true);
@@ -68,10 +77,13 @@ const OwnerInterviewTimeTable = () => {
 
   function onClickFail(id) {
     axios
-      .post("/owner/mypage/interview/result", {
-        interview_id: id,
-        value: false,
-      })
+      .post(
+        `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/result`,
+        {
+          interview_id: id,
+          value: false,
+        }
+      )
       .then(function (res) {
         if (res === "success") {
           setIsClick(true);
@@ -89,11 +101,11 @@ const OwnerInterviewTimeTable = () => {
   useEffect(() => {
     const ownerId = sessionStorage.getItem("owner_id");
     axios
-      .post("/owner/interview", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/interview`, {
         owner_id: ownerId,
       })
       .then(function (res) {
-        // console.log(">>>>>", res.data);
+        console.log(">>>>>", res.data);
         setNowResult(res.data["now"]);
         setWaitResult(res.data["wait"]);
         setWillResult(res.data["will"]);

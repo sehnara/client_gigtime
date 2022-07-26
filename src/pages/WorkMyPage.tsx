@@ -1,14 +1,14 @@
-import axios from "axios";
-import React, { useRef, useState, useEffect } from "react";
-import DanChoo from "../components/DanChoo";
-import TabBar from "../components/TabBar";
-import NavBar from "../components/NavBar";
-import dogHeart from "../images/dog_heart.png";
-import InterviewTimeTable from "./InWorkerMyPages/InterviewTimeTable";
-import WinStores from "./InWorkerMyPages/WinStores";
-import WorkTimeTable from "./InWorkerMyPages/WorkTimeTable";
-import { useNavigate } from "react-router-dom";
-import { AiOutlinePlus } from "react-icons/ai";
+import axios from 'axios';
+import React, { useRef, useState, useEffect } from 'react';
+import DanChoo from '../components/DanChoo';
+import TabBar from '../components/TabBar';
+import NavBar from '../components/NavBar';
+import dogHeart from '../images/dog_heart.png';
+import InterviewTimeTable from './InWorkerMyPages/InterviewTimeTable';
+import WinStores from './InWorkerMyPages/WinStores';
+import WorkTimeTable from './InWorkerMyPages/WorkTimeTable';
+import { useNavigate } from 'react-router-dom';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 const data = [
   { time: 49, text: "바로알바로 일 한 시간" },
@@ -19,32 +19,31 @@ const data = [
 ];
 
 const WorkMyPage = () => {
-  const [result, setResult] = useState([]);
-  const [name, setName] = useState("");
-  const navigate = useNavigate();
+    const [result, setResult] = useState([]);
+    const [name, setName] = useState('');
+    const navigate = useNavigate();
+    useEffect(() => {
+        const workerId = sessionStorage.getItem('worker_id');
+        axios
+            .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/mypage/interview`, {
+                worker_id: workerId,
+            })
+            .then(function (res) {
+                console.log(res.data);
+                setResult(res.data['result']);
+                setName(res.data['name']);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    }, []);
 
-  useEffect(() => {
-    const workerId = sessionStorage.getItem("worker_id");
-    axios
-      .post("/worker/mypage/interview", {
-        worker_id: workerId,
-      })
-      .then(function (res) {
-        console.log(res.data);
-        setResult(res.data["result"]);
-        setName(res.data["name"]);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  }, []);
+    const danchooRef = useRef(1);
+    const [tab, setTab] = useState('알바시간표');
 
-  const danchooRef = useRef(1);
-  const [tab, setTab] = useState("알바시간표");
-
-  const setMenu = (data: string) => {
-    setTab(data);
-  };
+    const setMenu = (data: string) => {
+        setTab(data);
+    };
 
   return (
     <div className=" my-4">

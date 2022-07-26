@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Header from "../components/Header";
 
 const pc_config = {
   iceServers: [
@@ -21,13 +22,14 @@ const pc_config = {
     },
   ],
 };
+/* Server Socket URL : REACT_APP_SOCKET_SERVER -> .env edit*/
+
+// const SOCKET_SERVER_URL = `${process.env.REACT_APP_SOCKET_SERVER}`;
 
 type CommonInterviewPageProps = {
-  socket: SocketIOClient.Socket;
+  socket?: SocketIOClient.Socket;
 };
 
-/* 서버 소켓 URL  */
-const SOCKET_SERVER_URL = "http://localhost:4000";
 // room_full 에 대한 처리가 없음!
 const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
   // 사장님, 워커에 따라 다른 인자로 통신을 함.
@@ -117,51 +119,53 @@ const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
 
   useEffect(() => {
     socketRef.current = socket;
-    pcRef.current = new RTCPeerConnection(pc_config);
+    if (socketRef.current !== undefined) {
+      pcRef.current = new RTCPeerConnection(pc_config);
 
-    socketRef.current.on("all_users", (allUsers: Array<{ id: string }>) => {
-      if (allUsers.length > 0) {
-        createOffer();
-      }
-    });
+      socketRef.current.on("all_users", (allUsers: Array<{ id: string }>) => {
+        if (allUsers.length > 0) {
+          createOffer();
+        }
+      });
 
-    socketRef.current.on("getOffer", (sdp: RTCSessionDescription) => {
-      //console.log(sdp);
-      console.log("get offer");
-      createAnswer(sdp);
-    });
+      socketRef.current.on("getOffer", (sdp: RTCSessionDescription) => {
+        //console.log(sdp);
+        console.log("get offer");
+        createAnswer(sdp);
+      });
 
-    socketRef.current.on("getAnswer", (sdp: RTCSessionDescription) => {
-      console.log("get answer");
-      if (!pcRef.current) return;
-      pcRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
-      //console.log(sdp);
-    });
-
-    socketRef.current.on(
-      "getCandidate",
-      async (candidate: RTCIceCandidateInit) => {
+      socketRef.current.on("getAnswer", (sdp: RTCSessionDescription) => {
+        console.log("get answer");
         if (!pcRef.current) return;
-        await pcRef.current.addIceCandidate(new RTCIceCandidate(candidate));
-        console.log("candidate add success");
-      }
-    );
+        pcRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
+        //console.log(sdp);
+      });
 
-    socketRef.current.on(roomID, (msg: string) => {
-      alert(msg);
-      window.location.reload();
-    });
+      socketRef.current.on(
+        "getCandidate",
+        async (candidate: RTCIceCandidateInit) => {
+          if (!pcRef.current) return;
+          await pcRef.current.addIceCandidate(new RTCIceCandidate(candidate));
+          console.log("candidate add success");
+        }
+      );
 
-    setVideoTracks();
+      socketRef.current.on(roomID, (msg: string) => {
+        alert(msg);
+        window.location.reload();
+      });
 
-    return () => {
-      if (socketRef.current) {
-        socketRef.current.disconnect();
-      }
-      if (pcRef.current) {
-        pcRef.current.close();
-      }
-    };
+      setVideoTracks();
+
+      return () => {
+        if (socketRef.current) {
+          socketRef.current.disconnect();
+        }
+        if (pcRef.current) {
+          pcRef.current.close();
+        }
+      };
+    }
   }, []);
   function handleMike(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -198,9 +202,12 @@ const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
     if (isOwner) {
       // 상점 주인일 경우 axios 통신 후 이동
       axios
-        .post("/owner/mypage/interview/exit", {
-          interview_id: roomID,
-        })
+        .post(
+          `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/exit`,
+          {
+            interview_id: roomID,
+          }
+        )
         .then((res) => {
           console.log(res.data);
           if (res.data.state === "success") {
@@ -217,114 +224,57 @@ const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
     }
   }
   return (
-    <div style={{ backgroundColor: "#1b1b1c", height: "100vh" }}>
-      <h1
-        style={{
-          fontSize: 15,
-          textAlign: "center",
-          padding: "20px",
-          color: "white",
-        }}
-      >
-        샤샥 알바
-      </h1>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+    <div>
+      <Header title={"바로알바 면접"} />
+      <div className="flex flex-col h-screen justify-center items-center relative mx-8">
+        <div className=" flex items-center justify-center w-40 absolute -top-1 rounded-3xl  space-x-5 py-2 bg-white rounded-t-lg pt-2">
+          <button id="mike" onClick={handleMike} className="">
+            <img
+              src={
+                onMike
+                  ? require(`../images/no-mute.png`)
+                  : require(`../images/mute.png`)
+              }
+              width="25"
+              height="25"
+              alt="Mute On/Off"
+            />
+          </button>{" "}
+          <button id="screen" onClick={handleScreen} className="">
+            <img
+              src={
+                onScreen
+                  ? require(`../images/video.png`)
+                  : require(`../images/no-video.png`)
+              }
+              width="25"
+              height="25"
+              alt="Screen On/Off"
+            />
+          </button>{" "}
+          <button id="exit" onClick={handleExit} className="">
+            <img
+              src={require(`../images/logout.png`)}
+              width="25"
+              height="25"
+              alt="Exit"
+            />
+          </button>
+        </div>
         <video
-          style={{
-            width: "50%",
-            height: "50%",
-            backgroundColor: "#3f3f40",
-            padding: "5px",
-          }}
-          playsInline
-          muted
           ref={localVideoRef}
+          muted
+          playsInline
           autoPlay
+          className="shadow-xl shadow-gray-500 -mt-24"
         />
         <video
           id="remotevideo"
-          style={{
-            width: "50%",
-            height: "50%",
-            backgroundColor: "#3f3f40",
-            padding: "5px",
-            zIndex: 2,
-          }}
           ref={remoteVideoRef}
           playsInline
           autoPlay
+          className="shadow-xl shadow-gray-500 pt-24"
         />
-      </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button
-          id="mike"
-          onClick={handleMike}
-          style={{
-            width: "50px",
-            margin: "10px",
-            backgroundColor: "#3f3f40",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src={
-              onMike
-                ? require(`../images/no-mute.png`)
-                : require(`../images/mute.png`)
-            }
-            width="25"
-            height="25"
-            alt="Mute On/Off"
-          />
-        </button>{" "}
-        <button
-          id="screen"
-          onClick={handleScreen}
-          style={{
-            width: "50px",
-            margin: "10px",
-            backgroundColor: "#3f3f40",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src={
-              onScreen
-                ? require(`../images/video.png`)
-                : require(`../images/no-video.png`)
-            }
-            width="25"
-            height="25"
-            alt="Screen On/Off"
-          />
-        </button>{" "}
-        <button
-          id="exit"
-          onClick={handleExit}
-          style={{
-            width: "50px",
-            margin: "10px",
-            backgroundColor: "#3f3f40",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          {" "}
-          <img
-            src={require(`../images/logout.png`)}
-            width="25"
-            height="25"
-            alt="Exit"
-          />
-        </button>
       </div>
     </div>
   );

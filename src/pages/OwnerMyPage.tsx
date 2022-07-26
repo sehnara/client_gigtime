@@ -63,7 +63,7 @@ const WorkMyPage = () => {
   const getData = async () => {
     const ownerId = sessionStorage.getItem("owner_id");
     await axios
-      .post("/owner/mypage", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage`, {
         owner_id: ownerId,
       })
       .then(function (res: any) {
@@ -74,7 +74,7 @@ const WorkMyPage = () => {
         console.log(err);
       });
     await axios
-      .get("/owner/angel", {
+      .get(`${process.env.REACT_APP_ROUTE_PATH}/owner/angel`, {
         params: {
           owner_id: sessionStorage.getItem("owner_id"),
         },
@@ -102,7 +102,7 @@ const WorkMyPage = () => {
   // [확인 눌렀을 때, POST 누르면 2]
   const postAngel = async () => {
     await axios
-      .post("/owner/angel/call", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/angel/call`, {
         owner_id: sessionStorage.getItem("owner_id"),
         type: selectedData.type,
         start_time: selectedData.startTime,

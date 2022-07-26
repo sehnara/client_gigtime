@@ -29,7 +29,7 @@ const WorkerHomePage = () => {
 
   useEffect(() => {
     axios
-      .post("/worker/addr/range", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/addr/range`, {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
@@ -41,7 +41,7 @@ const WorkerHomePage = () => {
 
   const getStoreList = async () => {
     await axios
-      .post("/store/list", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/store/list`, {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
@@ -53,6 +53,7 @@ const WorkerHomePage = () => {
         }
       });
   };
+
   useEffect(() => {
     getStoreList();
   }, []);
@@ -65,7 +66,7 @@ const WorkerHomePage = () => {
       >
         <AiOutlinePlus />
       </button>
-      <NavBar mode="WORKER" />
+      <NavBar />
       {/* 상단 */}
       <div className=" m-8  flex items-center justify-between">
         <h1 className="text-2xl font-bold">{loca}</h1>
@@ -102,6 +103,7 @@ const WorkerHomePage = () => {
                   store={store.name}
                   distance={store.distance}
                   jobs={["카운터", "서빙"]}
+                  storeImage={`${process.env.REACT_APP_S3_PATH}${store.background_image}`}
                   minPay={store.minimum_wage}
                   ment={store.description}
                   onClickEvent={() => {

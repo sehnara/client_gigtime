@@ -1,41 +1,38 @@
-import axios from "axios";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import {
-  setEmail,
-  setLocation,
-  setName,
-  setRange,
-} from "../module/slices/sign";
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setEmail, setLocation, setName, setRange } from '../module/slices/sign';
 
 // 'id': '1',
 // 'user_flag': 'w or o',
 // 'token': 'token string'
 
 function KakaoLoginButton() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.Kakao.init(`${process.env.REACT_APP_KAKAO_INIT_KEY}`);
-    }
-  }, []);
+    useEffect(() => {
+        console.log(process.env.REACT_APP_ROUTE_PATH);
+        console.log(process.env.REACT_APP_SOCKET_SERVER);
+        if (typeof window !== 'undefined') {
+            window.Kakao.init(`${process.env.REACT_APP_KAKAO_INIT_KEY}`);
+        }
+    }, []);
 
-  function kakaoLogin() {
-    window.Kakao.Auth.login({
-      scope: "profile_nickname, account_email",
-      success: function (response) {
-        window.Kakao.API.request({
-          url: "/v2/user/me",
-          success: async (res) => {
-            const kakao_account = res.kakao_account;
-            dispatch(setName(kakao_account.profile.nickname));
-            dispatch(setEmail(kakao_account.email));
+    function kakaoLogin() {
+        window.Kakao.Auth.login({
+            scope: 'profile_nickname, account_email',
+            success: function (response) {
+                window.Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: async (res) => {
+                        const kakao_account = res.kakao_account;
+                        dispatch(setName(kakao_account.profile.nickname));
+                        dispatch(setEmail(kakao_account.email));
 
             await axios
-              .post("/check/member", {
+              .post(`${process.env.REACT_APP_ROUTE_PATH}/check/member`, {
                 email: `${kakao_account.email}`,
               })
               .then(function (response) {
@@ -75,23 +72,15 @@ function KakaoLoginButton() {
               });
           },
         });
-      },
-      fail: function (error) {
-        console.log(error);
-      },
-    });
-  }
+    }
 
-  return (
-    <div className="mt-10">
-      <a id="custom-login-btn" onClick={kakaoLogin}>
-        <img
-          src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
-          width="190"
-        />
-      </a>
-    </div>
-  );
+    return (
+        <div className="mt-10">
+            <a id="custom-login-btn" onClick={kakaoLogin}>
+                <img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="190" />
+            </a>
+        </div>
+    );
 }
 
 export default KakaoLoginButton;

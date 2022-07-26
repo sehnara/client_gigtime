@@ -25,7 +25,7 @@ const RecruitTable = () => {
 
   const getData = async () => {
     await axios
-      .post("/owner/mypage/work", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/work`, {
         owner_id: Number(sessionStorage.getItem("owner_id")),
       })
       .then((res) => {
@@ -35,8 +35,6 @@ const RecruitTable = () => {
   useEffect(() => {
     getData();
   }, []);
-
-  console.log(">>>>", data);
 
   return (
     <div className="m-8">
