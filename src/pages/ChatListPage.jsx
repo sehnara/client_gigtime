@@ -16,7 +16,6 @@ function ChatListPage( {socket} ) {
             })
             .then((res) => {
                 setChatData(res.data);
-                console.log(res.data);
             });
         } else {
             await axios.post("http://localhost:4000/chatting/room/list", {
@@ -25,7 +24,6 @@ function ChatListPage( {socket} ) {
             })
             .then((res) => {
                 setChatData(res.data);
-                console.log(res.data);
             });
         }
     }

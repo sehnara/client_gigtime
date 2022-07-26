@@ -8,7 +8,7 @@ function MeChatbox( { messageContent } ) {
                     <p>{messageContent.message}</p>
                 </div>
                 <div className="flex flex-col">
-                    <p className="font-bold text-sm">{messageContent.caller_name}</p>
+                    {/* <p className="font-bold text-sm">{messageContent.caller_name}</p> */}
                     <p className="text-xs">{messageContent.createdAt}</p>
                 </div>
             </div>
