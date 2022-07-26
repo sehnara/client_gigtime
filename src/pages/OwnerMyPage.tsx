@@ -27,7 +27,18 @@ const WorkMyPage = () => {
   const [name, setName] = useState("");
   const [tab, setTab] = useState("면접관리");
   const [isAngel, setAngel] = useState<ANGEL_STATE>("NONE");
+  const [resultData, setResultData] = useState({
+    date: "",
+    start_time: "",
+    end_time: "",
+    hours: 0,
+    price: 0,
+    type: "",
+    name: "",
+    dist: 0,
+  });
   const danchooRef = useRef(1);
+  const angelId = sessionStorage.getItem("angel_id");
 
   // [바로알바 인풋값]
   const times = [
@@ -80,6 +91,7 @@ const WorkMyPage = () => {
 
   useEffect(() => {
     if (sessionStorage.getItem("angel_id")) {
+      getAngel();
       setAngel("RESULT");
     }
     return () => {
@@ -110,7 +122,16 @@ const WorkMyPage = () => {
 
   // [RESULT 페이지, 사장님 결과 확인]
   const getAngel = async () => {
-    await axios.get("/owner/angel/info", {});
+    await axios
+      .get("/owner/angel/info", {
+        params: {
+          angel_id: sessionStorage.getItem("angel_id"),
+        },
+      })
+      .then((res) => {
+        console.log("사장님 결과 확인 : ", res.data);
+        setResultData(res.data);
+      });
   };
 
   // FUNCTION ----------------------------------
@@ -148,21 +169,24 @@ const WorkMyPage = () => {
               <div className="text-white w-screen px-16 mb-2">
                 <div className="flex w-full ">
                   <p className="pr-4">요청 직종 : </p>
-                  <p>요리사</p>
+                  <p>{resultData && resultData.type}</p>
                 </div>
               </div>
               {/* 2. 요청 시간 */}
               <div className="text-white w-screen px-16 mb-2">
                 <div className="flex w-full ">
                   <p className="pr-4">요청 시간 : </p>
-                  <p>10:00 ~ 13:00</p>
+                  <p>
+                    {resultData && resultData.start_time}~
+                    {resultData && resultData.end_time}
+                  </p>
                 </div>
               </div>
               {/* 3. 요청 시급 */}
               <div className="text-white w-screen px-16 mb-2">
                 <div className="flex w-full ">
                   <p className="pr-4">시급 : </p>
-                  <p>10000원</p>
+                  <p>{resultData && resultData.price}원</p>
                 </div>
               </div>
               <div className="border m-4 w-2/3 text-center"></div>
@@ -170,19 +194,22 @@ const WorkMyPage = () => {
               <div className="text-white w-screen px-16 mb-2">
                 <div className="flex w-full ">
                   <p className="pr-4">매칭된 가족원 : </p>
-                  <p>강세훈</p>
+                  <p>{resultData && resultData.name}님</p>
                 </div>
               </div>
               {/* 5. 매칭 거리 */}
               <div className="text-white w-screen px-16 mb-2">
                 <div className="flex w-full ">
                   <p className="pr-4">가게와의 거리 : </p>
-                  <p>20m</p>
+                  <p>{resultData && resultData.dist}m</p>
                 </div>
               </div>{" "}
               <Button
                 title={"나가기"}
-                onClickEvent={() => setAngel("NONE")}
+                onClickEvent={() => {
+                  setAngel("NONE");
+                  sessionStorage.removeItem("angel_id");
+                }}
                 width={64}
               />
             </div>

@@ -1,7 +1,6 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
 import Header from "../components/Header";
 
 const WorkerAngelResult = () => {
@@ -48,7 +47,7 @@ const WorkerAngelResult = () => {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
-        console.log("보내줘 제발", res.data);
+        navigation("/worker/home");
       });
   };
 

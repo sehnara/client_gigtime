@@ -51,14 +51,17 @@ function App() {
     const data = JSON.parse(body);
 
     if (title === "알바천사 콜") {
+      // WORKER
       if (
         window.confirm(
           title + " : " + data["store_name"] + "에서 알바천사 호출하셨습니다."
         )
       ) {
         sessionStorage.setItem("angel_id", data["angel_id"]);
+        window.location.assign("https://heobo.shop/worker/AngelResult");
       }
     } else if (title === "알바천사 결과") {
+      // OWNER
       if (data["result"] === "success") {
         if (
           window.confirm(
@@ -70,6 +73,7 @@ function App() {
           )
         ) {
           sessionStorage.setItem("angel_id", data["angel_id"]);
+          window.location.assign("https://heobo.shop/owner/mypage");
         }
       } else {
         alert(title + " : " + "지금 날아올 알바천사가 없습니다.");
