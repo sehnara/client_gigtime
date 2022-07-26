@@ -21,10 +21,15 @@ const pc_config = {
     },
   ],
 };
+
+type CommonInterviewPageProps = {
+  socket: SocketIOClient.Socket
+};
+
 /* 서버 소켓 URL  */
-const SOCKET_SERVER_URL = "http://localhost:8080";
+const SOCKET_SERVER_URL = "http://localhost:4000";
 // room_full 에 대한 처리가 없음!
-const CommonInterviewPage = () => {
+const CommonInterviewPage = ( {socket} : CommonInterviewPageProps ) => {
   // 사장님, 워커에 따라 다른 인자로 통신을 함.
   const [onMike, setOnMike] = useState(true);
   const [onScreen, setOnScreen] = useState(true);
@@ -111,7 +116,7 @@ const CommonInterviewPage = () => {
   };
 
   useEffect(() => {
-    socketRef.current = io.connect(SOCKET_SERVER_URL);
+    socketRef.current = socket;
     pcRef.current = new RTCPeerConnection(pc_config);
 
     socketRef.current.on("all_users", (allUsers: Array<{ id: string }>) => {
