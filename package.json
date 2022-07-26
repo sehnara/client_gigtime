@@ -1,95 +1,95 @@
 {
-  "name": "namanmoo_client",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.1.1",
-    "@fortawesome/free-brands-svg-icons": "^6.1.1",
-    "@fortawesome/free-regular-svg-icons": "^6.1.1",
-    "@fortawesome/free-solid-svg-icons": "^6.1.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@reduxjs/toolkit": "^1.8.3",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/material-ui": "0.21.8",
-    "@types/node": "^16.11.43",
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "@types/react-redux": "^7.1.24",
-    "@types/react-router-dom": "^5.1.6",
-    "@types/redux": "3.6.0",
-    "@types/redux-logger": "^3.0.9",
-    "@types/simple-peer": "9.6.1",
-    "@types/socket.io-client": "1.4.34",
-    "@types/styled-components": "5.1.3",
-    "@types/uuid": "8.3.0",
-    "axios": "^0.27.2",
-    "bootstrap": "^5.1.3",
-    "dotenv": "^16.0.1",
-    "firebase": "^9.9.0",
-    "jwt-decode": "3.1.2",
-    "moment": "2.29.0",
-    "react": "^18.2.0",
-    "react-bootstrap": "^2.4.0",
-    "react-daum-postcode": "^3.1.1",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.4.0",
-    "react-kakao-login": "^2.1.0",
-    "react-redux": "^8.0.2",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
-    "redux": "^4.2.0",
-    "redux-logger": "^3.0.6",
-    "simple-peer": "9.6.2",
-    "socket.io-client": "2.3.0",
-    "styled-components": "5.2.0",
-    "typescript": "^4.7.4",
-    "uuid": "8.3.1",
-    "web-vitals": "^2.1.4",
-    "workbox-background-sync": "^5.1.4",
-    "workbox-broadcast-update": "^5.1.4",
-    "workbox-cacheable-response": "^5.1.4",
-    "workbox-core": "^5.1.4",
-    "workbox-expiration": "^5.1.4",
-    "workbox-google-analytics": "^5.1.4",
-    "workbox-navigation-preload": "^5.1.4",
-    "workbox-precaching": "^5.1.4",
-    "workbox-range-requests": "^5.1.4",
-    "workbox-routing": "^5.1.4",
-    "workbox-strategies": "^5.1.4",
-    "workbox-streams": "^5.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@types/axios": "^0.14.0",
-    "autoprefixer": "^10.4.7",
-    "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.5"
-  },
-  "proxy": ""
+    "name": "namanmoo_client",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.1.1",
+        "@fortawesome/free-brands-svg-icons": "^6.1.1",
+        "@fortawesome/free-regular-svg-icons": "^6.1.1",
+        "@fortawesome/free-solid-svg-icons": "^6.1.1",
+        "@fortawesome/react-fontawesome": "^0.2.0",
+        "@reduxjs/toolkit": "^1.8.3",
+        "@testing-library/jest-dom": "^5.16.4",
+        "@testing-library/react": "^13.3.0",
+        "@testing-library/user-event": "^13.5.0",
+        "@types/jest": "^27.5.2",
+        "@types/material-ui": "0.21.8",
+        "@types/node": "^16.11.43",
+        "@types/react": "^18.0.15",
+        "@types/react-dom": "^18.0.6",
+        "@types/react-redux": "^7.1.24",
+        "@types/react-router-dom": "^5.1.6",
+        "@types/redux": "3.6.0",
+        "@types/redux-logger": "^3.0.9",
+        "@types/simple-peer": "9.6.1",
+        "@types/socket.io-client": "1.4.34",
+        "@types/styled-components": "5.1.3",
+        "@types/uuid": "8.3.0",
+        "axios": "^0.27.2",
+        "bootstrap": "^5.1.3",
+        "dotenv": "^16.0.1",
+        "firebase": "^9.9.0",
+        "jwt-decode": "3.1.2",
+        "moment": "2.29.0",
+        "react": "^18.2.0",
+        "react-bootstrap": "^2.4.0",
+        "react-daum-postcode": "^3.1.1",
+        "react-dom": "^18.2.0",
+        "react-icons": "^4.4.0",
+        "react-kakao-login": "^2.1.0",
+        "react-redux": "^8.0.2",
+        "react-router-dom": "^6.3.0",
+        "react-scripts": "5.0.1",
+        "redux": "^4.2.0",
+        "redux-logger": "^3.0.6",
+        "simple-peer": "9.6.2",
+        "socket.io-client": "2.3.0",
+        "styled-components": "5.2.0",
+        "typescript": "^4.7.4",
+        "uuid": "8.3.1",
+        "web-vitals": "^2.1.4",
+        "workbox-background-sync": "^5.1.4",
+        "workbox-broadcast-update": "^5.1.4",
+        "workbox-cacheable-response": "^5.1.4",
+        "workbox-core": "^5.1.4",
+        "workbox-expiration": "^5.1.4",
+        "workbox-google-analytics": "^5.1.4",
+        "workbox-navigation-preload": "^5.1.4",
+        "workbox-precaching": "^5.1.4",
+        "workbox-range-requests": "^5.1.4",
+        "workbox-routing": "^5.1.4",
+        "workbox-strategies": "^5.1.4",
+        "workbox-streams": "^5.1.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@types/axios": "^0.14.0",
+        "autoprefixer": "^10.4.7",
+        "postcss": "^8.4.14",
+        "tailwindcss": "^3.1.5"
+    },
+    "proxy": "http://localhost:4000"
 }

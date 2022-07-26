@@ -21,6 +21,8 @@ import OwnerRecruitNoticePage from './pages/OwnerRecruitNoticePage';
 import WorkerSpeedGetJob from './pages/WorkerSpeedGetJob';
 import WorkerSpeedResultPage from './pages/WorkerSpeedResultPage';
 import CommonInterviewPage from './pages/CommonInterviewPage';
+import io from 'socket.io-client';
+import OwnerImageUploadPage from './pages/InOwnerMypages/OwnerImageUploadPage';
 
 function App() {
     // const onTest = async () => {
@@ -40,7 +42,8 @@ function App() {
     //useEffect(() => {
     // dispatch(addUser({ id: 3, name: "강세훈" }));
     //}, []);
-
+    const SOCKET_SERVER_URL = `${process.env.REACT_APP_SOCKET_SERVER}`;
+    const socket = io.connect(SOCKET_SERVER_URL);
     return (
         <BrowserRouter>
             <Routes>
@@ -67,11 +70,13 @@ function App() {
                 {/* 마이 페이지 */}
                 <Route path="/worker/mypage" element={<WorkMyPage />} />
                 {/* 면접 */}
-                <Route path="/interview" element={<CommonInterviewPage />} />
+                <Route path="/interview" element={<CommonInterviewPage socket={socket} />} />
                 {/* 바로 알바 */}
                 <Route path="/worker/speed" element={<WorkerSpeedGetJob />} />
                 {/* 바로 알바 결과*/}
                 <Route path="/worker/speed/result" element={<WorkerSpeedResultPage />} />
+                {/* 주인 로고, 전경 업로드 */}
+                <Route path="owner/mypage/imageUpload" element={<OwnerImageUploadPage />} />
             </Routes>
         </BrowserRouter>
     );

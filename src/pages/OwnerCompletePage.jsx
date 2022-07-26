@@ -4,14 +4,13 @@ import Button from '../components/Button';
 import dog from '../images/dog.png';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setOwnerEmail, setOwnerName } from '../module/slices/owner';
+import { setBackground, setOwnerEmail, setOwnerName } from '../module/slices/owner';
 import axios from 'axios';
 
 function OwnerCompletePage() {
     const navigate = useNavigate();
     const state = useSelector((state) => state);
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(setOwnerName(state.sign.name));
         dispatch(setOwnerEmail(state.sign.email));
@@ -24,7 +23,17 @@ function OwnerCompletePage() {
                 console.log('response >>', response.data);
                 if (response.data['result'] === 'success') {
                     sessionStorage.setItem('owner_id', response.data['owner_id']);
-                    navigate('/owner/recruit');
+                    state.owner.background.append(response.data['owner_id']);
+                    axios
+                        .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/imageUpload/background`, state.owner.background)
+                        .then((res) => {
+                            if (res.data.state === 'success') {
+                                console.log('가게 전경이 적용되었습니다.');
+                                navigate('/owner/recruit');
+                            } else {
+                                console.log('error');
+                            }
+                        });
                 } else {
                     // console.log(response.data);
                 }

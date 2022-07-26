@@ -97,6 +97,7 @@ const WorkerHomePage = () => {
                                     store={store.name}
                                     distance={store.distance}
                                     jobs={['카운터', '서빙']}
+                                    storeImage={`${process.env.REACT_APP_S3_PATH}${store.background_image}`}
                                     minPay={store.minimum_wage}
                                     ment={store.description}
                                     onClickEvent={() => {

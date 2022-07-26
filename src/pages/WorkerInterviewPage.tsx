@@ -81,7 +81,10 @@ const WorkerInterviewPage = () => {
             <NavBar />
             <Header title={'면접신청'} />
             {/* 이미지 */}
-            <div className="bg-gray-200 w-full h-48"></div>
+
+            {/* <div className="bg-gray-200 w-full h-48"></div> */}
+            <img className="bg-gray-200 w-full h-48" src={`${process.env.REACT_APP_S3_PATH}${basic.background_image}`} />
+
             {/* 멘트 */}
             <p className="px-8 py-4"></p>
             <div className="border-t-4 "></div>
