@@ -31,7 +31,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
           </button>
           <button
             onClick={() => {
-              navigate("/worker/recruit");
+              navigate("/worker/interview");
             }}
             className="text-2xl flex flex-col items-center"
           >
@@ -56,7 +56,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
           </button>
           <button
             onClick={() => {
-              navigate("/worker/nearWork");
+              navigate("/chating");
             }}
             className="text-2xl flex flex-col items-center"
           >
