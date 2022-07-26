@@ -56,7 +56,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
           </button>
           <button
             onClick={() => {
-              navigate("/chating");
+              navigate("/chatlist");
             }}
             className="text-2xl flex flex-col items-center"
           >

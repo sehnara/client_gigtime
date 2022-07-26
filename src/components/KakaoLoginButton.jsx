@@ -18,8 +18,6 @@ function KakaoLoginButton() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(process.env.REACT_APP_ROUTE_PATH);
-    console.log(process.env.REACT_APP_SOCKET_SERVER);
     if (typeof window !== "undefined") {
       window.Kakao.init(`${process.env.REACT_APP_KAKAO_INIT_KEY}`);
     }
@@ -55,15 +53,18 @@ function KakaoLoginButton() {
                 return response;
               })
               .then(async (res) => {
-                await axios.post("/permission", {
-                  id: sessionStorage.getItem(
-                    res.data["member_type"] === "worker"
-                      ? "worker_id"
-                      : "owner_id"
-                  ),
-                  user_flag: res.data["member_type"] === "worker" ? "w" : "o",
-                  token: sessionStorage.getItem("FCM_TOKEN"),
-                });
+                await axios.post(
+                  `${process.env.REACT_APP_ROUTE_PATH}/permission`,
+                  {
+                    id: sessionStorage.getItem(
+                      res.data["member_type"] === "worker"
+                        ? "worker_id"
+                        : "owner_id"
+                    ),
+                    user_flag: res.data["member_type"] === "worker" ? "w" : "o",
+                    token: sessionStorage.getItem("FCM_TOKEN"),
+                  }
+                );
                 if (res.data["member_type"] === "worker") {
                   navigate("/worker/nearWork");
                 } else if (res.data["member_type"] === "owner") {
