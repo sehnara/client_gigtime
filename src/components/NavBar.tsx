@@ -36,7 +36,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             className="text-2xl flex flex-col items-center"
           >
             <AiOutlineUsergroupAdd />
-            <p className="text-xs"></p>
+            <p className="text-xs">모집</p>
           </button>
           <button
             onClick={() => {

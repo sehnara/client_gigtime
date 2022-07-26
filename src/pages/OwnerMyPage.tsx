@@ -44,7 +44,7 @@ const WorkMyPage = () => {
   const times = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24,
-  ].map((i) => new Date(Date.now() + 3600000 * i).toISOString());
+  ].map((i) => new Date(Date.now() + 3600000 * (i + 9)).toISOString());
 
   const [angelData, setAngelData] = useState({
     types: [],
