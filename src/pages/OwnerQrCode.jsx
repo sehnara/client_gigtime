@@ -6,25 +6,26 @@ import axios from "axios";
 
 const OwnerQrCode = () => {
   const [data, setData] = useState("");
-  const [isSuccess, setSuccess] = useState("");
+  const [isSuccess, setSuccess] = useState({});
 
   const postData = async () => {
-    const updatedData = JSON.parse(data);
+    const worker_id = Number(data.split(":")[1]);
+
     await axios
       .post("/owner/qrCode", {
-        onwer_id: sessionStorage.getItem("owner_id"),
-        worker_id: updatedData["worker_id"],
-        time: updatedData["time"],
+        owner_id: sessionStorage.getItem("owner_id"),
+        worker_id,
+        time: new Date().toISOString(),
       })
       .then((res) => {
         setSuccess(res.data);
       });
   };
 
+  console.log("success>>>> ", isSuccess);
+
   useEffect(() => {
-    if (data !== "") {
-      postData();
-    }
+    postData();
   }, [data]);
 
   return (
@@ -56,23 +57,23 @@ const OwnerQrCode = () => {
         <div></div>
       ) : (
         <div className="text-center mt-24">
-          {isSuccess === "success" ? (
+          {isSuccess.success === "success" ? (
             <>
               <p className="text-2xl mb-4">
                 <span className="text-cyan-500 font-bold">'출근' </span>확인
                 되었습니다.
               </p>
               <p className="text-lg mb-2">
-                <span className="font-bold">{data}</span>님, 오늘도
+                <span className="font-bold">{isSuccess.name}</span>님, 오늘도
                 <span className="text-cyan-500 font-bold"> 안전</span>하게
                 일해주세요!
               </p>
             </>
-          ) : isSuccess === "notFound" ? (
+          ) : isSuccess.success === "notFound" ? (
             <>
               <p className="text-2xl mb-4">
-                신청 시간
-                <span className="text-cyan-500 font-bold">'30분 전' </span>부터
+                출근 시간
+                <span className="text-cyan-500 font-bold"> '30분 전' </span>부터
               </p>
               <p className="text-lg">출석 체크 가능합니다.</p>
             </>

@@ -10,10 +10,10 @@ type HeaderProps = {
 const Header = ({ title, onClickEvent }: HeaderProps) => {
   const navigate = useNavigate();
   const onClick = () => {
-    if (onClickEvent) {
-      navigate(onClickEvent);
-    } else {
+    if (onClickEvent === "NONE") {
       navigate(-1);
+    } else {
+      navigate(onClickEvent!);
     }
   };
   return (
@@ -22,6 +22,10 @@ const Header = ({ title, onClickEvent }: HeaderProps) => {
       <p className="text-center font-bold flex-10">{title}</p>
     </div>
   );
+};
+
+Header.defaultProps = {
+  onClickEvent: "NONE",
 };
 
 export default Header;
