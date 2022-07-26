@@ -23,13 +23,13 @@ const pc_config = {
 };
 
 type CommonInterviewPageProps = {
-  socket: SocketIOClient.Socket
+  socket: SocketIOClient.Socket;
 };
 
 /* 서버 소켓 URL  */
 const SOCKET_SERVER_URL = "http://localhost:4000";
 // room_full 에 대한 처리가 없음!
-const CommonInterviewPage = ( {socket} : CommonInterviewPageProps ) => {
+const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
   // 사장님, 워커에 따라 다른 인자로 통신을 함.
   const [onMike, setOnMike] = useState(true);
   const [onScreen, setOnScreen] = useState(true);
