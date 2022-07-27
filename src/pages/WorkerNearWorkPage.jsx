@@ -20,18 +20,25 @@ const WorkerNearWorkPage = () => {
   const [stores, setStores] = useState([]);
   const [loc, setLoc] = useState("");
   const [range, setRange] = useState("");
-  const [itemIndex, setItemIndex] = useState(0);
-  const [items, setItems] = useState(4);
-  const [result, setResult] = useState([]);
+  const [cursor, setCursor] = useState(0);
 
   const getData = async () => {
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/show/hourly_orders`, {
         worker_id: sessionStorage.getItem("worker_id"),
+        cursor: "null",
       })
       .then((res) => {
+        console.log("hourly_orders 의 res.data : ", res.data);
+        // 데이터 파싱
+        const obj = res.data[res.data.length - 1].work_date_and_type_and_id;
+        const temp = Object.keys(obj);
+        const key = temp[temp.length - 1];
+        const temp2 = obj[key].start_time_and_id;
+        const testCursor = temp2[temp2.length - 1];
+        console.log("cursor : ", testCursor[testCursor.length - 1]);
+        setCursor(testCursor[testCursor.length - 1]);
         setStores(res.data);
-        setResult(res.data.slice(itemIndex, items));
       });
   };
 
@@ -59,10 +66,25 @@ const WorkerNearWorkPage = () => {
     let clientHeight = document.documentElement.clientHeight;
 
     if (scrollTop + clientHeight === scrollHeight) {
-      setItemIndex(itemIndex + 4);
-      setResult(result.concat(stores.slice(itemIndex + 4, itemIndex + 8)));
+      axios
+        .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/show/hourly_orders`, {
+          worker_id: sessionStorage.getItem("worker_id"),
+          cursor: cursor,
+        })
+        .then((res) => {
+          console.log("hourly_orders 스크롤 시 res.data : ", res.data);
+          // 데이터 파싱
+          const obj = res.data[res.data.length - 1].work_date_and_type_and_id;
+          const temp = Object.keys(obj);
+          const key = temp[temp.length - 1];
+          const temp2 = obj[key].start_time_and_id;
+          const testCursor = temp2[temp2.length - 1];
+          console.log("cursor : ", testCursor[testCursor.length - 1]);
+          setCursor(testCursor[testCursor.length - 1]);
+          setStores((list) => [...list, ...res.data]);
+        });
     }
-  }, [itemIndex, result]);
+  }, [stores]);
 
   useEffect(() => {
     window.addEventListener("scroll", _infiniteScroll, true);
@@ -93,8 +115,8 @@ const WorkerNearWorkPage = () => {
       {/* 중반 */}
       <div className="bg-yellow-400 pt-4 h-full">
         <div className="mx-8 ">
-          {result && result.length !== 0 ? (
-            result.map((e) => {
+          {stores && stores.length !== 0 ? (
+            stores.map((e) => {
               ref.current += 1;
               return (
                 <StoreCard
