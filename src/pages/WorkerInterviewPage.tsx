@@ -78,7 +78,7 @@ const WorkerInterviewPage = () => {
   return (
     <div className="my-2">
       {/* 헤더 */}
-      <NavBar />
+      <NavBar mode={"WORKER"} />
       <Header title={"면접신청"} />
       {/* 이미지 */}
 
@@ -214,6 +214,7 @@ const WorkerInterviewPage = () => {
         <div className="h-3"></div>
 
         <Button title={"신청하기"} onClickEvent={onComplete} />
+        <div className="h-24"></div>
       </div>
     </div>
   );

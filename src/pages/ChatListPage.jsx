@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ChatCard from "../components/ChatCard";
 import Header from "../components/Header";
 import axios from "axios";
+import NavBar from "../components/NavBar";
 
 function ChatListPage({ socket }) {
   const [chatData, setChatData] = useState([]);
@@ -41,7 +42,8 @@ function ChatListPage({ socket }) {
 
   return (
     <>
-      <Header title="채팅 목록" />
+      <NavBar mode={"WORKER"} />
+      <Header title="채팅 목록" worker={true} />
       <div className="m-8 flex flex-col overflow-scroll">
         {/* <ChatCard key={3} caller={"김건엽"} receiverName={"강세훈"} lastChat={"난 알바를 가기가 싫어"} date={"2022-07-25"} time={"7시 15분"}/> */}
         {chatData.map((el, index) => {

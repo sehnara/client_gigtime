@@ -12,7 +12,7 @@ import Empty from "../components/Empty";
 import NavBar from "../components/NavBar";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useCallback } from "react";
-
+import Header from "../components/Header";
 
 const WorkerNearWorkPage = () => {
   const state = useSelector((state) => state);
@@ -30,7 +30,6 @@ const WorkerNearWorkPage = () => {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
-        console.log(">>>>>>>>>>>>", res.data);
         setStores(res.data);
         setResult(res.data.slice(itemIndex, items));
       });
@@ -70,7 +69,6 @@ const WorkerNearWorkPage = () => {
     return () => window.removeEventListener("scroll", _infiniteScroll, true);
   }, [_infiniteScroll]);
 
-
   const ref = useRef(1);
   const navigate = useNavigate();
   const nextPage = (data) => {
@@ -81,42 +79,40 @@ const WorkerNearWorkPage = () => {
   };
 
   return (
-    <div>
-      <button
-        onClick={() => navigate("/worker/speed")}
-        className="flex justify-center items-center bg-cyan-500 text-3xl font-extrabold rounded-full w-16 h-16  text-white fixed bottom-0 right-0 m-4 "
-      >
-        <AiOutlinePlus />
-      </button>
+    <div className="h-screen">
+      <Header title="알바예약" worker={true} />
       <NavBar mode={"WORKER"} />
       {/* 상단 */}
-      <div className=" m-8  flex items-center justify-between">
-        <h1 className="text-2xl font-bold w-2/3">{loc}</h1>
-        <p className="text-sm font-normal text-slate-600 mt-2">
-          내 주변 <span className="font-extrabold">{range}m</span>
+      <div className=" m-8  flex items-center justify-between ">
+        <h1 className="text-xl font-bold w-2/3  overflow-hidden h-16">{loc}</h1>
+        <p className="text-xs font-normal text-gray-500 border-2 p-2 py-1 rounded-lg">
+          내 주변
+          <span className="font-bold text-cyan-500 text-lg"> {range}</span>m
         </p>
       </div>
       {/* 중반 */}
-      <div className="mx-8">
-        {result && result.length !== 0 ? (
-          result.map((e) => {
-            ref.current += 1;
-            return (
-              <StoreCard
-                key={ref.current}
-                mode={"NEAR"}
-                store={e.name}
-                distance={e.distance}
-                jobs={["서빙"]}
-                minPay={e.minimum_wage}
-                works={e.key}
-                onDateClickEvent={nextPage}
-              />
-            );
-          })
-        ) : (
-          <Empty text={"주변일감"} margin={4} />
-        )}
+      <div className="bg-yellow-400 pt-4 h-full">
+        <div className="mx-8 ">
+          {result && result.length !== 0 ? (
+            result.map((e) => {
+              ref.current += 1;
+              return (
+                <StoreCard
+                  key={ref.current}
+                  mode={"NEAR"}
+                  store={e.name}
+                  distance={e.distance}
+                  jobs={["서빙"]}
+                  minPay={e.minimum_wage}
+                  works={e.key}
+                  onDateClickEvent={nextPage}
+                />
+              );
+            })
+          ) : (
+            <Empty text={"주변일감"} margin={4} />
+          )}
+        </div>
       </div>
     </div>
   );

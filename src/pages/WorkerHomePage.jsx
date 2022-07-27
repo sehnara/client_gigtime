@@ -9,6 +9,7 @@ import { setStoreId } from "../module/slices/store";
 import NavBar from "../components/NavBar";
 import Empty from "../components/Empty";
 import { AiOutlinePlus } from "react-icons/ai";
+import Header from "../components/Header";
 
 const WorkerHomePage = () => {
   const navigate = useNavigate();
@@ -45,7 +46,6 @@ const WorkerHomePage = () => {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
-        console.log(">>>>", res.data);
         if (res.data === "error - store/list") {
           setStores([]);
         } else {
@@ -59,41 +59,41 @@ const WorkerHomePage = () => {
   }, []);
 
   return (
-    <div className="font-sans">
-      <button
-        onClick={() => navigate("/worker/speed")}
-        className="flex justify-center items-center  bg-cyan-500 text-3xl font-extrabold rounded-full w-16 h-16  text-white fixed bottom-0 right-0 m-4 "
-      >
-        <AiOutlinePlus />
-      </button>
-      <NavBar />
+    <div className="font-sans ">
+      <Header title="면접신청" worker={true} />
+      <NavBar mode="WORKER" />
       {/* 상단 */}
-      <div className=" m-8  flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{loca}</h1>
-        <p className="text-sm font-normal text-slate-600 mt-2">
-          내 주변 <span className="font-extrabold">{range}m</span>
+      <div className="m-8 flex items-center justify-between">
+        <h1 className="text-xl font-bold w-2/3  overflow-hidden h-16">
+          {loca}
+        </h1>
+        <p className="text-xs font-normal text-gray-500 border-2 p-2 py-1 rounded-lg">
+          내 주변
+          <span className="font-bold text-cyan-500 text-lg"> {range}</span>m
         </p>
       </div>
       {/* 중반 */}
-      <div className="flex m-8 mt-10">
+      <div className="flex m-8 mt-10 mb-0">
         <div className="flex-column">
           <p className="text-2xl mb-0.5 font-medium">이제는</p>
           <p className="text-2xl mb-0.5 font-medium">
             <span className="text-cyan-500  font-extrabold">바로 알바</span>
           </p>
-          <p className="text-2xl mb-0.5 font-medium">할 시간!</p>
+          <p className="text-2xl mb-0.5 font-medium">갈 시간!</p>
         </div>
         <img
           src={man}
           alt="walking man"
           width="150"
-          className="transform translate-x-12"
+          className="transform translate-x-20 translate-y-1"
         />
       </div>
       {/* 하단 */}
-      <div className="border-t-4 "></div>
-      <div className="m-8 ">
-        <h1 className="text-xl font-bold mb-4">{name}님을 기다리고 있어요.</h1>
+      <div className="p-8 bg-cyan-500">
+        <h1 className="text-xl font-bold mb-4">
+          <span className="text-2xl text-white">{name} </span>님을 기다리고
+          있어요.
+        </h1>
         <div>
           {stores && stores.length !== 0 ? (
             stores.map((store) => {
@@ -117,6 +117,7 @@ const WorkerHomePage = () => {
           )}
         </div>
       </div>
+      <div className="h-24" />
     </div>
   );
 };

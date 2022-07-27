@@ -26,7 +26,6 @@ const List = ({
   price,
 }: ListProps) => {
   const [isStretch, setIsStretch] = useState(false);
-  // console.log(datas);
 
   //   날짜 관련
   const time = new Date(date);
@@ -47,7 +46,7 @@ const List = ({
       : time.getDay() === 6
       ? "토"
       : "일";
-  console.log(date);
+
   return (
     <div className="mb-8">
       {mode === "WORKER" ? (
@@ -56,19 +55,17 @@ const List = ({
             {date == undefined ? (
               <Empty text={"일"} margin={4} />
             ) : (
-              <div>
+              <div className="flex space-x-2">
                 <AiOutlineCalendar />
                 <p className="text-xs ">{`${year}년 ${month}월 ${day}일 ${yoil}요일`}</p>
               </div>
             )}
           </div>
           <div className="flex space-x-2 mt-4">
-            <p className="font-bold">{store}</p>
-            {/* <p className="text-xs bg-gray-100 px-2 py-1 rounded-2xl">{type}</p> */}
+            <p className="font-bold text-xl">{store}</p>
           </div>
-          <div className="flex mt-1 items-center justify-between">
+          <div className="flex mt-1 items-center justify-between text-cyan-500 font-bold mb-2">
             <p className="text-xs">{address}</p>
-            {/* <p className=" text-lg font-bold">총 {price}원</p> */}
           </div>
         </div>
       ) : (
@@ -84,7 +81,6 @@ const List = ({
         </div>
       )}
       {/* --------------------------------------------------------------------- */}
-      {/* 20:00,10250,왕경업,14 */}
       <div
         className={`w-full  rounded-xl ${
           date === undefined ? "" : "shadow-xl"
@@ -134,13 +130,12 @@ const List = ({
               );
             })
           : datas.map((e) => {
-              // console.log(datas.indexOf(e));
               if (datas.indexOf(e) < 3) {
                 e = e.split(",");
                 return mode === "WORKER" ? (
                   <div
                     key={e}
-                    className="space-x-4 px-4 border-b-2 border-gray-100"
+                    className="space-x-4 px-4 border-b-2 border-gray-100 "
                   >
                     <p className="py-2 text-center text-sm">{`${e[0]}~${
                       e[0].split(":")[0] * 1 + 1

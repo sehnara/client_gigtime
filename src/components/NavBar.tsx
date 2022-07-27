@@ -31,12 +31,12 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
           </button>
           <button
             onClick={() => {
-              navigate("/worker/interview");
+              navigate("/worker/home");
             }}
             className="text-2xl flex flex-col items-center"
           >
             <AiOutlineUsergroupAdd />
-            <p className="text-xs">모집</p>
+            <p className="text-xs">면접</p>
           </button>
           <button
             onClick={() => {
@@ -53,14 +53,6 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
           >
             <FiZap />
             <p className="text-xs">바로</p>
-          </button>
-          <button
-            onClick={() => {
-              navigate("/chatlist");
-            }}
-            className="text-2xl flex flex-col items-center"
-          >
-            <BsChatDots /> <p className="text-xs">채팅</p>
           </button>
           <button
             onClick={() => {
