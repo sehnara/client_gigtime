@@ -96,5 +96,5 @@
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.5"
   },
-  "proxy": ""
+  "proxy": "https://3b33-143-248-220-176.jp.ngrok.io/"
 }

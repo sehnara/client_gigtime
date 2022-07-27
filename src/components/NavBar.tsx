@@ -62,6 +62,14 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
           >
             <BsChatDots /> <p className="text-xs">채팅</p>
           </button>
+          <button
+            onClick={() => {
+              navigate("/chatlist");
+            }}
+            className="text-2xl flex flex-col items-center"
+          >
+            <BsChatDots /> <p className="text-xs">채팅</p>
+          </button>
         </>
       ) : (
         <>
