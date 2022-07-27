@@ -59,6 +59,7 @@ const OwnerInterviewTimeTable = () => {
       .post(
         `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/result`,
         {
+          owner_id: sessionStorage.getItem("owner_id"),
           interview_id: id,
           value: true,
         }
