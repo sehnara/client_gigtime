@@ -45,7 +45,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             }}
             className="text-2xl flex flex-col items-center"
           >
-            <MdOutlineQrCodeScanner className=" bg-cyan-500 p-3 w-16 h-16 rounded-full text-white absolute bottom-6 shadow-lg shadow-slate-300" />
+            <MdOutlineQrCodeScanner className=" border-2 border-cyan-600 bg-cyan-500 p-3 w-16 h-16 rounded-full text-white absolute bottom-6 shadow-lg shadow-slate-300" />
             <p className="text-xs">출첵</p>
           </button>
           <button
@@ -90,7 +90,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             }}
             className="text-2xl flex flex-col items-center"
           >
-            <MdOutlineQrCodeScanner className=" bg-cyan-500 p-3 w-16 h-16 rounded-full text-white absolute bottom-6 shadow-lg shadow-slate-300" />
+            <MdOutlineQrCodeScanner className=" border-2 border-cyan-600 bg-cyan-500 p-3 w-16 h-16 rounded-full text-white absolute bottom-6 shadow-lg shadow-slate-300" />
             <p className="text-xs">출첵</p>
           </button>
           <button

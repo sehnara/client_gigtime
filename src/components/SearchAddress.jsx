@@ -5,7 +5,7 @@ import { setLocation } from "../module/slices/sign";
 import { setAddress } from "../module/slices/owner";
 
 function SearchAddress(props) {
-  const {mode} = props
+  const { mode, setComplete } = props;
   const state = useSelector((state) => state);
   const signData = state.sign;
   const dispatch = useDispatch();
@@ -24,16 +24,15 @@ function SearchAddress(props) {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    dispatch(mode === "OWNER" ?setAddress(fullAddress) :setLocation(fullAddress)); 
+    dispatch(
+      mode === "OWNER" ? setAddress(fullAddress) : setLocation(fullAddress)
+    );
+
+    setComplete(true);
     // console.log(fullAddress); // e.g. 대전 동구 판암동 497-7 (판암동)
   };
 
-  return (
-    <DaumPostcode
-      onComplete={handleComplete}
-      {...props}
-    />
-  );
+  return <DaumPostcode onComplete={handleComplete} {...props} />;
 }
 
 export default SearchAddress;

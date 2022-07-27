@@ -42,8 +42,6 @@ const InterviewCard = ({
         interviewId: interviewId,
       })
       .then((res) => {
-        console.log(res.data);
-
         if (res.data.enter === true) {
           navigate("/interview", {
             state: {
@@ -86,14 +84,46 @@ const InterviewCard = ({
       {/* 주소 */}
       <p className="mb-3  text-xs mt-2 font-bold">{storeAdd}</p>
       {/* 화상 면접 접근 카드 */}
-      <div className="flex rounded-xl shadow-lg h-10 items-center p-4">
-        <p className="flex-10 text-center">{interviewTime}</p>
-        <button
-          onClick={interviewWorker}
-          className=" bg-cyan-500 px-2 py-1 rounded-lg "
-        >
-          <BsFillCameraVideoFill onClick={() => {}} className="text-white" />
-        </button>
+      <div
+        className={`flex rounded-xl shadow-lg h-10 items-center  justify-center p-6 ${
+          state === 2 || state === 3
+            ? "bg-gray-400"
+            : state === 4 && "bg-gray-300"
+        }`}
+      >
+        {state === 2 || state === 3 ? (
+          <div className="flex flex-col justify-center items-center w-full ">
+            <p className="text-center text-white font-bold">{interviewTime}</p>
+            <p className="text-xs text-bold ">면접 준비 중입니다...</p>
+          </div>
+        ) : state === 4 ? (
+          <div className=" ">
+            <p className="text-sm">면접 결과를 기다리는 중입니다...</p>
+          </div>
+        ) : state === 5 ? (
+          <div className="">
+            <p className="text-sm">
+              {resultFlag ? (
+                <span className="text-green-400 font-bold text-lg">합격</span>
+              ) : (
+                <span className="text-red-400 font-bold text-lg">불합격</span>
+              )}
+            </p>
+          </div>
+        ) : (
+          <>
+            <p className="flex-10 text-center">{interviewTime}</p>
+            <button
+              onClick={interviewWorker}
+              className=" bg-cyan-500 px-2 py-1 rounded-lg "
+            >
+              <BsFillCameraVideoFill
+                onClick={() => {}}
+                className="text-white"
+              />
+            </button>
+          </>
+        )}
       </div>
       <div className="border-2 border-gray-100 mt-8"></div>
     </div>

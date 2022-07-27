@@ -29,8 +29,6 @@ const WorkerInterviewPage = () => {
 
   const onComplete = () => {
     onApply();
-    // navigate("/worker/nearWork");
-    navigate("/worker/mypage");
   };
 
   const getData = async () => {
@@ -66,7 +64,11 @@ const WorkerInterviewPage = () => {
         store_id: Number(state.store.id),
       })
       .then((res) => {
-        console.log(res.data);
+        if (res.data === "안됨. 다른면접있음.") {
+          alert("이미 면접이 예약된 시간입니다.");
+        } else {
+          navigate("/worker/mypage");
+        }
       });
   };
 

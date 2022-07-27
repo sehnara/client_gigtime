@@ -4,9 +4,11 @@ import List from "../../components/List";
 
 const mockDict = [
   [
-    "2022-08-20",
-    "설거지",
+    "2022-08-20", // 0
+    "설거지", // 1
     "2", // order_id
+    0, // 0 or 1 check in flag
+    0, // 0,1,2,3, status
     "20:00,10250,왕경업,14", // 마지막꺼는 hourly_order_id
     "12:00,10265,왕경업,15",
     "20:00,10250,왕경업,16", // 마지막꺼는 hourly_order_id
@@ -45,7 +47,7 @@ const RecruitTable = () => {
             key={keyRef.current}
             date={e[0]}
             type={e[1]}
-            datas={e.slice(3)}
+            datas={e.slice(5)}
             mode={"OWNER"}
           />
         );

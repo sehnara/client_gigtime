@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import { QrReader } from "react-qr-reader";
 import { AiOutlineExpand } from "react-icons/ai";
 import axios from "axios";
+import NavBar from "../components/NavBar";
 
 const OwnerQrCode = () => {
   const [data, setData] = useState("");
@@ -22,14 +23,13 @@ const OwnerQrCode = () => {
       });
   };
 
-  console.log("success>>>> ", isSuccess);
-
   useEffect(() => {
     postData();
   }, [data]);
 
   return (
     <div>
+      <NavBar mode="OWNER" />
       <Header title="출근확인" />
       <div className="bg-gray-200 relative">
         <QrReader

@@ -67,9 +67,6 @@ function StoreCard({
           {mode === "NEAR" ? (
             <div className="flex items-center ">
               <h3 className="mt-2 font-bold truncate ">{store}</h3>
-              {/* <p className="text-gray-500 text-xs mt-3 ml-3">
-                총 {works && works.length}건
-              </p> */}
             </div>
           ) : (
             <h3 className="mt-2 font-bold text-lg truncate w-52">{store}</h3>
@@ -79,7 +76,7 @@ function StoreCard({
             {mode === "OWNER_MYPAGE" ? `${address}` : `${distance}m`}
           </p>
           {/* 직종 */}
-          <div className="flex space-x-2 mt-2 truncate overflow-sroll w-52 ">
+          <div className="flex space-x-2 truncate mt-2 overflow-sroll w-48">
             {jobs &&
               jobs.map((e) => {
                 return (
@@ -142,6 +139,7 @@ function StoreCard({
             <FaRegComment className="mr-2" />
             <p className="text-xs w-72 truncate">{ment}</p>
           </div>
+
           {/* 시급 */}
           <div className="flex items-center mt-2">
             <BsCoin className="mr-2" />

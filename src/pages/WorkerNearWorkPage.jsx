@@ -21,6 +21,7 @@ const WorkerNearWorkPage = () => {
   const [loc, setLoc] = useState("");
   const [range, setRange] = useState("");
   const [cursor, setCursor] = useState(0);
+  const [notFound, setIsNotFound] = useState(false);
 
   const getData = async () => {
     await axios
@@ -29,15 +30,19 @@ const WorkerNearWorkPage = () => {
         cursor: "null",
       })
       .then((res) => {
-        // 데이터 파싱
-        const obj = res.data[res.data.length - 1].work_date_and_type_and_id;
-        const temp = Object.keys(obj);
-        const key = temp[temp.length - 1];
-        const temp2 = obj[key].start_time_and_id;
-        const testCursor = temp2[temp2.length - 1];
-        // console.log("cursor : ", testCursor[testCursor.length - 1]);
-        setCursor(testCursor[testCursor.length - 1]);
-        setStores(res.data);
+        if (res.data === "notFound") {
+          setIsNotFound(true);
+        } else {
+          // 데이터 파싱
+          const obj = res.data[res.data.length - 1].work_date_and_type_and_id;
+          const temp = Object.keys(obj);
+          const key = temp[temp.length - 1];
+          const temp2 = obj[key].start_time_and_id;
+          const testCursor = temp2[temp2.length - 1];
+
+          setCursor(testCursor[testCursor.length - 1]);
+          setStores(res.data);
+        }
       });
   };
 
@@ -100,24 +105,31 @@ const WorkerNearWorkPage = () => {
   };
 
   return (
-    <div>
+    <div className="bg-yellow-400 h-screen">
       <Header title="마이 홈" worker={true} />
       <NavBar mode={"WORKER"} />
       {/* 상단 */}
-      <div className=" mx-4 my-4 ">
-        <h1 className="text-xl font-bold flex">
-          <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce" />
-          {loc}
-        </h1>
-        <p className="text-right p-2 py-1 rounded-lg font-bold">
-          내 주변
-          <span className="font-bold text-cyan-500 text-4xl "> {range}</span>m
-        </p>
+      <div className="bg-white">
+        <div className=" mx-4 py-4 ">
+          <h1 className="text-xl font-bold flex">
+            <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce" />
+            {loc}
+          </h1>
+          <p className="text-right p-2 py-1 rounded-lg font-bold">
+            내 주변
+            <span className="font-bold text-cyan-500 text-4xl "> {range}</span>m
+          </p>
+        </div>
       </div>
       {/* 중반 */}
-      <div className="bg-yellow-400 pt-4 h-full pb-24">
+
+      <div className={`bg-yellow-400 pt-4 h-full pb-24`}>
         <div className="mx-8 ">
-          {stores && stores.length !== 0 ? (
+          {notFound ? (
+            <div className=" text-center font-bold pt-64">
+              <p className="animate-pulse text-lg">등록된 가게가 없습니다.</p>
+            </div>
+          ) : stores && stores.length !== 0 ? (
             stores.map((e) => {
               ref.current += 1;
               // console.log(e);

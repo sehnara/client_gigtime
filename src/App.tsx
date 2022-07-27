@@ -53,6 +53,8 @@ function App() {
     const link = payload.link;
     const data = JSON.parse(body);
 
+    console.log("들어오니???????", data, title);
+
     if (title === "알바천사 콜") {
       // WORKER
       if (
@@ -82,6 +84,18 @@ function App() {
             `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage`
           );
         }
+      } else if (title === "면접 결과") {
+        if (
+          window.confirm(
+            title + " : " + data["store_name"] + "에서 면접 결과가 왔습니다."
+          )
+        ) {
+          console.log("가자 >>>>> ", title, data["store_name"]);
+          // sessionStorage.setItem("angel_id", data["angel_id"]);
+          window.location.assign(
+            `${process.env.REACT_APP_ROUTE_PATH}/worker/mypage`
+          );
+        }
       } else {
         alert(title + " : " + "지금 날아올 알바천사가 없습니다.");
       }
@@ -91,6 +105,7 @@ function App() {
 
   const SOCKET_SERVER_URL = `${process.env.REACT_APP_SOCKET_SERVER}`;
   const socket = io.connect(SOCKET_SERVER_URL);
+
   return (
     <BrowserRouter>
       <Routes>

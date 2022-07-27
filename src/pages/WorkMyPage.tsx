@@ -24,6 +24,7 @@ const WorkMyPage = () => {
   const [result, setResult] = useState([]);
   const [name, setName] = useState("");
   const navigate = useNavigate();
+
   useEffect(() => {
     const workerId = sessionStorage.getItem("worker_id");
     axios
@@ -31,17 +32,16 @@ const WorkMyPage = () => {
         worker_id: workerId,
       })
       .then(function (res) {
-        console.log(res.data);
         setResult(res.data["result"]);
         setName(res.data["name"]);
       })
       .catch(function (err) {
         console.log(err);
       });
-  }, []);
+  }, [name]);
 
   const danchooRef = useRef(1);
-  const [tab, setTab] = useState("알바시간표");
+  const [tab, setTab] = useState("면접시간표");
 
   const setMenu = (data: string) => {
     setTab(data);
@@ -58,7 +58,7 @@ const WorkMyPage = () => {
         setTab={setMenu}
       />
       {tab === "면접시간표" ? (
-        <InterviewTimeTable result={result} />
+        <InterviewTimeTable result={result} status={data} />
       ) : tab === "알바시간표" ? (
         <WorkTimeTable />
       ) : (

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import InputValue2 from "../components/InputValue2";
+import NavBar from "../components/NavBar";
 
 // {
 //   'owner_id': 60,
@@ -100,8 +101,9 @@ const OwnerRecruitNoticePage = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="pb-24">
       <Header title={"모집공고"} />
+      <NavBar mode="OWNER" />
       <div className="mx-8">
         {/* 매장이름 */}
         <InputValue2

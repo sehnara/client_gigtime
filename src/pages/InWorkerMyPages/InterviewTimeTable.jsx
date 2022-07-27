@@ -1,9 +1,8 @@
 import React from "react";
 import InterviewCard from "../../components/InterviewCard";
 
-const InterviewTimeTable = ({ result }) => {
+const InterviewTimeTable = ({ result, status }) => {
   const src = result;
-  console.log(src);
 
   return (
     <div className="overflow-scroll ">
