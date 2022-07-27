@@ -82,7 +82,7 @@ const WorkerSpeedGetJob = () => {
       )}
       <NavBar mode="WORKER" />
       <Header title="바로알바" worker={true} />
-      <div className="mx-8">
+      <div className="mx-8 my-4">
         <InputValue2
           mode="SELECT"
           label={"알바유형"}

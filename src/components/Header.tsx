@@ -5,7 +5,7 @@ import { BiUserCircle } from "react-icons/bi";
 
 type HeaderProps = {
   title: string;
-  worker?: boolean;
+  worker?: boolean | string;
   onClickEvent?: string;
 };
 
@@ -22,8 +22,12 @@ const Header = ({ title, onClickEvent, worker }: HeaderProps) => {
     <div className="px-8 py-4 flex items-center justify-between bg-gray-100">
       <AiOutlineArrowLeft className="text-gray-600 text-xl" onClick={onClick} />
       <p className="text-center font-bold text-lg">{title}</p>
-      {worker && (
+      {worker ? (
         <button onClick={() => navigate("/worker/mypage")}>
+          <BiUserCircle className="text-2xl text-gray-500" />
+        </button>
+      ) : (
+        <button onClick={() => navigate("/owner/mypage")}>
           <BiUserCircle className="text-2xl text-gray-500" />
         </button>
       )}

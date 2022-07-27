@@ -119,9 +119,9 @@ const OwnerInterviewTimeTable = () => {
   }, [isClick]);
 
   return (
-    <div className="m-8">
-      <h1 className="text-lg font-bold mb-3">입장대기</h1>
-      <div className="h-72 mb-5 rounded-xl overflow-scroll">
+    <div className="px-8">
+      <h1 className="text-xl font-bold  my-4">입장대기</h1>
+      <div className="h-64 mb-5 rounded-xl overflow-y-scroll">
         {/* <OwnerPageCard mode="NOW"/> */}
         {nowResult &&
           nowResult.map((el) => (
@@ -135,7 +135,8 @@ const OwnerInterviewTimeTable = () => {
             />
           ))}
       </div>
-      <h1 className="text-lg font-bold mb-3">승인대기</h1>
+      <hr className="border-2 " />
+      <h1 className="text-xl font-bold my-4">승인대기</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="WAIT"/> */}
         {waitResult &&
@@ -153,7 +154,8 @@ const OwnerInterviewTimeTable = () => {
             />
           ))}
       </div>
-      <h1 className="text-lg font-bold mb-3">면접예정</h1>
+      <hr className="border-2 " />
+      <h1 className="text-xl font-bold my-4">면접예정</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="WILL"/> */}
         {willResult &&
@@ -168,7 +170,8 @@ const OwnerInterviewTimeTable = () => {
             />
           ))}
       </div>
-      <h1 className="text-lg font-bold mb-3">면접완료</h1>
+      <hr className="border-2 " />
+      <h1 className="text-xl font-bold my-4">면접완료</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="COMPLETE"/> */}
         {completeResult &&

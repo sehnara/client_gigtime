@@ -36,15 +36,15 @@ function OwnerPageCard({
   return (
     <>
       <DateText date={dateSplit} />
-      <div className="w-full h-48 rounded-xl shadow-lg shadow-black-500 mr-2 mb-2 text-center flex flex-col p-4">
+      <div className="w-84 h-52 rounded-xl shadow-lg shadow-black-500 mr-2  text-center flex flex-col p-4 mb-8">
         <GigWorker name={name} />
         <div className="flex items-center">
-          <img className="m-2 w-5 h-5" src={clock} />
-          <p className="text-xs">{interviewTime}</p>
+          <img className="mx-2 my-1 w-7 h-7" src={clock} />
+          <p className="text-base ml-3">{interviewTime}</p>
         </div>
         <div className="flex items-center">
-          <img className="m-2 w-5 h-5" src={question} />
-          <p className="text-xs">{description}</p>
+          <img className="mx-2 my-2 w-7 h-7" src={question} />
+          <p className="text-base ml-3">{description}</p>
         </div>
         <div className="flex">
           {mode === "WAIT" ? (

@@ -75,17 +75,17 @@ const WorkerHomePage = () => {
       {/* 중반 */}
       <div className="flex m-8 mt-10 mb-0">
         <div className="flex-column">
-          <p className="text-2xl mb-0.5 font-medium">이제는</p>
-          <p className="text-2xl mb-0.5 font-medium">
+          <p className="text-3xl mb-0.5 font-medium">이제는</p>
+          <p className="text-3xl mb-0.5 font-medium">
             <span className="text-cyan-500  font-extrabold">바로 알바</span>
           </p>
-          <p className="text-2xl mb-0.5 font-medium">갈 시간!</p>
+          <p className="text-3xl mb-0.5 font-medium">갈 시간!</p>
         </div>
         <img
           src={man}
           alt="walking man"
           width="150"
-          className="transform translate-x-20 translate-y-1"
+          className="transform translate-x-16 translate-y-1"
         />
       </div>
       {/* 하단 */}

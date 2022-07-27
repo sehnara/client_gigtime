@@ -353,17 +353,17 @@ const WorkMyPage = () => {
       )}
       {/* 알바 천사 끝 ============================================================================================== */}
       <NavBar mode="OWNER" angelUseState={setAngel} isAngel={isAngel} />
-      <Header title="마이 페이지" />
+      <Header title="마이 페이지" worker={false} />
       <div className=" my-4">
         {/* 상단 */}
-        <div className="mx-8">
-          <h1 className="text-lg font-bold mb-4">{storename}</h1>
+        <div className="mx-8 flex justify-between items-end">
+          <h1 className="text-xl font-bold mb-4 ">{storename}</h1>
           {/* 상단 - 이름, 단추들, 강아지 한 마리*/}
           <h1 className="mb-4">
-            <span className="font-bold">{name}</span>님
+            <span className="font-bold text-cyan-600">{name}</span>님
           </h1>
         </div>
-        <div className="flex flex-wrap justify-center mb-4">
+        {/* <div className="flex flex-wrap justify-center mb-4">
           {data.map((e) => {
             danchooRef.current += 1;
             return (
@@ -377,7 +377,7 @@ const WorkMyPage = () => {
             height={100}
             className="transform translate-x-3 translate-y-5 "
           />
-        </div>
+        </div> */}
         <div className="border-t-4"></div>
         {/* TAB BAR  */}
         <TabBar

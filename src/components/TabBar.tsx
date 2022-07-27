@@ -12,7 +12,7 @@ const TabBar = ({ menu, tab, setTab }: TabBarProps) => {
     setTab(e);
   };
   return (
-    <div className="flex space-x-2 border-b-2 justify-between items-center">
+    <div className="flex space-x-2 border-b-2 justify-between items-center bg-white">
       {menu.map((e) => {
         tabRef.current += 1;
         return tab === e ? (

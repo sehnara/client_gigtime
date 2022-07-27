@@ -39,7 +39,6 @@ const RecruitTable = () => {
   return (
     <div className="m-8">
       {data.map((e) => {
-        console.log(data);
         keyRef.current += 1;
         return (
           <List
