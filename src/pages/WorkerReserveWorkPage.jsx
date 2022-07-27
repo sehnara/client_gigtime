@@ -80,7 +80,10 @@ const WorkerReserveWorkPage = () => {
       <NavBar mode="WORKER" />
       <Header title="알바예약" worker={true} />
       {/* 이미지 */}
-      <div className="bg-gray-200 w-full h-48"></div>
+      <img
+        className="bg-gray-200 w-full h-48"
+        src={`${process.env.REACT_APP_S3_PATH}${storeData.background_image}`}
+      />
       {/* 멘트 */}
       <p className="px-8 py-4">{storeData.description}</p>
       <div className="border-t-4 "></div>

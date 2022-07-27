@@ -118,6 +118,7 @@ const WorkerNearWorkPage = () => {
           {stores && stores.length !== 0 ? (
             stores.map((e) => {
               ref.current += 1;
+              console.log(e);
               return (
                 <StoreCard
                   key={ref.current}
@@ -125,6 +126,7 @@ const WorkerNearWorkPage = () => {
                   store={e.name}
                   distance={e.distance}
                   jobs={["서빙"]}
+                  storeImage={`${process.env.REACT_APP_S3_PATH}${e.background_image}`}
                   minPay={e.minimum_wage}
                   works={e.key}
                   onDateClickEvent={nextPage}
