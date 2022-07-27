@@ -76,7 +76,7 @@ const WorkerInterviewPage = () => {
   }, []);
 
   return (
-    <div className="my-2">
+    <div className="">
       {/* 헤더 */}
       <NavBar mode={"WORKER"} />
       <Header title={"면접신청"} />

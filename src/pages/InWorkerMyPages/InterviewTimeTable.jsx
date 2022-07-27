@@ -1,12 +1,12 @@
-import React from 'react';
-import InterviewCard from '../../components/InterviewCard';
+import React from "react";
+import InterviewCard from "../../components/InterviewCard";
 
 const InterviewTimeTable = ({ result }) => {
   const src = result;
   console.log(src);
 
   return (
-    <div className="overflow-scroll h-96">
+    <div className="overflow-scroll ">
       {src.map((el, index) => (
         <InterviewCard
           key={index}

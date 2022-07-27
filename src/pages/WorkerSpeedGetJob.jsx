@@ -8,7 +8,7 @@ import Pachinco from "../components/Pachinco";
 
 const setTimes = (start, end) => {
   const arr = [];
-  if (start !== "" && start !== "") {
+  if (start !== "" && end !== "") {
     for (
       let i = Number(start.split(":")[0]);
       i <= Number(end.split(":")[0]);
@@ -42,6 +42,12 @@ const WorkerSpeedGetJob = () => {
     setRecruitData({ ...recruitData, [_key]: _value });
   };
 
+  // console.log(
+  //   console.log(
+  //     ">>>Ssss>>>>",
+  //     setTimes(recruitData.start_time, recruitData.end_time)
+  //   )
+  // );
   const getDatas = async () => {
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/suggestion`, {

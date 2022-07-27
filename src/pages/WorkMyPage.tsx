@@ -10,6 +10,7 @@ import WorkTimeTable from "./InWorkerMyPages/WorkTimeTable";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import Header from "../components/Header";
+import Empty from "../components/Empty";
 
 const data = [
   { time: 49, text: "바로알바로 일 한 시간" },
@@ -50,40 +51,16 @@ const WorkMyPage = () => {
     <div>
       <Header title="마이페이지" worker={true} />
       <NavBar mode="WORKER" />
-      {/* 상단 */}
-      <div className="mx-8">
-        {/* <h1 className="text-lg font-bold mb-4">내 정보</h1> */}
-        {/* 상단 - 이름, 단추들, 강아지 한 마리*/}
-        {/* <h1 className="mb-4">
-          <span className="font-bold">{name}</span>님
-        </h1> */}
-      </div>
-      <div className="flex flex-wrap justify-center mb-4">
-        {data.map((e) => {
-          danchooRef.current += 1;
-          return (
-            <DanChoo time={e.time} text={e.text} key={danchooRef.current} />
-          );
-        })}
-        <img
-          src={dogHeart}
-          alt="핫도그"
-          width={120}
-          height={100}
-          className="transform translate-x-3 translate-y-5"
-        />
-      </div>
-      <div className="border-t-4"></div>
       {/* TAB BAR  */}
       <TabBar
         tab={tab}
-        menu={["알바시간표", "면접시간표", "합격한 곳"]}
+        menu={["면접시간표", "알바시간표", "합격한 곳"]}
         setTab={setMenu}
       />
-      {tab === "알바시간표" ? (
-        <WorkTimeTable />
-      ) : tab === "면접시간표" ? (
+      {tab === "면접시간표" ? (
         <InterviewTimeTable result={result} />
+      ) : tab === "알바시간표" ? (
+        <WorkTimeTable />
       ) : (
         <WinStores />
       )}

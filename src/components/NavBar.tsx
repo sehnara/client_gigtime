@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineHome, AiOutlineUsergroupAdd } from "react-icons/ai";
 import { MdOutlineQrCodeScanner } from "react-icons/md";
-import { TbBarcode } from "react-icons/tb";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { BsChatDots } from "react-icons/bs";
 import { FiZap } from "react-icons/fi";
 
@@ -22,21 +22,22 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
         <>
           <button
             onClick={() => {
-              navigate("/worker/nearWork");
-            }}
-            className="text-2xl flex flex-col items-center"
-          >
-            <AiOutlineHome />
-            <p className="text-xs">홈</p>
-          </button>
-          <button
-            onClick={() => {
               navigate("/worker/home");
             }}
             className="text-2xl flex flex-col items-center"
           >
             <AiOutlineUsergroupAdd />
+
             <p className="text-xs">면접</p>
+          </button>
+          <button
+            onClick={() => {
+              navigate("/worker/nearWork");
+            }}
+            className="text-2xl flex flex-col items-center"
+          >
+            <RiMoneyDollarCircleLine />
+            <p className="text-xs">알바</p>
           </button>
           <button
             onClick={() => {

@@ -8,7 +8,7 @@ import { setCurrentOrder } from "../module/slices/order";
 import { setStoreId } from "../module/slices/store";
 import NavBar from "../components/NavBar";
 import Empty from "../components/Empty";
-import { AiOutlinePlus } from "react-icons/ai";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 import Header from "../components/Header";
 
 const WorkerHomePage = () => {
@@ -63,21 +63,24 @@ const WorkerHomePage = () => {
       <Header title="면접신청" worker={true} />
       <NavBar mode="WORKER" />
       {/* 상단 */}
-      <div className="m-8 flex items-center justify-between">
-        <h1 className="text-xl font-bold w-2/3  overflow-hidden h-16">
+      <div className=" mx-4 my-4 ">
+        <h1 className="text-xl font-bold flex">
+          <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce " />
           {loca}
         </h1>
-        <p className="text-xs font-normal text-gray-500 border-2 p-2 py-1 rounded-lg">
+        <p className="text-right p-2 py-1 rounded-lg font-bold">
           내 주변
-          <span className="font-bold text-cyan-500 text-lg"> {range}</span>m
+          <span className="font-bold text-red-400 text-4xl "> {range}</span>m
         </p>
       </div>
       {/* 중반 */}
-      <div className="flex m-8 mt-10 mb-0">
+      <div className="flex m-8 mt-4 mb-0">
         <div className="flex-column">
           <p className="text-3xl mb-0.5 font-medium">이제는</p>
           <p className="text-3xl mb-0.5 font-medium">
-            <span className="text-cyan-500  font-extrabold">바로 알바</span>
+            <span className="text-cyan-500  font-extrabold animate-pulse">
+              바로 알바
+            </span>
           </p>
           <p className="text-3xl mb-0.5 font-medium">갈 시간!</p>
         </div>
@@ -113,7 +116,7 @@ const WorkerHomePage = () => {
               );
             })
           ) : (
-            <Empty text={"일감"} margin={10} />
+            <Empty text={"주변 일거리를 불러오는 중입니다."} margin={10} />
           )}
         </div>
       </div>

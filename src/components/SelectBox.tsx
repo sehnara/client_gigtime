@@ -19,17 +19,18 @@ const SelectBox = ({
   getData,
   mode,
 }: SelectBoxProp) => {
-  // console.log("^^^^^^^^^^^^^", selectedDate);
-
   return (
     <div className="shadow-lg shadow-slate-300 h-40 overflow-scroll rounded-md">
       {data.map((e) => {
+        console.log(">>>>>", e);
         return mode === "RESERVE" ? (
           <div
             onClick={() => getData(e.hourlyorders_id)}
             key={e.hourlyorders_id}
-            className={`rounded-sm text-center py-2 shadow-sm  mx-2 my-2  cursor-pointer text-sm ${
-              selectedDate!.includes(e.hourlyorders_id)
+            className={`rounded-sm text-center py-2 shadow-sm  mx-2 my-2  cursor-pointer text-base items-center ${
+              selectedDate!
+                // .map((i) => i.hourlyorders_id)
+                .includes(e.hourlyorders_id)
                 ? "text-white bg-cyan-500"
                 : "text-black bg-white"
             } flex px-4 justify-between`}
@@ -42,7 +43,8 @@ const SelectBox = ({
                 : Number(e.start_time.split("T")[1].split(":")[0]) + 1
             }:${e.start_time.split("T")[1].split(":")[1]}`}</p>
             <p>
-              {e.min_price}원<span className="text-xs"> /시간</span>
+              <span className="font-bold text-lg">{e.min_price}</span>
+              <span className="text-xs">원 /시간</span>
             </p>
           </div>
         ) : (

@@ -53,7 +53,7 @@ const List = ({
         <div>
           <div className="flex space-x-2 items-center">
             {date == undefined ? (
-              <Empty text={"일"} margin={4} />
+              <Empty text={"예약한 일거리가 없습니다."} margin={4} />
             ) : (
               <div className="flex space-x-2">
                 <AiOutlineCalendar />
@@ -71,7 +71,7 @@ const List = ({
       ) : (
         <div className="flex space-x-2 items-center">
           {date == undefined ? (
-            <Empty text={"모집 내역"} margin={4} />
+            <Empty text={"모집 내역이 없습니다."} margin={4} />
           ) : (
             <div className="flex space-x-2 items-center mb-1">
               <AiOutlineCalendar className="text-3xl" />
@@ -92,7 +92,7 @@ const List = ({
               <p className="transform translate-x-60 translate-y-11 text-sm text-gray-500 ">
                 총
                 <span className="text-cyan-500 font-bold text-lg">
-                  {datas.length}
+                  {` ${datas.length}`}
                 </span>
                 시간
               </p>

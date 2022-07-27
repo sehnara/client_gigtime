@@ -10,7 +10,7 @@ import {
 } from "../module/slices/order";
 import Empty from "../components/Empty";
 import NavBar from "../components/NavBar";
-import { AiOutlinePlus } from "react-icons/ai";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useCallback } from "react";
 import Header from "../components/Header";
 
@@ -29,14 +29,13 @@ const WorkerNearWorkPage = () => {
         cursor: "null",
       })
       .then((res) => {
-        console.log("hourly_orders 의 res.data : ", res.data);
         // 데이터 파싱
         const obj = res.data[res.data.length - 1].work_date_and_type_and_id;
         const temp = Object.keys(obj);
         const key = temp[temp.length - 1];
         const temp2 = obj[key].start_time_and_id;
         const testCursor = temp2[temp2.length - 1];
-        console.log("cursor : ", testCursor[testCursor.length - 1]);
+        // console.log("cursor : ", testCursor[testCursor.length - 1]);
         setCursor(testCursor[testCursor.length - 1]);
         setStores(res.data);
       });
@@ -72,14 +71,14 @@ const WorkerNearWorkPage = () => {
           cursor: cursor,
         })
         .then((res) => {
-          console.log("hourly_orders 스크롤 시 res.data : ", res.data);
+          // console.log("hourly_orders 스크롤 시 res.data : ", res.data);
           // 데이터 파싱
           const obj = res.data[res.data.length - 1].work_date_and_type_and_id;
           const temp = Object.keys(obj);
           const key = temp[temp.length - 1];
           const temp2 = obj[key].start_time_and_id;
           const testCursor = temp2[temp2.length - 1];
-          console.log("cursor : ", testCursor[testCursor.length - 1]);
+          // console.log("cursor : ", testCursor[testCursor.length - 1]);
           setCursor(testCursor[testCursor.length - 1]);
           setStores((list) => [...list, ...res.data]);
         });
@@ -101,24 +100,27 @@ const WorkerNearWorkPage = () => {
   };
 
   return (
-    <div className="h-screen">
-      <Header title="알바예약" worker={true} />
+    <div>
+      <Header title="마이 홈" worker={true} />
       <NavBar mode={"WORKER"} />
       {/* 상단 */}
-      <div className=" m-8  flex items-center justify-between ">
-        <h1 className="text-xl font-bold w-2/3  overflow-hidden h-16">{loc}</h1>
-        <p className="text-xs font-normal text-gray-500 border-2 p-2 py-1 rounded-lg">
+      <div className=" mx-4 my-4 ">
+        <h1 className="text-xl font-bold flex">
+          <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce" />
+          {loc}
+        </h1>
+        <p className="text-right p-2 py-1 rounded-lg font-bold">
           내 주변
-          <span className="font-bold text-cyan-500 text-lg"> {range}</span>m
+          <span className="font-bold text-cyan-500 text-4xl "> {range}</span>m
         </p>
       </div>
       {/* 중반 */}
-      <div className="bg-yellow-400 pt-4 h-full">
+      <div className="bg-yellow-400 pt-4 h-full pb-24">
         <div className="mx-8 ">
           {stores && stores.length !== 0 ? (
             stores.map((e) => {
               ref.current += 1;
-              console.log(e);
+              // console.log(e);
               return (
                 <StoreCard
                   key={ref.current}
@@ -134,7 +136,7 @@ const WorkerNearWorkPage = () => {
               );
             })
           ) : (
-            <Empty text={"주변일감"} margin={4} />
+            <Empty text={"일자리를 불러오는 중입니다."} margin={4} />
           )}
         </div>
       </div>

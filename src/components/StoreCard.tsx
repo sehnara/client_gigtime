@@ -66,26 +66,26 @@ function StoreCard({
           {/* 가게명 */}
           {mode === "NEAR" ? (
             <div className="flex items-center ">
-              <h3 className="mt-2 font-bold truncate">{store}</h3>
-              <p className="text-gray-500 text-xs mt-3 ml-3">
+              <h3 className="mt-2 font-bold truncate ">{store}</h3>
+              {/* <p className="text-gray-500 text-xs mt-3 ml-3">
                 총 {works && works.length}건
-              </p>
+              </p> */}
             </div>
           ) : (
-            <h3 className="mt-2 font-bold text-lg text-gray-600">{store}</h3>
+            <h3 className="mt-2 font-bold text-lg truncate w-52">{store}</h3>
           )}
           {/* 거리 */}
-          <p className="mt-1 text-xs truncate w-48">
+          <p className="mt-1 text-sm truncate w-48 text-gray-400">
             {mode === "OWNER_MYPAGE" ? `${address}` : `${distance}m`}
           </p>
           {/* 직종 */}
-          <div className="flex space-x-2 mt-2 overflow-scroll">
+          <div className="flex space-x-2 mt-2 truncate overflow-sroll w-52 ">
             {jobs &&
               jobs.map((e) => {
                 return (
                   <div
                     key={e}
-                    className="text-xs bg-gray-200 rounded-3xl px-2 py-1"
+                    className="text-xs bg-gray-200 rounded-3xl px-2 py-1 "
                   >
                     {e}
                   </div>
@@ -106,14 +106,14 @@ function StoreCard({
               return (
                 <div
                   key={ref.current}
-                  className="mt-2 p-4 shadow-lg rounded-lg bg-white border-2"
+                  className="mt-2 p-2 shadow-lg rounded-lg bg-white border-2"
                   onClick={() =>
                     onWorkReserve({ id: e[2], date: e[0], type: e[1] })
                   }
                 >
                   {/* 시급 */}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center mt-2 w-36 mb-2">
+                    <div className="flex items-center mt-1 w-36 mb-2">
                       <BsCoin className="mr-2" />
                       <p className="text-xs">
                         시급 <span className="font-bold">{minPay}</span>
@@ -140,7 +140,7 @@ function StoreCard({
           {/* 사장님 멘트 */}
           <div className="flex items-center">
             <FaRegComment className="mr-2" />
-            <p className="text-xs">{ment}</p>
+            <p className="text-xs w-72 truncate">{ment}</p>
           </div>
           {/* 시급 */}
           <div className="flex items-center mt-2">

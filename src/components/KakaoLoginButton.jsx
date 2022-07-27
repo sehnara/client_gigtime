@@ -66,7 +66,7 @@ function KakaoLoginButton() {
                   }
                 );
                 if (res.data["member_type"] === "worker") {
-                  navigate("/worker/nearWork");
+                  navigate("/worker/home");
                 } else if (res.data["member_type"] === "owner") {
                   navigate("/owner/mypage");
                 } else {

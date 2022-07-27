@@ -21,7 +21,6 @@ const WorkerDistancePage = () => {
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/signup`, signData)
       .then((res) => {
-        console.log("res.data >>>>", res.data);
         sessionStorage.setItem("worker_id", res.data);
       })
       .then(() => {
