@@ -31,6 +31,9 @@ const WorkerReserveWorkPage = () => {
   const [workDates, setWorkDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState([]);
   const [storeData, setStoreData] = useState({});
+  const [money, setMoney] = useState([]);
+  const [sur, setSur] = useState(0);
+
   const worker_id = Number(sessionStorage.getItem("worker_id"));
 
   const getData = async () => {
@@ -54,10 +57,12 @@ const WorkerReserveWorkPage = () => {
       });
   };
 
-  const getWorkTime = (t) => {
+  const getWorkTime = (t, e2) => {
     if (selectedDate.includes(Number(t))) {
+      setMoney([...money.filter((e) => e !== e2)]);
       setSelectedDate([...selectedDate.filter((e) => e !== t)]);
     } else {
+      setMoney([...money, e2]);
       setSelectedDate([...selectedDate, Number(t)]);
     }
   };
@@ -74,6 +79,14 @@ const WorkerReserveWorkPage = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  useEffect(() => {
+    if (money.length === 0) {
+      setSur(0);
+    } else {
+      setSur(money.map((i) => Number(i.min_price)).reduce((a, b) => a + b));
+    }
+  }, [money.length]);
 
   return (
     <div>
@@ -144,7 +157,7 @@ const WorkerReserveWorkPage = () => {
           <p className="flex-1">임금</p>
           <p className="flex-3 font-bold">
             <span className="text-3xl text-red-400">
-              {selectedDate === [] ? 0 : selectedDate.length * 10000}
+              {selectedDate === [] ? 0 : sur}
             </span>
             원
           </p>
@@ -171,7 +184,7 @@ const WorkerReserveWorkPage = () => {
           title={"예약하기"}
           onClickEvent={async () => {
             await onReserve();
-            navigate("/worker/nearWork");
+            navigate("/worker/myPage");
           }}
         />
         <div className="h-24"></div>

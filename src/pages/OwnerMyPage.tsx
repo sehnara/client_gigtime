@@ -138,10 +138,9 @@ const WorkMyPage = () => {
   const setMenu = (data: string) => {
     setTab(data);
   };
-
   // COMPONENT ----------------------------------
   return (
-    <>
+    <div className="h-screen overflow-scroll">
       {/* 바로알바 팝업 페이지 */}
       {(isAngel === "POSTING" ||
         isAngel === "SEARCHING" ||
@@ -393,7 +392,7 @@ const WorkMyPage = () => {
           <MyGigWorker />
         )}
       </div>
-    </>
+    </div>
   );
 };
 

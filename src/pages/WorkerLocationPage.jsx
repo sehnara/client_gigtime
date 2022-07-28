@@ -21,7 +21,7 @@ const WorkerLocationPage = () => {
 
   return (
     <div className="font-sans">
-      <Header title="회원가입" />
+      <Header title="회원가입" isSignUp={true} />
       {/* 상단 */}
       <BodyTop title="내 위치" />
       {/* 중반 */}

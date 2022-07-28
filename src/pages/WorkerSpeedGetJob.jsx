@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import InputValue2 from "../components/InputValue2";
@@ -27,6 +28,7 @@ const setTimes = (start, end) => {
 };
 
 const WorkerSpeedGetJob = () => {
+  const navigation = useNavigate();
   const [isPopUp, setIsPopUp] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [recruitData, setRecruitData] = useState({
@@ -42,12 +44,6 @@ const WorkerSpeedGetJob = () => {
     setRecruitData({ ...recruitData, [_key]: _value });
   };
 
-  // console.log(
-  //   console.log(
-  //     ">>>Ssss>>>>",
-  //     setTimes(recruitData.start_time, recruitData.end_time)
-  //   )
-  // );
   const getDatas = async () => {
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/suggestion`, {
@@ -58,6 +54,7 @@ const WorkerSpeedGetJob = () => {
         min_price: Number(recruitData.price),
       })
       .then((res) => {
+        console.log("!~!!!!!!", res.data);
         setResult(res.data);
       })
       .then(() => {
@@ -189,8 +186,10 @@ const WorkerSpeedGetJob = () => {
           dict_value={recruitData["price"]}
         />
         <Button
-          title={"바로알바 견적내기"}
-          onClickEvent={() => setIsPopUp(!isPopUp)}
+          title={`바로알바 견적내기`}
+          onClickEvent={() => {
+            setIsPopUp(!isPopUp);
+          }}
         />
       </div>
     </div>

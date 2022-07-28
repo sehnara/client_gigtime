@@ -4,11 +4,13 @@ type MODE = "NORMAL" | "RESERVE" | "TIME";
 
 type SelectBoxProp = {
   data: any[];
-  getData: (e: any) => void;
+  getData: (e: any, e2?: any) => void;
   mode?: MODE;
   selectedDate?: string[];
   selectedDay?: string | null;
   selectedTime?: string | null;
+  setMoney?: () => void;
+  money?: [];
 };
 
 const SelectBox = ({
@@ -25,12 +27,12 @@ const SelectBox = ({
         console.log(">>>>>", e);
         return mode === "RESERVE" ? (
           <div
-            onClick={() => getData(e.hourlyorders_id)}
+            onClick={() => {
+              getData(e.hourlyorders_id, e);
+            }}
             key={e.hourlyorders_id}
             className={`rounded-sm text-center py-2 shadow-sm  mx-2 my-2  cursor-pointer text-base items-center ${
-              selectedDate!
-                // .map((i) => i.hourlyorders_id)
-                .includes(e.hourlyorders_id)
+              selectedDate!.includes(e.hourlyorders_id)
                 ? "text-white bg-cyan-500"
                 : "text-black bg-white"
             } flex px-4 justify-between`}

@@ -2,14 +2,16 @@ import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 type HeaderProps = {
   title: string;
   worker?: boolean | string;
   onClickEvent?: string;
+  isSignUp?: boolean;
 };
 
-const Header = ({ title, onClickEvent, worker }: HeaderProps) => {
+const Header = ({ title, onClickEvent, worker, isSignUp }: HeaderProps) => {
   const navigate = useNavigate();
   const onClick = () => {
     if (onClickEvent === "NONE") {
@@ -26,6 +28,10 @@ const Header = ({ title, onClickEvent, worker }: HeaderProps) => {
         <button onClick={() => navigate("/worker/mypage")}>
           <BiUserCircle className="text-2xl text-gray-500" />
         </button>
+      ) : isSignUp ? (
+        <div>
+          <AiOutlineQuestionCircle className="text-2xl text-gray-500" />
+        </div>
       ) : (
         <button onClick={() => navigate("/owner/mypage")}>
           <BiUserCircle className="text-2xl text-gray-500" />

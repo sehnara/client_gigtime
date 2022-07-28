@@ -124,8 +124,9 @@ const OwnerInterviewTimeTable = () => {
       <div className="h-64 mb-5 rounded-xl overflow-y-scroll">
         {/* <OwnerPageCard mode="NOW"/> */}
         {nowResult &&
-          nowResult.map((el) => (
+          nowResult.map((el, index) => (
             <OwnerPageCard
+              key={index}
               mode="NOW"
               date={el.interview_date}
               name={el.worker_name}
@@ -140,8 +141,9 @@ const OwnerInterviewTimeTable = () => {
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="WAIT"/> */}
         {waitResult &&
-          waitResult.map((el) => (
+          waitResult.map((el, index) => (
             <OwnerPageCard
+              key={index}
               mode="WAIT"
               id={el.interview_id}
               date={el.interview_date}
@@ -159,8 +161,9 @@ const OwnerInterviewTimeTable = () => {
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="WILL"/> */}
         {willResult &&
-          willResult.map((el) => (
+          willResult.map((el, index) => (
             <OwnerPageCard
+              key={index}
               mode="WILL"
               id={el.interview_id}
               date={el.interview_date}
@@ -175,8 +178,9 @@ const OwnerInterviewTimeTable = () => {
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="COMPLETE"/> */}
         {completeResult &&
-          completeResult.map((el) => (
+          completeResult.map((el, index) => (
             <OwnerPageCard
+              key={index}
               mode="COMPLETE"
               id={el.interview_id}
               date={el.interview_date}

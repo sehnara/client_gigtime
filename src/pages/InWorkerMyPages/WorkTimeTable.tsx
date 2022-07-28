@@ -14,7 +14,7 @@ const WorkTimeTable = () => {
         })
         .then((res) => {
           setDatas(res.data);
-          console.log(res.data);
+          // console.log(res.data);
         });
     } catch {
       console.log("axios error");
@@ -32,7 +32,7 @@ const WorkTimeTable = () => {
           keyRef.current += 1;
           let hours = new Array();
 
-          for (let i = 4; i < e.length; i++) {
+          for (let i = 6; i < e.length; i++) {
             hours.push(e[i]);
           }
 

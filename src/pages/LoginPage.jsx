@@ -21,7 +21,7 @@ const LoginPage = () => {
   ];
   return (
     <div className="font-sans h-screen">
-      <Header title="회원가입" />
+      <Header title="회원가입" isSignUp={true} />
       <div className="m-8 mt-10 h-full">
         <p className="text-lg mb-2 font-bold">가입유형 선택</p>
         <div className="flex flex-col h-5/6 justify-around">

@@ -39,7 +39,7 @@ const WorkerDistancePage = () => {
 
   return (
     <div className="font-sans">
-      <Header title="회원가입 " />
+      <Header title="회원가입 " isSignUp={true} />
       {/* 상단 */}
       <div className=" m-8  flex items-start flex-col">
         <div className="text-gray-600 font-bold">

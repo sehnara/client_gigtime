@@ -35,13 +35,9 @@ const WorkerHomePage = () => {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
-        if (res.data === "notFound") {
-          setIsNotFound(true);
-        } else {
-          setLoc(res.data[0].location);
-          setRange(res.data[0].range);
-          setName(res.data[0].name);
-        }
+        setLoc(res.data[0].location);
+        setRange(res.data[0].range);
+        setName(res.data[0].name);
       });
   }, []);
 
@@ -53,6 +49,8 @@ const WorkerHomePage = () => {
       .then((res) => {
         if (res.data === "error - store/list") {
           setStores([]);
+        } else if (res.data === "notFound") {
+          setIsNotFound(true);
         } else {
           setStores(res.data);
         }
@@ -70,7 +68,7 @@ const WorkerHomePage = () => {
       {/* 상단 */}
       <div className="bg-white">
         <div className=" mx-4 py-4 ">
-          <h1 className="text-lg font-bold flex">
+          <h1 className="text-lg font-bold flex ">
             <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce " />
             {loca}
           </h1>

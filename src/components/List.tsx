@@ -48,7 +48,7 @@ const List = ({
       : "일";
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 ">
       {mode === "WORKER" ? (
         <div>
           <div className="flex space-x-2 items-center">
@@ -89,7 +89,7 @@ const List = ({
         {mode === "WORKER"
           ? ""
           : date !== undefined && (
-              <p className="transform translate-x-60 translate-y-11 text-sm text-gray-500 ">
+              <p className="text-sm text-gray-500 text-right">
                 총
                 <span className="text-cyan-500 font-bold text-lg">
                   {` ${datas.length}`}
