@@ -96,8 +96,6 @@ const OwnerInterviewTimeTable = () => {
         console.log(err);
       });
   }
-  // 3. isClick을 useEffect [] 안에 넣어줌
-  // 4. useEffect 끝에 false로 바꿔 줌
 
   useEffect(() => {
     const ownerId = sessionStorage.getItem("owner_id");
@@ -106,7 +104,6 @@ const OwnerInterviewTimeTable = () => {
         owner_id: ownerId,
       })
       .then(function (res) {
-        console.log(">>>>>", res.data);
         setNowResult(res.data["now"]);
         setWaitResult(res.data["wait"]);
         setWillResult(res.data["will"]);
@@ -122,7 +119,6 @@ const OwnerInterviewTimeTable = () => {
     <div className="px-8">
       <h1 className="text-xl font-bold  my-4">입장대기</h1>
       <div className="h-64 mb-5 rounded-xl overflow-y-scroll">
-        {/* <OwnerPageCard mode="NOW"/> */}
         {nowResult &&
           nowResult.map((el, index) => (
             <OwnerPageCard
@@ -139,7 +135,6 @@ const OwnerInterviewTimeTable = () => {
       <hr className="border-2 " />
       <h1 className="text-xl font-bold my-4">승인대기</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
-        {/* <OwnerPageCard mode="WAIT"/> */}
         {waitResult &&
           waitResult.map((el, index) => (
             <OwnerPageCard
