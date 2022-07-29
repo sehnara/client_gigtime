@@ -42,6 +42,11 @@ jobs:
             
             
       - name: Generate Environment
+        run: |
+          echo "REACT_APP_KAKAO_INIT_KEY=$REACT_APP_KAKAO_INIT_KEY" >> .env.production
+          echo "REACT_APP_ROUTE_PATH=$REACT_APP_ROUTE_PATH" >> .env.production
+          echo "REACT_APP_S3_PATH=$REACT_APP_S3_PATH" >> .env.production
+          echo "REACT_APP_SOCKET_SERVER=$REACT_APP_SOCKET_SERVER" >> .env.production
         env:
           REACT_APP_KAKAO_INIT_KEY: ${{ secrets.REACT_APP_KAKAO_INIT_KEY }}
           REACT_APP_ROUTE_PATH: ${{ secrets.REACT_APP_ROUTE_PATH }}
