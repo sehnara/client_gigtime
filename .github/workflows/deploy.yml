@@ -39,7 +39,9 @@ jobs:
         run: yarn install
       
       - name: Build
-        run: npm run build
+        run: yarn build
+        env:
+          CI: "" 
       
       - name: Deploy
         env:
