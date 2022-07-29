@@ -13,8 +13,13 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
+
+    
+
   # This workflow contains a single job called "build"
   build:
+    environment: react_env
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -35,10 +40,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
             
+            
+      - name: Generate Environment
+        env:
+          REACT_APP_KAKAO_INIT_KEY: ${{ secrets.REACT_APP_KAKAO_INIT_KEY }}
+          REACT_APP_ROUTE_PATH: ${{ secrets.REACT_APP_ROUTE_PATH }}
+          REACT_APP_S3_PATH: ${{secrets.REACT_APP_S3_PATH}}
+          REACT_APP_SOCKET_SERVER: ${{secrets.REACT_APP_SOCKET_SERVER}}
+            
       - name: Install Dependencies
         run: yarn install
       
       - name: Build
+        
         run: yarn build
         env:
           CI: "" 
