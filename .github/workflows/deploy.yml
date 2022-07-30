@@ -63,10 +63,8 @@ jobs:
         run: |
           rm -rf build
           mkdir build
-          cd build
           echo "sib=al" >> sibal.txt
-          cd ..
-          cp -TR . build/
+          cp -TR sibal.txt build/
           tar -cvf deploy.tar build/
           cd build
           ls
