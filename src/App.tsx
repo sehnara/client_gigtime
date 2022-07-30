@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "tailwindcss/tailwind.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import InitPage from "./pages/InitPage";
 import LoginPage from "./pages/LoginPage";
 import OwnerStoreNamePage from "./pages/OwnerStoreNamePage";
@@ -21,26 +21,90 @@ import OwnerRecruitNoticePage from "./pages/OwnerRecruitNoticePage";
 import WorkerSpeedGetJob from "./pages/WorkerSpeedGetJob";
 import WorkerSpeedResultPage from "./pages/WorkerSpeedResultPage";
 import CommonInterviewPage from "./pages/CommonInterviewPage";
-
+import { firebaseApp } from "./firebase";
+import WorkerQrCode from "./pages/WorkerQrCode";
+import OwnerQrCode from "./pages/OwnerQrCode";
+import OwnerAngelResult from "./pages/WorkerAngelResult";
+import ChatListPage from "./pages/ChatListPage";
+import ChatRoomPage from "./pages/ChatRoomPage";
+import io from "socket.io-client";
 
 function App() {
-  // const onTest = async () => {
-  //   await axios
-  //     .get("http://localhost:4000/")
-  //     .then((res) => console.log(res.data))
-  //     .catch();
-  // };
+  const [isTokenFound, setTokenFound] = useState(false);
+  const [myToken, setMyToken] = useState("");
+  const firebaseMessaging = firebaseApp.messaging();
 
-  // useEffect(() => {
-  //   onTest();
-  // }, []);
+  firebaseMessaging
+    .requestPermission()
+    .then(() => {
+      return firebaseMessaging.getToken(); // 등록 토큰 받기
+    })
+    .then(function (token: any) {
+      console.log(token); //토큰 출력
+      sessionStorage.setItem("FCM_TOKEN", token);
+      setMyToken(token);
+    })
+    .catch(function (error: any) {
+      console.log("FCM Error : ", error);
+    });
 
-  //const users = useSelector<ReducerType, User[]>((state) => state.users);
-  //const dispatch = useDispatch();
+  firebaseMessaging.onMessage((payload: any) => {
+    const { title, body } = payload.data;
+    const link = payload.link;
+    const data = JSON.parse(body);
 
-  //useEffect(() => {
-  // dispatch(addUser({ id: 3, name: "강세훈" }));
-  //}, []);
+    console.log("들어오니???????", data, title);
+
+    if (title === "알바천사 콜") {
+      // WORKER
+      if (
+        window.confirm(
+          title + " : " + data["store_name"] + "에서 알바천사 호출하셨습니다."
+        )
+      ) {
+        sessionStorage.setItem("angel_id", data["angel_id"]);
+        window.location.assign(
+          `${process.env.REACT_APP_ROUTE_PATH}/worker/AngelResult`
+        );
+      }
+    } else if (title === "알바천사 결과") {
+      // OWNER
+      if (data["result"] === "success") {
+        if (
+          window.confirm(
+            title +
+              " : " +
+              "알바천사 " +
+              data["worker_name"] +
+              "님이 수락하셨습니다."
+          )
+        ) {
+          sessionStorage.setItem("angel_id", data["angel_id"]);
+          window.location.assign(
+            `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage`
+          );
+        }
+      } else if (title === "면접 결과") {
+        if (
+          window.confirm(
+            title + " : " + data["store_name"] + "에서 면접 결과가 왔습니다."
+          )
+        ) {
+          console.log("가자 >>>>> ", title, data["store_name"]);
+          // sessionStorage.setItem("angel_id", data["angel_id"]);
+          window.location.assign(
+            `${process.env.REACT_APP_ROUTE_PATH}/worker/mypage`
+          );
+        }
+      } else {
+        alert(title + " : " + "지금 날아올 알바천사가 없습니다.");
+      }
+    } else {
+    }
+  });
+
+  const SOCKET_SERVER_URL = `${process.env.REACT_APP_SOCKET_SERVER}`;
+  const socket = io.connect(SOCKET_SERVER_URL);
 
   return (
     <BrowserRouter>
@@ -61,7 +125,8 @@ function App() {
         <Route path="/worker/location" element={<WorkerLocationPage />} />
         <Route path="/worker/distance" element={<WorkerDistancePage />} />
         <Route path="/worker/home" element={<WorkerHomePage />} />
-
+        <Route path="/chatlist" element={<ChatListPage socket={socket} />} />
+        <Route path="/chatroom" element={<ChatRoomPage socket={socket} />} />
         {/* 면접 신청 페이지 */}
         <Route path="/worker/interview" element={<WorkerInterviewPage />} />
         {/* 주변 일감 */}
@@ -71,7 +136,10 @@ function App() {
         {/* 마이 페이지 */}
         <Route path="/worker/mypage" element={<WorkMyPage />} />
         {/* 면접 */}
-        <Route path="/interview" element={<CommonInterviewPage />} />
+        <Route
+          path="/interview"
+          element={<CommonInterviewPage socket={socket} />}
+        />
         {/* 바로 알바 */}
         <Route path="/worker/speed" element={<WorkerSpeedGetJob />} />
         {/* 바로 알바 결과*/}
@@ -79,6 +147,14 @@ function App() {
           path="/worker/speed/result"
           element={<WorkerSpeedResultPage />}
         />
+
+        {/* QRCODE - WORKER */}
+        <Route path="/worker/qrCode" element={<WorkerQrCode />} />
+        {/* QRCODE - OWNER */}
+        <Route path="/owner/qrCode" element={<OwnerQrCode />} />
+
+        {/* 알바천사 - OWNER */}
+        <Route path="/worker/AngelResult" element={<OwnerAngelResult />} />
       </Routes>
     </BrowserRouter>
   );

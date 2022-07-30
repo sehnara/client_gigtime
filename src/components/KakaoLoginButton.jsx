@@ -9,6 +9,10 @@ import {
   setRange,
 } from "../module/slices/sign";
 
+// 'id': '1',
+// 'user_flag': 'w or o',
+// 'token': 'token string'
+
 function KakaoLoginButton() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,11 +35,10 @@ function KakaoLoginButton() {
             dispatch(setEmail(kakao_account.email));
 
             await axios
-              .post("http://localhost:4000/check/member", {
+              .post(`${process.env.REACT_APP_ROUTE_PATH}/check/member`, {
                 email: `${kakao_account.email}`,
               })
               .then(function (response) {
-                console.log("res.data>>>>>>>>", response.data);
                 if (response.data["member_type"] === "worker") {
                   sessionStorage.setItem(
                     "worker_id",
@@ -43,20 +46,35 @@ function KakaoLoginButton() {
                   );
                   dispatch(setLocation(response.data["address"]));
                   dispatch(setRange(response.data["range"]));
-                  navigate("/worker/nearWork");
                 } else if (response.data["member_type"] === "owner") {
-                  console.log(">>>>>>>", response.data);
                   sessionStorage.setItem("owner_id", response.data["owner_id"]);
+                } else {
+                }
+                return response;
+              })
+              .then(async (res) => {
+                await axios.post(
+                  `${process.env.REACT_APP_ROUTE_PATH}/permission`,
+                  {
+                    id: sessionStorage.getItem(
+                      res.data["member_type"] === "worker"
+                        ? "worker_id"
+                        : "owner_id"
+                    ),
+                    user_flag: res.data["member_type"] === "worker" ? "w" : "o",
+                    token: sessionStorage.getItem("FCM_TOKEN"),
+                  }
+                );
+                if (res.data["member_type"] === "worker") {
+                  navigate("/worker/home");
+                } else if (res.data["member_type"] === "owner") {
                   navigate("/owner/mypage");
-                  // navigate("/login");
                 } else {
                   navigate("/login");
-                  console.log(response);
                 }
               })
               .catch(function (error) {
                 console.log(error);
-                // navigate('/login');
               });
           },
         });

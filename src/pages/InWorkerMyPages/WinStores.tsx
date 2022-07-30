@@ -7,7 +7,7 @@ const WinStores = () => {
 
   const getData = async () => {
     await axios
-      .post("http://localhost:4000/worker/mypage/myStore", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/mypage/myStore`, {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => setData(res.data));
@@ -25,6 +25,7 @@ const WinStores = () => {
             key={index}
             mode={"OWNER_MYPAGE"}
             store={e.name}
+            storeImage={`${process.env.REACT_APP_S3_PATH}${e.background_image}`}
             address={e.address}
             jobs={e.types}
             onDateClickEvent={() => {}}

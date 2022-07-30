@@ -12,7 +12,7 @@ const MyGigWorker = () => {
   useEffect(() => {
     const ownerId = sessionStorage.getItem("owner_id");
     axios
-      .post("http://localhost:4000/owner/mypage/myWorker", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/myWorker`, {
         owner_id: ownerId,
       })
       .then((res) => {
@@ -36,7 +36,9 @@ const MyGigWorker = () => {
       ) : (
         <div>
           <h1 className="text-lg mb-3">
-            총 <strong>{workers.length}명</strong>의 알바생
+            총{" "}
+            <strong className="text-2xl text-cyan-500">{workers.length}</strong>
+            명의 알바생
           </h1>
           <div className="w-full h-full rounded-xl shadow-lg shadow-black-500 mr-2 mb-2 text-center flex flex-col p-4">
             {workers &&

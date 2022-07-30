@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import InputValue2 from "../components/InputValue2";
+import NavBar from "../components/NavBar";
 
 // {
 //   'owner_id': 60,
@@ -55,9 +56,12 @@ const OwnerRecruitNoticePage = () => {
 
   const getData = async () => {
     await axios
-      .post("http://localhost:4000/owner/mypage/employment/button", {
-        owner_id: owner_id,
-      })
+      .post(
+        `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/employment/button`,
+        {
+          owner_id: owner_id,
+        }
+      )
       .then((res) => {
         console.log("recruit", res.data);
         setRecruitData({
@@ -71,7 +75,7 @@ const OwnerRecruitNoticePage = () => {
 
   const onEnroll = async () => {
     await axios
-      .post("http://localhost:4000/owner/employment", postData)
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/employment`, postData)
       .then((res) => {
         navigate("/owner/mypage");
         console.log(res.data);
@@ -97,8 +101,9 @@ const OwnerRecruitNoticePage = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="pb-24">
       <Header title={"모집공고"} />
+      <NavBar mode="OWNER" />
       <div className="mx-8">
         {/* 매장이름 */}
         <InputValue2

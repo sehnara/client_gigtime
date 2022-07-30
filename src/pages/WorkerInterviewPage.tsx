@@ -29,13 +29,11 @@ const WorkerInterviewPage = () => {
 
   const onComplete = () => {
     onApply();
-    // navigate("/worker/nearWork");
-    navigate("/worker/mypage");
   };
 
   const getData = async () => {
     await axios
-      .post("http://localhost:4000/apply/load_store", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/load_store`, {
         store_id: Number(state.store.id),
       })
       .then((res) => {
@@ -46,7 +44,7 @@ const WorkerInterviewPage = () => {
 
   const getData2 = async () => {
     await axios
-      .post("http://localhost:4000/apply/load_interview", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/load_interview`, {
         store_id: Number(state.store.id),
         interview_month: 7,
       })
@@ -58,7 +56,7 @@ const WorkerInterviewPage = () => {
 
   const onApply = async () => {
     await axios
-      .post("http://localhost:4000/apply/submit", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/submit`, {
         interview_date: date,
         interview_time: Number(time),
         question: question,
@@ -66,7 +64,11 @@ const WorkerInterviewPage = () => {
         store_id: Number(state.store.id),
       })
       .then((res) => {
-        console.log(res.data);
+        if (res.data === "안됨. 다른면접있음.") {
+          alert("이미 면접이 예약된 시간입니다.");
+        } else {
+          navigate("/worker/mypage");
+        }
       });
   };
 
@@ -76,12 +78,18 @@ const WorkerInterviewPage = () => {
   }, []);
 
   return (
-    <div className="my-2">
+    <div className="">
       {/* 헤더 */}
-      <NavBar />
+      <NavBar mode={"WORKER"} />
       <Header title={"면접신청"} />
       {/* 이미지 */}
-      <div className="bg-gray-200 w-full h-48"></div>
+
+      {/* <div className="bg-gray-200 w-full h-48"></div> */}
+      <img
+        className="bg-gray-200 w-full h-48"
+        src={`${process.env.REACT_APP_S3_PATH}${basic.background_image}`}
+      />
+
       {/* 멘트 */}
       <p className="px-8 py-4"></p>
       <div className="border-t-4 "></div>
@@ -208,6 +216,7 @@ const WorkerInterviewPage = () => {
         <div className="h-3"></div>
 
         <Button title={"신청하기"} onClickEvent={onComplete} />
+        <div className="h-24"></div>
       </div>
     </div>
   );

@@ -52,9 +52,9 @@ function StoreCard({
   }
 
   return (
-    <div className="mb-4" onClick={onClickEvent}>
+    <div className="mb-6" onClick={onClickEvent}>
       {/* 상단부 */}
-      <div className="rounded-2xl shadow-gray-500 flex  shadow p-2">
+      <div className="rounded-2xl shadow-gray-500 flex  shadow p-2  bg-white">
         {/* 사진 */}
         {storeImage === "" ? (
           <div className="w-24 h-24 rounded-xl bg-slate-300 mr-4"></div>
@@ -66,27 +66,23 @@ function StoreCard({
           {/* 가게명 */}
           {mode === "NEAR" ? (
             <div className="flex items-center ">
-              <h3 className="mt-2 font-bold ">{store}</h3>
-              <p className="text-gray-400 text-xs mt-3 ml-3">
-                총 {works && works.length}건
-              </p>
+              <h3 className="mt-2 font-bold truncate ">{store}</h3>
             </div>
           ) : (
-            <h3 className="mt-2 font-bold ">{store}</h3>
+            <h3 className="mt-2 font-bold text-lg truncate w-52">{store}</h3>
           )}
-
           {/* 거리 */}
-          <p className="mt-1">
+          <p className="mt-1 text-sm truncate w-48 text-gray-400">
             {mode === "OWNER_MYPAGE" ? `${address}` : `${distance}m`}
           </p>
           {/* 직종 */}
-          <div className="flex space-x-2 mt-2 overflow-scroll w-full">
+          <div className="flex space-x-2 truncate mt-2 overflow-sroll w-48">
             {jobs &&
               jobs.map((e) => {
                 return (
                   <div
                     key={e}
-                    className="text-xs bg-gray-200 rounded-3xl px-2 py-1"
+                    className="text-xs bg-gray-200 rounded-3xl px-2 py-1 "
                   >
                     {e}
                   </div>
@@ -100,21 +96,21 @@ function StoreCard({
       {mode === "OWNER_MYPAGE" ? (
         ""
       ) : mode === "NEAR" ? (
-        <div className="flex overflow-scroll p-2 w-">
+        <div className="flex overflow-scroll px-2 pb-2 w-full space-x-3 ">
           {works &&
             works.map((e) => {
               ref.current += 1;
               return (
                 <div
                   key={ref.current}
-                  className="mt-2 p-4 shadow-lg rounded-lg"
+                  className="mt-2 p-2 shadow-lg rounded-lg bg-white border-2"
                   onClick={() =>
                     onWorkReserve({ id: e[2], date: e[0], type: e[1] })
                   }
                 >
                   {/* 시급 */}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center mt-2 w-36 mb-2">
+                    <div className="flex items-center mt-1 w-36 mb-2">
                       <BsCoin className="mr-2" />
                       <p className="text-xs">
                         시급 <span className="font-bold">{minPay}</span>
@@ -137,12 +133,13 @@ function StoreCard({
             })}
         </div>
       ) : (
-        <div className="mt-2 p-4 shadow-lg rounded-lg">
+        <div className="mt-2 p-4 shadow-lg rounded-lg border-2 bg-white">
           {/* 사장님 멘트 */}
           <div className="flex items-center">
             <FaRegComment className="mr-2" />
-            <p className="text-xs">{ment}</p>
+            <p className="text-xs w-72 truncate">{ment}</p>
           </div>
+
           {/* 시급 */}
           <div className="flex items-center mt-2">
             <BsCoin className="mr-2" />

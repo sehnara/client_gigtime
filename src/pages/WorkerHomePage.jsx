@@ -8,7 +8,8 @@ import { setCurrentOrder } from "../module/slices/order";
 import { setStoreId } from "../module/slices/store";
 import NavBar from "../components/NavBar";
 import Empty from "../components/Empty";
-import { AiOutlinePlus } from "react-icons/ai";
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import Header from "../components/Header";
 
 const WorkerHomePage = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const WorkerHomePage = () => {
   const [loca, setLoc] = useState("");
   const [range, setRange] = useState("");
   const [name, setName] = useState("");
+  const [notFound, setIsNotFound] = useState(false);
 
   const [stores, setStores] = useState([]);
   const dispatch = useDispatch();
@@ -29,7 +31,7 @@ const WorkerHomePage = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:4000/worker/addr/range", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/addr/range`, {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
@@ -41,60 +43,73 @@ const WorkerHomePage = () => {
 
   const getStoreList = async () => {
     await axios
-      .post("http://localhost:4000/store/list", {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/store/list`, {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
-        console.log(">>>>", res.data);
         if (res.data === "error - store/list") {
           setStores([]);
+        } else if (res.data === "notFound") {
+          setIsNotFound(true);
         } else {
           setStores(res.data);
         }
       });
   };
+
   useEffect(() => {
     getStoreList();
   }, []);
 
   return (
-    <div className="font-sans">
-      <button
-        onClick={() => navigate("/worker/speed")}
-        className="flex justify-center items-center  bg-cyan-500 text-3xl font-extrabold rounded-full w-16 h-16  text-white fixed bottom-0 right-0 m-4 "
-      >
-        <AiOutlinePlus />
-      </button>
-      <NavBar />
+    <div className="font-sans bg-cyan-500 h-screen">
+      <Header title="면접신청" worker={true} />
+      <NavBar mode="WORKER" />
       {/* 상단 */}
-      <div className=" m-8  flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{loca}</h1>
-        <p className="text-sm font-normal text-slate-600 mt-2">
-          내 주변 <span className="font-extrabold">{range}m</span>
-        </p>
-      </div>
-      {/* 중반 */}
-      <div className="flex m-8 mt-10">
-        <div className="flex-column">
-          <p className="text-2xl mb-0.5 font-medium">이제는</p>
-          <p className="text-2xl mb-0.5 font-medium">
-            <span className="text-cyan-500  font-extrabold">바로 알바</span>
+      <div className="bg-white">
+        <div className=" mx-4 py-4 ">
+          <h1 className="text-lg font-bold flex ">
+            <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce " />
+            {loca}
+          </h1>
+          <p className="text-right p-2 py-1 rounded-lg font-bold">
+            내 주변
+            <span className="font-bold text-red-400 text-4xl "> {range}</span>m
           </p>
-          <p className="text-2xl mb-0.5 font-medium">할 시간!</p>
         </div>
-        <img
-          src={man}
-          alt="walking man"
-          width="150"
-          className="transform translate-x-12"
-        />
+        {/* 중반 */}
+        <div className="flex m-8 mt-4 ">
+          <div className="flex-column">
+            <p className="text-3xl mb-0.5 font-medium">이제는</p>
+            <p className="text-3xl mb-0.5 font-medium">
+              <span className="text-cyan-500  font-extrabold animate-pulse">
+                바로 알바
+              </span>
+            </p>
+            <p className="text-3xl mb-0.5 font-medium">갈 시간!</p>
+          </div>
+          <img
+            src={man}
+            alt="walking man"
+            width="150"
+            className="transform translate-x-16 translate-y-1"
+          />
+        </div>
       </div>
       {/* 하단 */}
-      <div className="border-t-4 "></div>
-      <div className="m-8 ">
-        <h1 className="text-xl font-bold mb-4">{name}님을 기다리고 있어요.</h1>
+      <div className="p-8 py-2 bg-cyan-500 pb-24">
+        <h1 className="text-xl font-bold mb-4">
+          <span className="text-2xl text-white">{name} </span>님을 기다리고
+          있어요.
+        </h1>
         <div>
-          {stores && stores.length !== 0 ? (
+          {notFound ? (
+            <div className=" text-center font-bold pt-28">
+              <p className="animate-pulse text-lg">
+                면접 가능한 가게가 없습니다
+              </p>
+            </div>
+          ) : stores && stores.length !== 0 ? (
             stores.map((store) => {
               return (
                 <StoreCard
@@ -102,6 +117,7 @@ const WorkerHomePage = () => {
                   store={store.name}
                   distance={store.distance}
                   jobs={["카운터", "서빙"]}
+                  storeImage={`${process.env.REACT_APP_S3_PATH}${store.background_image}`}
                   minPay={store.minimum_wage}
                   ment={store.description}
                   onClickEvent={() => {
@@ -111,7 +127,7 @@ const WorkerHomePage = () => {
               );
             })
           ) : (
-            <Empty text={"일감"} margin={10} />
+            <Empty text={"주변 일거리를 불러오는 중입니다."} margin={10} />
           )}
         </div>
       </div>

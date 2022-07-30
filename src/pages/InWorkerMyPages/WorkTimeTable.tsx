@@ -9,12 +9,12 @@ const WorkTimeTable = () => {
   const getData = async () => {
     try {
       await axios
-        .post("http://localhost:4000/worker/mypage/work", {
+        .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/mypage/work`, {
           worker_id: sessionStorage.getItem("worker_id"),
         })
         .then((res) => {
           setDatas(res.data);
-          console.log(res.data);
+          // console.log(res.data);
         });
     } catch {
       console.log("axios error");
@@ -32,7 +32,7 @@ const WorkTimeTable = () => {
           keyRef.current += 1;
           let hours = new Array();
 
-          for (let i = 4; i < e.length; i++) {
+          for (let i = 6; i < e.length; i++) {
             hours.push(e[i]);
           }
 
