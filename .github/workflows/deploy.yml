@@ -61,12 +61,10 @@ jobs:
       
       - name: sibal
         run: |
-          pwd
-          mkdir sibal
-          cd sibal
-          pwd
           echo "sib=al" >> sibal.txt
-          cat sibal.txt
+          mkdir ../build
+          cp -TR . ../build
+          tar -cvf deploy.tar ../build/
 
       
       - uses: actions/checkout@master
@@ -77,6 +75,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           rm: true
-          source: "/home/runner/work/gigtime_client/gigtime_client/sibal/sibal.txt"
-          target: "/home/ubuntu/BARO_ALBA"
+          source: "deploy.tar"
+          target: "~/BARO_ALBA"
 
