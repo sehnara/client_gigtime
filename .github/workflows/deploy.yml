@@ -58,12 +58,14 @@ jobs:
         run: yarn build
         env:
           CI: "" 
-          
-      - name: Run a multi-line script
-        run: |
-          mkdir ../build
-          cp -TR . ../build
-          tar -cvf deploy.tar ../build/
+      
+      - name: fucking
+        run: pwd
+      #- name: Run a multi-line script
+      #  run: |
+      #    mkdir ../build
+      #    cp -TR . ../build
+      #    tar -cvf deploy.tar ../build/
       
       - uses: actions/checkout@master
       - name: copy file via ssh password
@@ -73,8 +75,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           rm: true
-          source: "~/build"
-          target: "~/BARO_ALBA"
+          source: "~/BARO_ALBA"
+          target: "~/build"
       
       #- name: Deploy
       #  env:
