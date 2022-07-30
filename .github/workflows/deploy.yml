@@ -61,11 +61,12 @@ jobs:
       
       - name: sibal
         run: |
+          rm -rf build
+          mkdir build
           echo "sib=al" >> sibal.txt
-          mkdir ../build
           cp -TR . ../build
-          tar -cvf deploy.tar ../build/
-          cd ../build
+          tar -cvf deploy.tar build/
+          cd build
           ls
 
       
