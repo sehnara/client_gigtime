@@ -60,7 +60,7 @@ jobs:
           CI: "" 
     
       - name: test
-        run:
+        run: |
           ls
           cd build
           ls
