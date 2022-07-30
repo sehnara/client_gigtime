@@ -50,22 +50,21 @@ jobs:
           REACT_APP_S3_PATH: ${{secrets.REACT_APP_S3_PATH}}
           REACT_APP_SOCKET_SERVER: ${{secrets.REACT_APP_SOCKET_SERVER}}
             
-      - name: Install Dependencies
-        run: yarn install
+      #- name: Install Dependencies
+      #  run: yarn install
       
-      - name: Build
+      #- name: Build
         
-        run: yarn build
-        env:
-          CI: "" 
+      #  run: yarn build
+      #  env:
+      #    CI: "" 
       
-      - name: fucking
-        run: pwd
-      #- name: Run a multi-line script
-      #  run: |
-      #    mkdir ../build
-      #    cp -TR . ../build
-      #    tar -cvf deploy.tar ../build/
+      - name: sibal
+        run: |
+          mkdir sibal
+          echo "sib=al" >> sibal.txt
+          cat sibal.txt
+
       
       - uses: actions/checkout@master
       - name: copy file via ssh password
@@ -75,17 +74,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           rm: true
-          source: "/home/runner/work/gigtime_client/gigtime_client/build"
-          target: "/home/ubuntu/BARO_ALBA"
-      
-      #- name: Deploy
-      #  env:
-      #    AWS_ACCESS_KEY_ID: '${{secrets.AWS_ACCESS_KEY_ID}}'
-      #    AWS_SECRET_ACCESS_KEY: '${{secrets.AWS_SECRET_ACCESS_KEY}}'
-      #  run: |
-      #    aws s3 cp --recursive --region '${{secrets.AWS_S3_REGION}}' build '${{secrets.AWS_S3_BUCKET_NAME}}'
-      # Runs a set of commands using the runners shell
-      # - name: Run a multi-line script
-      # run: |
-      #    echo Add other actions to build,
-      #    echo test, and deploy your project.
+          source: "~/sibal/sibal.txt"
+          target: "~/BARO_ALBA"
+
