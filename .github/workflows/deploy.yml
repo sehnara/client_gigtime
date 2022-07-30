@@ -63,14 +63,15 @@ jobs:
         run: |
           pwd
           ls
+          echo "123"
           cd build
           ls
           
-      - name: Run a multi-line script
-        run: |
-          mkdir ../build
-          cp -TR . ../build
-          tar -cvf deploy.tar ../build/
+      #- name: Run a multi-line script
+      #  run: |
+      #    mkdir ../build
+      #    cp -TR . ../build
+      #    tar -cvf deploy.tar ../build/
           
       - name: SCP Command to Transfer Files
         uses: appleboy/scp-action@v0.1.3
@@ -79,7 +80,7 @@ jobs:
           host: ${{ secrets.HOST }}
           key: ${{ secrets.PRIVATE_KEY }}
           rm: true
-          source: "build/"
+          source: "/home/runner/work/gigtime_client/gigtime_client/build/"
           target: "/home/ubuntu/tests"
           strip_components: 2
 
