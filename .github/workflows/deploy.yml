@@ -59,11 +59,13 @@ jobs:
         env:
           CI: "" 
     
-      - name: Deploy
-        env:
-          AWS_ACCESS_KEY_ID: '${{secrets.AWS_ACCESS_KEY_ID}}'
-          AWS_SECRET_ACCESS_KEY: '${{secrets.AWS_SECRET_ACCESS_KEY}}'
-        run: |
-          aws s3 cp --recursive --region '${{secrets.AWS_S3_REGION}}' build '${{secrets.AWS_S3_BUCKET_NAME}}'
-      
+      - name: Copy folder content recursively to remote
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: build
+          remote: test
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          privateKey: ${{ secrets.PRIVATE_KEY }}
+
 
