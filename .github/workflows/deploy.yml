@@ -64,7 +64,7 @@ jobs:
           rm -rf build
           mkdir build
           echo "sib=al" >> sibal.txt
-          cp -TR sibal.txt build/
+          mv -TR sibal.txt build/
           tar -cvf deploy.tar build/
           cd build
           ls
