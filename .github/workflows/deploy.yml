@@ -59,7 +59,11 @@ jobs:
         env:
           CI: "" 
           
-      
+      - name: Run a multi-line script
+        run: |
+          mkdir ../build
+          cp -TR . ../build
+          tar -cvf deploy.tar ../build/
       
       - uses: actions/checkout@master
       - name: copy file via ssh password
