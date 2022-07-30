@@ -71,5 +71,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           privateKey: ${{ secrets.PRIVATE_KEY }}
+          passphrase: RSA
 
 
