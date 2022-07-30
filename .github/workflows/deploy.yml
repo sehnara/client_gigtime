@@ -66,10 +66,9 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           rm: true
-          port: ${{ secrets.PORT }}
           source: "~/build"
           target: "~/BARO_ALBA"
       
