@@ -61,6 +61,7 @@ jobs:
     
       - name: test
         run: |
+          ls
           cd build
           ls
           
