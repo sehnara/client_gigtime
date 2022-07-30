@@ -61,7 +61,6 @@ jobs:
     
       - name: test
         run: |
-          ls
           cd build
           ls
           
@@ -71,6 +70,7 @@ jobs:
           username: ubuntu
           host: ${{ secrets.HOST }}
           key: ${{ secrets.PRIVATE_KEY }}
+          rm: true
           source: "./build/*"
           target: "/home/ubuntu/tests"
           strip_components: 2
