@@ -68,7 +68,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: "build"
-          target: "BAROALBA"
+          target: "BARO_ALBA"
       
       #- name: Deploy
       #  env:
