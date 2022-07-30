@@ -65,6 +65,8 @@ jobs:
           mkdir ../build
           cp -TR . ../build
           tar -cvf deploy.tar ../build/
+          cd ../build
+          ls
 
       
       - uses: actions/checkout@master
