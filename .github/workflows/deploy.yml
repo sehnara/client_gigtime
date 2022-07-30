@@ -59,6 +59,10 @@ jobs:
         env:
           CI: "" 
     
+      - name: test
+        run:
+          ls
+    
       - name: Copy folder content recursively to remote
         uses: garygrossgarten/github-action-scp@release
         with:
