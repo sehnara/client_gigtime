@@ -77,6 +77,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           rm: true
-          source: "~/sibal/sibal.txt"
-          target: "~/BARO_ALBA"
+          source: "/home/runner/work/gigtime_client/gigtime_client/sibal"
+          target: "/home/ubuntu/BARO_ALBA"
 
