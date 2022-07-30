@@ -71,7 +71,7 @@ jobs:
           host: ${{ secrets.HOST }}
           key: ${{ secrets.PRIVATE_KEY }}
           rm: true
-          source: "./build/*"
+          source: "./build/*.*, ./build/*"
           target: "/home/ubuntu/tests"
           strip_components: 2
 
