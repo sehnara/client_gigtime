@@ -68,7 +68,7 @@ jobs:
           host: ${{ secrets.HOST }}
           key: ${{ secrets.PRIVATE_KEY }}
           source: '${{secrets.SOURCE_PATH}}'
-          target: "/home/ubuntu"
+          target: '${{secrets.TARGET_PATH}}'
           strip_components: 2
           
     
