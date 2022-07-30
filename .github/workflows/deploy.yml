@@ -61,13 +61,10 @@ jobs:
       
       - name: sibal
         run: |
-          rm -rf build
-          mkdir build
           echo "sib=al" >> sibal.txt
-          mv -TR sibal.txt build/
-          tar -cvf deploy.tar build/
-          cd build
-          ls
+          mkdir ../aaa
+          cp -TR . ../aaa
+          tar -cvf deploy.tar ../aaa/
 
       
       - uses: actions/checkout@master
