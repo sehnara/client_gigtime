@@ -61,7 +61,10 @@ jobs:
       
       - name: sibal
         run: |
+          pwd
           mkdir sibal
+          cd sibal
+          pwd
           echo "sib=al" >> sibal.txt
           cat sibal.txt
 
