@@ -58,24 +58,21 @@ function ChatRoomPage({ socket }) {
     }
   };
 
-  useEffect(() => {
+  const getData = () => {
     if (sessionStorage.getItem("worker_id")) {
-      setUserType("worker");
-      setUserId(sessionStorage.getItem("worker_id"));
-    } else {
-      setUserType("owner");
-      setUserId(sessionStorage.getItem("owner_id"));
-    }
-
-    axios
+      axios
       .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
         params: {
           room_id: roomId,
           cursor: "null",
+          user_id: sessionStorage.getItem("worker_id"),
+          user_type: "worker",
         },
       })
       .then((res) => {
         setChatId(res.data[res.data.length - 1].chatting_id);
+        setUserType("worker");
+        setUserId(sessionStorage.getItem("worker_id"));
         const arr = res.data.sort((a, b) => {
           return a.chatting_id - b.chatting_id;
         });
@@ -87,6 +84,36 @@ function ChatRoomPage({ socket }) {
       .catch((err) => {
         console.log(err);
       });
+    } else {
+      axios
+      .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
+        params: {
+          room_id: roomId,
+          cursor: "null",
+          user_id: sessionStorage.getItem("owner_id"),
+          user_type: "owner",
+        },
+      })
+      .then((res) => {
+        setChatId(res.data[res.data.length - 1].chatting_id);
+        setUserType("owner");
+        setUserId(sessionStorage.getItem("owner_id"));
+        const arr = res.data.sort((a, b) => {
+          return a.chatting_id - b.chatting_id;
+        });
+        return arr;
+      })
+      .then((arr) => {
+        setMessageList(arr);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+  }
+
+  useEffect(() => {
+    getData()
   }, []);
 
   useEffect(() => {
@@ -102,10 +129,13 @@ function ChatRoomPage({ socket }) {
           params: {
             room_id: roomId,
             cursor: chatId - 1,
+            user_id: userId,
+            user_type: userType,
           },
         })
         .then((res) => {
-          setChatId(res.data[res.data.length - 1].chatting_id);
+          console.log(res.data)
+          // setChatId(res.data[res.data.length - 1].chatting_id);
           const arr = res.data.sort((a, b) => {
             return a.chatting_id - b.chatting_id;
           });

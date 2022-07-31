@@ -7,6 +7,7 @@ import NavBar from "../components/NavBar";
 function ChatListPage({ socket }) {
   const [chatData, setChatData] = useState([]);
   const [lastChatData, setLastChatData] = useState({});
+  const [chatRead, setChatRead] = useState(0);
 
   const getData = async () => {
     if (sessionStorage.getItem("worker_id")) {
@@ -16,6 +17,7 @@ function ChatListPage({ socket }) {
           type: "worker",
         })
         .then((res) => {
+          console.log(res.data)
           setChatData(res.data);
         });
     } else {
@@ -52,6 +54,7 @@ function ChatListPage({ socket }) {
           if (el.room_id === lastChatData.room_id) {
             el.last_chat = lastChatData.message;
             el.time = lastChatData.createdAt;
+            el.not_read_chat = el.not_read_chat + chatRead
             console.log(el.last_chat);
             console.log(el.time);
             console.log(el.caller_name);
@@ -64,6 +67,7 @@ function ChatListPage({ socket }) {
               caller={el.caller_name}
               time={el.time}
               roomId={el.room_id}
+              notRead={el.not_read_chat}
             />
           );
         })}

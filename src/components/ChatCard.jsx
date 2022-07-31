@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function ChatCard( { caller, receiverName, lastChat, time, roomId} ) {
+function ChatCard( { caller, receiverName, lastChat, time, roomId, notRead } ) {
     const navigate = useNavigate();
 
     function toNextPage() {
@@ -19,7 +19,8 @@ function ChatCard( { caller, receiverName, lastChat, time, roomId} ) {
         <div className="w-full h-20 rounded-xl shadow-lg shadow-black-500 p-4 border-2 mb-2" onClick={toNextPage}>
                     <div className="flex justify-between">
                         <p className="font-bold">{receiverName}</p>
-                        {/* <p className="text-xs">{date}</p> */}
+                        {notRead === 0 ? null : <p className="text-xs rounded-full border border-red-500 bg-red-500 p-1 text-white">{notRead}</p>}
+                        {/* <p className="text-xs rounded-full border border-red-500 bg-red-500 p-1 text-white">{notRead}</p> */}
                     </div>
                     <div className="mt-2 flex justify-between">
                         <p className="text-xs">{lastChat}</p>
