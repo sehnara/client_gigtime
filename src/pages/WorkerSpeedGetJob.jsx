@@ -186,7 +186,6 @@ const WorkerSpeedGetJob = () => {
           dict_key={"price"}
           dict_value={recruitData["price"]}
         />
-        <MapRoute />
         <Button
           title={`바로알바 견적내기`}
           onClickEvent={() => {
@@ -199,13 +198,3 @@ const WorkerSpeedGetJob = () => {
 };
 
 export default WorkerSpeedGetJob;
-
-//    {
-//     "worker_id": 1,
-//     "work_date": "2022-08-20",
-//     "start_times": [
-//         "10:00",
-//         "11:00",
-//        ...
-//         ]
-// }

@@ -7,7 +7,7 @@ const MapContainer = ({ worker, owner }) => {
     const container = document.getElementById("myMap");
     const options = {
       center: new kakao.maps.LatLng(owner.lat, owner.lng),
-      level: 10,
+      level: 3,
     };
     const map = new kakao.maps.Map(container, options);
 

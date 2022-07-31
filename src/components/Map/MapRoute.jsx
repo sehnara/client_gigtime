@@ -32,8 +32,8 @@ const MapRoute = () => {
   useEffect(() => {
     const container = document.getElementById("myMap");
     const options = {
-      center: new kakao.maps.LatLng(37.502, 127.026581),
-      level: 10,
+      center: new kakao.maps.LatLng(37.4999269, 127.0365526),
+      level: 5,
     };
     const map = new kakao.maps.Map(container, options);
 
@@ -52,7 +52,7 @@ const MapRoute = () => {
       customOverlay.setMap(map);
     }
   }, []);
-  return <div id="myMap" className={`w-72 h-48 m-2`}></div>;
+  return <div id="myMap" className={`w-full h-96 m-2`}></div>;
 };
 
 export default MapRoute;
