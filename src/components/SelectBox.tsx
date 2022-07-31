@@ -24,7 +24,6 @@ const SelectBox = ({
   return (
     <div className="shadow-lg shadow-slate-300 h-40 overflow-scroll rounded-md">
       {data.map((e) => {
-        console.log(">>>>>", e);
         return mode === "RESERVE" ? (
           <div
             onClick={() => {

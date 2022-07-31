@@ -26,6 +26,7 @@ const WorkerHomePage = () => {
 
   const onNextPage = (e) => {
     dispatch(setStoreId(e));
+    sessionStorage.setItem("store_id", e);
     navigate("/worker/interview");
   };
 

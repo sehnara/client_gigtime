@@ -35,14 +35,19 @@ const WorkerReserveWorkPage = () => {
   const [sur, setSur] = useState(0);
 
   const worker_id = Number(sessionStorage.getItem("worker_id"));
+  const order_id = Number(
+    state.order.id || sessionStorage.getItem("reserve_id")
+  );
+  const work_date = state.order.date || sessionStorage.getItem("reserve_date");
+  const type = state.order.type || sessionStorage.getItem("reserve_type");
 
   const getData = async () => {
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/reservation/list`, {
         worker_id: sessionStorage.getItem("worker_id"),
-        order_id: state.order.id,
-        work_date: masage_date(state.order.date),
-        type: state.order.type,
+        order_id,
+        work_date: masage_date(work_date),
+        type,
       })
       .then((res) => {
         setWorkDates(res.data);
@@ -50,7 +55,7 @@ const WorkerReserveWorkPage = () => {
 
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/reserve/load_store`, {
-        order_id: Number(state.order.id),
+        order_id,
       })
       .then((res) => {
         setStoreData(res.data);
@@ -78,6 +83,11 @@ const WorkerReserveWorkPage = () => {
 
   useEffect(() => {
     getData();
+    return () => {
+      sessionStorage.removeItem("reserve_id");
+      sessionStorage.removeItem("reserve_date");
+      sessionStorage.removeItem("reserve_type");
+    };
   }, []);
 
   useEffect(() => {
@@ -87,7 +97,7 @@ const WorkerReserveWorkPage = () => {
       setSur(money.map((i) => Number(i.min_price)).reduce((a, b) => a + b));
     }
   }, [money.length]);
-
+  // console.log(">><", storeData);
   return (
     <div>
       <NavBar mode="WORKER" />
@@ -95,7 +105,12 @@ const WorkerReserveWorkPage = () => {
       {/* 이미지 */}
       <img
         className="bg-gray-200 w-full h-48"
-        src={`${process.env.REACT_APP_S3_PATH}${storeData.background_image}`}
+        src={
+          storeData &&
+          (storeData
+            ? `${process.env.REACT_APP_S3_PATH}${storeData.background_image}`
+            : `${process.env.REACT_APP_S3_PATH}background/default_bg.png`)
+        }
       />
       {/* 멘트 */}
       <p className="px-8 py-4 text-sm text-gray-600">{storeData.description}</p>
@@ -126,10 +141,10 @@ const WorkerReserveWorkPage = () => {
 
         <div className="flex items-center w-full my-4">
           <AiOutlineCalendar className="mr-2 text-xl" />
-          <p className="text-base">{masage_date(state.order.date, "korean")}</p>
+          <p className="text-base">{masage_date(work_date, "korean")}</p>
           {/* 직종 */}
           <p className="text-xs ml-6 bg-gray-200 px-2 py-1 rounded-2xl">
-            {state.order.type}
+            {type}
           </p>
         </div>
         <SelectBox
@@ -145,7 +160,7 @@ const WorkerReserveWorkPage = () => {
         <h3 className="font-bold mb-4">예약 정보</h3>
         <div className="flex items-center mb-3 text-sm text-gray-500">
           <p className="flex-1">근무날짜</p>
-          <p className="flex-3">{masage_date(state.order.date, "korean")}</p>
+          <p className="flex-3">{masage_date(work_date, "korean")}</p>
         </div>
         <div className="flex items-center mb-3 text-sm text-gray-500">
           <p className="flex-1">근무시간</p>
@@ -169,7 +184,6 @@ const WorkerReserveWorkPage = () => {
         <h3 className="font-bold mb-4">안내사항</h3>
         {[
           "- 근로계약서 작성을 위해 신분증을 지참해주세요.",
-          " - 알바 48시간 전까지 취소 가능",
           " - 무단 결근 시 서비스 규정에 따라 이용 제한",
         ].map((e) => {
           return (

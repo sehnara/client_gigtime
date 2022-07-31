@@ -16,7 +16,10 @@ const WorkerInterviewPage = () => {
   const [basic, setBasic] = useState<any>({});
   const [times, setTimes] = useState<any>([]);
   const worker_id = sessionStorage.getItem("worker_id");
+  const store_id =
+    Number(state.store.id) || Number(sessionStorage.getItem("store_id"));
 
+  console.log(">>>>", store_id);
   const getDate = (date: string) => {
     setDate(date);
   };
@@ -34,10 +37,9 @@ const WorkerInterviewPage = () => {
   const getData = async () => {
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/load_store`, {
-        store_id: Number(state.store.id),
+        store_id,
       })
       .then((res) => {
-        // console.log(">>>>>>>", res.data);
         setBasic(res.data);
       });
   };
@@ -45,11 +47,10 @@ const WorkerInterviewPage = () => {
   const getData2 = async () => {
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/load_interview`, {
-        store_id: Number(state.store.id),
+        store_id,
         interview_month: 7,
       })
       .then((res) => {
-        // console.log("!!!!!!!!!!!",res)
         setTimes(res.data);
       });
   };
@@ -61,7 +62,7 @@ const WorkerInterviewPage = () => {
         interview_time: Number(time),
         question: question,
         worker_id: worker_id,
-        store_id: Number(state.store.id),
+        store_id,
       })
       .then((res) => {
         if (res.data === "안됨. 다른면접있음.") {
@@ -75,6 +76,9 @@ const WorkerInterviewPage = () => {
   useEffect(() => {
     getData();
     getData2();
+    return () => {
+      sessionStorage.removeItem("store_id");
+    };
   }, []);
 
   return (
@@ -83,8 +87,6 @@ const WorkerInterviewPage = () => {
       <NavBar mode={"WORKER"} />
       <Header title={"면접신청"} />
       {/* 이미지 */}
-
-      {/* <div className="bg-gray-200 w-full h-48"></div> */}
       <img
         className="bg-gray-200 w-full h-48"
         src={`${process.env.REACT_APP_S3_PATH}${basic.background_image}`}
@@ -204,7 +206,6 @@ const WorkerInterviewPage = () => {
           "- 면접은 화상으로 진행됩니다.",
           " - 접속 링크는 면접대기 탭에서 확인할 수 있습니다.",
           " - 면접 30분 전부터 면접시작 버튼이 활성화됩니다.",
-          " - 면접 24시간 전까지 취소가 가능합니다.",
           " - 무단 면접 불참시 서비스 이용이 제한됩니다.",
         ].map((e) => {
           return (
