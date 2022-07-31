@@ -233,7 +233,7 @@ const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
             muted
             playsInline
             autoPlay
-            className="absolute z-20 w-32 h-38 top-0 right-0"
+            className="absolute z-20 w-1/3 top-0 right-0 bg-yellow-500"
             />
 
           <video
