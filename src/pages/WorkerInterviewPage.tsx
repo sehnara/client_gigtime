@@ -19,7 +19,6 @@ const WorkerInterviewPage = () => {
   const store_id =
     Number(state.store.id) || Number(sessionStorage.getItem("store_id"));
 
-  console.log(">>>>", store_id);
   const getDate = (date: string) => {
     setDate(date);
   };
@@ -204,9 +203,9 @@ const WorkerInterviewPage = () => {
         <h3 className="font-bold mb-4">안내사항</h3>
         {[
           "- 면접은 화상으로 진행됩니다.",
-          " - 접속 링크는 면접대기 탭에서 확인할 수 있습니다.",
-          " - 면접 30분 전부터 면접시작 버튼이 활성화됩니다.",
-          " - 무단 면접 불참시 서비스 이용이 제한됩니다.",
+          "- 접속 링크는 면접대기 탭에서 확인할 수 있습니다.",
+          "- 사장님이 면접 수락 시 알림이 전송됩니다.",
+          "- 무단 면접 불참시 서비스 이용이 제한됩니다.",
         ].map((e) => {
           return (
             <p key={e} className="text-sm mb-2 text-gray-500">

@@ -94,6 +94,7 @@ const WorkerNearWorkPage = () => {
 
   const ref = useRef(1);
   const navigate = useNavigate();
+
   const nextPage = (data) => {
     dispatch(setCurrentOrder(data.id));
     sessionStorage.setItem("reserve_id", data.id);
@@ -101,7 +102,7 @@ const WorkerNearWorkPage = () => {
     sessionStorage.setItem("reserve_date", data.date);
     dispatch(setCurrentType(data.type));
     sessionStorage.setItem("reserve_type", data.type);
-    navigate("/worker/reserveWork");
+    navigate("/worker/reserveWork");  
   };
 
   return (
