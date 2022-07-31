@@ -11,9 +11,11 @@ import axios from "axios";
 function ChatRoomPage({ socket }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  // const [messageSub, setMessageSub] = useState({});
   const [userType, setUserType] = useState("");
   const [userId, setUserId] = useState("");
   const [chatId, setChatId] = useState(0);
+  // 무한스크롤
   const [ref, inView] = useInView();
   const location = useLocation();
 
@@ -59,7 +61,66 @@ function ChatRoomPage({ socket }) {
     }
   };
 
-  const getData = () => {
+  const getData = async () => {
+    socket.emit("join_chat_room", roomId);
+    if (sessionStorage.getItem("worker_id")) {
+      axios
+        .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
+          params: {
+            room_id: roomId,
+            cursor: "null",
+            user_id: sessionStorage.getItem("worker_id"),
+            user_type: "worker",
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setChatId(res.data[res.data.length - 1].chatting_id);
+          setUserType("worker");
+          setUserId(sessionStorage.getItem("worker_id"));
+          const arr = res.data.sort((a, b) => {
+            return a.chatting_id - b.chatting_id;
+          });
+          return arr;
+        })
+        .then((arr) => {
+          setMessageList(arr);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
+          params: {
+            room_id: roomId,
+            cursor: "null",
+            user_id: sessionStorage.getItem("owner_id"),
+            user_type: "owner",
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setChatId(res.data[res.data.length - 1].chatting_id);
+          setUserType("owner");
+          setUserId(sessionStorage.getItem("owner_id"));
+          const arr = res.data.sort((a, b) => {
+            return a.chatting_id - b.chatting_id;
+          });
+          return arr;
+        })
+        .then((arr) => {
+          setMessageList(arr);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    
+    await socket.emit("read_aaaaaaaa", { 'room_id': roomId });
+  };
+
+  const getData2 = async () => {
     if (sessionStorage.getItem("worker_id")) {
       axios
         .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
@@ -168,6 +229,53 @@ function ChatRoomPage({ socket }) {
   }, [socket]);
 
   useEffect(() => {
+    socket.on("read_message", (data) => {
+      console.log('수신자가 바로 읽었음!')
+
+      // 발신자 1 없애는 신호 보내자!
+      socket.emit("read_mmmm", data);
+      
+    });
+    return(() => {
+      socket.off("read_message");
+    })
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on("reload", (data) => {
+      console.log(data)
+      console.log('페이지 리로드 할게!')      
+      getData();
+      // setMessageSub(data);
+    });
+    return(() => {
+      socket.off("reload");
+    })
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on("reload2", () => {
+      console.log('reload2222222222')
+      getData2();
+    });
+    return(() => {
+      socket.off("reload2");
+    })
+  }, []);
+
+  // useEffect(() => {
+  //   socket.on("reload2", () => {
+  //     console.log('페이지 리로드 할게!')      
+  //     getData();
+  //     // setMessageSub(data);
+  //   });
+  //   return(() => {
+  //     socket.off("reload2");
+  //   })
+  // }, [socket]);
+
+  // 무한스크롤
+  useEffect(() => {
     if (inView) {
       axios
         .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
@@ -206,8 +314,10 @@ function ChatRoomPage({ socket }) {
             {messageList.map((messageContent, index) => {
               if (caller === messageContent.caller_name) {
                 if (index === 1) {
+                  console.log('not_read: ',messageContent.not_read);
                   return (
                     <div
+                      // 무한스크롤
                       className="h-auto p-3 flex justify-end"
                       key={index}
                       ref={ref}
@@ -219,18 +329,20 @@ function ChatRoomPage({ socket }) {
                         <div className="flex flex-col">
                           {/* <p className="font-bold text-sm">{messageContent.caller_name}</p> */}
                           <div className="flex justify-beween">
-                          {
-                            messageContent.not_read === 1 ? <p className="text-xs text-yellow-500">1</p> : null
-                          }
+                          {/* {
+                            messageContent.not_read === 0 ? null : <p className="text-xs text-yellow-500">1</p>
+                          } */}
                             <p className="text-xs">{messageContent.createdAt}</p>
                           </div>
-                        </div>
+                        </div> 
                       </div>
                     </div>
                   );
                 } else {
                   return (
-                    <MeChatbox key={index} messageContent={messageContent} />
+                    <MeChatbox key={index} messageContent={messageContent}
+                    // messageSub={messageSub}
+                    />
                   );
                 }
               } else {
@@ -252,7 +364,10 @@ function ChatRoomPage({ socket }) {
                   );
                 } else {
                   return (
-                    <OtherChatbox key={index} receiver={receiverName} messageContent={messageContent} />
+                    <OtherChatbox key={index} 
+                    receiver={receiverName} 
+                    messageContent={messageContent} 
+                    />
                   );
                 }
               }
