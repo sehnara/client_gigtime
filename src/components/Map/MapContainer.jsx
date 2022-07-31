@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import man from "../../images/man.png";
 const { kakao } = window;
+
 const MapContainer = ({ worker, owner }) => {
   useEffect(() => {
     const container = document.getElementById("myMap");

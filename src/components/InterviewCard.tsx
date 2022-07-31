@@ -103,9 +103,9 @@ const InterviewCard = ({
         ) : state === 5 ? (
           <div className="">
             <p className="text-sm">
-              {!resultFlag ? (
+              {resultFlag ? (
                 <span className="text-green-400 font-bold text-lg">합격</span>
-              ) : ( 
+              ) : (
                 <span className="text-red-400 font-bold text-lg">불합격</span>
               )}
             </p>

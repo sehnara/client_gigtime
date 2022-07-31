@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import InputValue2 from "../components/InputValue2";
+import MapRoute from "../components/Map/MapRoute";
 import NavBar from "../components/NavBar";
 import Pachinco from "../components/Pachinco";
 
@@ -185,6 +186,7 @@ const WorkerSpeedGetJob = () => {
           dict_key={"price"}
           dict_value={recruitData["price"]}
         />
+        <MapRoute />
         <Button
           title={`바로알바 견적내기`}
           onClickEvent={() => {
