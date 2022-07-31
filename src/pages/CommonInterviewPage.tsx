@@ -225,7 +225,6 @@ const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
   }
   return (
     <div>
-      <Header title={"바로알바 면접"} />
       <div className="relative flex items-center justify-center h-screen overflow-hidden">
         {/* <div className="relative"> */}
           <video
@@ -233,7 +232,7 @@ const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
             muted
             playsInline
             autoPlay
-            className="absolute z-20 w-1/3 top-0 right-0 bg-yellow-500"
+            className="absolute z-20 w-1/3 top-0 right-0"
             />
 
           <video
@@ -241,7 +240,7 @@ const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
             ref={remoteVideoRef}
             playsInline
             autoPlay
-            className="absolute z-10 w-auto min-w-full min-h-full max-w-none"      
+            className="absolute z-10 w-auto min-w-full min-h-full max-w-none"       
           />   
         {/* </div> */}
         
