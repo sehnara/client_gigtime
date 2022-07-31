@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setRange } from "../module/slices/sign";
 import axios from "axios";
 import Header from "../components/Header";
+import Map from "../components/Map/Map";
 
 const WorkerDistancePage = () => {
   const dispatch = useDispatch();
@@ -31,8 +32,6 @@ const WorkerDistancePage = () => {
         console.log(error);
       });
   };
-
-  // 다음 페이지로 가입시더
   const onNextPage = () => {
     setSignData();
   };
@@ -63,6 +62,13 @@ const WorkerDistancePage = () => {
           step={10}
           value={signData.range}
           onChange={onchangeDistance}
+        />
+        <Map
+          level={7}
+          width={"full"}
+          height={"96"}
+          address={signData.location}
+          range={signData.range}
         />
         <Button title={"설정 완료"} onClickEvent={onNextPage} />
       </div>

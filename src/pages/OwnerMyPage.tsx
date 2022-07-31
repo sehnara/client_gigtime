@@ -10,6 +10,7 @@ import RecruitTable from "./InOwnerMypages/RecruitTable";
 import magnifier from "../images/Magnifier.png";
 import NavBar from "../components/NavBar";
 import Button from "../components/Button";
+import MapContainer from "../components/Map/MapMarkers";
 
 const data = [
   { time: 49, text: "긱타임에서 모집공고 낸 횟수" },
@@ -159,7 +160,7 @@ const WorkMyPage = () => {
                 가게와 가까운 알바생부터 매칭 중
               </div>
             </>
-          ) : isAngel === "RESULT" ? (
+          ) : isAngel === "POSTING" ? (
             <div className="flex flex-col justify-center items-center">
               <p className="text-cyan-400 text-2xl font-bold my-8 ">
                 매칭 완료
@@ -202,7 +203,11 @@ const WorkMyPage = () => {
                   <p className="pr-4">가게와의 거리 : </p>
                   <p>{resultData && resultData.dist}m</p>
                 </div>
-              </div>{" "}
+              </div>
+              <MapContainer
+                owner={{ lat: 37.23451, lng: 126.8 }}
+                worker={{ lat: 37.23451, lng: 126.7 }}
+              />
               <Button
                 title={"나가기"}
                 onClickEvent={() => {

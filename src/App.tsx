@@ -30,19 +30,16 @@ import ChatRoomPage from "./pages/ChatRoomPage";
 import io from "socket.io-client";
 
 function App() {
-  const [isTokenFound, setTokenFound] = useState(false);
-  const [myToken, setMyToken] = useState("");
   const firebaseMessaging = firebaseApp.messaging();
 
   firebaseMessaging
     .requestPermission()
     .then(() => {
-      return firebaseMessaging.getToken(); // 등록 토큰 받기
+      return firebaseMessaging.getToken();
     })
     .then(function (token: any) {
-      console.log(token); //토큰 출력
+      console.log(token);
       sessionStorage.setItem("FCM_TOKEN", token);
-      setMyToken(token);
     })
     .catch(function (error: any) {
       console.log("FCM Error : ", error);
@@ -50,13 +47,9 @@ function App() {
 
   firebaseMessaging.onMessage((payload: any) => {
     const { title, body } = payload.data;
-    const link = payload.link;
     const data = JSON.parse(body);
 
-    console.log("들어오니???????", data, title);
-
     if (title === "알바천사 콜") {
-      // WORKER
       if (
         window.confirm(
           title + " : " + data["store_name"] + "에서 알바천사 호출하셨습니다."
@@ -68,7 +61,6 @@ function App() {
         );
       }
     } else if (title === "알바천사 결과") {
-      // OWNER
       if (data["result"] === "success") {
         if (
           window.confirm(
@@ -90,7 +82,6 @@ function App() {
             title + " : " + data["store_name"] + "에서 면접 결과가 왔습니다."
           )
         ) {
-          console.log("가자 >>>>> ", title, data["store_name"]);
           // sessionStorage.setItem("angel_id", data["angel_id"]);
           window.location.assign(
             `${process.env.REACT_APP_ROUTE_PATH}/worker/mypage`
@@ -111,6 +102,7 @@ function App() {
       <Routes>
         <Route path="/*" element={<InitPage />} />
         <Route path="/login" element={<LoginPage />} />
+        {/* OWNER */}
         <Route path="/owner/storename" element={<OwnerStoreNamePage />} />
         <Route
           path="/owner/storelocation"
@@ -122,39 +114,29 @@ function App() {
         <Route path="/owner/complete" element={<OwnerCompletePage />} />
         <Route path="/owner/mypage" element={<OwnerMyPage />} />
         <Route path="/owner/recruit" element={<OwnerRecruitNoticePage />} />
-        <Route path="/worker/location" element={<WorkerLocationPage />} />
+        <Route path="/owner/qrCode" element={<OwnerQrCode />} />
+        {/* WORKER */}
         <Route path="/worker/distance" element={<WorkerDistancePage />} />
         <Route path="/worker/home" element={<WorkerHomePage />} />
-        <Route path="/chatlist" element={<ChatListPage socket={socket} />} />
-        <Route path="/chatroom" element={<ChatRoomPage socket={socket} />} />
-        {/* 면접 신청 페이지 */}
+        <Route path="/worker/location" element={<WorkerLocationPage />} />
         <Route path="/worker/interview" element={<WorkerInterviewPage />} />
-        {/* 주변 일감 */}
         <Route path="/worker/nearWork" element={<WorkerNearWorkPage />} />
-        {/* 알바 예약*/}
         <Route path="/worker/reserveWork" element={<WorkerReserveWorkPage />} />
-        {/* 마이 페이지 */}
         <Route path="/worker/mypage" element={<WorkMyPage />} />
-        {/* 면접 */}
-        <Route
-          path="/interview"
-          element={<CommonInterviewPage socket={socket} />}
-        />
-        {/* 바로 알바 */}
         <Route path="/worker/speed" element={<WorkerSpeedGetJob />} />
-        {/* 바로 알바 결과*/}
         <Route
           path="/worker/speed/result"
           element={<WorkerSpeedResultPage />}
         />
-
-        {/* QRCODE - WORKER */}
         <Route path="/worker/qrCode" element={<WorkerQrCode />} />
-        {/* QRCODE - OWNER */}
-        <Route path="/owner/qrCode" element={<OwnerQrCode />} />
-
-        {/* 알바천사 - OWNER */}
         <Route path="/worker/AngelResult" element={<OwnerAngelResult />} />
+        {/* 기타 */}
+        <Route
+          path="/interview"
+          element={<CommonInterviewPage socket={socket} />}
+        />
+        <Route path="/chatlist" element={<ChatListPage socket={socket} />} />
+        <Route path="/chatroom" element={<ChatRoomPage socket={socket} />} />
       </Routes>
     </BrowserRouter>
   );
