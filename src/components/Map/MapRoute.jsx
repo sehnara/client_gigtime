@@ -37,7 +37,6 @@ const MapRoute = () => {
     };
     const map = new kakao.maps.Map(container, options);
 
-    // 커스텀 오버레이가 표시될 위치입니다
     for (let i = 0; i < mock.length; i++) {
       var customOverlay = new kakao.maps.CustomOverlay({
         position: new kakao.maps.LatLng(mock[i].lat, mock[i].lnt),
@@ -48,7 +47,6 @@ const MapRoute = () => {
         xAnchor: 0.3,
         yAnchor: 0.91,
       });
-      // 커스텀 오버레이를 지도에 표시합니다
       customOverlay.setMap(map);
     }
   }, []);
@@ -56,23 +54,3 @@ const MapRoute = () => {
 };
 
 export default MapRoute;
-
-// 클로리스 역삼 GFC점
-// 서울 강남구 테헤란로 152 강남파이낸스센터 지하1층
-// 37.49992690000000000
-// 127.03655260000000000
-
-// 바게트케이
-// 서울 강남구 테헤란로34길 21-10
-// 37.50025670000000000
-// 127.04143290000000000
-
-// 브루커피 강남타워300점
-// 서울 강남구 테헤란로2길 21 1
-// 37.49672930000000000
-// 127.02942370000000000
-
-// 커피스니퍼 센터필드점
-// 서울 강남구 테헤란로 231 센터필드 지상 2층 E207호 커피스니퍼
-// 37.50304260000000000
-// 127.04158800000000000

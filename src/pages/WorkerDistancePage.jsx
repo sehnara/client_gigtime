@@ -58,8 +58,8 @@ const WorkerDistancePage = () => {
           type="range"
           className="border-2 h-10 w-full"
           min={0}
-          max={5000}
-          step={10}
+          max={4000}
+          step={100}
           value={signData.range}
           onChange={onchangeDistance}
         />
