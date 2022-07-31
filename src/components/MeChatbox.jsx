@@ -9,7 +9,12 @@ function MeChatbox( { messageContent } ) {
                 </div>
                 <div className="flex flex-col">
                     {/* <p className="font-bold text-sm">{messageContent.caller_name}</p> */}
-                    <p className="text-xs">{messageContent.createdAt}</p>
+                    <div className="flex justify-between">
+                        {
+                            messageContent.not_read === 1 ? <p className="text-xs text-yellow-500">1</p> : null
+                        }
+                        <p className="text-xs">{messageContent.createdAt}</p>
+                    </div>
                 </div>
             </div>
         </div>

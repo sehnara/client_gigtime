@@ -9,7 +9,7 @@ function ChatCard( { caller, receiverName, lastChat, time, roomId, notRead } ) {
             state: {
                 roomId: roomId,
                 caller: caller,
-                receiverName: receiverName
+                receiverName: receiverName,
             }
         });
     };
