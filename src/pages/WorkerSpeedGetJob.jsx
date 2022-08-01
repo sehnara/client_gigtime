@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import InputValue2 from "../components/InputValue2";
+import MapRoute from "../components/Map/MapRoute";
 import NavBar from "../components/NavBar";
 import Pachinco from "../components/Pachinco";
 
@@ -197,13 +198,3 @@ const WorkerSpeedGetJob = () => {
 };
 
 export default WorkerSpeedGetJob;
-
-//    {
-//     "worker_id": 1,
-//     "work_date": "2022-08-20",
-//     "start_times": [
-//         "10:00",
-//         "11:00",
-//        ...
-//         ]
-// }

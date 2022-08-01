@@ -10,6 +10,7 @@ import RecruitTable from "./InOwnerMypages/RecruitTable";
 import magnifier from "../images/Magnifier.png";
 import NavBar from "../components/NavBar";
 import Button from "../components/Button";
+import MapContainer from "../components/Map/MapContainer.jsx";
 
 const data = [
   { time: 49, text: "긱타임에서 모집공고 낸 횟수" },
@@ -22,7 +23,6 @@ const data = [
 export type ANGEL_STATE = "NONE" | "POSTING" | "SEARCHING" | "RESULT";
 
 const WorkMyPage = () => {
-  // STATE -------------------------------------
   const [storename, setStorename] = useState("");
   const [name, setName] = useState("");
   const [tab, setTab] = useState("면접관리");
@@ -37,8 +37,6 @@ const WorkMyPage = () => {
     name: "",
     dist: 0,
   });
-  const danchooRef = useRef(1);
-  const angelId = sessionStorage.getItem("angel_id");
 
   // [바로알바 인풋값]
   const times = [
@@ -134,11 +132,9 @@ const WorkMyPage = () => {
       });
   };
 
-  // FUNCTION ----------------------------------
   const setMenu = (data: string) => {
     setTab(data);
   };
-  // COMPONENT ----------------------------------
   return (
     <div className="h-screen overflow-scroll">
       {/* 바로알바 팝업 페이지 */}
@@ -202,7 +198,11 @@ const WorkMyPage = () => {
                   <p className="pr-4">가게와의 거리 : </p>
                   <p>{resultData && resultData.dist}m</p>
                 </div>
-              </div>{" "}
+              </div>
+              <MapContainer
+                owner={{ lat: 37.23451, lng: 126.8 }}
+                worker={{ lat: 37.23451, lng: 126.7 }}
+              />
               <Button
                 title={"나가기"}
                 onClickEvent={() => {
