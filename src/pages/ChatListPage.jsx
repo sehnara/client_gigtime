@@ -38,7 +38,11 @@ function ChatListPage({ socket }) {
     socket.on("receive_message", (data) => {
       setLastChatData(data);
     });
+    return(() => {
+      socket.off("receive_message");
+    })
   }, [socket]);
+
 
   return (
     <>
@@ -52,9 +56,10 @@ function ChatListPage({ socket }) {
           if (el.room_id === lastChatData.room_id) {
             el.last_chat = lastChatData.message;
             el.time = lastChatData.createdAt;
-            console.log(el.last_chat);
-            console.log(el.time);
-            console.log(el.caller_name);
+            el.not_read_chat = lastChatData.not_read_chat;
+            // console.log(el.last_chat);
+            // console.log(el.time);
+            // console.log(el.caller_name);
           }
           return (
             <ChatCard
@@ -64,6 +69,7 @@ function ChatListPage({ socket }) {
               caller={el.caller_name}
               time={el.time}
               roomId={el.room_id}
+              notRead={el.not_read_chat}
             />
           );
         })}

@@ -48,6 +48,7 @@ function ChatRoomPage({ socket }) {
         send_user_id: userId,
         send_user_type: userType,
         message: currentMessage,
+        not_read: 1,
         createdAt:
           year + "-" + month + "-" + date + " " + hours + ":" + minutes,
       };
@@ -58,42 +59,187 @@ function ChatRoomPage({ socket }) {
     }
   };
 
-  useEffect(() => {
+  const getData = async () => {
+    socket.emit("join_chat_room", roomId);
     if (sessionStorage.getItem("worker_id")) {
-      setUserType("worker");
-      setUserId(sessionStorage.getItem("worker_id"));
+      axios
+        .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
+          params: {
+            room_id: roomId,
+            cursor: "null",
+            user_id: sessionStorage.getItem("worker_id"),
+            user_type: "worker",
+          },
+        })
+        .then((res) => {
+          setChatId(res.data[res.data.length - 1].chatting_id);
+          setUserType("worker");
+          setUserId(sessionStorage.getItem("worker_id"));
+          const arr = res.data.sort((a, b) => {
+            return a.chatting_id - b.chatting_id;
+          });
+          return arr;
+        })
+        .then((arr) => {
+          setMessageList(arr);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
-      setUserType("owner");
-      setUserId(sessionStorage.getItem("owner_id"));
+      axios
+        .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
+          params: {
+            room_id: roomId,
+            cursor: "null",
+            user_id: sessionStorage.getItem("owner_id"),
+            user_type: "owner",
+          },
+        })
+        .then((res) => {
+          setChatId(res.data[res.data.length - 1].chatting_id);
+          setUserType("owner");
+          setUserId(sessionStorage.getItem("owner_id"));
+          const arr = res.data.sort((a, b) => {
+            return a.chatting_id - b.chatting_id;
+          });
+          return arr;
+        })
+        .then((arr) => {
+          setMessageList(arr);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
-    axios
-      .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
-        params: {
-          room_id: roomId,
-          cursor: "null",
-        },
-      })
-      .then((res) => {
-        setChatId(res.data[res.data.length - 1].chatting_id);
-        const arr = res.data.sort((a, b) => {
-          return a.chatting_id - b.chatting_id;
+    await socket.emit("read_that", { 'room_id': roomId });
+  };
+
+  const reloadData = async () => {
+    if (sessionStorage.getItem("worker_id")) {
+      axios
+        .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
+          params: {
+            room_id: roomId,
+            cursor: "null",
+            user_id: sessionStorage.getItem("worker_id"),
+            user_type: "worker",
+          },
+        })
+        .then((res) => {
+          setChatId(res.data[res.data.length - 1].chatting_id);
+          setUserType("worker");
+          setUserId(sessionStorage.getItem("worker_id"));
+          const arr = res.data.sort((a, b) => {
+            return a.chatting_id - b.chatting_id;
+          });
+          return arr;
+        })
+        .then((arr) => {
+          setMessageList(arr);
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        return arr;
-      })
-      .then((arr) => {
-        setMessageList(arr);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    } else {
+      axios
+        .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
+          params: {
+            room_id: roomId,
+            cursor: "null",
+            user_id: sessionStorage.getItem("owner_id"),
+            user_type: "owner",
+          },
+        })
+        .then((res) => {
+          setChatId(res.data[res.data.length - 1].chatting_id);
+          setUserType("owner");
+          setUserId(sessionStorage.getItem("owner_id"));
+          const arr = res.data.sort((a, b) => {
+            return a.chatting_id - b.chatting_id;
+          });
+          return arr;
+        })
+        .then((arr) => {
+          setMessageList(arr);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const giveChatState = async () => {
+    if (sessionStorage.getItem("worker_id")) {
+      await axios
+        .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/read`, {
+          params: {
+            room_id: roomId,
+            user_id: sessionStorage.getItem("worker_id"),
+            user_type: "worker",
+          },
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      await axios
+        .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/read`, {
+          params: {
+            room_id: roomId,
+            user_id: sessionStorage.getItem("owner_id"),
+            user_type: "owner",
+          },
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  useEffect(() => {
+    getData();
   }, []);
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
+      giveChatState();
     });
+    return(() => {
+      socket.off("receive_message");
+    })
   }, [socket]);
+
+  useEffect(() => {
+    socket.on("read_message", (data) => {
+      socket.emit("read_ok", data);
+    });
+    return(() => {
+      socket.off("read_message");
+    })
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on("reload", (data) => {
+      getData();
+    });
+
+    return(() => {
+      socket.off("reload");
+    })
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on("reload2", () => {
+      reloadData();
+    });
+
+    return(() => {
+      socket.off("reload2");
+    })
+  }, []);
 
   useEffect(() => {
     if (inView) {
@@ -101,7 +247,9 @@ function ChatRoomPage({ socket }) {
         .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
           params: {
             room_id: roomId,
-            cursor: chatId - 1,
+            cursor: chatId,
+            user_id: userId,
+            user_type: userType,
           },
         })
         .then((res) => {
@@ -143,15 +291,19 @@ function ChatRoomPage({ socket }) {
                           <p>{messageContent.message}</p>
                         </div>
                         <div className="flex flex-col">
-                          {/* <p className="font-bold text-sm">{messageContent.caller_name}</p> */}
-                          <p className="text-xs">{messageContent.createdAt}</p>
-                        </div>
+                          <div className="flex justify-beween">
+                          {
+                            messageContent.not_read === 0 ? null : <p className="text-xs text-yellow-500">1</p>
+                          }
+                            <p className="text-xs">{messageContent.createdAt}</p>
+                          </div>
+                        </div> 
                       </div>
                     </div>
                   );
                 } else {
                   return (
-                    <MeChatbox key={index} messageContent={messageContent} />
+                    <MeChatbox key={index} messageContent={messageContent}/>
                   );
                 }
               } else {
@@ -164,7 +316,7 @@ function ChatRoomPage({ socket }) {
                         </div>
                         <div className="flex flex-col">
                           <p className="font-bold text-sm">
-                            {messageContent.caller_name}
+                            {receiverName}
                           </p>
                           <p className="text-xs">{messageContent.createdAt}</p>
                         </div>
@@ -173,7 +325,10 @@ function ChatRoomPage({ socket }) {
                   );
                 } else {
                   return (
-                    <OtherChatbox key={index} messageContent={messageContent} />
+                    <OtherChatbox key={index} 
+                    receiver={receiverName} 
+                    messageContent={messageContent} 
+                    />
                   );
                 }
               }
@@ -184,7 +339,7 @@ function ChatRoomPage({ socket }) {
           <input
             type="text"
             value={currentMessage}
-            placeholder="메시지입력해라"
+            placeholder="메시지를 입력해주세요"
             className="h-full border-2 rounded w-10/12"
             onChange={(e) => {
               setCurrentMessage(e.target.value);

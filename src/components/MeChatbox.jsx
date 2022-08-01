@@ -1,6 +1,6 @@
 import React from "react";
 
-function MeChatbox( { messageContent } ) {
+function MeChatbox( { messageContent, messageSub } ) {
     return(
         <div className="h-auto p-3 flex justify-end">
             <div className="w-40">
@@ -9,7 +9,12 @@ function MeChatbox( { messageContent } ) {
                 </div>
                 <div className="flex flex-col">
                     {/* <p className="font-bold text-sm">{messageContent.caller_name}</p> */}
-                    <p className="text-xs">{messageContent.createdAt}</p>
+                    <div className="flex justify-between">
+                        {
+                            messageContent.not_read === 0 ? null : <p className="text-xs text-yellow-500">1</p>
+                        }
+                        <p className="text-xs">{messageContent.createdAt}</p>
+                    </div>
                 </div>
             </div>
         </div>
