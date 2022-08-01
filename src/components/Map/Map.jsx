@@ -9,8 +9,6 @@ const Map = ({ level, width, height, address, range }) => {
   let circle;
 
   const drawCircle = () => {
-    console.log("location >>>", location);
-
     const container = document.getElementById("myMap");
     const options = {
       center: new kakao.maps.LatLng(location.center.lat, location.center.lng),

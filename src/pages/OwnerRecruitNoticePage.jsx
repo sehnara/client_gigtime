@@ -63,7 +63,6 @@ const OwnerRecruitNoticePage = () => {
         }
       )
       .then((res) => {
-        console.log("recruit", res.data);
         setRecruitData({
           ...recruitData,
           store_name: res.data.name,
@@ -78,7 +77,6 @@ const OwnerRecruitNoticePage = () => {
       .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/employment`, postData)
       .then((res) => {
         navigate("/owner/mypage");
-        console.log(res.data);
       });
   };
 
@@ -86,7 +84,7 @@ const OwnerRecruitNoticePage = () => {
     setPostData({
       ...postData,
       store_name: recruitData.store_name,
-      type: recruitData.types,
+      type: recruitData.type,
       description: recruitData.description,
       start_date: recruitData.start_date,
       end_date: recruitData.end_date,
@@ -141,7 +139,7 @@ const OwnerRecruitNoticePage = () => {
       <div className="border-t-4 mt-8 mb-4"></div>
       {/* --------------------------------------------- */}
 
-      <div className="mx-8">
+      <div className="mx-8 ">
         {/* 시작날짜 */}
         <InputValue2
           mode="DATE"
@@ -209,7 +207,7 @@ const OwnerRecruitNoticePage = () => {
         />
       </div>
 
-      <div className="mx-8">
+      <div className="mx-8 mb-8">
         <Button title="모집공고" onClickEvent={onEnroll} />
       </div>
     </div>

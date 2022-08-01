@@ -105,7 +105,6 @@ function App() {
           );
         }
       } else if (title === "면접 신청") {
-        console.log("#####################");
         alert(`
         ${data["worker_name"]}님이 면접 신청하셨습니다.
         `);
