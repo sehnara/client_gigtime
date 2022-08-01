@@ -11,11 +11,9 @@ import axios from "axios";
 function ChatRoomPage({ socket }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  // const [messageSub, setMessageSub] = useState({});
   const [userType, setUserType] = useState("");
   const [userId, setUserId] = useState("");
   const [chatId, setChatId] = useState(0);
-  // 무한스크롤
   const [ref, inView] = useInView();
   const location = useLocation();
 
@@ -74,7 +72,6 @@ function ChatRoomPage({ socket }) {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setChatId(res.data[res.data.length - 1].chatting_id);
           setUserType("worker");
           setUserId(sessionStorage.getItem("worker_id"));
@@ -100,7 +97,6 @@ function ChatRoomPage({ socket }) {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setChatId(res.data[res.data.length - 1].chatting_id);
           setUserType("owner");
           setUserId(sessionStorage.getItem("owner_id"));
@@ -116,11 +112,11 @@ function ChatRoomPage({ socket }) {
           console.log(err);
         });
     }
-    
-    await socket.emit("read_aaaaaaaa", { 'room_id': roomId });
+
+    await socket.emit("read_that", { 'room_id': roomId });
   };
 
-  const getData2 = async () => {
+  const reloadData = async () => {
     if (sessionStorage.getItem("worker_id")) {
       axios
         .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
@@ -132,7 +128,6 @@ function ChatRoomPage({ socket }) {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setChatId(res.data[res.data.length - 1].chatting_id);
           setUserType("worker");
           setUserId(sessionStorage.getItem("worker_id"));
@@ -158,7 +153,6 @@ function ChatRoomPage({ socket }) {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setChatId(res.data[res.data.length - 1].chatting_id);
           setUserType("owner");
           setUserId(sessionStorage.getItem("owner_id"));
@@ -186,11 +180,6 @@ function ChatRoomPage({ socket }) {
             user_type: "worker",
           },
         })
-        .then((res) => {
-          if (res.data === "success") {
-            console.log(res.data);
-          }
-        })
         .catch((err) => {
           console.log(err);
         });
@@ -202,11 +191,6 @@ function ChatRoomPage({ socket }) {
             user_id: sessionStorage.getItem("owner_id"),
             user_type: "owner",
           },
-        })
-        .then((res) => {
-          if (res.data === "success") {
-            console.log(res.data);
-          }
         })
         .catch((err) => {
           console.log(err);
@@ -230,11 +214,7 @@ function ChatRoomPage({ socket }) {
 
   useEffect(() => {
     socket.on("read_message", (data) => {
-      console.log('수신자가 바로 읽었음!')
-
-      // 발신자 1 없애는 신호 보내자!
-      socket.emit("read_mmmm", data);
-      
+      socket.emit("read_ok", data);
     });
     return(() => {
       socket.off("read_message");
@@ -243,11 +223,9 @@ function ChatRoomPage({ socket }) {
 
   useEffect(() => {
     socket.on("reload", (data) => {
-      console.log(data)
-      console.log('페이지 리로드 할게!')      
       getData();
-      // setMessageSub(data);
     });
+
     return(() => {
       socket.off("reload");
     })
@@ -255,26 +233,14 @@ function ChatRoomPage({ socket }) {
 
   useEffect(() => {
     socket.on("reload2", () => {
-      console.log('reload2222222222')
-      getData2();
+      reloadData();
     });
+
     return(() => {
       socket.off("reload2");
     })
   }, []);
 
-  // useEffect(() => {
-  //   socket.on("reload2", () => {
-  //     console.log('페이지 리로드 할게!')      
-  //     getData();
-  //     // setMessageSub(data);
-  //   });
-  //   return(() => {
-  //     socket.off("reload2");
-  //   })
-  // }, [socket]);
-
-  // 무한스크롤
   useEffect(() => {
     if (inView) {
       axios
@@ -314,10 +280,8 @@ function ChatRoomPage({ socket }) {
             {messageList.map((messageContent, index) => {
               if (caller === messageContent.caller_name) {
                 if (index === 1) {
-                  console.log('not_read: ',messageContent.not_read);
                   return (
                     <div
-                      // 무한스크롤
                       className="h-auto p-3 flex justify-end"
                       key={index}
                       ref={ref}
@@ -327,11 +291,10 @@ function ChatRoomPage({ socket }) {
                           <p>{messageContent.message}</p>
                         </div>
                         <div className="flex flex-col">
-                          {/* <p className="font-bold text-sm">{messageContent.caller_name}</p> */}
                           <div className="flex justify-beween">
-                          {/* {
+                          {
                             messageContent.not_read === 0 ? null : <p className="text-xs text-yellow-500">1</p>
-                          } */}
+                          }
                             <p className="text-xs">{messageContent.createdAt}</p>
                           </div>
                         </div> 
@@ -340,9 +303,7 @@ function ChatRoomPage({ socket }) {
                   );
                 } else {
                   return (
-                    <MeChatbox key={index} messageContent={messageContent}
-                    // messageSub={messageSub}
-                    />
+                    <MeChatbox key={index} messageContent={messageContent}/>
                   );
                 }
               } else {

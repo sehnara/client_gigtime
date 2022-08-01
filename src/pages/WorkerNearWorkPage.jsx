@@ -34,13 +34,7 @@ const WorkerNearWorkPage = () => {
           setIsNotFound(true);
         } else {
           // 데이터 파싱
-          const obj = res.data[res.data.length - 1].work_date_and_type_and_id;
-          const temp = Object.keys(obj);
-          const key = temp[temp.length - 1];
-          const temp2 = obj[key].start_time_and_id;
-          const testCursor = temp2[temp2.length - 1];
-
-          setCursor(testCursor[testCursor.length - 1]);
+          setCursor(res.data[res.data.length - 1].store_id);
           setStores(res.data);
         }
       });
@@ -70,21 +64,16 @@ const WorkerNearWorkPage = () => {
     let clientHeight = document.documentElement.clientHeight;
 
     if (scrollTop + clientHeight === scrollHeight) {
+      // console.log(cursor)
       axios
         .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/show/hourly_orders`, {
           worker_id: sessionStorage.getItem("worker_id"),
           cursor: cursor,
         })
         .then((res) => {
-          // console.log("hourly_orders 스크롤 시 res.data : ", res.data);
+          console.log(res.data)
           // 데이터 파싱
-          const obj = res.data[res.data.length - 1].work_date_and_type_and_id;
-          const temp = Object.keys(obj);
-          const key = temp[temp.length - 1];
-          const temp2 = obj[key].start_time_and_id;
-          const testCursor = temp2[temp2.length - 1];
-          // console.log("cursor : ", testCursor[testCursor.length - 1]);
-          setCursor(testCursor[testCursor.length - 1]);
+          setCursor(res.data[res.data.length - 1].store_id);
           setStores((list) => [...list, ...res.data]);
         });
     }
