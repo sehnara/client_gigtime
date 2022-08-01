@@ -225,27 +225,27 @@ const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
   }
   return (
     <div>
-      <Header title={"바로알바 면접"} />
-      <div className="flex flex-col justify-center items-center my-8 mx-8">
-        <div className="relative">
-          <video
-            id="remotevideo"
-            ref={remoteVideoRef}
-            playsInline
-            autoPlay
-            className="shadow-xl shadow-gray-500"      
-          />
+      <div className="relative flex items-center justify-center h-screen overflow-hidden">
+        {/* <div className="relative"> */}
           <video
             ref={localVideoRef}
             muted
             playsInline
             autoPlay
-            className="absolute top-2/3 z-10 w-16 h-28"
-          />
-        </div>
+            className="absolute z-20 w-1/3 top-0 right-0"
+            />
+
+          <video
+            id="remotevideo"
+            ref={remoteVideoRef}
+            playsInline
+            autoPlay
+            className="absolute z-10 w-auto min-w-full min-h-full max-w-none"       
+          />   
+        {/* </div> */}
         
 
-        <div className=" flex items-center justify-center w-40 rounded-3xl  space-x-5 py-2 bg-gray-200 border-4 border-cyan-500 pt-2 mt-8">
+        <div className="z-30 flex items-center justify-center w-40 rounded-3xl space-x-5 py-2 bg-gray-200 border-4 border-cyan-700 pt-2 mt-auto mb-20">
           <button id="mike" onClick={handleMike} className="">
             <img
               src={

@@ -11,13 +11,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function OwnerUploadPage() {
     const [value, setValue] = useState('');
-    const [file, setFile] = useState(null);
     const [image, setImage] = useState(owner);
     const [background, setBackgroundImage] = useState(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
-    console.log('>>>>>', state.owner);
 
     const encodeFileToBase64 = (fileBlob) => {
         const reader = new FileReader();
@@ -41,30 +39,18 @@ function OwnerUploadPage() {
 
     const backgroundImageChangedHandler = (event) => {
         let imageFile = event.target.files[0];
-        encodeFileToBase64(imageFile);
+        console.log(event.target.files);
 
-        setFile(imageFile);
-        let data = new FormData();
-        data.append('background', file);
-        setBackgroundImage(data);
-    };
-
-    const backgroundImageUploadHandler = () => {
-        // 해당 이미지 파일을 리덕스에 담고 CompletePage에서 진행해야할 것 같음.
-        console.log(file);
-        if (file) {
-            let data = new FormData();
-            data.append('background', file);
-
-            // data.append('id', 1);
-            axios.post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/imageUpload/background`, data).then((res) => {
-                if (res.data.state === 'success') {
-                    alert('가게 전경이 적용되었습니다.');
-                    setBackgroundImage(`${process.env.REACT_APP_S3_PATH}${res.data.url}`);
-                }
-            });
-        } else {
-            alert('가게의 전경을 선택해주세요.');
+        if(['image/png', 'image/jpeg', 'image/jpg', 'image/bmp'].includes(imageFile.type)){
+            if(imageFile.size < 1024 * 1024 * 10){
+                encodeFileToBase64(imageFile);
+                setBackgroundImage(imageFile);}
+            else{
+                alert("10MB보다 큰 이미지는 올릴 수 없습니다.");
+            
+            }
+        }else{
+            alert("지원하지 않는 파일 형식입니다. 이미지를 올려주세요.");
         }
     };
 
