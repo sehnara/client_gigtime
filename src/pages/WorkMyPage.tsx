@@ -25,6 +25,26 @@ const WorkMyPage = () => {
   const [name, setName] = useState("");
   const navigate = useNavigate();
 
+  const boxRef : any = useRef(null);
+  const [ScrollY, setScrollY] = useState(0);
+  const [ScrollActive, setScrollActive] = useState(false);
+
+  function logit() {
+    setScrollY(boxRef.current.scrollTop)
+    if (boxRef.current.scrollTop > 30) {  
+        setScrollActive(true);
+    } else {
+        setScrollActive(false);
+    }
+  }
+
+  useEffect(() => {
+    function watchScroll() {  
+      boxRef.current.addEventListener("scroll", logit);
+    }
+    watchScroll();
+  })
+
   useEffect(() => {
     const workerId = sessionStorage.getItem("worker_id");
     axios
@@ -48,23 +68,26 @@ const WorkMyPage = () => {
   };
 
   return (
-    <div>
-      <Header title="마이페이지" worker={true} />
-      <NavBar mode="WORKER" />
-      {/* TAB BAR  */}
-      <TabBar
-        tab={tab}
-        menu={["면접시간표", "알바시간표", "합격한 곳"]}
-        setTab={setMenu}
-      />
-      {tab === "면접시간표" ? (
-        <InterviewTimeTable result={result} status={data} />
-      ) : tab === "알바시간표" ? (
-        <WorkTimeTable />
-      ) : (
-        <WinStores />
-      )}
-      <div className="h-24"></div>
+    <div className="h-screen overflow-scroll" ref={boxRef}>
+      <div>
+        <Header title="마이페이지" worker={true} />
+        {/* TAB BAR  */}
+        <NavBar mode="WORKER" />
+        <TabBar
+          tab={tab}
+          menu={["면접시간표", "알바시간표", "합격한 곳"]}
+          setTab={setMenu}
+          ScrollActive={ScrollActive}
+        />
+        {tab === "면접시간표" ? (
+          <InterviewTimeTable result={result} status={data} />
+        ) : tab === "알바시간표" ? (
+          <WorkTimeTable />
+        ) : (
+          <WinStores />
+        )}
+        <div className="h-24"></div>
+      </div>
     </div>
   );
 };

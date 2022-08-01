@@ -4,15 +4,16 @@ type TabBarProps = {
   menu: string[];
   tab: string;
   setTab: (e: string) => void;
+  ScrollActive?: boolean;
 };
 
-const TabBar = ({ menu, tab, setTab }: TabBarProps) => {
+const TabBar = ({ menu, tab, setTab, ScrollActive }: TabBarProps) => {
   const tabRef = useRef(1);
   const changeTab = (e: string) => {
     setTab(e);
   };
   return (
-    <div className="flex space-x-2 border-b-2 justify-between items-center bg-white">
+    <div className={ScrollActive ? "flex space-x-2 border-b-2 justify-between items-center bg-white top-0 fixed w-full" : "flex space-x-2 border-b-2 justify-between items-center bg-white"}>
       {menu.map((e) => {
         tabRef.current += 1;
         return tab === e ? (
