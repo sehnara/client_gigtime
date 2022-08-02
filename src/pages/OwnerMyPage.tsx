@@ -65,7 +65,6 @@ const OwnerMyPage = () => {
   };
 
   const getData2 = async () => {
-    console.log("owner: ", ownerId);
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/angel`, {
         owner_id: ownerId,
@@ -79,6 +78,7 @@ const OwnerMyPage = () => {
   useEffect(() => {
     getData();
     getData2();
+    setAngel("NONE");
   }, []);
 
   useEffect(() => {

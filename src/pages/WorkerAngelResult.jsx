@@ -26,6 +26,7 @@ const WorkerAngelResult = () => {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
+        console.log("알바생 앤젤 뭐시기 >>>>", res.data);
         setData(res.data);
       });
   };

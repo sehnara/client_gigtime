@@ -52,7 +52,14 @@ const Pachinco = ({ result, moneys, speed, visits }: PachincoType) => {
         )}
       </div>
       <div className="w-2/4">
-        {sec === moneys.length ? (
+        {moneys.length === 0 ? (
+          <Button
+            title={"나가기"}
+            onClickEvent={() => {
+              navigate("/worker/home");
+            }}
+          />
+        ) : sec === moneys.length ? (
           <Button
             title={"다음으로"}
             onClickEvent={() =>
@@ -62,12 +69,7 @@ const Pachinco = ({ result, moneys, speed, visits }: PachincoType) => {
             }
           />
         ) : (
-          <Button
-            title={"나가기"}
-            onClickEvent={() => {
-              navigate("/worker/home");
-            }}
-          />
+          <></>
         )}
       </div>
     </div>
