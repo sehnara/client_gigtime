@@ -44,6 +44,19 @@ messaging.onBackgroundMessage(function (payload) {
   });
 });
 
+self.addEventListener("push", function (e) {
+  const notificationTitle = payload.data.title;
+  const notificationOptions = {
+    body: payload.data.body,
+  };
+
+  self.registration.showNotification(notificationTitle, {
+    body: `${
+      notificationOptions.body.split('"')[3]
+    }에서 알바생을 급하게 찾고 있습니다!`,
+  });
+});
+
 self.addEventListener("notificationclick", function (event) {
   const url = "https://heobo.shop";
   event.notification.close();
