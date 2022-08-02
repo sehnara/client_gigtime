@@ -57,7 +57,7 @@ const WorkerAngelResult = () => {
       })
       .then((res) => {
         if (res.data === "success") {
-          alert(`${data.store_name}와 알바천사 매칭되었습니다.`);
+          alert(`${data.store_name}와(과) 알바천사 매칭되었습니다.`);
         } else if (res.data === "fail") {
           alert(`이미 만료된 콜입니다.`);
         } else {
