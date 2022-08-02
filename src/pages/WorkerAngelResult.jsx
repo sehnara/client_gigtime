@@ -56,6 +56,15 @@ const WorkerAngelResult = () => {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
+        if (res.data === "success") {
+          alert(`${data.store_name}와 알바천사 매칭되었습니다.`);
+        } else if (res.data === "fail") {
+          alert(`이미 만료된 콜입니다.`);
+        } else {
+          alert("잠시 후 다시 이용해주세요.");
+        }
+      })
+      .then(() => {
         navigation("/worker/home");
       });
   };
