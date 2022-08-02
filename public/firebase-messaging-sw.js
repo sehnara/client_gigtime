@@ -38,6 +38,6 @@ messaging.onBackgroundMessage(function (payload) {
   };
 
   self.registration.showNotification(notificationTitle, {
-    body: `${notificationOptions.body.store_name}에서 알바생을 급하게 찾고 있습니다!`,
+    body: `${notificationOptions.body} >>> ${notificationOptions.body["store_name"]}에서 알바생을 급하게 찾고 있습니다!`,
   });
 });
