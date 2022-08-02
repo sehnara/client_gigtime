@@ -115,10 +115,8 @@ const OwnerMyPage = () => {
   // [RESULT 페이지, 사장님 결과 확인]
   const getAngel = async () => {
     await axios
-      .get("/owner/angel/info", {
-        params: {
-          angel_id: sessionStorage.getItem("angel_id"),
-        },
+      .post("/owner/angel/info", {
+        angel_id: sessionStorage.getItem("angel_id"),
       })
       .then((res) => {
         setResultData(res.data);
