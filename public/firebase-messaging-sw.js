@@ -25,6 +25,8 @@ const messaging = firebase.messaging();
 //     body: payload.data.body,
 //     title: payload.data.title,
 //   };
+let worker_id = 0;
+let angel_id = 0;
 
 messaging.onBackgroundMessage(function (payload) {
   console.log(
@@ -36,19 +38,13 @@ messaging.onBackgroundMessage(function (payload) {
   const notificationOptions = {
     body: payload.data.body,
   };
-
-  console.log("angel >>>", body);
+  worker_id = JSON.parse(payload.data.body).worker_id;
+  angel_id = JSON.parse(payload.data.body).angel_id;
 
   self.registration.showNotification(notificationTitle, {
     body: `${
       notificationOptions.body.split('"')[3]
     }에서 알바생을 급하게 찾고 있습니다!`,
-  });
-
-  self.addEventListener("notificationclick", function (event) {
-    const url = "http://localhost:3000/owner/mypage";
-    event.notification.close();
-    event.waitUntil(clients.openWindow(url));
   });
 });
 
@@ -64,3 +60,8 @@ messaging.onBackgroundMessage(function (payload) {
 //     }에서 알바생을 급하게 찾고 있습니다!`,
 //   });
 // });
+self.addEventListener("notificationclick", function (event) {
+  const url = `http://localhost:3000/worker/AngelResult?worker_id=${worker_id}&angel_id=${angel_id}`;
+  event.notification.close();
+  event.waitUntil(clients.openWindow(url));
+});
