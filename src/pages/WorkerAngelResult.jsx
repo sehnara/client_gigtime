@@ -18,12 +18,16 @@ const WorkerAngelResult = () => {
     dist: 0,
     location: "",
   });
+  const sch = location.search;
+  const params = new URLSearchParams(sch);
+  const w_id = params.get("worker_id");
+  const a_id = params.get("angel_id");
 
   const getData = async () => {
     await axios
       .post("/worker/angel/info", {
-        angel_id: sessionStorage.getItem("angel_id"),
-        worker_id: sessionStorage.getItem("worker_id"),
+        angel_id: sessionStorage.getItem("angel_id") || a_id,
+        worker_id: sessionStorage.getItem("worker_id") || w_id,
       })
       .then((res) => {
         console.log("알바생 앤젤 뭐시기 >>>>", res.data);
