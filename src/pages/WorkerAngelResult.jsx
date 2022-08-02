@@ -18,7 +18,7 @@ const WorkerAngelResult = () => {
     dist: 0,
     location: "",
   });
-  const sch = location.search;
+  const sch = window.location.search;
   const params = new URLSearchParams(sch);
   const w_id = params.get("worker_id");
   const a_id = params.get("angel_id");
@@ -36,6 +36,13 @@ const WorkerAngelResult = () => {
   };
 
   useEffect(() => {
+    if (
+      !sessionStorage.getItem("worker_id") ||
+      !sessionStorage.getItem("angel_id")
+    ) {
+      sessionStorage.setItem("worker_id", w_id);
+      sessionStorage.setItem("angel_id", a_id);
+    }
     getData();
   }, []);
 
