@@ -48,6 +48,7 @@ function App() {
   firebaseMessaging.onMessage((payload: any) => {
     const { title, body } = payload.data;
     const data = JSON.parse(body);
+    console.log("><><", title, "<><>", data);
 
     if (title === "알바천사 콜") {
       if (
@@ -79,17 +80,12 @@ function App() {
       } else {
         alert(title + " : " + "지금 날아올 알바천사가 없습니다.");
       }
-    } else if (title === "면접 결과") {
-      if (
-        window.confirm(
-          title + " : " + data["store_name"] + "에서 면접 결과가 왔습니다."
-        )
-      ) {
-        window.location.assign(
-          `${process.env.REACT_APP_ROUTE_PATH}/worker/mypage`
-        );
-      }
+    } else if (title === "면접 신청") {
+      alert(`
+        ${data["worker_name"]}님이 면접 신청하셨습니다.
+        `);
     } else if (title === "면접 신청결과") {
+      console.log("><><", title);
       alert(
         `${data["store_name"]}에서 면접 신청을 ${
           data["result"] === "accept" ? "수락" : "거절"
@@ -106,10 +102,16 @@ function App() {
           `${process.env.REACT_APP_ROUTE_PATH}/worker/mypage`
         );
       }
-    } else if (title === "면접 신청") {
-      alert(`
-        ${data["worker_name"]}님이 면접 신청하셨습니다.
-        `);
+    } else if (title === "면접 결과") {
+      if (
+        window.confirm(
+          title + " : " + data["store_name"] + "에서 면접 결과가 왔습니다."
+        )
+      ) {
+        window.location.assign(
+          `${process.env.REACT_APP_ROUTE_PATH}/worker/mypage`
+        );
+      }
     } else {
     }
   });
