@@ -43,3 +43,9 @@ messaging.onBackgroundMessage(function (payload) {
     }에서 알바생을 급하게 찾고 있습니다!`,
   });
 });
+
+self.addEventListener("notificationclick", function (event) {
+  const url = "https://heobo.shop";
+  event.notification.close();
+  event.waitUntil(clients.openWindow(url));
+});
