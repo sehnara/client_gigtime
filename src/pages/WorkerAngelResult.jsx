@@ -21,14 +21,11 @@ const WorkerAngelResult = () => {
 
   const getData = async () => {
     await axios
-      .get("/worker/angel/info", {
-        params: {
-          angel_id: sessionStorage.getItem("angel_id"),
-          worker_id: sessionStorage.getItem("worker_id"),
-        },
+      .post("/worker/angel/info", {
+        angel_id: sessionStorage.getItem("angel_id"),
+        worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
-        console.log("받아라 제발", res.data);
         setData(res.data);
       });
   };

@@ -46,7 +46,6 @@ function StoreCard({
   onClickEvent,
   onDateClickEvent,
 }: StoreCardProps) {
-  const ref = useRef(1);
   function onWorkReserve(orderId: any) {
     onDateClickEvent!(orderId!);
   }
@@ -78,10 +77,10 @@ function StoreCard({
           {/* 직종 */}
           <div className="flex space-x-2 truncate mt-2 overflow-sroll w-48">
             {jobs &&
-              jobs.map((e) => {
+              jobs.map((e, index) => {
                 return (
                   <div
-                    key={e}
+                    key={index}
                     className="text-xs bg-gray-200 rounded-3xl px-2 py-1 "
                   >
                     {e}
@@ -98,11 +97,10 @@ function StoreCard({
       ) : mode === "NEAR" ? (
         <div className="flex overflow-scroll px-2 pb-2 w-full space-x-3 ">
           {works &&
-            works.map((e) => {
-              ref.current += 1;
+            works.map((e, index) => {
               return (
                 <div
-                  key={ref.current}
+                  key={index}
                   className="mt-2 p-2 shadow-lg rounded-lg bg-white border-2"
                   onClick={() =>
                     onWorkReserve({ id: e[2], date: e[0], type: e[1] })
@@ -116,10 +114,7 @@ function StoreCard({
                         시급 <span className="font-bold">{minPay}</span>
                       </p>
                     </div>
-                    <div
-                      key={e}
-                      className="text-xs bg-gray-200 rounded-3xl px-2 py-1"
-                    >
+                    <div className="text-xs bg-gray-200 rounded-3xl px-2 py-1">
                       {e[1]}
                     </div>
                   </div>

@@ -1,34 +1,6 @@
 import React, { useEffect } from "react";
 const { kakao } = window;
-const MapRoute = () => {
-  const mock = [
-    {
-      store: "수수커피 강남N타워점",
-      lat: "37.4997777",
-      lnt: "127.0324107",
-    },
-    {
-      store: "클로리스 역삼 GFC점",
-      lat: "37.4999269",
-      lnt: "127.0365526",
-    },
-    {
-      store: "바게트케이",
-      lat: "37.5002567",
-      lnt: "127.0414329",
-    },
-    {
-      store: "브루커피",
-      lat: "37.4967293",
-      lnt: "127.0294237",
-    },
-    {
-      store: "커피스니퍼 센터필드점",
-      lat: "37.5030426",
-      lnt: "127.041588",
-    },
-  ];
-
+const MapRoute = ({ locations }) => {
   useEffect(() => {
     const container = document.getElementById("myMap");
     const options = {
@@ -37,9 +9,9 @@ const MapRoute = () => {
     };
     const map = new kakao.maps.Map(container, options);
 
-    for (let i = 0; i < mock.length; i++) {
+    for (let i = 0; i < locations.length; i++) {
       var customOverlay = new kakao.maps.CustomOverlay({
-        position: new kakao.maps.LatLng(mock[i].lat, mock[i].lnt),
+        position: new kakao.maps.LatLng(locations[i].lat, locations[i].lnt),
         content:
           '<div class="overlaybox" >' +
           `    <div class="boxtitle">${i + 1}</div>` +
@@ -50,7 +22,36 @@ const MapRoute = () => {
       customOverlay.setMap(map);
     }
   }, []);
-  return <div id="myMap" className={`w-full h-96 m-2`}></div>;
+  return (
+    <div>
+      <div id="myMap" className={`w-full h-72 `}></div>
+      <div className="mx-2 p-2">
+        <p className="font-bold my-1">최단거리! 최고수익! 알바추천</p>
+        {locations &&
+          locations.map((e, index) => {
+            return (
+              <div
+                key={index}
+                className="flex space-x-2 items-center border-2 rounded-xl my-2 p-1"
+              >
+                <div className="flex-1">
+                  <div className=" bg-cyan-400 w-8 h-8 rounded-full flex justify-center items-center ">
+                    <p className="text-center bg-white w-5 h-5 rounded-full text-sm font-bold">
+                      {index + 1}
+                    </p>
+                  </div>
+                </div>
+                <p className="flex-4 text-center font-bold ">{e.store}</p>
+                <p className="flex-2 text-center text-sm">
+                  {`${e.start}`}
+                  <span className="text-xs">{`(${e.duration}h)`}</span>
+                </p>
+              </div>
+            );
+          })}
+      </div>
+    </div>
+  );
 };
 
 export default MapRoute;
