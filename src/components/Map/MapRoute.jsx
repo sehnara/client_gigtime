@@ -1,17 +1,23 @@
 import React, { useEffect } from "react";
 const { kakao } = window;
-const MapRoute = ({ locations }) => {
+const MapRoute = ({ locations, durations }) => {
   useEffect(() => {
     const container = document.getElementById("myMap");
     const options = {
-      center: new kakao.maps.LatLng(37.4999269, 127.0365526),
+      center: new kakao.maps.LatLng(
+        Number(locations[0].lat),
+        Number(locations[0].lng)
+      ),
       level: 5,
     };
     const map = new kakao.maps.Map(container, options);
 
     for (let i = 0; i < locations.length; i++) {
       var customOverlay = new kakao.maps.CustomOverlay({
-        position: new kakao.maps.LatLng(locations[i].lat, locations[i].lnt),
+        position: new kakao.maps.LatLng(
+          Number(locations[i].lat),
+          Number(locations[i].lng)
+        ),
         content:
           '<div class="overlaybox" >' +
           `    <div class="boxtitle">${i + 1}</div>` +
@@ -22,11 +28,12 @@ const MapRoute = ({ locations }) => {
       customOverlay.setMap(map);
     }
   }, []);
+
   return (
     <div>
       <div id="myMap" className={`w-full h-72 `}></div>
       <div className="mx-2 p-2">
-        <p className="font-bold my-1">최단거리! 최고수익! 알바추천</p>
+        <p className="font-bold my-1 mb-2">최단거리! 최고수익! 알바추천</p>
         {locations &&
           locations.map((e, index) => {
             return (
@@ -41,10 +48,12 @@ const MapRoute = ({ locations }) => {
                     </p>
                   </div>
                 </div>
-                <p className="flex-4 text-center font-bold ">{e.store}</p>
+                <p className="flex-4 text-center font-bold text-sm">
+                  {e && e.store}
+                </p>
                 <p className="flex-2 text-center text-sm">
-                  {`${e.start}`}
-                  <span className="text-xs">{`(${e.duration}h)`}</span>
+                  {`${e && e.time}`}
+                  <span className="text-xs">{`(${durations[index]}h)`}</span>
                 </p>
               </div>
             );

@@ -85,7 +85,6 @@ function App() {
         ${data["worker_name"]}님이 면접 신청하셨습니다.
         `);
     } else if (title === "면접 신청결과") {
-      console.log("면접 신청결과 >>>>> ", title);
       alert(
         `${data["store_name"]}에서 면접 신청을 ${
           data["result"] === "accept" ? "수락" : "거절"
