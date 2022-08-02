@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import List from "../../components/List";
+import NotFound from "../../components/NotFound";
 
 // const mockDict = [
 //   [
@@ -40,18 +41,23 @@ const RecruitTable = () => {
 
   return (
     <div className="m-8">
-      {data.map((e) => {
-        keyRef.current += 1;
-        return (
-          <List
-            key={keyRef.current}
-            date={e[0]}
-            type={e[1]}
-            datas={e.slice(5)}
-            mode={"OWNER"}
-          />
-        );
-      })}
+      {
+        data === undefined ?
+        <NotFound title={"아직 모집내역이 없어요!"} />
+        :
+        data.map((e) => {
+          keyRef.current += 1;
+          return (
+            <List
+              key={keyRef.current}
+              date={e[0]}
+              type={e[1]}
+              datas={e.slice(5)}
+              mode={"OWNER"}
+            />
+          );
+        })
+      }
     </div>
   );
 };

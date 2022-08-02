@@ -52,6 +52,7 @@ const WorkMyPage = () => {
         worker_id: workerId,
       })
       .then(function (res) {
+        console.log(res.data)
         setResult(res.data["result"]);
         setName(res.data["name"]);
       })

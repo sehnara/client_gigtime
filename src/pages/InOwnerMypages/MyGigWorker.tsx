@@ -2,7 +2,7 @@ import React from "react";
 import GigWorker from "../../components/GigWorker";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Empty from "../../components/Empty";
+import NotFound from "../../components/NotFound";
 
 const MyGigWorker = () => {
   const [workerNum, setWorkerNum] = useState(0);
@@ -32,7 +32,8 @@ const MyGigWorker = () => {
   return (
     <div className="m-8">
       {result === "empty" ? (
-        <Empty text={"긱"} margin={0} />
+        // <Empty text={"긱"} margin={0} />
+        <NotFound title={"나의 알바생이 없어요!"} />
       ) : (
         <div>
           <h1 className="text-lg mb-3">

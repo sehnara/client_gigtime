@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import List from "../../components/List";
+import NotFound from "../../components/NotFound";
 
 const WorkTimeTable = () => {
   const keyRef = useRef(1);
@@ -14,7 +15,7 @@ const WorkTimeTable = () => {
         })
         .then((res) => {
           setDatas(res.data);
-          // console.log(res.data);
+          console.log(res.data);
         });
     } catch {
       console.log("axios error");
@@ -27,8 +28,10 @@ const WorkTimeTable = () => {
 
   return (
     <div className="m-8">
-      {datas &&
-        datas.map((e) => {
+      {
+        datas.length === 0 ?
+        <NotFound title={"신청한 알바가 없어요!"} />
+        : datas.map((e) => {
           keyRef.current += 1;
           let hours = new Array();
 
