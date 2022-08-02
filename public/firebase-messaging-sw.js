@@ -38,6 +38,6 @@ messaging.onBackgroundMessage(function (payload) {
   };
 
   self.registration.showNotification(notificationTitle, {
-    body: notificationOptions,
+    body: notificationOptions.body,
   });
 });
