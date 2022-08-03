@@ -81,9 +81,14 @@ const WorkerHomePage = () => {
         {/* 중반 */}
         <div className="flex m-4 mb-0 justify-between">
           <div className="flex-column">
-            <p className="text-2xl mb-0.5 font-bold">이제는</p>
-            <p className="text-2xl mb-0.5 font-bold">
-              <span className="text-cyan-500  font-extrabold ">바로 알바</span>
+            <p className="text-2xl mb-2 font-bold">이제는</p>
+            <p
+              className="
+              font-bold"
+            >
+              <span className="text-cyan-500  font-extrabold font-jua text-3xl">
+                바로 알바
+              </span>
             </p>
             <p className="text-2xl mb-0.5 font-bold">갈 시간!</p>
           </div>
