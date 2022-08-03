@@ -31,26 +31,26 @@ const OwnerMyPage = () => {
   });
   const danchooRef = useRef(1);
   const angelId = sessionStorage.getItem("angel_id");
-  
-  const boxRef : any = useRef(null);
+
+  const boxRef: any = useRef(null);
   const [ScrollY, setScrollY] = useState(0);
   const [ScrollActive, setScrollActive] = useState(false);
-  
+
   function logit() {
-    setScrollY(boxRef.current.scrollTop)
-    if (boxRef.current.scrollTop > 30) {  
-        setScrollActive(true);
+    setScrollY(boxRef.current.scrollTop);
+    if (boxRef.current.scrollTop > 30) {
+      setScrollActive(true);
     } else {
-        setScrollActive(false);
+      setScrollActive(false);
     }
   }
 
   useEffect(() => {
-    function watchScroll() {  
+    function watchScroll() {
       boxRef.current.addEventListener("scroll", logit);
     }
     watchScroll();
-  })
+  });
 
   const ownerId = sessionStorage.getItem("owner_id");
   // [바로알바 인풋값]
@@ -134,6 +134,8 @@ const OwnerMyPage = () => {
         }
       });
   };
+
+  console.log(selectedData);
 
   // [RESULT 페이지, 사장님 결과 확인]
   const getAngel = async () => {
@@ -376,19 +378,19 @@ const OwnerMyPage = () => {
         </div>
         <div className="border-t-4"></div>
         {/* TAB BAR  */}
-          <TabBar
-            tab={tab}
-            menu={["모집내역", "면접관리", "나의 알바생"]}
-            setTab={setMenu}
-            ScrollActive={ScrollActive}
-            />
-          {tab === "면접관리" ? (
-            <OwnerInterviewTimeTable />
-          ) : tab === "모집내역" ? (
-            <RecruitTable />
-          ) : (
-            <MyGigWorker />
-          )}
+        <TabBar
+          tab={tab}
+          menu={["모집내역", "면접관리", "나의 알바생"]}
+          setTab={setMenu}
+          ScrollActive={ScrollActive}
+        />
+        {tab === "면접관리" ? (
+          <OwnerInterviewTimeTable />
+        ) : tab === "모집내역" ? (
+          <RecruitTable />
+        ) : (
+          <MyGigWorker />
+        )}
       </div>
     </div>
   );

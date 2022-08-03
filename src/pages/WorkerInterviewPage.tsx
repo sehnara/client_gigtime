@@ -6,7 +6,9 @@ import Button from "../components/Button";
 import Header from "../components/Header";
 import SelectBox from "../components/SelectBox";
 import NavBar from "../components/NavBar";
-
+import { FaRegUserCircle } from "react-icons/fa";
+import { BsPhone } from "react-icons/bs";
+import { FiMapPin } from "react-icons/fi";
 const WorkerInterviewPage = () => {
   const navigate = useNavigate();
   const [date, setDate] = useState<string | null>(null);
@@ -87,34 +89,28 @@ const WorkerInterviewPage = () => {
       <Header title={"면접신청"} />
       {/* 이미지 */}
       <img
-        className="bg-gray-200 w-full h-48"
+        className="bg-gray-200 w-full object-cover  h-64"
         src={`${process.env.REACT_APP_S3_PATH}${basic.background_image}`}
       />
-
       {/* 멘트 */}
-      <p className="px-8 py-4"></p>
-      <div className="border-t-4 "></div>
       {/* 가게 기본 정보 : 가게명, 담당자, 연락처, 주소 */}
-      <div className="mx-8 m-4 text-sm">
+      <div className="m-8 text-sm">
         <h3 className="font-bold mb-4 text-base">{basic && basic.name}</h3>
         <div className="flex items-center mb-3 text-gray-500">
-          <p className="flex-1">담당자</p>
-          <p className="flex-3">
+          <FaRegUserCircle className="mr-4 text-lg" />
+          <p className="flex-3 text-black">
             <span className="text-sm">{basic && basic.owner_name}님</span>
           </p>
         </div>
+
         <div className="flex items-center mb-3 text-gray-500">
-          <p className="flex-1">연락처</p>
-          <p className="flex-3">{basic && basic.owner_phone}</p>
-        </div>
-        <div className="flex items-center mb-3 text-gray-500">
-          <p className="flex-1">주소</p>
-          <p className="flex-3">{basic && basic.address}</p>
+          <FiMapPin className="mr-4 text-lg" />
+          <p className="flex-3 text-black">{basic && basic.address}</p>
         </div>
       </div>
       <div className="border-t-4 "></div>
       {/* 날짜선택 */}
-      <div className="mx-8 m-4">
+      <div className="m-8  ">
         <h3 className="font-bold mb-4">날짜 선택</h3>
         <SelectBox
           mode="NORMAL"
@@ -131,7 +127,7 @@ const WorkerInterviewPage = () => {
       </div>
       <div className="border-t-4 "></div>
       {/* 시간선택 */}
-      <div className="mx-8 m-4">
+      <div className="m-8">
         <h3 className="font-bold mb-4">시간 선택</h3>
         <SelectBox
           mode="TIME"
@@ -148,23 +144,9 @@ const WorkerInterviewPage = () => {
         />
       </div>
       <div className="border-t-4 "></div>
-      {/* 유형선택 */}
-      <div className="mx-8 m-4">
-        <h3 className="font-bold mb-4">직무 정보</h3>
-        {["카운터", "서빙", "설거지"].map((e) => {
-          return (
-            <button
-              key={e}
-              className="bg-gray-200 rounded-2xl p-1 px-4 cursor-pointer mr-2"
-            >
-              {e}
-            </button>
-          );
-        })}
-      </div>
-      <div className="border-t-4 "></div>
+
       {/* 질문하기 */}
-      <div className="mx-8 m-4">
+      <div className="m-8">
         <h3 className="font-bold mb-4">질문 하기</h3>
         <p className="text-gray-500 text-sm mb-2">
           사장님께 궁금한 내용을 남겨주세요
@@ -179,11 +161,11 @@ const WorkerInterviewPage = () => {
       </div>
       <div className="border-t-4 "></div>
       {/* 신청정보*/}
-      <div className="mx-8 m-4">
-        <h3 className="font-bold mb-4">신청정보</h3>
+      <div className="m-8 ">
+        <h3 className="font-bold mb-4">신청정보 확인</h3>
         <div className="flex items-center mb-3 text-gray-500">
           <p className="flex-1">면접일시</p>
-          <p className="flex-3">
+          <p className="flex-3 text-red-500 font-bold">
             {date?.split("-")[0] === undefined
               ? "날짜를 지정해주세요"
               : `${date?.split("-")[0]}년 ${date?.split("-")[1]}월 ${
@@ -193,14 +175,14 @@ const WorkerInterviewPage = () => {
         </div>
         <div className="flex items-center mb-3 text-gray-500">
           <p className="flex-1">면접시간</p>
-          <p className="flex-3">{`${time === null ? "00" : time}:00 ~ ${
-            time === null ? "00" : Number(time) + 1
-          }:00`}</p>
+          <p className="flex-3 text-red-500 font-bold">{`${
+            time === null ? "00" : time
+          }:00 ~ ${time === null ? "00" : Number(time) + 1}:00`}</p>
         </div>
       </div>
       <div className="border-t-4 "></div>
       {/* 안내사항 */}
-      <div className="mx-8 m-4">
+      <div className="m-8">
         <h3 className="font-bold mb-4">안내사항</h3>
         {[
           "- 면접은 화상으로 진행됩니다.",

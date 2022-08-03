@@ -33,9 +33,9 @@ const Pachinco = ({ result, moneys, speed, visits }: PachincoType) => {
 
   return (
     <div className="flex flex-col justify-center items-center w-full ">
-      <p className="text-red-400 font-bold text-4xl animation-fade-in-down p-4">
+      <p className="text-red-400 font-bold text-4xl animation-fade-in-down p-4 ">
         {moneys.length === 0
-          ? ""
+          ? "  "
           : sec === moneys.length
           ? `총 ${money - moneys[0]}원 증가`
           : `${money - prevMoney}원 증가`}

@@ -5,6 +5,9 @@ import Header from "../components/Header";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import axios from "axios";
 import MapRoute from "../components/Map/MapRoute";
+import { BiTimeFive } from "react-icons/bi";
+import { RiPinDistanceLine } from "react-icons/ri";
+import { GiReceiveMoney } from "react-icons/gi";
 
 const WorkerSpeedResultPage = () => {
   const location = useLocation();
@@ -61,18 +64,22 @@ const WorkerSpeedResultPage = () => {
         locations={setStarts(loc).map((i) => loc[i])}
         durations={getDurations(loc)}
       />
-      <div className="border-2 mb-4"></div>
-      <div className="mx-6">
-        <p className="text-xl font-bold text-right">
-          총 <span className="text-cyan-500 text-2xl">{loc.length}</span>
-          시간
-        </p>
-        <p className="text-xl font-bold text-right">
-          총 <span className="text-cyan-500 text-2xl">{result.move}</span>m
-        </p>
-        <p className="text-xl font-bold text-right ">
-          총 <span className="text-cyan-500 text-3xl">{totalPrice}</span>원
-        </p>
+      <div className="mx-6 ">
+        <div className="w-36 ">
+          <p className="text-xl font-bold text-right flex items-center">
+            <BiTimeFive className="mr-4" />
+            <span className="text-red-400 text-xl">{loc.length}</span>
+            시간
+          </p>
+          <p className="text-xl font-bold text-right flex items-center">
+            <RiPinDistanceLine className="mr-4" />
+            <span className="text-red-400 text-xl">{result.move}</span>m
+          </p>
+          <p className="text-xl font-bold text-right  flex items-center">
+            <GiReceiveMoney className="mr-4" />
+            <span className="text-red-400 text-xl">{totalPrice}</span>원
+          </p>
+        </div>
         <Button
           title={"알바신청하기"}
           className="mt-4"

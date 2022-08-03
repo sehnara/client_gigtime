@@ -24,6 +24,7 @@ const OwnerQrCode = () => {
   };
 
   useEffect(() => {
+    if (data === "") return;
     postData();
   }, [data]);
 

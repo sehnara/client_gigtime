@@ -27,17 +27,17 @@ const InputValue2 = ({
 }: InputValue2Props) => {
   return (
     <div className={`mb-${margin_bottom}`}>
-      {label && <label className="text-sm font-bold">{label}</label>}
+      {label && <label className="text-sm font-bold ">{label}</label>}
       <div
         className={`w-full rounded-lg border ${
-          mode === "TIME" ? "border-white" : "border-gray-400"
-        } `}
+          mode === "TIME" ? "border-white" : "border-gray-300"
+        } mt-2`}
       >
         {mode === "NORMAL" ? (
           <input
             id="input"
-            className={`w-full rounded-lg h-10 outline-gray-300 indent-2 ${
-              dict_value && "bg-gray-200 border-gray-500 "
+            className={`w-full rounded-md h-10 outline-gray-200 indent-2 ${
+              dict_value && " border-gray-200 "
             }`}
             value={dict_value === 0 ? "" : dict_value}
             onChange={(e) => setValue(dict_key, e.target.value)}
@@ -69,7 +69,7 @@ const InputValue2 = ({
           <div className="flex justify-between space-x-2">
             <select
               name="알바유형 선택"
-              className="w-full h-10 rounded-lg text-gray-600 border border-gray-400 p-1"
+              className="w-full h-10 rounded-lg text-gray-600 border border-gray-300 p-1"
               onChange={(e) => setValue("start_time", e.target.value)}
             >
               {options &&
@@ -83,7 +83,7 @@ const InputValue2 = ({
             </select>
             <select
               name="알바유형 선택"
-              className="w-full h-10 rounded-lg text-gray-600 border border-gray-400 p-1"
+              className="w-full h-10 rounded-lg text-gray-600 border border-gray-300 p-1 "
               onChange={(e) => setValue("end_time", e.target.value)}
             >
               {options2 &&

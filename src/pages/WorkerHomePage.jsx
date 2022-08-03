@@ -73,8 +73,8 @@ const WorkerHomePage = () => {
             {loca.split(" ").slice(0, 3).join(" ")}
             {/* <HiOutlineLocationMarker className="text-2xl ml-2 text-red-400 font-bold animate-bounce " /> */}
           </h1>
-          <p className="rounded-lg font-bold text-xl relative">
-            <p className="text-xs absolute -top-3 text-gray-500">내 주변</p>
+          <p className="rounded-lg font-bold text-xl flex items-center">
+            <p className="text-xs text-gray-500 pr-1 pt-2 ">내 주변</p>
             <span className="font-bold text-red-400 text-2xl "> {range}</span>m
           </p>
         </div>
@@ -82,10 +82,7 @@ const WorkerHomePage = () => {
         <div className="flex m-4 mb-0 justify-between">
           <div className="flex-column">
             <p className="text-2xl mb-2 font-bold">이제는</p>
-            <p
-              className="
-              font-bold"
-            >
+            <p className="font-bold ">
               <span className="text-cyan-500  font-extrabold font-jua text-3xl">
                 바로 알바
               </span>
@@ -98,7 +95,7 @@ const WorkerHomePage = () => {
       {/* 하단 */}
       <div className="p-8 py-0 bg-cyan-500 pb-24">
         <h1 className="text-lg font-bold mb-4 text-right pt-4">
-          <span className="text-2xl text-white">{name}</span>님을 기다리고
+          <span className="text-2xl text-white">{name} </span>님을 기다리고
           있어요.
         </h1>
         <div>

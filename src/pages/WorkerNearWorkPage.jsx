@@ -109,8 +109,8 @@ const WorkerNearWorkPage = () => {
             {/* <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce" /> */}
             {loc.split(" ").slice(0, 3).join(" ")}
           </h1>
-          <p className="rounded-lg font-bold text-xl relative">
-            <p className="text-xs absolute -top-3 text-gray-500">내 주변</p>
+          <p className="rounded-lg font-bold text-xl flex items-center">
+            <p className="text-xs text-gray-500 pr-1 pt-2 ">내 주변</p>
             <span className="font-bold text-red-400 text-2xl "> {range}</span>m
           </p>
         </div>
@@ -118,7 +118,7 @@ const WorkerNearWorkPage = () => {
       {/* 중반 */}
 
       <div className={`bg-yellow-400 pt-4 h-full pb-24`}>
-        <div className="mx-8 ">
+        <div className="mx-8 my-4">
           {notFound ? (
             <div className=" text-center font-bold pt-64">
               <p className="animate-pulse text-lg">등록된 가게가 없습니다.</p>
