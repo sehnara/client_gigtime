@@ -10,7 +10,7 @@ const OwnerJobTypePage = () => {
   const jobType = [
     {
       id: '1',
-      name: '음식점',
+      name: '설거지',
     },
     {
       id: '2',
@@ -26,19 +26,19 @@ const OwnerJobTypePage = () => {
     },
     {
       id: '5',
-      name: '문서작업',
+      name: '전단지',
     },
     {
       id: '6',
-      name: '번역',
+      name: '배달',
     },
     {
       id: '7',
-      name: '질서유지',
+      name: '고객관리',
     },
     {
       id: '8',
-      name: '경비',
+      name: '홍보',
     },
     {
       id: '9',
@@ -46,7 +46,7 @@ const OwnerJobTypePage = () => {
     },
     {
       id: '10',
-      name: '운송',
+      name: '포장',
     },
     {
       id: '11',
@@ -54,23 +54,23 @@ const OwnerJobTypePage = () => {
     },
     {
       id: '12',
-      name: '이벤트',
+      name: '심부름',
     },
     {
       id: '13',
-      name: '편의점',
+      name: '카운터',
     },
     {
       id: '14',
-      name: '건설용역',
+      name: '계산',
     },
     {
       id: '15',
-      name: '베이비시터',
+      name: '재료관리',
     },
     {
       id: '16',
-      name: '술집',
+      name: '매장관리',
     },
   ];
   

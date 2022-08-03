@@ -10,6 +10,7 @@ import NavBar from "../components/NavBar";
 import Empty from "../components/Empty";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import Header from "../components/Header";
+import { useCallback } from "react";
 
 const WorkerHomePage = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const WorkerHomePage = () => {
   const [notFound, setIsNotFound] = useState(false);
 
   const [stores, setStores] = useState([]);
+  const [cursor, setCursor] = useState(0);
   const dispatch = useDispatch();
 
   const onNextPage = (e) => {
@@ -46,6 +48,7 @@ const WorkerHomePage = () => {
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/store/list`, {
         worker_id: sessionStorage.getItem("worker_id"),
+        cursor: "null",
       })
       .then((res) => {
         if (res.data === "error - store/list") {
@@ -53,10 +56,42 @@ const WorkerHomePage = () => {
         } else if (res.data === "notFound") {
           setIsNotFound(true);
         } else {
+          console.log(res.data);
+          setCursor(res.data[res.data.length - 1].store_id);
           setStores(res.data);
         }
       });
   };
+
+  const _infiniteScroll = useCallback(() => {
+    let scrollHeight = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight
+    );
+    let scrollTop = Math.max(
+      document.documentElement.scrollTop,
+      document.body.scrollTop
+    );
+    let clientHeight = document.documentElement.clientHeight;
+
+    if (scrollTop + clientHeight === scrollHeight) {
+      axios
+        .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/show/hourly_orders`, {
+          worker_id: sessionStorage.getItem("worker_id"),
+          cursor: cursor,
+        })
+        .then((res) => {
+          // 데이터 파싱
+          setCursor(res.data[res.data.length - 1].store_id);
+          setStores((list) => [...list, ...res.data]);
+        });
+    }
+  }, [stores]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", _infiniteScroll, true);
+    return () => window.removeEventListener("scroll", _infiniteScroll, true);
+  }, [_infiniteScroll]);
 
   useEffect(() => {
     getStoreList();
