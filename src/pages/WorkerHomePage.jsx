@@ -76,12 +76,14 @@ const WorkerHomePage = () => {
 
     if (scrollTop + clientHeight === scrollHeight) {
       axios
-        .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/show/hourly_orders`, {
+        .post(`${process.env.REACT_APP_ROUTE_PATH}/store/list`, {
           worker_id: sessionStorage.getItem("worker_id"),
           cursor: cursor,
         })
         .then((res) => {
-          // 데이터 파싱
+          if (res.data === "notFound") {
+            return;
+          }
           setCursor(res.data[res.data.length - 1].store_id);
           setStores((list) => [...list, ...res.data]);
         });
