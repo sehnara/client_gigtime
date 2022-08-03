@@ -5,20 +5,41 @@ import axios from "axios";
 import Header from "../components/Header";
 
 const pc_config = {
+  // {
+  //   urls: 'stun:[STUN_IP]:[PORT]',
+  //   'credentials': '[YOR CREDENTIALS]',
+  //   'username': '[USERNAME]'
+  // },
   iceServers: [
-    // {
-    //   urls: 'stun:[STUN_IP]:[PORT]',
-    //   'credentials': '[YOR CREDENTIALS]',
-    //   'username': '[USERNAME]'
-    // },
     {
-      urls: [
-        "stun:stun.l.google.com:19302",
-        "stun:stun1.l.google.com:19302",
-        "stun:stun2.l.google.com:19302",
-        "stun:stun3.l.google.com:19302",
-        "stun:stun4.l.google.com:19302",
-      ],
+      urls: "stun:stun.l.google.com:19302",
+    },
+    {
+      urls: "stun:stun1.l.google.com:19302",
+    },
+    {
+      urls: "stun:stun2.l.google.com:19302",
+    },
+    {
+      urls: "stun:stun3.l.google.com:19302",
+    },
+    {
+      urls: "stun:stun4.l.google.com:19302",
+    },
+    {
+      urls: "turn:openrelay.metered.ca:80",
+      username: "openrelayproject",
+      credential: "openrelayproject",
+    },
+    {
+      urls: "turn:openrelay.metered.ca:443",
+      username: "openrelayproject",
+      credential: "openrelayproject",
+    },
+    {
+      urls: "turn:openrelay.metered.ca:443?transport=tcp",
+      username: "openrelayproject",
+      credential: "openrelayproject",
     },
   ],
 };
@@ -227,23 +248,22 @@ const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
     <div>
       <div className="relative flex items-center justify-center h-screen overflow-hidden">
         {/* <div className="relative"> */}
-          <video
-            ref={localVideoRef}
-            muted
-            playsInline
-            autoPlay
-            className="absolute z-20 w-1/3 top-0 right-0"
-            />
+        <video
+          ref={localVideoRef}
+          muted
+          playsInline
+          autoPlay
+          className="absolute z-20 w-1/3 top-0 right-0"
+        />
 
-          <video
-            id="remotevideo"
-            ref={remoteVideoRef}
-            playsInline
-            autoPlay
-            className="absolute z-10 w-auto min-w-full min-h-full max-w-none"       
-          />   
+        <video
+          id="remotevideo"
+          ref={remoteVideoRef}
+          playsInline
+          autoPlay
+          className="absolute z-10 w-auto min-w-full min-h-full max-w-none"
+        />
         {/* </div> */}
-        
 
         <div className="z-30 flex items-center justify-center w-40 rounded-3xl space-x-5 py-2 bg-gray-200 border-4 border-cyan-700 pt-2 mt-auto mb-20">
           <button id="mike" onClick={handleMike} className="">
