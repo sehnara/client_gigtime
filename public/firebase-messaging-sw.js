@@ -61,7 +61,7 @@ messaging.onBackgroundMessage(function (payload) {
 //   });
 // });
 self.addEventListener("notificationclick", function (event) {
-  const url = `http://localhost:3000/worker/AngelResult?worker_id=${worker_id}&angel_id=${angel_id}`;
+  const url = `https://heobo.shop/worker/AngelResult?worker_id=${worker_id}&angel_id=${angel_id}`;
   event.notification.close();
   event.waitUntil(clients.openWindow(url));
 });

@@ -93,23 +93,25 @@ const WorkerNearWorkPage = () => {
     sessionStorage.setItem("reserve_date", data.date);
     dispatch(setCurrentType(data.type));
     sessionStorage.setItem("reserve_type", data.type);
-    navigate("/worker/reserveWork");  
+    navigate("/worker/reserveWork");
   };
 
   return (
-    <div className="bg-yellow-400 h-screen">
-      <Header title="마이 홈" worker={true} />
+    <div
+      className={`bg-yellow-400 ${stores.length === 0 ? "h-screen" : "h-full"}`}
+    >
+      <Header title="알바 신청" worker={true} />
       <NavBar mode={"WORKER"} />
       {/* 상단 */}
-      <div className="bg-white">
-        <div className=" mx-4 py-4 ">
-          <h1 className="text-xl font-bold flex">
-            <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce" />
-            {loc}
+      <div className="bg-slate-100">
+        <div className=" p-4 flex justify-between items-center">
+          <h1 className="text-xl font-bold flex ">
+            {/* <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce" /> */}
+            {loc.split(" ").slice(0, 3).join(" ")}
           </h1>
-          <p className="text-right p-2 py-1 rounded-lg font-bold">
-            내 주변
-            <span className="font-bold text-cyan-500 text-4xl "> {range}</span>m
+          <p className="rounded-lg font-bold text-xl relative">
+            <p className="text-xs absolute -top-3 text-gray-500">내 주변</p>
+            <span className="font-bold text-red-400 text-2xl "> {range}</span>m
           </p>
         </div>
       </div>
@@ -124,14 +126,14 @@ const WorkerNearWorkPage = () => {
           ) : stores && stores.length !== 0 ? (
             stores.map((e) => {
               ref.current += 1;
-              // console.log(e);
+              console.log(e);
               return (
                 <StoreCard
                   key={ref.current}
                   mode={"NEAR"}
                   store={e.name}
                   distance={e.distance}
-                  jobs={["서빙"]}
+                  jobs={[]}
                   storeImage={`${process.env.REACT_APP_S3_PATH}${e.background_image}`}
                   minPay={e.minimum_wage}
                   works={e.key}
