@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
-import ScrollToBottom from "react-scroll-to-bottom";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import OtherChatbox from "../components/OtherChatbox";
@@ -20,6 +19,8 @@ function ChatRoomPage({ socket }) {
   const receiverName = location.state.receiverName;
   const caller = location.state.caller;
   const roomId = location.state.roomId;
+
+  const [prevScrollHeight, setPrevScrollHeight] = useState("");
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
@@ -62,7 +63,7 @@ function ChatRoomPage({ socket }) {
   const getData = async () => {
     socket.emit("join_chat_room", roomId);
     if (sessionStorage.getItem("worker_id")) {
-      axios
+      await axios
         .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
           params: {
             room_id: roomId,
@@ -87,7 +88,7 @@ function ChatRoomPage({ socket }) {
           console.log(err);
         });
     } else {
-      axios
+      await axios
         .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
           params: {
             room_id: roomId,
@@ -243,6 +244,7 @@ function ChatRoomPage({ socket }) {
 
   useEffect(() => {
     if (inView) {
+      setPrevScrollHeight(document.documentElement.scrollHeight);
       axios
         .get(`${process.env.REACT_APP_ROUTE_PATH}/chatting/message/loading`, {
           params: {
@@ -268,15 +270,24 @@ function ChatRoomPage({ socket }) {
     }
   }, [inView]);
 
+  useEffect(() => {
+    if (prevScrollHeight) {
+      document.documentElement.scrollTo(0, document.documentElement.scrollHeight - prevScrollHeight);
+      return setPrevScrollHeight(null);
+    }
+
+    document.documentElement.scrollTo(0, document.documentElement.scrollHeight - document.documentElement.clientHeight);
+  }, [messageList])
+
   return (
     <>
-      <Header title="채팅방" />
-      <div className="mr-8 ml-8 mt-10 h-fit flex flex-col justify-center">
-        <div className="h-10 rounded bg-cyan-500 p-2">
-          <p className="text-white font-bold">{receiverName}</p>
-        </div>
-        <div className="h-96 rounded border-2">
-          <ScrollToBottom className="w-full h-full overflow-y-scroll overflow-x-hidden">
+      <div className="top-0 sticky w-full">
+        <Header title={receiverName} />
+      </div>
+      {/* <div className={ScrollActive ? "h-10 rounded bg-cyan-500 p-2 top-13 fixed w-full" : "h-10 rounded bg-cyan-500 p-2"}>
+        <p className="text-white font-bold">{receiverName}</p>
+      </div> */}
+        <div className="rounded border-2">
             {messageList.map((messageContent, index) => {
               if (caller === messageContent.caller_name) {
                 if (index === 1) {
@@ -333,9 +344,8 @@ function ChatRoomPage({ socket }) {
                 }
               }
             })}
-          </ScrollToBottom>
         </div>
-        <div className="h-10">
+        <div className="h-10 sticky bottom-0">
           <input
             type="text"
             value={currentMessage}
@@ -349,13 +359,12 @@ function ChatRoomPage({ socket }) {
             }}
           />
           <button
-            className="h-full w-2/12 border-2 rounded"
+            className="h-full w-2/12 border-2 rounded bg-white"
             onClick={sendMessage}
           >
             &#9658;
           </button>
         </div>
-      </div>
     </>
   );
 }
