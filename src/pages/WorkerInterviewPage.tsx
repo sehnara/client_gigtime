@@ -120,10 +120,11 @@ const WorkerInterviewPage = () => {
           mode="NORMAL"
           getData={getDate}
           data={
-            times &&
-            times.map((t: any) => {
-              return t.date;
-            })
+            times
+              ? times.map((t: any) => {
+                  return t.date;
+                })
+              : []
           }
           selectedDay={date}
         />

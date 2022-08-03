@@ -9,6 +9,7 @@ const OwnerInterviewTimeTable = () => {
   const [waitResult, setWaitResult] = useState([]);
   const [willResult, setWillResult] = useState([]);
   const [completeResult, setCompleteResult] = useState([]);
+  const [expiredResult, setExpiredResult] = useState([]);
   // 1.
   const [isClick, setIsClick] = useState(false);
 
@@ -109,6 +110,7 @@ const OwnerInterviewTimeTable = () => {
         setWaitResult(res.data["wait"]);
         setWillResult(res.data["will"]);
         setCompleteResult(res.data["complete"]);
+        setExpiredResult(res.data["expired"]);
       })
       .catch(function (err) {
         console.log(err);
@@ -205,6 +207,26 @@ const OwnerInterviewTimeTable = () => {
           ))
         }
       </div>
+      <hr className="border-2 " />
+      <h1 className="text-xl font-bold my-4">만료된 면접</h1>
+      <div className="h-72 mb-5 rounded-xl overflow-scroll">
+        {expiredResult &&
+          expiredResult.map((el, index) => (
+            <OwnerPageCard
+              key={index}
+              mode="EXPIRED"
+              id={el.interview_id}
+              date={el.interview_date}
+              name={el.worker_name}
+              time={el.interview_time}
+              description={el.question}
+              // onClickPass={onClickPass}
+              // onClickFail={onClickFail}
+              // setIsClick={setIsClick}
+            />
+          ))}
+      </div>
+      <div className="h-24"></div>
     </div>
   );
 };

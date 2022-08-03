@@ -55,7 +55,6 @@ const WorkerSpeedGetJob = () => {
         min_price: Number(recruitData.price),
       })
       .then((res) => {
-        console.log("!~!!!!!!", res.data);
         setResult(res.data);
       })
       .then(() => {
@@ -96,22 +95,22 @@ const WorkerSpeedGetJob = () => {
           dict_value={recruitData["type"]}
           options={[
             "알바유형 선택",
-            "음식점",
+            "설거지",
             "서빙",
             "청소",
             "음료제조",
-            "문서작업",
-            "번역",
-            "질서유지",
-            "경비",
+            "전단지",
+            "배달",
+            "고객관리",
+            "홍보",
             "주방보조",
-            "운송",
+            "포장",
             "판매",
-            "이벤트",
-            "편의점",
-            "건성용역",
-            "베이비시터",
-            "술집",
+            "심부름",
+            "카운터",
+            "계산",
+            "재료관리",
+            "매장관리",
           ]}
         />
         <InputValue2

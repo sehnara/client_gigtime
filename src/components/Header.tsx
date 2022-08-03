@@ -9,9 +9,18 @@ type HeaderProps = {
   worker?: boolean | string;
   onClickEvent?: string;
   isSignUp?: boolean;
+  isLast?: boolean;
+  isFirst?: boolean;
 };
 
-const Header = ({ title, onClickEvent, worker, isSignUp }: HeaderProps) => {
+const Header = ({
+  title,
+  onClickEvent,
+  worker,
+  isSignUp,
+  isLast,
+  isFirst,
+}: HeaderProps) => {
   const navigate = useNavigate();
   const onClick = () => {
     if (onClickEvent === "NONE") {
@@ -21,10 +30,20 @@ const Header = ({ title, onClickEvent, worker, isSignUp }: HeaderProps) => {
     }
   };
   return (
-    <div className="px-8 py-4 flex items-center justify-between bg-gray-100">
-      <AiOutlineArrowLeft className="text-gray-600 text-xl" onClick={onClick} />
+    <div className="px-4 py-4 flex items-center justify-between bg-white">
+      {isFirst ? (
+        <div className="w-4 h-4"></div>
+      ) : (
+        <AiOutlineArrowLeft
+          className="text-gray-600 text-xl"
+          onClick={onClick}
+        />
+      )}
+
       <p className="text-center font-bold text-lg">{title}</p>
-      {worker ? (
+      {isLast ? (
+        <div className="h-4 w-4"></div>
+      ) : worker ? (
         <button onClick={() => navigate("/worker/mypage")}>
           <BiUserCircle className="text-2xl text-gray-500" />
         </button>
@@ -43,6 +62,8 @@ const Header = ({ title, onClickEvent, worker, isSignUp }: HeaderProps) => {
 
 Header.defaultProps = {
   onClickEvent: "NONE",
+  isLast: false,
+  isFirst: false,
 };
 
 export default Header;

@@ -12,17 +12,9 @@ import NavBar from "../components/NavBar";
 import Button from "../components/Button";
 import MapContainer from "../components/Map/MapContainer.jsx";
 
-const data = [
-  { time: 49, text: "긱타임에서 모집공고 낸 횟수" },
-  { time: 3, text: "긱타임에서 면접 본 횟수" },
-  { time: 8, text: "내 매장의 긱워커는 몇 명?" },
-  { time: 237, text: "월 평균 알바비 (만 원)" },
-  { time: 10, text: "도움 받은 시간 (긱 SOS)" },
-];
-
 export type ANGEL_STATE = "NONE" | "POSTING" | "SEARCHING" | "RESULT";
 
-const WorkMyPage = () => {
+const OwnerMyPage = () => {
   const [storename, setStorename] = useState("");
   const [name, setName] = useState("");
   const [tab, setTab] = useState("면접관리");
@@ -60,6 +52,7 @@ const WorkMyPage = () => {
     watchScroll();
   })
 
+  const ownerId = sessionStorage.getItem("owner_id");
   // [바로알바 인풋값]
   const times = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -81,7 +74,6 @@ const WorkMyPage = () => {
   });
 
   const getData = async () => {
-    const ownerId = sessionStorage.getItem("owner_id");
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage`, {
         owner_id: ownerId,
@@ -93,11 +85,12 @@ const WorkMyPage = () => {
       .catch(function (err: any) {
         console.log(err);
       });
+  };
+
+  const getData2 = async () => {
     await axios
-      .get(`${process.env.REACT_APP_ROUTE_PATH}/owner/angel`, {
-        params: {
-          owner_id: sessionStorage.getItem("owner_id"),
-        },
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/angel`, {
+        owner_id: ownerId,
       })
       .then((res: any) => {
         setAngelData({ ...angelData, types: res.data.type });
@@ -107,6 +100,8 @@ const WorkMyPage = () => {
   // [처음 데이터 받아올 때, 1]
   useEffect(() => {
     getData();
+    getData2();
+    setAngel("NONE");
   }, []);
 
   useEffect(() => {
@@ -143,13 +138,10 @@ const WorkMyPage = () => {
   // [RESULT 페이지, 사장님 결과 확인]
   const getAngel = async () => {
     await axios
-      .get("/owner/angel/info", {
-        params: {
-          angel_id: sessionStorage.getItem("angel_id"),
-        },
+      .post("/owner/angel/info", {
+        angel_id: sessionStorage.getItem("angel_id"),
       })
       .then((res) => {
-        console.log("사장님 결과 확인 : ", res.data);
         setResultData(res.data);
       });
   };
@@ -376,29 +368,12 @@ const WorkMyPage = () => {
       <NavBar mode="OWNER" angelUseState={setAngel} isAngel={isAngel} />
       <Header title="마이 페이지" worker={false} />
       <div className=" my-4">
-        {/* 상단 */}
         <div className="mx-8 flex justify-between items-end">
           <h1 className="text-xl font-bold mb-4 ">{storename}</h1>
-          {/* 상단 - 이름, 단추들, 강아지 한 마리*/}
           <h1 className="mb-4">
             <span className="font-bold text-cyan-600">{name}</span>님
           </h1>
         </div>
-        {/* <div className="flex flex-wrap justify-center mb-4">
-          {data.map((e) => {
-            danchooRef.current += 1;
-            return (
-              <DanChoo time={e.time} text={e.text} key={danchooRef.current} />
-            );
-          })}
-          <img
-            src={dogHeart}
-            alt="도그"
-            width={120}
-            height={100}
-            className="transform translate-x-3 translate-y-5 "
-          />
-        </div> */}
         <div className="border-t-4"></div>
         {/* TAB BAR  */}
           <TabBar
@@ -419,4 +394,4 @@ const WorkMyPage = () => {
   );
 };
 
-export default WorkMyPage;
+export default OwnerMyPage;

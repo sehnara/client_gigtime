@@ -36,16 +36,33 @@ function OwnerPageCard({
   return (
     <>
       <DateText date={dateSplit} />
-      <div className="w-84 h-52 rounded-xl shadow-lg shadow-black-500 mr-2  text-center flex flex-col p-4 mb-8">
+      <div
+        className={`w-84 ${
+          mode === "EXPIRED" ? "h-16" : "h-52"
+        } rounded-xl shadow-lg shadow-black-500 mr-2  text-center flex ${
+          mode === "EXPIRED"
+            ? "flex items-center justify-between bg-gray-200"
+            : "flex-col"
+        } p-4 mb-8`}
+      >
         <GigWorker name={name} />
-        <div className="flex items-center">
-          <img className="mx-2 my-1 w-7 h-7" src={clock} />
-          <p className="text-base ml-3">{interviewTime}</p>
-        </div>
-        <div className="flex items-center">
-          <img className="mx-2 my-2 w-7 h-7" src={question} />
-          <p className="text-base ml-3">{description}</p>
-        </div>
+        {mode === "EXPIRED" && (
+          <p className="pl-32 text-red-400 font-bold">만료</p>
+        )}
+        {mode === "EXPIRED" ? (
+          <></>
+        ) : (
+          <>
+            <div className="flex items-center">
+              <img className="mx-2 my-1 w-7 h-7" src={clock} />
+              <p className="text-base ml-3">{interviewTime}</p>
+            </div>
+            <div className="flex items-center">
+              <img className="mx-2 my-2 w-7 h-7" src={question} />
+              <p className="text-base ml-3">{description}</p>
+            </div>
+          </>
+        )}
         <div className="flex">
           {mode === "WAIT" ? (
             <>
@@ -83,6 +100,8 @@ function OwnerPageCard({
                 }}
               />
             </>
+          ) : mode === "EXPIRED" ? (
+            <></>
           ) : (
             <>
               <CardButton

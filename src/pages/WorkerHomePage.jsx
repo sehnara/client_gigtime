@@ -64,43 +64,36 @@ const WorkerHomePage = () => {
 
   return (
     <div className="font-sans bg-cyan-500 h-screen">
-      <Header title="면접신청" worker={true} />
+      <Header title="주변 가게" worker={true} isFirst={true} />
       <NavBar mode="WORKER" />
       {/* 상단 */}
-      <div className="bg-white">
-        <div className=" mx-4 py-4 ">
-          <h1 className="text-lg font-bold flex ">
-            <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce " />
-            {loca}
+      <div className="bg-slate-100">
+        <div className="p-4 flex justify-between items-center">
+          <h1 className="text-xl font-bold flex ">
+            {loca.split(" ").slice(0, 3).join(" ")}
+            {/* <HiOutlineLocationMarker className="text-2xl ml-2 text-red-400 font-bold animate-bounce " /> */}
           </h1>
-          <p className="text-right p-2 py-1 rounded-lg font-bold">
-            내 주변
-            <span className="font-bold text-red-400 text-4xl "> {range}</span>m
+          <p className="rounded-lg font-bold text-xl relative">
+            <p className="text-xs absolute -top-3 text-gray-500">내 주변</p>
+            <span className="font-bold text-red-400 text-2xl "> {range}</span>m
           </p>
         </div>
         {/* 중반 */}
-        <div className="flex m-8 mt-4 ">
+        <div className="flex m-4 mb-0 justify-between">
           <div className="flex-column">
-            <p className="text-3xl mb-0.5 font-medium">이제는</p>
-            <p className="text-3xl mb-0.5 font-medium">
-              <span className="text-cyan-500  font-extrabold animate-pulse">
-                바로 알바
-              </span>
+            <p className="text-2xl mb-0.5 font-bold">이제는</p>
+            <p className="text-2xl mb-0.5 font-bold">
+              <span className="text-cyan-500  font-extrabold ">바로 알바</span>
             </p>
-            <p className="text-3xl mb-0.5 font-medium">갈 시간!</p>
+            <p className="text-2xl mb-0.5 font-bold">갈 시간!</p>
           </div>
-          <img
-            src={man}
-            alt="walking man"
-            width="150"
-            className="transform translate-x-16 translate-y-1"
-          />
+          <img src={man} alt="walking man" width="120" className="" />
         </div>
       </div>
       {/* 하단 */}
-      <div className="p-8 py-2 bg-cyan-500 pb-24">
-        <h1 className="text-xl font-bold mb-4">
-          <span className="text-2xl text-white">{name} </span>님을 기다리고
+      <div className="p-8 py-0 bg-cyan-500 pb-24">
+        <h1 className="text-lg font-bold mb-4 text-right pt-4">
+          <span className="text-2xl text-white">{name}</span>님을 기다리고
           있어요.
         </h1>
         <div>
@@ -117,7 +110,7 @@ const WorkerHomePage = () => {
                   key={store.store_id}
                   store={store.name}
                   distance={store.distance}
-                  jobs={["카운터", "서빙"]}
+                  jobs={[]}
                   storeImage={`${process.env.REACT_APP_S3_PATH}${store.background_image}`}
                   minPay={store.minimum_wage}
                   ment={store.description}

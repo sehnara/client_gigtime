@@ -147,7 +147,7 @@ const WorkerReserveWorkPage = () => {
             {type}
           </p>
         </div>
-        <SelectBox
+        <SelectBox 
           selectedDate={selectedDate}
           getData={getWorkTime}
           data={workDates}

@@ -53,7 +53,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             className="text-2xl flex flex-col items-center"
           >
             <FiZap />
-            <p className="text-xs">바로</p>
+            <p className="text-xs">추천</p>
           </button>
           <button
             onClick={() => {
