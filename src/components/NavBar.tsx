@@ -94,7 +94,9 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             <p className="text-xs">출첵</p>
           </button>
           <button
-            onClick={() => angelUseState("POSTING")}
+            onClick={() => {
+              navigate("/owner/angel");
+            }}
             className="text-2xl flex flex-col items-center"
           >
             <FiZap />

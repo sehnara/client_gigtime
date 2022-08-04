@@ -49,7 +49,6 @@ const WorkerInterviewPage = () => {
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/load_interview`, {
         store_id,
-        interview_month: 7,
       })
       .then((res) => {
         setTimes(res.data);
@@ -57,6 +56,13 @@ const WorkerInterviewPage = () => {
   };
 
   const onApply = async () => {
+    if (date === null) {
+      alert("희망하는 면접 날짜를 알려주세요.");
+      return;
+    } else if (time === null) {
+      alert("희망하시는 면접 시간을 알려주세요.");
+      return;
+    }
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/apply/submit`, {
         interview_date: date,

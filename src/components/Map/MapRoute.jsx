@@ -32,8 +32,8 @@ const MapRoute = ({ locations, durations }) => {
   return (
     <div>
       <div id="myMap" className={`w-full h-72 `}></div>
-      <div className="mx-2 p-2">
-        <p className="font-bold my-1 mb-2">최단거리! 최고수익! 알바추천</p>
+      <div className="m-4 p-2">
+        <p className="font-bold mb-4">최단거리! 최고수익! 알바추천</p>
         {locations &&
           locations.map((e, index) => {
             return (
@@ -48,12 +48,12 @@ const MapRoute = ({ locations, durations }) => {
                     </p>
                   </div>
                 </div>
-                <p className="flex-4 text-center font-bold text-sm">
+                <p className="flex-4 text-center font-bold text-base">
                   {e && e.store}
                 </p>
-                <p className="flex-2 text-center text-sm">
+                <p className="flex-2 text-center text-base">
                   {`${e && e.time}`}
-                  <span className="text-xs">{`(${durations[index]}h)`}</span>
+                  <span className="text-sm">{`(${durations[index]}h)`}</span>
                 </p>
               </div>
             );

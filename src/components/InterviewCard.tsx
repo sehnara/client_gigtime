@@ -87,17 +87,16 @@ const InterviewCard = ({
       <div
         className={`flex rounded-xl shadow-lg h-10 items-center  justify-center p-6 ${
           state === 2 || state === 3 || state === 6
-            ? "bg-gray-300"
-            : state === 4 && "bg-gray-300"
+            ? "bg-gray-200"
+            : state === 4 && "bg-gray-200"
         }`}
       >
         {state === 2 ? (
           <div className="flex flex-col justify-center items-center w-full ">
-            <p className="text-center font-bold">{interviewTime}</p>
-            <p className="text-xs text-bold ">
-              면접 신청이 <span className="text-green-600 font-bold">완료</span>
-              되었습니다.
+            <p className=" text-bold ">
+              면접 신청 <span className="text-green-600 font-bold">완료</span>
             </p>
+            <p className="text-center font-bold text-xs">({interviewTime})</p>
           </div>
         ) : state === 3 ? (
           rejectFlag === 0 ? (
@@ -107,22 +106,22 @@ const InterviewCard = ({
             </div>
           ) : (
             <div className="flex flex-col justify-center items-center w-full ">
-              <p className="text-center font-bold">{interviewTime}</p>
-              <p className="text-xs text-bold">
-                면접 신청이 <span className="text-red-500 font-bold">거절</span>
-                되었습니다.
+              <p className="text-bold">
+                면접 신청 <span className="text-red-500 font-bold">거절</span>
               </p>
+              <p className="text-center text-xs font-bold">({interviewTime})</p>
             </div>
           )
         ) : state === 4 ? (
           <div className=" ">
-            <p className="text-sm ">면접 결과를 기다리는 중입니다...</p>
+            <p className="">면접 완료</p>
+            <p className="text-xs text-bold">(결과대기중)</p>
           </div>
         ) : state === 5 ? (
           <div className="">
             <p className="text-sm">
               {resultFlag ? (
-                <span className="text-green-400 font-bold text-lg ">합격</span>
+                <span className="text-green-500 font-bold text-lg ">합격</span>
               ) : (
                 <span className="text-red-400 font-bold text-lg ">불합격</span>
               )}
@@ -130,7 +129,7 @@ const InterviewCard = ({
           </div>
         ) : state === 6 ? (
           <div className="flex flex-col justify-center items-center w-full ">
-            <p className="text-sm text-bold font-bold ">만료된 면접입니다.</p>
+            <p className=" text-bold font-bold ">만료</p>
           </div>
         ) : (
           <>

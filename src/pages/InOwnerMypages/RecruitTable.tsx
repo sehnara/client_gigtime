@@ -40,11 +40,10 @@ const RecruitTable = () => {
   }, []);
 
   return (
-    <div className="m-8">
-      {
-        data === undefined ?
+    <div className="m-8 mb-36">
+      {data === undefined ? (
         <NotFound title={"아직 모집내역이 없어요!"} />
-        :
+      ) : (
         data.map((e) => {
           keyRef.current += 1;
           return (
@@ -57,7 +56,7 @@ const RecruitTable = () => {
             />
           );
         })
-      }
+      )}
     </div>
   );
 };

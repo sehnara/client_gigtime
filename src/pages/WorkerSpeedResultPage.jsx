@@ -59,25 +59,33 @@ const WorkerSpeedResultPage = () => {
 
   return (
     <div className="h-full w-full">
-      <Header title={"바로알바 신청하기"} />
+      <Header title={"바로알바 신청하기"} worker={true} />
       <MapRoute
         locations={setStarts(loc).map((i) => loc[i])}
         durations={getDurations(loc)}
       />
-      <div className="mx-6 ">
-        <div className="w-36 ">
-          <p className="text-xl font-bold text-right flex items-center">
-            <BiTimeFive className="mr-4" />
-            <span className="text-red-400 text-xl">{loc.length}</span>
-            시간
+      <div className="mx-8 flex flex-col items-end">
+        <div className=" flex  flex-col  w-36 ">
+          <p className="text-xl font-bold flex items-center ">
+            <BiTimeFive className="mr-4 flex-1" />
+            <div className="flex-3">
+              <span className="text-red-400 text-xl ">{loc.length}</span>
+              시간
+            </div>
           </p>
-          <p className="text-xl font-bold text-right flex items-center">
-            <RiPinDistanceLine className="mr-4" />
-            <span className="text-red-400 text-xl">{result.move}</span>m
+          <p className="text-xl font-bold flex items-center ">
+            <RiPinDistanceLine className="mr-4 flex-1" />
+            <div className="flex-3">
+              <span className="text-red-400 text-xl flex-3">{result.move}</span>
+              m
+            </div>
           </p>
-          <p className="text-xl font-bold text-right  flex items-center">
-            <GiReceiveMoney className="mr-4" />
-            <span className="text-red-400 text-xl">{totalPrice}</span>원
+          <p className="text-xl font-bold  flex items-center ">
+            <GiReceiveMoney className="mr-4 flex-1" />
+            <div className="flex-3">
+              <span className="text-red-400 text-xl flex-3">{totalPrice}</span>
+              원
+            </div>
           </p>
         </div>
         <Button

@@ -78,12 +78,18 @@ const WorkerReserveWorkPage = () => {
   };
 
   const onReserve = async () => {
+    if (selectedDate.length === 0) {
+      alert("희망하시는 시간을 선택해주세요.");
+      return;
+    }
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/reservation/save`, {
         worker_id: worker_id,
         hourlyorder_id: selectedDate,
       })
-      .then((res) => {});
+      .then((res) => {
+        navigate("/worker/myPage");
+      });
   };
 
   useEffect(() => {
@@ -202,7 +208,6 @@ const WorkerReserveWorkPage = () => {
           title={"예약하기"}
           onClickEvent={async () => {
             await onReserve();
-            navigate("/worker/myPage");
           }}
         />
         <div className="h-24"></div>

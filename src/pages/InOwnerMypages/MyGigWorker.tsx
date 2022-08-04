@@ -16,7 +16,7 @@ const MyGigWorker = () => {
         owner_id: ownerId,
       })
       .then((res) => {
-        console.log("-----------------", res.data);
+        // console.log("-----------------", res.data);
         if (res.data === "empty") {
           setResult(res.data);
         } else {
@@ -38,8 +38,8 @@ const MyGigWorker = () => {
         <div>
           <h1 className="text-lg mb-3">
             총{" "}
-            <strong className="text-2xl text-cyan-500">{workers.length}</strong>
-            명의 알바생
+            <strong className="text-lg text-cyan-500">{workers.length}</strong>
+            명의 가족들
           </h1>
           <div className="w-full h-full rounded-xl shadow-lg shadow-black-500 mr-2 mb-2 text-center flex flex-col p-4">
             {workers &&

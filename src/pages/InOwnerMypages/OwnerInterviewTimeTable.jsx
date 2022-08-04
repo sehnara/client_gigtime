@@ -122,10 +122,9 @@ const OwnerInterviewTimeTable = () => {
     <div className="px-8">
       <h1 className="text-xl font-bold  my-4">입장대기</h1>
       <div className="h-64 mb-5 rounded-xl overflow-y-scroll">
-        {
-          nowResult === undefined ? 
-          <NotFound title={"아직 면접시간이 되지 않았어요!"}/>
-          : 
+        {nowResult === undefined ? (
+          <NotFound title={"아직 면접시간이 되지 않았어요!"} />
+        ) : (
           nowResult.map((el, index) => (
             <OwnerPageCard
               key={index}
@@ -137,15 +136,14 @@ const OwnerInterviewTimeTable = () => {
               id={el.interview_id}
             />
           ))
-        }
+        )}
       </div>
       <hr className="border-2 " />
       <h1 className="text-xl font-bold my-4">승인대기</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
-        {
-          waitResult === undefined ?
+        {waitResult === undefined ? (
           <NotFound title={"면접 신청자가 아직 없어요!"} />
-          :
+        ) : (
           waitResult.map((el, index) => (
             <OwnerPageCard
               key={index}
@@ -160,16 +158,15 @@ const OwnerInterviewTimeTable = () => {
               setIsClick={setIsClick}
             />
           ))
-        }
+        )}
       </div>
       <hr className="border-2 " />
       <h1 className="text-xl font-bold my-4">면접예정</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="WILL"/> */}
-        {
-          willResult === undefined ?
+        {willResult === undefined ? (
           <NotFound title={"면접 예정자가 아직 없어요!"} />
-          :
+        ) : (
           willResult.map((el, index) => (
             <OwnerPageCard
               key={index}
@@ -181,16 +178,15 @@ const OwnerInterviewTimeTable = () => {
               description={el.question}
             />
           ))
-        }
+        )}
       </div>
       <hr className="border-2 " />
       <h1 className="text-xl font-bold my-4">면접완료</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
         {/* <OwnerPageCard mode="COMPLETE"/> */}
-        {
-          completeResult === undefined ?
+        {completeResult === undefined ? (
           <NotFound title={"면접 완료된 사람이 아직 없어요!"} />
-          :
+        ) : (
           completeResult.map((el, index) => (
             <OwnerPageCard
               key={index}
@@ -205,12 +201,14 @@ const OwnerInterviewTimeTable = () => {
               setIsClick={setIsClick}
             />
           ))
-        }
+        )}
       </div>
       <hr className="border-2 " />
       <h1 className="text-xl font-bold my-4">만료된 면접</h1>
       <div className="h-72 mb-5 rounded-xl overflow-scroll">
-        {expiredResult &&
+        {expiredResult === undefined ? (
+          <NotFound title={"만료된 면접이 없습니다."} />
+        ) : (
           expiredResult.map((el, index) => (
             <OwnerPageCard
               key={index}
@@ -224,7 +222,8 @@ const OwnerInterviewTimeTable = () => {
               // onClickFail={onClickFail}
               // setIsClick={setIsClick}
             />
-          ))}
+          ))
+        )}
       </div>
       <div className="h-24"></div>
     </div>

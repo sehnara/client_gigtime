@@ -114,7 +114,7 @@ function ChatRoomPage({ socket }) {
         });
     }
 
-    await socket.emit("read_that", { 'room_id': roomId });
+    await socket.emit("read_that", { room_id: roomId });
   };
 
   const reloadData = async () => {
@@ -208,18 +208,18 @@ function ChatRoomPage({ socket }) {
       setMessageList((list) => [...list, data]);
       giveChatState();
     });
-    return(() => {
+    return () => {
       socket.off("receive_message");
-    })
+    };
   }, [socket]);
 
   useEffect(() => {
     socket.on("read_message", (data) => {
       socket.emit("read_ok", data);
     });
-    return(() => {
+    return () => {
       socket.off("read_message");
-    })
+    };
   }, [socket]);
 
   useEffect(() => {
@@ -227,9 +227,9 @@ function ChatRoomPage({ socket }) {
       getData();
     });
 
-    return(() => {
+    return () => {
       socket.off("reload");
-    })
+    };
   }, [socket]);
 
   useEffect(() => {
@@ -237,9 +237,9 @@ function ChatRoomPage({ socket }) {
       reloadData();
     });
 
-    return(() => {
+    return () => {
       socket.off("reload2");
-    })
+    };
   }, []);
 
   useEffect(() => {
@@ -272,99 +272,103 @@ function ChatRoomPage({ socket }) {
 
   useEffect(() => {
     if (prevScrollHeight) {
-      document.documentElement.scrollTo(0, document.documentElement.scrollHeight - prevScrollHeight);
+      document.documentElement.scrollTo(
+        0,
+        document.documentElement.scrollHeight - prevScrollHeight
+      );
       return setPrevScrollHeight(null);
     }
 
-    document.documentElement.scrollTo(0, document.documentElement.scrollHeight - document.documentElement.clientHeight);
-  }, [messageList])
+    document.documentElement.scrollTo(
+      0,
+      document.documentElement.scrollHeight -
+        document.documentElement.clientHeight
+    );
+  }, [messageList]);
 
   return (
     <>
       <div className="top-0 sticky w-full">
-        <Header title={receiverName} />
+        <Header title={receiverName} isLast={true} />
       </div>
       {/* <div className={ScrollActive ? "h-10 rounded bg-cyan-500 p-2 top-13 fixed w-full" : "h-10 rounded bg-cyan-500 p-2"}>
         <p className="text-white font-bold">{receiverName}</p>
       </div> */}
-        <div className="rounded border-2">
-            {messageList.map((messageContent, index) => {
-              if (caller === messageContent.caller_name) {
-                if (index === 1) {
-                  return (
-                    <div
-                      className="h-auto p-3 flex justify-end"
-                      key={index}
-                      ref={ref}
-                    >
-                      <div className="w-40">
-                        <div className="w-auto h-auto min-h-[40px] max-w-full bg-cyan-500 rounded-lg pt-3 pl-2 text-sm text-white braek-words">
-                          <p>{messageContent.message}</p>
-                        </div>
-                        <div className="flex flex-col">
-                          <div className="flex justify-beween">
-                          {
-                            messageContent.not_read === 0 ? null : <p className="text-xs text-yellow-500">1</p>
-                          }
-                            <p className="text-xs">{messageContent.createdAt}</p>
-                          </div>
-                        </div> 
+      <div className="rounded border-2">
+        {messageList.map((messageContent, index) => {
+          if (caller === messageContent.caller_name) {
+            if (index === 1) {
+              return (
+                <div
+                  className="h-auto p-3 flex justify-end"
+                  key={index}
+                  ref={ref}
+                >
+                  <div className="w-40">
+                    <div className="w-auto h-auto min-h-[40px] max-w-full bg-cyan-500 rounded-lg pt-3 pl-2 text-sm text-white braek-words">
+                      <p>{messageContent.message}</p>
+                    </div>
+                    <div className="flex flex-col">
+                      <div className="flex justify-beween">
+                        {messageContent.not_read === 0 ? null : (
+                          <p className="text-xs text-yellow-500">1</p>
+                        )}
+                        <p className="text-xs">{messageContent.createdAt}</p>
                       </div>
                     </div>
-                  );
-                } else {
-                  return (
-                    <MeChatbox key={index} messageContent={messageContent}/>
-                  );
-                }
-              } else {
-                if (index === 1) {
-                  return (
-                    <div className="h-auto p-3 flex" key={index} ref={ref}>
-                      <div className="w-40">
-                        <div className="w-auto h-auto min-h-[40px] max-w-full bg-gray-500 rounded-lg pt-3 pl-2 text-sm text-white braek-words">
-                          <p>{messageContent.message}</p>
-                        </div>
-                        <div className="flex flex-col">
-                          <p className="font-bold text-sm">
-                            {receiverName}
-                          </p>
-                          <p className="text-xs">{messageContent.createdAt}</p>
-                        </div>
-                      </div>
+                  </div>
+                </div>
+              );
+            } else {
+              return <MeChatbox key={index} messageContent={messageContent} />;
+            }
+          } else {
+            if (index === 1) {
+              return (
+                <div className="h-auto p-3 flex" key={index} ref={ref}>
+                  <div className="w-40">
+                    <div className="w-auto h-auto min-h-[40px] max-w-full bg-gray-500 rounded-lg pt-3 pl-2 text-sm text-white braek-words">
+                      <p>{messageContent.message}</p>
                     </div>
-                  );
-                } else {
-                  return (
-                    <OtherChatbox key={index} 
-                    receiver={receiverName} 
-                    messageContent={messageContent} 
-                    />
-                  );
-                }
-              }
-            })}
-        </div>
-        <div className="h-10 sticky bottom-0">
-          <input
-            type="text"
-            value={currentMessage}
-            placeholder="메시지를 입력해주세요"
-            className="h-full border-2 rounded w-10/12"
-            onChange={(e) => {
-              setCurrentMessage(e.target.value);
-            }}
-            onKeyPress={(e) => {
-              e.key === "Enter" && sendMessage();
-            }}
-          />
-          <button
-            className="h-full w-2/12 border-2 rounded bg-white"
-            onClick={sendMessage}
-          >
-            &#9658;
-          </button>
-        </div>
+                    <div className="flex flex-col">
+                      <p className="font-bold text-sm">{receiverName}</p>
+                      <p className="text-xs">{messageContent.createdAt}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <OtherChatbox
+                  key={index}
+                  receiver={receiverName}
+                  messageContent={messageContent}
+                />
+              );
+            }
+          }
+        })}
+      </div>
+      <div className="h-10 sticky bottom-0">
+        <input
+          type="text"
+          value={currentMessage}
+          placeholder="메시지를 입력해주세요"
+          className="h-full border-2 rounded w-10/12"
+          onChange={(e) => {
+            setCurrentMessage(e.target.value);
+          }}
+          onKeyPress={(e) => {
+            e.key === "Enter" && sendMessage();
+          }}
+        />
+        <button
+          className="h-full w-2/12 border-2 rounded bg-white"
+          onClick={sendMessage}
+        >
+          &#9658;
+        </button>
+      </div>
     </>
   );
 }

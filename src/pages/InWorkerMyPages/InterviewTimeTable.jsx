@@ -6,11 +6,13 @@ const InterviewTimeTable = ({ result, status }) => {
   const src = result;
 
   return (
-    <div className="overflow-scroll">
-      {
-        src.length === 0 ?
-        <NotFound title={"신청한 면접이 아직 없어요!"}/>
-        : src.map((el, index) => (
+    <div className="overflow-scroll h-full ">
+      {src.length === 0 ? (
+        <div className="h-full m-8">
+          <NotFound title={"신청한 면접이 아직 없어요!"} />
+        </div>
+      ) : (
+        src.map((el, index) => (
           <InterviewCard
             key={index}
             date={el.interview_date}
@@ -25,7 +27,7 @@ const InterviewTimeTable = ({ result, status }) => {
             storeType={el.store_type}
           />
         ))
-      }
+      )}
     </div>
   );
 };

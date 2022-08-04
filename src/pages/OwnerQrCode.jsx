@@ -31,25 +31,23 @@ const OwnerQrCode = () => {
   return (
     <div>
       <NavBar mode="OWNER" />
-      <Header title="출근확인" />
-      <div className="bg-gray-200 relative">
+      <Header title="QR출근" />
+      <div className="relative">
         <QrReader
           onResult={(result, error) => {
             if (!!result) {
               setData(result?.text);
             }
-
             if (!!error) {
               console.info(error);
             }
           }}
-          e
           style={{ width: "100%" }}
         />
-        <AiOutlineExpand className="text-6xl text-cyan-400  absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-        <p className="w-full text-gray-600 text-center text-xs absolute bottom-4 left-1/2 transfrom -translate-x-1/2">
-          QR코드/바코드를 스캔하여 사장님께
-          <span className="text-red-500 font-bold">출석</span>을 알리세요!
+        <AiOutlineExpand className="text-7xl text-cyan-400  absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+        <p className="w-full text-gray-600 text-center text-sm absolute bottom-4 left-1/2 transfrom -translate-x-1/2">
+          QR코드/바코드를 스캔하여
+          <span className="text-red-500 font-bold"> 출근</span> 체크하세요!
         </p>
       </div>
 
@@ -57,7 +55,7 @@ const OwnerQrCode = () => {
       {data === "" ? (
         <div></div>
       ) : (
-        <div className="text-center mt-24">
+        <div className="text-center mt-32">
           {isSuccess.success === "success" ? (
             <>
               <p className="text-2xl mb-4">
@@ -72,11 +70,10 @@ const OwnerQrCode = () => {
             </>
           ) : isSuccess.success === "notFound" ? (
             <>
-              <p className="text-2xl mb-4">
-                출근 시간
-                <span className="text-cyan-500 font-bold"> '30분 전' </span>부터
+              <p className="text-xl mb-4">
+                <span className="text-cyan-500 font-bold">출근 시간</span>이
+                아닙니다.
               </p>
-              <p className="text-lg">출석 체크 가능합니다.</p>
             </>
           ) : (
             <></>

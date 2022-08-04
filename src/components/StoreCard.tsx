@@ -8,7 +8,7 @@ import {
 } from "react-icons/bs";
 import { AiOutlineMessage } from "react-icons/ai";
 
-type MODE = "NORMAL" | "NEAR" | "OWNER_MYPAGE";
+type MODE = "NORMAL" | "NEAR" | "OWNER_MYPAGE" | "WIN";
 
 type StoreCardProps = {
   store: string;
@@ -78,9 +78,21 @@ function StoreCard({
               <h3 className="mt-2 font-bold truncate ">{store}</h3>
             </div>
           ) : (
-            <h3 className="mt-2 font-bold  truncate w-52">{store}</h3>
+            <h3
+              className={`${
+                mode === "WIN" ? "" : "mt-2"
+              } font-bold  truncate w-52`}
+            >
+              {store}
+            </h3>
           )}
           {/* 거리 */}
+          {mode === "WIN" && (
+            <p className=" truncate w-48 text-red-400 font-bold text-xs">
+              {address}
+            </p>
+          )}
+
           <div className="flex items-center mt-1">
             {/* 직종 */}
             <div className="flex space-x-2 truncate  overflow-sroll ">
@@ -96,15 +108,20 @@ function StoreCard({
                   );
                 })}
             </div>
+
             <p className=" truncate w-48 text-red-400 font-bold ">
-              {mode === "OWNER_MYPAGE" ? `${address}` : `${distance}m`}
+              {mode === "OWNER_MYPAGE"
+                ? `${address}`
+                : mode === "WIN"
+                ? ""
+                : `${distance}m`}
             </p>
           </div>
         </div>
       </div>
 
       {/* 하단부 */}
-      {mode === "OWNER_MYPAGE" ? (
+      {mode === "OWNER_MYPAGE" || mode === "WIN" ? (
         ""
       ) : mode === "NEAR" ? (
         <div className="pb-2 w-full">
@@ -263,6 +280,7 @@ function StoreCard({
           </div>
         </div>
       )}
+      {mode === "WIN" && <div className="mt-4 border-2"></div>}
     </div>
   );
 }

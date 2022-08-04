@@ -56,7 +56,6 @@ const WorkerHomePage = () => {
         } else if (res.data === "notFound") {
           setIsNotFound(true);
         } else {
-          console.log(res.data);
           setCursor(res.data[res.data.length - 1].store_id);
           setStores(res.data);
         }

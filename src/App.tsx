@@ -28,6 +28,7 @@ import OwnerAngelResult from "./pages/WorkerAngelResult";
 import ChatListPage from "./pages/ChatListPage";
 import ChatRoomPage from "./pages/ChatRoomPage";
 import io from "socket.io-client";
+import OwnerAngelPage from "./pages/OwnerAngelPage";
 
 function App() {
   const firebaseMessaging = firebaseApp.messaging();
@@ -74,7 +75,7 @@ function App() {
         ) {
           sessionStorage.setItem("angel_id", data["angel_id"]);
           window.location.assign(
-            `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage`
+            `${process.env.REACT_APP_ROUTE_PATH}/owner/angel`
           );
         }
       } else {
@@ -111,6 +112,8 @@ function App() {
           `${process.env.REACT_APP_ROUTE_PATH}/worker/mypage`
         );
       }
+    } else if (title === "출석체크") {
+      alert(data["worker_name"] + "님이 출근하셨습니다.");
     } else {
     }
   });
@@ -151,6 +154,7 @@ function App() {
         />
         <Route path="/worker/qrCode" element={<WorkerQrCode />} />
         <Route path="/worker/AngelResult" element={<OwnerAngelResult />} />
+        <Route path="/owner/angel" element={<OwnerAngelPage />} />
         {/* 기타 */}
         <Route
           path="/interview"

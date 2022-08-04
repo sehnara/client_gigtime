@@ -28,10 +28,12 @@ const WorkTimeTable = () => {
 
   return (
     <div className="m-8">
-      {
-        datas.length === 0 ?
-        <NotFound title={"신청한 알바가 없어요!"} />
-        : datas.map((e) => {
+      {datas.length === 0 ? (
+        <div className="h-full">
+          <NotFound title={"신청한 알바가 없어요!"} />
+        </div>
+      ) : (
+        datas.map((e) => {
           keyRef.current += 1;
           let hours = new Array();
 
@@ -51,7 +53,8 @@ const WorkTimeTable = () => {
               datas={hours} // 수정해야함
             />
           );
-        })}
+        })
+      )}
     </div>
   );
 };

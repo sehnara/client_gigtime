@@ -76,6 +76,9 @@ const OwnerRecruitNoticePage = () => {
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/employment`, postData)
       .then((res) => {
+        if (res.data === "success") {
+          alert("모집 공고 완료했습니다.");
+        }
         navigate("/owner/mypage");
       });
   };
@@ -99,7 +102,7 @@ const OwnerRecruitNoticePage = () => {
   }, []);
 
   return (
-    <div className="pb-24">
+    <div className="pb-16">
       <Header title={"모집공고"} />
       <NavBar mode="OWNER" />
       <div className="mx-8">
@@ -136,7 +139,6 @@ const OwnerRecruitNoticePage = () => {
           dict_value={recruitData["description"]}
         />
       </div>
-      <div className="border-t-4 mt-8 mb-4"></div>
       {/* --------------------------------------------- */}
 
       <div className="mx-8 ">
@@ -208,7 +210,7 @@ const OwnerRecruitNoticePage = () => {
       </div>
 
       <div className="mx-8 mb-8">
-        <Button title="모집공고" onClickEvent={onEnroll} />
+        <Button title="모집공고 보내기" onClickEvent={onEnroll} />
       </div>
     </div>
   );
