@@ -6,25 +6,6 @@ import Header from "../components/Header";
 import InputValue2 from "../components/InputValue2";
 import NavBar from "../components/NavBar";
 
-// {
-//   'owner_id': 60,
-//   'store_name': '보리누리',
-// 'type': '설거지',
-// 'description': '설거지 알바 모집합니다',
-// 'start_date': '2022-08-20',
-// 'end_date': '2022-08-22',
-// 'start_time': '10:00',
-// 'end_time': '14:00',
-// 'price': 10000
-// }
-
-// '/owner/mypage/employment/button'
-// {
-//   'name': '보리누리',
-//   'address': '인천 서구 심곡동 123-4',
-//   'type': ['서빙', '뭐시기', ...]
-// }
-
 const OwnerRecruitNoticePage = () => {
   const navigate = useNavigate();
   const [recruitData, setRecruitData] = useState({
@@ -73,6 +54,18 @@ const OwnerRecruitNoticePage = () => {
   };
 
   const onEnroll = async () => {
+    if (
+      postData.type.split(" ")[0] === "기입" ||
+      postData.type === undefined ||
+      postData.start_time.split(" ")[0] === "기입" ||
+      postData.start_time === "" ||
+      postData.end_time.split(" ")[0] === "기입" ||
+      postData.end_time === ""
+    ) {
+      alert("모집 공고 정보 기입을 완료해주세요.");
+      return;
+    }
+
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/employment`, postData)
       .then((res) => {
@@ -82,6 +75,8 @@ const OwnerRecruitNoticePage = () => {
         navigate("/owner/mypage");
       });
   };
+
+  console.log("EEEEEEE", postData);
 
   useEffect(() => {
     setPostData({

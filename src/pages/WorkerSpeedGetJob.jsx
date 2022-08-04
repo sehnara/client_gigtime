@@ -76,6 +76,8 @@ const WorkerSpeedGetJob = () => {
           className="flex bg-black/[.8] absolute w-full h-full "
         >
           <Pachinco
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
             result={result}
             moneys={result.p_history}
             speed={80}

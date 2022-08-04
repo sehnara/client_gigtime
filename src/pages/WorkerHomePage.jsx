@@ -72,14 +72,14 @@ const WorkerHomePage = () => {
       document.body.scrollTop
     );
     let clientHeight = document.documentElement.clientHeight;
-    console.log(
-      "scrollHeight : ",
-      scrollHeight,
-      "scrollTop : ",
-      scrollTop,
-      "clientHeight : ",
-      clientHeight
-    );
+    // console.log(
+    //   "scrollHeight : ",
+    //   scrollHeight,
+    //   "scrollTop : ",
+    //   scrollTop,
+    //   "clientHeight : ",
+    //   clientHeight
+    // );
 
     if (scrollTop + clientHeight + 120 >= scrollHeight) {
       axios
@@ -150,10 +150,10 @@ const WorkerHomePage = () => {
               </p>
             </div>
           ) : stores && stores.length !== 0 ? (
-            stores.map((store) => {
+            stores.map((store, index) => {
               return (
                 <StoreCard
-                  key={store.store_id}
+                  key={index}
                   store={store.name}
                   distance={store.distance}
                   jobs={[]}

@@ -45,6 +45,19 @@ const OwnerAngelPage = () => {
     price: "",
   }); // [확인 눌렀을 때, POST 누르면 2]
   const postAngel = async () => {
+    if (
+      selectedData.startTime.split(" ")[0] === "출근" ||
+      selectedData.endTime.split(" ")[0] === "퇴근" ||
+      selectedData.type.split(" ")[0] === "알바" ||
+      selectedData.startTime.split(" ")[0] === "" ||
+      selectedData.endTime.split(" ")[0] === "" ||
+      selectedData.type.split(" ")[0] === "" ||
+      selectedData.price === ""
+    ) {
+      alert("모두 기입해주세요.");
+      return;
+    }
+
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/angel/call`, {
         owner_id: sessionStorage.getItem("owner_id"),
@@ -54,15 +67,17 @@ const OwnerAngelPage = () => {
         price: selectedData.price,
       })
       .then((res: any) => {
+        console.log("알바천사 호출 시 >>", res.data);
         if (res.data === "success") {
           setAngel("SEARCHING");
         } else {
-          alert(
-            "알바천사 서비스 사용에 어려움이 있습니다. 잠시후 다시 시도해주세요."
-          );
+          // alert(
+          //   "알바천사 서비스 사용에 어려움이 있습니다. 잠시후 다시 시도해주세요."
+          // );
         }
       });
   };
+  // console.log("{}{}{{}", selectedData);
   const angelId = sessionStorage.getItem("angel_id");
   // [RESULT 페이지, 사장님 결과 확인]
   const getAngel = async () => {
@@ -84,7 +99,7 @@ const OwnerAngelPage = () => {
         setAngelData({ ...angelData, types: res.data.type });
       });
   };
-  console.log(">>", resultData);
+
   useEffect(() => {
     getData2();
   }, []);
@@ -99,17 +114,15 @@ const OwnerAngelPage = () => {
     };
   }, [sessionStorage.getItem("angel_id")]);
 
-  console.log("resultData", resultData, resultData.start_time);
   return (
-    <div className=" h-screen">
+    <div className="h-screen ">
       {/* <Header title="알바천사" worker={false} /> */}
       {/* <NavBar mode="OWNER" isAngel={isAngel} /> */}
       {(isAngel === "POSTING" ||
         isAngel === "SEARCHING" ||
         isAngel === "RESULT") && (
-        <div className="absolute bg-black/[.9] z-10  w-full h-full flex flex-col justify-center items-center">
+        <div className="absolute h-screen bg-black/[.9] z-10 py-8 w-full flex flex-col justify-center items-center">
           <h1 className="text-white text-5xl font-bold mb-2">알바 천사</h1>
-
           {isAngel === "SEARCHING" ? (
             <>
               <img
@@ -188,9 +201,9 @@ const OwnerAngelPage = () => {
             </div>
           ) : (
             <>
-              <img src={magnifier} className="w-52 h-52 mb-4 " />
+              <img src={magnifier} className="w-52 h-52 " />
               <div>
-                <p className="text-white text-sm">
+                {/* <p className="text-white text-sm">
                   - <span className="text-cyan-500 font-bold">오늘 하루</span>
                   내에 알바 구인 가능
                 </p>
@@ -198,9 +211,9 @@ const OwnerAngelPage = () => {
                   - 현재 시간 기준{" "}
                   <span className="text-cyan-500 font-bold">1시간 이후</span>
                   부터 구인 가능
-                </p>
+                </p> */}
               </div>
-              <div className="mx-8 mt-8">
+              <div className="mx-8">
                 {/* 알바유형 */}
                 <label className="text-sm font-bold text-white mb-4">
                   알바유형
@@ -216,6 +229,9 @@ const OwnerAngelPage = () => {
                     });
                   }}
                 >
+                  <option className="text-gray-300">
+                    알바 유형을 선택해주세요
+                  </option>
                   {angelData.types !== [] &&
                     angelData.types.map((i, index) => {
                       return (
@@ -227,7 +243,7 @@ const OwnerAngelPage = () => {
                 </select>
                 {/* 시작시간 */}
                 <label className="text-sm font-bold text-white mb-4">
-                  시작 시간
+                  출근 시간
                 </label>
                 <select
                   name="알바유형 선택"
@@ -240,6 +256,9 @@ const OwnerAngelPage = () => {
                     });
                   }}
                 >
+                  <option className="text-gray-300">
+                    출근 시간을 선택해주세요
+                  </option>
                   {angelData &&
                     angelData.startTimes.map((i, index) => {
                       return (
@@ -254,7 +273,7 @@ const OwnerAngelPage = () => {
                 </select>
                 {/* 끝 시간 */}
                 <label className="text-sm font-bold text-white mb-4">
-                  끝 시간
+                  퇴근 시간
                 </label>
                 <select
                   name="알바유형 선택"
@@ -267,6 +286,9 @@ const OwnerAngelPage = () => {
                     });
                   }}
                 >
+                  <option className="text-gray-300">
+                    퇴근 시간을 선택해주세요
+                  </option>
                   {angelData &&
                     angelData.endTimes.map((i, index) => {
                       return (

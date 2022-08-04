@@ -110,7 +110,6 @@ const WorkerNearWorkPage = () => {
       <div className="bg-slate-100">
         <div className=" p-4 flex justify-between items-center">
           <h1 className="text-xl font-bold flex ">
-            {/* <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce" /> */}
             {loc.split(" ").slice(0, 3).join(" ")}
           </h1>
           <p className="rounded-lg font-bold text-xl flex items-center">

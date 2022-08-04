@@ -64,7 +64,7 @@ const WorkerDistancePage = () => {
           onChange={onchangeDistance}
         />
         <Map
-          level={7}
+          level={8}
           width={"full"}
           height={"96"}
           address={signData.location}

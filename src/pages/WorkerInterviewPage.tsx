@@ -30,7 +30,6 @@ const WorkerInterviewPage = () => {
   const getQuestion = (e: any) => {
     setQuestion(e.target.value);
   };
-
   const onComplete = () => {
     onApply();
   };
@@ -41,6 +40,7 @@ const WorkerInterviewPage = () => {
         store_id,
       })
       .then((res) => {
+        // console.log("BASIC", res.data);
         setBasic(res.data);
       });
   };
@@ -51,10 +51,11 @@ const WorkerInterviewPage = () => {
         store_id,
       })
       .then((res) => {
+        // console.log("TIMES", res.data);
         setTimes(res.data);
       });
   };
-
+  console.log("EEEEEEEE", time);
   const onApply = async () => {
     if (date === null) {
       alert("희망하는 면접 날짜를 알려주세요.");

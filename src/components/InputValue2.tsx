@@ -50,6 +50,7 @@ const InputValue2 = ({
             className="w-full h-10 rounded-lg text-gray-600"
             onChange={(e) => setValue(dict_key, e.target.value)}
           >
+            <option className="text-gray-400">기입 해주세요</option>
             {options &&
               options.map((e) => {
                 return (
@@ -72,6 +73,7 @@ const InputValue2 = ({
               className="w-full h-10 rounded-lg text-gray-600 border border-gray-300 p-1"
               onChange={(e) => setValue("start_time", e.target.value)}
             >
+              <option className="text-gray-400">기입 해주세요</option>
               {options &&
                 options.map((e) => {
                   return (
@@ -86,6 +88,7 @@ const InputValue2 = ({
               className="w-full h-10 rounded-lg text-gray-600 border border-gray-300 p-1 "
               onChange={(e) => setValue("end_time", e.target.value)}
             >
+              <option className="text-gray-400">기입 해주세요</option>
               {options2 &&
                 options2.map((e) => {
                   return (

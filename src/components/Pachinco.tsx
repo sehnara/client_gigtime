@@ -7,9 +7,18 @@ type PachincoType = {
   visits: any[];
   speed?: number;
   result?: {};
+  setIsOpen?: (e: boolean) => void;
+  isOpen?: boolean;
 };
 
-const Pachinco = ({ result, moneys, speed, visits }: PachincoType) => {
+const Pachinco = ({
+  result,
+  moneys,
+  speed,
+  visits,
+  setIsOpen,
+  isOpen,
+}: PachincoType) => {
   const [prevMoney, setPrevMoney] = useState<number>(0);
   const [money, setMoney] = useState<number>(0);
   const [sec, setSec] = useState<number>(0);
@@ -56,7 +65,7 @@ const Pachinco = ({ result, moneys, speed, visits }: PachincoType) => {
           <Button
             title={"나가기"}
             onClickEvent={() => {
-              navigate("/worker/home");
+              setIsOpen!(false);
             }}
           />
         ) : sec === moneys.length ? (
