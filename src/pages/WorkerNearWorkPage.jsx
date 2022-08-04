@@ -71,6 +71,9 @@ const WorkerNearWorkPage = () => {
           cursor: cursor,
         })
         .then((res) => {
+          if (res.data === "notFound" || res.data.length === 0) {
+            return;
+          }
           // 데이터 파싱
           setCursor(res.data[res.data.length - 1].store_id);
           setStores((list) => [...list, ...res.data]);
