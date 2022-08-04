@@ -63,7 +63,7 @@ const WorkerNearWorkPage = () => {
     );
     let clientHeight = document.documentElement.clientHeight;
 
-    if (scrollTop + clientHeight + 120 >= scrollHeight) {
+    if (scrollTop + clientHeight + 130 >= scrollHeight) {
       // console.log(cursor)
       axios
         .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/show/hourly_orders`, {
