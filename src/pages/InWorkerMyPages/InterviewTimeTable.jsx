@@ -8,9 +8,7 @@ const InterviewTimeTable = ({ result, status }) => {
   return (
     <div className="overflow-scroll h-full ">
       {src.length === 0 ? (
-        <div className="h-full m-8">
-          <NotFound title={"신청한 면접이 아직 없어요!"} />
-        </div>
+        <NotFound title={"신청한 면접이 아직 없어요!"} />
       ) : (
         src.map((el, index) => (
           <InterviewCard

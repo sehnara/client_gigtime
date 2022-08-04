@@ -15,7 +15,6 @@ const WorkTimeTable = () => {
         })
         .then((res) => {
           setDatas(res.data);
-          console.log(res.data);
         });
     } catch {
       console.log("axios error");
@@ -27,11 +26,9 @@ const WorkTimeTable = () => {
   }, []);
 
   return (
-    <div className="m-8">
+    <div className="overflow-scroll h-full">
       {datas.length === 0 ? (
-        <div className="h-full">
-          <NotFound title={"신청한 알바가 없어요!"} />
-        </div>
+        <NotFound title={"신청한 알바가 없어요!"} />
       ) : (
         datas.map((e) => {
           keyRef.current += 1;

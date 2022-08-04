@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import Empty from "../../components/Empty";
 import NotFound from "../../components/NotFound";
 import StoreCard from "../../components/StoreCard";
 
@@ -13,20 +12,25 @@ const WinStores = () => {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
-        setData(res.data);
+        if (res.data === "notFound") {
+          {
+            setData([]);
+          }
+        } else {
+          setData(res.data);
+        }
       });
   };
 
   useEffect(() => {
     getData();
   }, []);
-
+  console.log("!!!!!", data);
   return (
-    <div className="mx-8 my-4">
+    <div className="overflow-scroll h-full">
       {data.length === 0 ? (
-        <Empty text={"합격한 가게를 불러오는 중입니다."} margin={8} />
+        <NotFound title={"아직 합격한 곳이 없어요!"} />
       ) : (
-        // <NotFound title={"아직 합격한 곳이 없어요!"} />
         data.map((e: any, index: number) => {
           return (
             <StoreCard
