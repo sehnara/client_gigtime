@@ -56,28 +56,17 @@ const OwnerQrCode = () => {
         <div></div>
       ) : (
         <div className="text-center mt-32">
-          {isSuccess.success === "success" ? (
-            <>
-              <p className="text-2xl mb-4">
-                <span className="text-cyan-500 font-bold">'출근' </span>확인
-                되었습니다.
-              </p>
-              <p className="text-lg mb-2">
-                <span className="font-bold">{isSuccess.name}</span>님, 오늘도
-                <span className="text-cyan-500 font-bold"> 안전</span>하게
-                일해주세요!
-              </p>
-            </>
-          ) : isSuccess.success === "notFound" ? (
-            <>
-              <p className="text-xl mb-4">
-                <span className="text-cyan-500 font-bold">출근 시간</span>이
-                아닙니다.
-              </p>
-            </>
-          ) : (
-            <></>
-          )}
+          <>
+            <p className="text-2xl mb-4">
+              <span className="text-cyan-500 font-bold">'출근' </span>확인
+              되었습니다.
+            </p>
+            <p className="text-lg mb-2">
+              <span className="font-bold">{isSuccess.name}</span>님, 오늘도
+              <span className="text-cyan-500 font-bold"> 안전</span>하게
+              일해주세요!
+            </p>
+          </>
         </div>
       )}
     </div>
@@ -85,3 +74,27 @@ const OwnerQrCode = () => {
 };
 
 export default OwnerQrCode;
+
+// [원래  코드 : 2022.08.05 - 오전 02:35]
+// {isSuccess.success === "success" ? (
+//   <>
+//     <p className="text-2xl mb-4">
+//       <span className="text-cyan-500 font-bold">'출근' </span>확인
+//       되었습니다.
+//     </p>
+//     <p className="text-lg mb-2">
+//       <span className="font-bold">{isSuccess.name}</span>님, 오늘도
+//       <span className="text-cyan-500 font-bold"> 안전</span>하게
+//       일해주세요!
+//     </p>
+//   </>
+// ) : isSuccess.success === "notFound" ? (
+//   <>
+//     <p className="text-xl mb-4">
+//       <span className="text-cyan-500 font-bold">출근 시간</span>이
+//       아닙니다.
+//     </p>
+//   </>
+// ) : (
+//   <></>
+// )}
