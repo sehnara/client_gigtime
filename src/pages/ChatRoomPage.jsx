@@ -300,7 +300,7 @@ function ChatRoomPage({ socket }) {
             if (index === 1) {
               return (
                 <div
-                  className="h-auto p-3 flex justify-end"
+                  className="h-auto p-2 mb-5 flex justify-end"
                   key={index}
                   ref={ref}
                 >
@@ -325,7 +325,7 @@ function ChatRoomPage({ socket }) {
           } else {
             if (index === 1) {
               return (
-                <div className="h-auto p-3 flex" key={index} ref={ref}>
+                <div className="h-auto p-2 mb-5 flex" key={index} ref={ref}>
                   <div className="w-40">
                     <div className="w-auto h-auto min-h-[40px] max-w-full bg-gray-500 rounded-lg pt-3 pl-2 text-sm text-white braek-words">
                       <p>{messageContent.message}</p>
@@ -349,7 +349,7 @@ function ChatRoomPage({ socket }) {
           }
         })}
       </div>
-      <div className="h-10 sticky bottom-0">
+      <div className="h-8 w-full fixed bottom-0">
         <input
           type="text"
           value={currentMessage}

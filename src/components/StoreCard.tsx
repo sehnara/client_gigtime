@@ -68,7 +68,7 @@ function StoreCard({
         {storeImage === "" ? (
           <div className="w-16 h-16 rounded-lg bg-slate-300 mr-4"></div>
         ) : (
-          <img className=" w-16 h-16 rounded-lg mr-4" src={storeImage} />
+          <img className="object-cover w-16 h-16 rounded-lg mr-4" src={storeImage} />
         )}
 
         <div>
