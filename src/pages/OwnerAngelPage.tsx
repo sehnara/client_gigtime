@@ -99,6 +99,7 @@ const OwnerAngelPage = () => {
     };
   }, [sessionStorage.getItem("angel_id")]);
 
+  console.log("resultData", resultData, resultData.start_time);
   return (
     <div className=" h-screen">
       {/* <Header title="알바천사" worker={false} /> */}
@@ -137,11 +138,12 @@ const OwnerAngelPage = () => {
                 <div className="flex w-full ">
                   <p className="pr-4">시간 : </p>
                   <p>
-                    {resultData && Number(resultData.start_time) < 10
+                    {Number(resultData.start_time.split(":")[0]) < 10
                       ? `0${resultData.start_time}`
                       : resultData.start_time}
                     ~
-                    {resultData && Number(resultData.end_time) < 10
+                    {resultData &&
+                    Number(resultData.end_time.split(":")[0]) < 10
                       ? `0${resultData.end_time}`
                       : resultData.end_time}
                   </p>
