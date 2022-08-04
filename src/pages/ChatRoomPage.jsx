@@ -73,13 +73,23 @@ function ChatRoomPage({ socket }) {
           },
         })
         .then((res) => {
-          setChatId(res.data[res.data.length - 1].chatting_id);
-          setUserType("worker");
-          setUserId(sessionStorage.getItem("worker_id"));
-          const arr = res.data.sort((a, b) => {
-            return a.chatting_id - b.chatting_id;
-          });
-          return arr;
+          console.log(res.data)
+          if (res.data.length === 0) {
+            setUserType("worker");
+            setUserId(sessionStorage.getItem("worker_id"));
+            const arr = res.data.sort((a, b) => {
+              return a.chatting_id - b.chatting_id;
+            });
+            return arr;
+          } else {
+            setChatId(res.data[res.data.length - 1].chatting_id);
+            setUserType("worker");
+            setUserId(sessionStorage.getItem("worker_id"));
+            const arr = res.data.sort((a, b) => {
+              return a.chatting_id - b.chatting_id;
+            });
+            return arr;
+          }
         })
         .then((arr) => {
           setMessageList(arr);
@@ -98,13 +108,23 @@ function ChatRoomPage({ socket }) {
           },
         })
         .then((res) => {
-          setChatId(res.data[res.data.length - 1].chatting_id);
-          setUserType("owner");
-          setUserId(sessionStorage.getItem("owner_id"));
-          const arr = res.data.sort((a, b) => {
-            return a.chatting_id - b.chatting_id;
-          });
-          return arr;
+          console.log(res.data)
+          if (res.data.length === 0) {
+            setUserType("owner");
+            setUserId(sessionStorage.getItem("owner_id"));
+            const arr = res.data.sort((a, b) => {
+              return a.chatting_id - b.chatting_id;
+            });
+            return arr;
+          } else {
+            setChatId(res.data[res.data.length - 1].chatting_id);
+            setUserType("owner");
+            setUserId(sessionStorage.getItem("owner_id"));
+            const arr = res.data.sort((a, b) => {
+              return a.chatting_id - b.chatting_id;
+            });
+            return arr;
+          }
         })
         .then((arr) => {
           setMessageList(arr);
@@ -294,7 +314,7 @@ function ChatRoomPage({ socket }) {
       {/* <div className={ScrollActive ? "h-10 rounded bg-cyan-500 p-2 top-13 fixed w-full" : "h-10 rounded bg-cyan-500 p-2"}>
         <p className="text-white font-bold">{receiverName}</p>
       </div> */}
-      <div className="rounded border-2">
+      <div>
         {messageList.map((messageContent, index) => {
           if (caller === messageContent.caller_name) {
             if (index === 1) {
