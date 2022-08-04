@@ -38,7 +38,7 @@ const InterviewCard = ({
     // 없으면 alert
     // 있으면 navigate
     axios
-      .post(`${process.env.REACT_APP_ROUTE_PATH}/interview`, {
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/worker_interview`, {
         interviewId: interviewId,
       })
       .then((res) => {
