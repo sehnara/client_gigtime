@@ -68,7 +68,10 @@ function StoreCard({
         {storeImage === "" ? (
           <div className="w-16 h-16 rounded-lg bg-slate-300 mr-4"></div>
         ) : (
-          <img className="object-cover w-16 h-16 rounded-lg mr-4" src={storeImage} />
+          <img
+            className="object-cover w-16 h-16 rounded-lg mr-4"
+            src={storeImage}
+          />
         )}
 
         <div>
@@ -137,7 +140,6 @@ function StoreCard({
                         key={index}
                         className="mt-0.5 p-2 shadow-lg rounded-lg bg-white border-2"
                         onClick={(i) => {
-                          console.log(i.currentTarget.tagName === "BUTTON");
                           onWorkReserve({ id: e[2], date: e[0], type: e[1] });
                         }}
                       >

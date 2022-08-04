@@ -63,7 +63,7 @@ const WorkerNearWorkPage = () => {
     );
     let clientHeight = document.documentElement.clientHeight;
 
-    if (scrollTop + clientHeight === scrollHeight) {
+    if (scrollTop + clientHeight + 120 >= scrollHeight) {
       // console.log(cursor)
       axios
         .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/show/hourly_orders`, {
@@ -98,7 +98,11 @@ const WorkerNearWorkPage = () => {
 
   return (
     <div
-      className={`bg-yellow-400 ${stores.length === 0 ? "h-screen" : "h-full"}`}
+      className={`bg-yellow-400 ${
+        stores.length === 0 || stores.length === 1 || stores.length === 2
+          ? "h-screen"
+          : "h-full"
+      }`}
     >
       <Header title="알바 신청" worker={true} />
       <NavBar mode={"WORKER"} />

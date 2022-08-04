@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import { AiOutlineCalendar } from "react-icons/ai";
@@ -108,7 +108,11 @@ const WorkerReserveWorkPage = () => {
       setSur(money.map((i) => Number(i.min_price)).reduce((a, b) => a + b));
     }
   }, [money.length]);
-  // console.log(">><", storeData);
+
+  useEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <NavBar mode="WORKER" />

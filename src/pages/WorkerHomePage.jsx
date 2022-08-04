@@ -72,8 +72,16 @@ const WorkerHomePage = () => {
       document.body.scrollTop
     );
     let clientHeight = document.documentElement.clientHeight;
+    console.log(
+      "scrollHeight : ",
+      scrollHeight,
+      "scrollTop : ",
+      scrollTop,
+      "clientHeight : ",
+      clientHeight
+    );
 
-    if (scrollTop + clientHeight === scrollHeight) {
+    if (scrollTop + clientHeight + 120 >= scrollHeight) {
       axios
         .post(`${process.env.REACT_APP_ROUTE_PATH}/store/list`, {
           worker_id: sessionStorage.getItem("worker_id"),

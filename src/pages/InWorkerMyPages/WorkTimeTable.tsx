@@ -26,7 +26,7 @@ const WorkTimeTable = () => {
   }, []);
 
   return (
-    <div className="overflow-scroll h-full">
+    <div className="overflow-scroll h-full p-8">
       {datas.length === 0 ? (
         <NotFound title={"신청한 알바가 없어요!"} />
       ) : (
