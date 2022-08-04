@@ -2,7 +2,7 @@ import React from "react";
 
 function OtherChatbox( { messageContent, receiver } ) {
     return(
-        <div className="h-auto p-3 flex">
+        <div className="h-auto mb-5 p-2 flex">
             <div className="w-40">
                 <div className="w-auto h-auto min-h-[40px] max-w-full bg-gray-500 rounded-lg pt-3 pl-2 text-sm text-white braek-words">
                     <p>{messageContent.message}</p>
