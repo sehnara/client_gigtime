@@ -5,6 +5,7 @@ import clock from "../images/clock.png";
 import question from "../images/question.png";
 import CardButton from "./CardButton";
 import GigWorker from "./GigWorker";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function OwnerPageCard({
@@ -24,15 +25,22 @@ function OwnerPageCard({
   let dateSplit = date.split("-");
   const navigate = useNavigate();
 
-  function moveInterview(key) {
-    // 인터뷰 페이지로 이동
-    navigate("/interview", {
-      state: {
-        room: id,
-        isOwner: true,
-      },
-    });
-  }
+  const moveInterview = async () =>{
+    await axios
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner_interview`, {room: id})
+      .then((res) =>{
+        if(res.data.status === 'success'){
+          // 인터뷰 페이지로 이동
+          navigate("/interview", {
+            state: { 
+            room: id,
+            isOwner: true,
+            },
+          });
+      }  
+    })
+  };
+
   return (
     <>
       <DateText date={dateSplit} />
@@ -96,7 +104,7 @@ function OwnerPageCard({
                 color={"bg-cyan-500"}
                 height={10}
                 onClickEvent={() => {
-                  moveInterview(id);
+                  moveInterview();
                 }}
               />
             </>
