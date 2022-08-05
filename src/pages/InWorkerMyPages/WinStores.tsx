@@ -25,7 +25,7 @@ const WinStores = () => {
   useEffect(() => {
     getData();
   }, []);
-  console.log("!!!!!", data);
+
   return (
     <div className="overflow-scroll h-full">
       {data.length === 0 ? (

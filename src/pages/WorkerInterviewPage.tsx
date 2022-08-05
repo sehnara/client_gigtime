@@ -89,9 +89,9 @@ const WorkerInterviewPage = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   document.documentElement.scrollTo(0, 0);
-  // }, []);
+  useEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="">

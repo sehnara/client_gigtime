@@ -42,7 +42,7 @@ const WorkMyPage = () => {
     function watchScroll() {
       boxRef.current.addEventListener("scroll", logit);
     }
-    watchScroll();
+    // watchScroll();
   });
 
   useEffect(() => {

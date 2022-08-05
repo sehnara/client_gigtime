@@ -7,7 +7,7 @@ const MapContainer = ({ worker, owner }) => {
     const container = document.getElementById("myMap");
     const options = {
       center: new kakao.maps.LatLng(owner.lat, owner.lng),
-      level: 3,
+      level: 7,
     };
     const map = new kakao.maps.Map(container, options);
 
@@ -42,7 +42,7 @@ const MapContainer = ({ worker, owner }) => {
         image: markerImage, // 마커 이미지
       });
     }
-  }, []);
+  }, [worker, owner]);
   return <div id="myMap" className={`w-72 h-48 m-2`}></div>;
 };
 

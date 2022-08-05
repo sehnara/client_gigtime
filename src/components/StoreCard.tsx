@@ -61,9 +61,14 @@ function StoreCard({
   let nextGuns = 10;
 
   return (
-    <div className="mb-6" onClick={onClickEvent}>
+    <div
+      className={`${mode === "WIN" ? "m-4" : "mb-6"} `}
+      onClick={onClickEvent}
+    >
       {/* 상단부 */}
-      <div className="rounded-lg flex p-2 bg-white ">
+      <div
+        className={`rounded-lg flex ${mode === "WIN" ? "" : "p-2"} bg-white`}
+      >
         {/* 사진 */}
         {storeImage === "" ? (
           <div className="w-16 h-16 rounded-lg bg-slate-300 mr-4"></div>
