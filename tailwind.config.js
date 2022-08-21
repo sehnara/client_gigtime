@@ -14,6 +14,7 @@ module.exports = {
       },
       fontFamily: {
         jua: ['"Jua"', "sans-serif"],
+        picture: ['"Black And White Picture"', "sans-serif"]
       },
       translate: {
         "-1/2": "-50%",

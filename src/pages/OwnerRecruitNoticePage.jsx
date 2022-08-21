@@ -6,25 +6,6 @@ import Header from "../components/Header";
 import InputValue2 from "../components/InputValue2";
 import NavBar from "../components/NavBar";
 
-// {
-//   'owner_id': 60,
-//   'store_name': '보리누리',
-// 'type': '설거지',
-// 'description': '설거지 알바 모집합니다',
-// 'start_date': '2022-08-20',
-// 'end_date': '2022-08-22',
-// 'start_time': '10:00',
-// 'end_time': '14:00',
-// 'price': 10000
-// }
-
-// '/owner/mypage/employment/button'
-// {
-//   'name': '보리누리',
-//   'address': '인천 서구 심곡동 123-4',
-//   'type': ['서빙', '뭐시기', ...]
-// }
-
 const OwnerRecruitNoticePage = () => {
   const navigate = useNavigate();
   const [recruitData, setRecruitData] = useState({
@@ -63,7 +44,6 @@ const OwnerRecruitNoticePage = () => {
         }
       )
       .then((res) => {
-        console.log("recruit", res.data);
         setRecruitData({
           ...recruitData,
           store_name: res.data.name,
@@ -74,19 +54,35 @@ const OwnerRecruitNoticePage = () => {
   };
 
   const onEnroll = async () => {
+    if (
+      postData.type.split(" ")[0] === "기입" ||
+      postData.type === undefined ||
+      postData.start_time.split(" ")[0] === "기입" ||
+      postData.start_time === "" ||
+      postData.end_time.split(" ")[0] === "기입" ||
+      postData.end_time === ""
+    ) {
+      alert("모집 공고 정보 기입을 완료해주세요.");
+      return;
+    }
+
     await axios
       .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/employment`, postData)
       .then((res) => {
+        if (res.data === "success") {
+          alert("모집 공고 완료했습니다.");
+        }
         navigate("/owner/mypage");
-        console.log(res.data);
       });
   };
+
+  console.log("EEEEEEE", postData);
 
   useEffect(() => {
     setPostData({
       ...postData,
       store_name: recruitData.store_name,
-      type: recruitData.types,
+      type: recruitData.type,
       description: recruitData.description,
       start_date: recruitData.start_date,
       end_date: recruitData.end_date,
@@ -101,7 +97,7 @@ const OwnerRecruitNoticePage = () => {
   }, []);
 
   return (
-    <div className="pb-24">
+    <div className="pb-16">
       <Header title={"모집공고"} />
       <NavBar mode="OWNER" />
       <div className="mx-8">
@@ -138,10 +134,9 @@ const OwnerRecruitNoticePage = () => {
           dict_value={recruitData["description"]}
         />
       </div>
-      <div className="border-t-4 mt-8 mb-4"></div>
       {/* --------------------------------------------- */}
 
-      <div className="mx-8">
+      <div className="mx-8 ">
         {/* 시작날짜 */}
         <InputValue2
           mode="DATE"
@@ -209,8 +204,8 @@ const OwnerRecruitNoticePage = () => {
         />
       </div>
 
-      <div className="mx-8">
-        <Button title="모집공고" onClickEvent={onEnroll} />
+      <div className="mx-8 mb-8">
+        <Button title="모집공고 보내기" onClickEvent={onEnroll} />
       </div>
     </div>
   );

@@ -53,6 +53,14 @@ function KakaoLoginButton() {
                 return response;
               })
               .then(async (res) => {
+                console.log(
+                  "꿀벌 >>>>>",
+                  sessionStorage.getItem(
+                    res.data["member_type"] === "worker"
+                      ? "worker_id"
+                      : "owner_id"
+                  )
+                );
                 await axios.post(
                   `${process.env.REACT_APP_ROUTE_PATH}/permission`,
                   {

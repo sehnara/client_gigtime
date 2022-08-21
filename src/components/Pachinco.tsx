@@ -7,9 +7,18 @@ type PachincoType = {
   visits: any[];
   speed?: number;
   result?: {};
+  setIsOpen?: (e: boolean) => void;
+  isOpen?: boolean;
 };
 
-const Pachinco = ({ result, moneys, speed, visits }: PachincoType) => {
+const Pachinco = ({
+  result,
+  moneys,
+  speed,
+  visits,
+  setIsOpen,
+  isOpen,
+}: PachincoType) => {
   const [prevMoney, setPrevMoney] = useState<number>(0);
   const [money, setMoney] = useState<number>(0);
   const [sec, setSec] = useState<number>(0);
@@ -31,13 +40,11 @@ const Pachinco = ({ result, moneys, speed, visits }: PachincoType) => {
     };
   }, [sec]);
 
-  console.log(">>>>", sec, moneys);
-
   return (
     <div className="flex flex-col justify-center items-center w-full ">
-      <p className="text-red-400 font-bold text-4xl animation-fade-in-down p-4">
+      <p className="text-red-400 font-bold text-4xl animation-fade-in-down p-4 ">
         {moneys.length === 0
-          ? ""
+          ? "  "
           : sec === moneys.length
           ? `총 ${money - moneys[0]}원 증가`
           : `${money - prevMoney}원 증가`}
@@ -54,23 +61,25 @@ const Pachinco = ({ result, moneys, speed, visits }: PachincoType) => {
         )}
       </div>
       <div className="w-2/4">
-        {/* {sec === moneys.length ? (
+        {moneys.length === 0 ? (
+          <Button
+            title={"나가기"}
+            onClickEvent={() => {
+              setIsOpen!(false);
+            }}
+          />
+        ) : sec === moneys.length ? (
           <Button
             title={"다음으로"}
             onClickEvent={() =>
               navigate("/worker/speed/result", {
-                state: { visits, totalPrice: money },
+                state: { visits, totalPrice: money, result },
               })
             }
           />
-        ) : ( */}
-        <Button
-          title={"나가기"}
-          onClickEvent={() => {
-            navigate("/worker/home");
-          }}
-        />
-        {/* )} */}
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

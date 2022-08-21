@@ -18,22 +18,31 @@ const WorkerAngelResult = () => {
     dist: 0,
     location: "",
   });
+  const sch = window.location.search;
+  const params = new URLSearchParams(sch);
+  const w_id = params.get("worker_id");
+  const a_id = params.get("angel_id");
 
   const getData = async () => {
     await axios
-      .get("/worker/angel/info", {
-        params: {
-          angel_id: sessionStorage.getItem("angel_id"),
-          worker_id: sessionStorage.getItem("worker_id"),
-        },
+      .post("/worker/angel/info", {
+        angel_id: sessionStorage.getItem("angel_id") || a_id,
+        worker_id: sessionStorage.getItem("worker_id") || w_id,
       })
       .then((res) => {
-        console.log("받아라 제발", res.data);
+        console.log("알바생 앤젤 뭐시기 >>>>", res.data);
         setData(res.data);
       });
   };
 
   useEffect(() => {
+    if (
+      !sessionStorage.getItem("worker_id") ||
+      !sessionStorage.getItem("angel_id")
+    ) {
+      sessionStorage.setItem("worker_id", w_id);
+      sessionStorage.setItem("angel_id", a_id);
+    }
     getData();
   }, []);
 
@@ -47,13 +56,24 @@ const WorkerAngelResult = () => {
         worker_id: sessionStorage.getItem("worker_id"),
       })
       .then((res) => {
+        if (res.data === "success") {
+          alert(`${data.store_name}와(과) 알바천사 매칭되었습니다.`);
+        } else if (res.data === "fail") {
+          alert(`이미 만료된 콜입니다.`);
+        } else if (res.data === "already") {
+          alert(`동일한 시간에 알바 천사 콜 두 건 이상 수락 불가합니다.`);
+        } else {
+          alert("잠시 후 다시 이용해주세요.");
+        }
+      })
+      .then(() => {
         navigation("/worker/home");
       });
   };
 
   return (
     <div>
-      <Header title="알바천사" onClickEvent={"/worker/home"} />
+      <Header title="알바천사 결과" onClickEvent={"/worker/home"} />
       <div className="flex flex-col justify-center items-center">
         <p className="text-cyan-400 text-2xl font-bold my-8 ">바로알바 정보</p>
         {/* 1.요청 직종 */}

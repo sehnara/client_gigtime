@@ -19,8 +19,9 @@ const CardButton = ({
 }: CardButtonProps) => {
   const onClick = () => {
     onClickEvent && onClickEvent();
-    setIsClick!(true);
+    setIsClick && setIsClick!(true);
   };
+
   return (
     <button
       onClick={onClick}

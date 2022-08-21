@@ -34,13 +34,7 @@ const WorkerNearWorkPage = () => {
           setIsNotFound(true);
         } else {
           // 데이터 파싱
-          const obj = res.data[res.data.length - 1].work_date_and_type_and_id;
-          const temp = Object.keys(obj);
-          const key = temp[temp.length - 1];
-          const temp2 = obj[key].start_time_and_id;
-          const testCursor = temp2[temp2.length - 1];
-
-          setCursor(testCursor[testCursor.length - 1]);
+          setCursor(res.data[res.data.length - 1].store_id);
           setStores(res.data);
         }
       });
@@ -69,22 +63,19 @@ const WorkerNearWorkPage = () => {
     );
     let clientHeight = document.documentElement.clientHeight;
 
-    if (scrollTop + clientHeight === scrollHeight) {
+    if (scrollTop + clientHeight + 130 >= scrollHeight) {
+      // console.log(cursor)
       axios
         .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/show/hourly_orders`, {
           worker_id: sessionStorage.getItem("worker_id"),
           cursor: cursor,
         })
         .then((res) => {
-          // console.log("hourly_orders 스크롤 시 res.data : ", res.data);
+          if (res.data === "notFound" || res.data.length === 0) {
+            return;
+          }
           // 데이터 파싱
-          const obj = res.data[res.data.length - 1].work_date_and_type_and_id;
-          const temp = Object.keys(obj);
-          const key = temp[temp.length - 1];
-          const temp2 = obj[key].start_time_and_id;
-          const testCursor = temp2[temp2.length - 1];
-          // console.log("cursor : ", testCursor[testCursor.length - 1]);
-          setCursor(testCursor[testCursor.length - 1]);
+          setCursor(res.data[res.data.length - 1].store_id);
           setStores((list) => [...list, ...res.data]);
         });
     }
@@ -97,34 +88,43 @@ const WorkerNearWorkPage = () => {
 
   const ref = useRef(1);
   const navigate = useNavigate();
+
   const nextPage = (data) => {
     dispatch(setCurrentOrder(data.id));
+    sessionStorage.setItem("reserve_id", data.id);
     dispatch(setCurrentDate(data.date));
+    sessionStorage.setItem("reserve_date", data.date);
     dispatch(setCurrentType(data.type));
+    sessionStorage.setItem("reserve_type", data.type);
     navigate("/worker/reserveWork");
   };
 
   return (
-    <div className="bg-yellow-400 h-screen">
-      <Header title="마이 홈" worker={true} />
+    <div
+      className={`bg-yellow-400 ${
+        stores.length === 0 || stores.length === 1 || stores.length === 2
+          ? "h-screen"
+          : "h-full"
+      }`}
+    >
+      <Header title="알바 신청" worker={true} />
       <NavBar mode={"WORKER"} />
       {/* 상단 */}
-      <div className="bg-white">
-        <div className=" mx-4 py-4 ">
-          <h1 className="text-xl font-bold flex">
-            <HiOutlineLocationMarker className="text-7xl mr-3 text-red-400 font-bold animate-bounce" />
-            {loc}
+      <div className="bg-slate-100">
+        <div className=" p-4 flex justify-between items-center">
+          <h1 className="text-xl font-bold flex ">
+            {loc.split(" ").slice(0, 3).join(" ")}
           </h1>
-          <p className="text-right p-2 py-1 rounded-lg font-bold">
-            내 주변
-            <span className="font-bold text-cyan-500 text-4xl "> {range}</span>m
+          <p className="rounded-lg font-bold text-xl flex items-center">
+            <p className="text-xs text-gray-500 pr-1 pt-2 ">내 주변</p>
+            <span className="font-bold text-red-400 text-2xl "> {range}</span>m
           </p>
         </div>
       </div>
       {/* 중반 */}
 
       <div className={`bg-yellow-400 pt-4 h-full pb-24`}>
-        <div className="mx-8 ">
+        <div className="mx-8 my-4">
           {notFound ? (
             <div className=" text-center font-bold pt-64">
               <p className="animate-pulse text-lg">등록된 가게가 없습니다.</p>
@@ -132,14 +132,14 @@ const WorkerNearWorkPage = () => {
           ) : stores && stores.length !== 0 ? (
             stores.map((e) => {
               ref.current += 1;
-              // console.log(e);
+              console.log(e);
               return (
                 <StoreCard
                   key={ref.current}
                   mode={"NEAR"}
                   store={e.name}
                   distance={e.distance}
-                  jobs={["서빙"]}
+                  jobs={[]}
                   storeImage={`${process.env.REACT_APP_S3_PATH}${e.background_image}`}
                   minPay={e.minimum_wage}
                   works={e.key}

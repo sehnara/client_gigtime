@@ -5,6 +5,7 @@ import clock from "../images/clock.png";
 import question from "../images/question.png";
 import CardButton from "./CardButton";
 import GigWorker from "./GigWorker";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function OwnerPageCard({
@@ -24,28 +25,52 @@ function OwnerPageCard({
   let dateSplit = date.split("-");
   const navigate = useNavigate();
 
-  function moveInterview(key) {
-    // 인터뷰 페이지로 이동
-    navigate("/interview", {
-      state: {
-        room: id,
-        isOwner: true,
-      },
-    });
-  }
+  const moveInterview = async () =>{
+    await axios
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner_interview`, {room: id})
+      .then((res) =>{
+        if(res.data.status === 'success'){
+          // 인터뷰 페이지로 이동
+          navigate("/interview", {
+            state: { 
+            room: id,
+            isOwner: true,
+            },
+          });
+      }  
+    })
+  };
+
   return (
     <>
       <DateText date={dateSplit} />
-      <div className="w-84 h-52 rounded-xl shadow-lg shadow-black-500 mr-2  text-center flex flex-col p-4 mb-8">
+      <div
+        className={`w-84 ${
+          mode === "EXPIRED" ? "h-16" : "h-52"
+        } rounded-xl shadow-lg shadow-black-500 mr-2  text-center flex ${
+          mode === "EXPIRED"
+            ? "flex items-center justify-between bg-gray-200"
+            : "flex-col"
+        } p-4 mb-8`}
+      >
         <GigWorker name={name} />
-        <div className="flex items-center">
-          <img className="mx-2 my-1 w-7 h-7" src={clock} />
-          <p className="text-base ml-3">{interviewTime}</p>
-        </div>
-        <div className="flex items-center">
-          <img className="mx-2 my-2 w-7 h-7" src={question} />
-          <p className="text-base ml-3">{description}</p>
-        </div>
+        {mode === "EXPIRED" && (
+          <p className="pl-32 text-red-400 font-bold">만료</p>
+        )}
+        {mode === "EXPIRED" ? (
+          <></>
+        ) : (
+          <>
+            <div className="flex items-center">
+              <img className="mx-2 my-1 w-7 h-7" src={clock} />
+              <p className="text-base ml-3">{interviewTime}</p>
+            </div>
+            <div className="flex items-center">
+              <img className="mx-2 my-2 w-7 h-7" src={question} />
+              <p className="text-base ml-3">{description}</p>
+            </div>
+          </>
+        )}
         <div className="flex">
           {mode === "WAIT" ? (
             <>
@@ -79,10 +104,12 @@ function OwnerPageCard({
                 color={"bg-cyan-500"}
                 height={10}
                 onClickEvent={() => {
-                  moveInterview(id);
+                  moveInterview();
                 }}
               />
             </>
+          ) : mode === "EXPIRED" ? (
+            <></>
           ) : (
             <>
               <CardButton

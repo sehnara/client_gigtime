@@ -13,7 +13,7 @@ export const sign = createSlice({
     name: "",
     email: "",
     location: "",
-    range: 0,
+    range: 2000,
   },
   reducers: {
     setName(state, action) {

@@ -17,7 +17,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full flex space-x-12 px-8 py-4 fixed bottom-0 bg-white shadow-xl shadow-inner items-center justify-center ">
+    <div className="w-full flex space-x-12 px-8 py-3 fixed bottom-0 bg-white shadow-xl shadow-inner items-center justify-center ">
       {mode === "WORKER" ? (
         <>
           <button
@@ -26,7 +26,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             }}
             className="text-2xl flex flex-col items-center"
           >
-            <AiOutlineUsergroupAdd />
+            <AiOutlineUsergroupAdd className="text-2xl" />
 
             <p className="text-xs">면접</p>
           </button>
@@ -36,7 +36,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             }}
             className="text-2xl flex flex-col items-center"
           >
-            <RiMoneyDollarCircleLine />
+            <RiMoneyDollarCircleLine className="text-2xl" />
             <p className="text-xs">알바</p>
           </button>
           <button
@@ -52,8 +52,8 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             onClick={() => navigate("/worker/speed")}
             className="text-2xl flex flex-col items-center"
           >
-            <FiZap />
-            <p className="text-xs">바로</p>
+            <FiZap className="text-2xl" />
+            <p className="text-xs">추천</p>
           </button>
           <button
             onClick={() => {
@@ -61,7 +61,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             }}
             className="text-2xl flex flex-col items-center"
           >
-            <BsChatDots /> <p className="text-xs">채팅</p>
+            <BsChatDots className="text-2xl" /> <p className="text-xs">채팅</p>
           </button>
         </>
       ) : (
@@ -72,7 +72,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             }}
             className="text-2xl flex flex-col items-center"
           >
-            <AiOutlineHome />
+            <AiOutlineHome className="text-2xl" />
             <p className="text-xs">홈</p>
           </button>
           <button
@@ -81,7 +81,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             }}
             className="text-2xl flex flex-col items-center"
           >
-            <AiOutlineUsergroupAdd />
+            <AiOutlineUsergroupAdd className="text-2xl" />
             <p className="text-xs">모집</p>
           </button>
           <button
@@ -94,10 +94,12 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             <p className="text-xs">출첵</p>
           </button>
           <button
-            onClick={() => angelUseState("POSTING")}
+            onClick={() => {
+              navigate("/owner/angel");
+            }}
             className="text-2xl flex flex-col items-center"
           >
-            <FiZap />
+            <FiZap className="text-2xl" />
             <p className="text-xs">천사</p>
           </button>
           <button
@@ -106,7 +108,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             }}
             className="text-2xl flex flex-col items-center"
           >
-            <BsChatDots /> <p className="text-xs">채팅</p>
+            <BsChatDots className="text-2xl" /> <p className="text-xs">채팅</p>
           </button>
         </>
       )}

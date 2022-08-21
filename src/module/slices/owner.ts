@@ -7,7 +7,7 @@ export interface OwnerData {
     store_name: string;
     location: string;
     store_jobs: string[];
-    background: string;
+    background: File;
     logo: string;
     description: string;
     minimum_wage: number;

@@ -46,7 +46,7 @@ const List = ({
       : time.getDay() === 6
       ? "토"
       : "일";
-
+  // console.log(">>>", isStretch);
   return (
     <div className="mb-8 ">
       {mode === "WORKER" ? (
@@ -73,9 +73,20 @@ const List = ({
           {date == undefined ? (
             <Empty text={"모집 내역이 없습니다."} margin={4} />
           ) : (
-            <div className="flex space-x-2 items-center mb-1">
-              <AiOutlineCalendar className="text-3xl" />
-              <p className="text-lg font-bold">{`${year}년 ${month}월 ${day}일 ${yoil}요일`}</p>
+            <div className="flex space-x-2 items-center mb-1 justify-between w-full">
+              <div className="flex space-x-2 items-center ">
+                <AiOutlineCalendar className="text-sm" />
+                <p className="text-sm font-bold">{`${year}년 ${month}월 ${day}일 ${yoil}요일`}</p>
+              </div>
+              {date !== undefined && (
+                <p className="text-sm text-gray-500 pr-2">
+                  총
+                  <span className="text-cyan-500 font-bold text-sm">
+                    {` ${datas.length}`}
+                  </span>
+                  시간
+                </p>
+              )}
             </div>
           )}
         </div>
@@ -86,17 +97,6 @@ const List = ({
           date === undefined ? "" : "shadow-xl"
         } pb-1`}
       >
-        {mode === "WORKER"
-          ? ""
-          : date !== undefined && (
-              <p className="text-sm text-gray-500 text-right">
-                총
-                <span className="text-cyan-500 font-bold text-lg">
-                  {` ${datas.length}`}
-                </span>
-                시간
-              </p>
-            )}
         {mode === "WORKER" ? (
           ""
         ) : (
@@ -173,7 +173,11 @@ const List = ({
             }}
           >
             <p>더보기</p>
-            {isStretch ? <RiArrowUpSLine /> : <RiArrowDownSLine />}
+            {isStretch ? (
+              <RiArrowUpSLine className="text-lg" />
+            ) : (
+              <RiArrowDownSLine className="text-lg" />
+            )}
           </button>
         ) : (
           ""

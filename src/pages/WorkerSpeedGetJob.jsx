@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import InputValue2 from "../components/InputValue2";
+import MapRoute from "../components/Map/MapRoute";
 import NavBar from "../components/NavBar";
 import Pachinco from "../components/Pachinco";
 
@@ -54,7 +55,6 @@ const WorkerSpeedGetJob = () => {
         min_price: Number(recruitData.price),
       })
       .then((res) => {
-        console.log("!~!!!!!!", res.data);
         setResult(res.data);
       })
       .then(() => {
@@ -76,6 +76,8 @@ const WorkerSpeedGetJob = () => {
           className="flex bg-black/[.8] absolute w-full h-full "
         >
           <Pachinco
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
             result={result}
             moneys={result.p_history}
             speed={80}
@@ -85,6 +87,17 @@ const WorkerSpeedGetJob = () => {
       )}
       <NavBar mode="WORKER" />
       <Header title="바로알바" worker={true} />
+      <div className="p-8 bg-slate-200">
+        <p className="text-xl">
+          최적의 <span className="text-cyan-500 font-bold">알바 경로</span>를
+        </p>
+        <p className="text-xl">추천해드립니다.</p>
+        <p className="bg-white text-sm mt-4 rounded-md p-4">
+          추천 받을 날짜와 시간만 설정하면{" "}
+          <span className="text-cyan-500">가장 높은 수익</span>이 기대되는 알바
+          시간표를 추천해드립니다.
+        </p>
+      </div>
       <div className="mx-8 my-4">
         <InputValue2
           mode="SELECT"
@@ -95,22 +108,22 @@ const WorkerSpeedGetJob = () => {
           dict_value={recruitData["type"]}
           options={[
             "알바유형 선택",
-            "음식점",
+            "설거지",
             "서빙",
             "청소",
             "음료제조",
-            "문서작업",
-            "번역",
-            "질서유지",
-            "경비",
+            "전단지",
+            "배달",
+            "고객관리",
+            "홍보",
             "주방보조",
-            "운송",
+            "포장",
             "판매",
-            "이벤트",
-            "편의점",
-            "건성용역",
-            "베이비시터",
-            "술집",
+            "심부름",
+            "카운터",
+            "계산",
+            "재료관리",
+            "매장관리",
           ]}
         />
         <InputValue2
@@ -191,19 +204,10 @@ const WorkerSpeedGetJob = () => {
             setIsPopUp(!isPopUp);
           }}
         />
+        <div className="pb-24 "></div>
       </div>
     </div>
   );
 };
 
 export default WorkerSpeedGetJob;
-
-//    {
-//     "worker_id": 1,
-//     "work_date": "2022-08-20",
-//     "start_times": [
-//         "10:00",
-//         "11:00",
-//        ...
-//         ]
-// }
