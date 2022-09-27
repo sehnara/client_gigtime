@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import List from "../../components/List";
+import NotFound from "../../components/NotFound";
 
 const WorkTimeTable = () => {
   const keyRef = useRef(1);
@@ -9,12 +10,11 @@ const WorkTimeTable = () => {
   const getData = async () => {
     try {
       await axios
-        .post("http://localhost:4000/worker/mypage/work", {
+        .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/mypage/work`, {
           worker_id: sessionStorage.getItem("worker_id"),
         })
         .then((res) => {
           setDatas(res.data);
-          console.log(res.data);
         });
     } catch {
       console.log("axios error");
@@ -26,13 +26,15 @@ const WorkTimeTable = () => {
   }, []);
 
   return (
-    <div className="m-8">
-      {datas &&
+    <div className="overflow-scroll h-full p-8">
+      {datas.length === 0 ? (
+        <NotFound title={"신청한 알바가 없어요!"} />
+      ) : (
         datas.map((e) => {
           keyRef.current += 1;
           let hours = new Array();
 
-          for (let i = 4; i < e.length; i++) {
+          for (let i = 6; i < e.length; i++) {
             hours.push(e[i]);
           }
 
@@ -48,7 +50,8 @@ const WorkTimeTable = () => {
               datas={hours} // 수정해야함
             />
           );
-        })}
+        })
+      )}
     </div>
   );
 };

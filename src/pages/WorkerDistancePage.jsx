@@ -4,6 +4,8 @@ import Button from "../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setRange } from "../module/slices/sign";
 import axios from "axios";
+import Header from "../components/Header";
+import Map from "../components/Map/Map";
 
 const WorkerDistancePage = () => {
   const dispatch = useDispatch();
@@ -19,9 +21,8 @@ const WorkerDistancePage = () => {
 
   const setSignData = async () => {
     await axios
-      .post("http://localhost:4000/worker/signup", signData)
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/signup`, signData)
       .then((res) => {
-        console.log("res.data >>>>", res.data);
         sessionStorage.setItem("worker_id", res.data);
       })
       .then(() => {
@@ -31,21 +32,24 @@ const WorkerDistancePage = () => {
         console.log(error);
       });
   };
-
-  // 다음 페이지로 가입시더
   const onNextPage = () => {
     setSignData();
   };
 
   return (
     <div className="font-sans">
+      <Header title="회원가입 " isSignUp={true} />
       {/* 상단 */}
-      <div className=" m-8  flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{signData.location}</h1>
+      <div className=" m-8  flex items-start flex-col">
+        <div className="text-gray-600 font-bold">
+          <h2>현재 위치 : </h2>
+        </div>
+        <h1 className="text-xl font-bold">{signData.location}</h1>
       </div>
+      <div className="border-2"></div>
       {/* 중반 */}
       <div className=" m-8 mt-10">
-        <p className="text-lg mb-0.5 font-bold">거리를 설정해주세요</p>
+        <p className="text-xl mb-4 font-bold">거리를 설정해주세요</p>
         <p className="text-xs text-gray-500 mt-2">
           반경 <span className="font-extrabold">{signData.range}m</span> 안에
           있는 일감 정보가 검색됩니다.
@@ -54,10 +58,17 @@ const WorkerDistancePage = () => {
           type="range"
           className="border-2 h-10 w-full"
           min={0}
-          max={5000}
-          step={10}
+          max={4000}
+          step={100}
           value={signData.range}
           onChange={onchangeDistance}
+        />
+        <Map
+          level={8}
+          width={"full"}
+          height={"96"}
+          address={signData.location}
+          range={signData.range}
         />
         <Button title={"설정 완료"} onClickEvent={onNextPage} />
       </div>

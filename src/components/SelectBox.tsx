@@ -4,11 +4,13 @@ type MODE = "NORMAL" | "RESERVE" | "TIME";
 
 type SelectBoxProp = {
   data: any[];
-  getData: (e: any) => void;
+  getData: (e: any, e2?: any) => void;
   mode?: MODE;
   selectedDate?: string[];
   selectedDay?: string | null;
   selectedTime?: string | null;
+  setMoney?: () => void;
+  money?: [];
 };
 
 const SelectBox = ({
@@ -19,37 +21,38 @@ const SelectBox = ({
   getData,
   mode,
 }: SelectBoxProp) => {
-  // console.log("^^^^^^^^^^^^^", selectedDate);
-
   return (
-    <div className="shadow-lg shadow-slate-300 h-40 overflow-scroll rounded-md">
+    <div className="shadow-lg shadow-slate-300 h-40 overflow-scroll rounded-md ">
       {data.map((e) => {
         return mode === "RESERVE" ? (
           <div
-            onClick={() => getData(e.hourlyorders_id)}
+            onClick={() => {
+              getData(e.hourlyorders_id, e);
+            }}
             key={e.hourlyorders_id}
-            className={`rounded-sm text-center py-2 shadow-sm  mx-2 my-2  cursor-pointer text-sm ${
+            className={`p-2 px-8 rounded-sm text-center shadow-sm   cursor-pointer text-sm items-center ${
               selectedDate!.includes(e.hourlyorders_id)
                 ? "text-white bg-cyan-500"
                 : "text-black bg-white"
-            } flex px-4 justify-between`}
+            } flex justify-between`}
           >
             <p>{`${e.start_time.split("T")[1].split(":")[0]}:${
               e.start_time.split("T")[1].split(":")[1]
-            }~${
+            } ~ ${
               Number(e.start_time.split("T")[1].split(":")[0]) + 1 < 10
                 ? "0" + (Number(e.start_time.split("T")[1].split(":")[0]) + 1)
                 : Number(e.start_time.split("T")[1].split(":")[0]) + 1
             }:${e.start_time.split("T")[1].split(":")[1]}`}</p>
             <p>
-              {e.min_price}원<span className="text-xs"> /시간</span>
+              <span className="font-bold text-lg  ">{e.min_price}</span>
+              <span className="text-xs">원</span>
             </p>
           </div>
         ) : (
           <div
             onClick={() => getData(e)}
             key={e}
-            className={`rounded-sm text-center py-2 shadow-sm  mx-2 my-2 ${
+            className={`rounded-sm text-center  shadow-sm  px-2 py-2 ${
               selectedDay === e || selectedTime === e
                 ? "bg-cyan-500 text-white"
                 : ""

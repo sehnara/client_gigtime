@@ -21,14 +21,59 @@
     ></script>
     <title>바로 알바</title>
     <!-- Kakao API -->
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e52d9d71836aeaf748d049929de16bca&libraries=services"
+    ></script>
+    <!-- <script type="text/javascript">
+      kakao.maps.load(function () {
+        const map = new kakao.maps.Map(node, options);
+      });
+    </script> -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Hahmlet:wght@300;500;600&display=swap" rel="stylesheet">
+    <style>
+      .overlaybox {
+        position: relative;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(2, 191, 204, 0.6);
+        border-radius: 50%;
+      }
+      .overlaybox .boxtitle {
+        color: rgb(49, 49, 49);
+        font-size: 14px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 1);
+        width: 20px;
+        border-radius: 50%;
+        height: 20px;
+        line-height: 20px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
 </html>
+
+<!-- background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/box_movie.png")
+          no-repeat; -->

@@ -2,29 +2,57 @@ import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Header from "../components/Header";
 
 const pc_config = {
+  // {
+  //   urls: 'stun:[STUN_IP]:[PORT]',
+  //   'credentials': '[YOR CREDENTIALS]',
+  //   'username': '[USERNAME]'
+  // },
   iceServers: [
-    // {
-    //   urls: 'stun:[STUN_IP]:[PORT]',
-    //   'credentials': '[YOR CREDENTIALS]',
-    //   'username': '[USERNAME]'
-    // },
     {
-      urls: [
-        "stun:stun.l.google.com:19302",
-        "stun:stun1.l.google.com:19302",
-        "stun:stun2.l.google.com:19302",
-        "stun:stun3.l.google.com:19302",
-        "stun:stun4.l.google.com:19302",
-      ],
+      urls: "stun:stun.l.google.com:19302",
+    },
+    {
+      urls: "stun:stun1.l.google.com:19302",
+    },
+    {
+      urls: "stun:stun2.l.google.com:19302",
+    },
+    {
+      urls: "stun:stun3.l.google.com:19302",
+    },
+    {
+      urls: "stun:stun4.l.google.com:19302",
+    },
+    {
+      urls: "turn:openrelay.metered.ca:80",
+      username: "openrelayproject",
+      credential: "openrelayproject",
+    },
+    {
+      urls: "turn:openrelay.metered.ca:443",
+      username: "openrelayproject",
+      credential: "openrelayproject",
+    },
+    {
+      urls: "turn:openrelay.metered.ca:443?transport=tcp",
+      username: "openrelayproject",
+      credential: "openrelayproject",
     },
   ],
 };
-/* 서버 소켓 URL  */
-const SOCKET_SERVER_URL = "http://localhost:8080";
+/* Server Socket URL : REACT_APP_SOCKET_SERVER -> .env edit*/
+
+// const SOCKET_SERVER_URL = `${process.env.REACT_APP_SOCKET_SERVER}`;
+
+type CommonInterviewPageProps = {
+  socket?: SocketIOClient.Socket;
+};
+
 // room_full 에 대한 처리가 없음!
-const CommonInterviewPage = () => {
+const CommonInterviewPage = ({ socket }: CommonInterviewPageProps) => {
   // 사장님, 워커에 따라 다른 인자로 통신을 함.
   const [onMike, setOnMike] = useState(true);
   const [onScreen, setOnScreen] = useState(true);
@@ -111,52 +139,54 @@ const CommonInterviewPage = () => {
   };
 
   useEffect(() => {
-    socketRef.current = io.connect(SOCKET_SERVER_URL);
-    pcRef.current = new RTCPeerConnection(pc_config);
+    socketRef.current = socket;
+    if (socketRef.current !== undefined) {
+      pcRef.current = new RTCPeerConnection(pc_config);
 
-    socketRef.current.on("all_users", (allUsers: Array<{ id: string }>) => {
-      if (allUsers.length > 0) {
-        createOffer();
-      }
-    });
+      socketRef.current.on("all_users", (allUsers: Array<{ id: string }>) => {
+        if (allUsers.length > 0) {
+          createOffer();
+        }
+      });
 
-    socketRef.current.on("getOffer", (sdp: RTCSessionDescription) => {
-      //console.log(sdp);
-      console.log("get offer");
-      createAnswer(sdp);
-    });
+      socketRef.current.on("getOffer", (sdp: RTCSessionDescription) => {
+        //console.log(sdp);
+        console.log("get offer");
+        createAnswer(sdp);
+      });
 
-    socketRef.current.on("getAnswer", (sdp: RTCSessionDescription) => {
-      console.log("get answer");
-      if (!pcRef.current) return;
-      pcRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
-      //console.log(sdp);
-    });
-
-    socketRef.current.on(
-      "getCandidate",
-      async (candidate: RTCIceCandidateInit) => {
+      socketRef.current.on("getAnswer", (sdp: RTCSessionDescription) => {
+        console.log("get answer");
         if (!pcRef.current) return;
-        await pcRef.current.addIceCandidate(new RTCIceCandidate(candidate));
-        console.log("candidate add success");
-      }
-    );
+        pcRef.current.setRemoteDescription(new RTCSessionDescription(sdp));
+        //console.log(sdp);
+      });
 
-    socketRef.current.on(roomID, (msg: string) => {
-      alert(msg);
-      window.location.reload();
-    });
+      socketRef.current.on(
+        "getCandidate",
+        async (candidate: RTCIceCandidateInit) => {
+          if (!pcRef.current) return;
+          await pcRef.current.addIceCandidate(new RTCIceCandidate(candidate));
+          console.log("candidate add success");
+        }
+      );
 
-    setVideoTracks();
+      socketRef.current.on(roomID, (msg: string) => {
+        alert(msg);
+        window.location.reload();
+      });
 
-    return () => {
-      if (socketRef.current) {
-        socketRef.current.disconnect();
-      }
-      if (pcRef.current) {
-        pcRef.current.close();
-      }
-    };
+      setVideoTracks();
+
+      return () => {
+        if (socketRef.current) {
+          socketRef.current.disconnect();
+        }
+        if (pcRef.current) {
+          pcRef.current.close();
+        }
+      };
+    }
   }, []);
   function handleMike(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -193,9 +223,12 @@ const CommonInterviewPage = () => {
     if (isOwner) {
       // 상점 주인일 경우 axios 통신 후 이동
       axios
-        .post("http://localhost:4000/owner/mypage/interview/exit", {
-          interview_id: roomID,
-        })
+        .post(
+          `${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/interview/exit`,
+          {
+            interview_id: roomID,
+          }
+        )
         .then((res) => {
           console.log(res.data);
           if (res.data.state === "success") {
@@ -212,114 +245,60 @@ const CommonInterviewPage = () => {
     }
   }
   return (
-    <div style={{ backgroundColor: "#1b1b1c", height: "100vh" }}>
-      <h1
-        style={{
-          fontSize: 15,
-          textAlign: "center",
-          padding: "20px",
-          color: "white",
-        }}
-      >
-        샤샥 알바
-      </h1>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+    <div>
+      <div className="relative flex items-center justify-center h-screen overflow-hidden">
+        {/* <div className="relative"> */}
         <video
-          style={{
-            width: "50%",
-            height: "50%",
-            backgroundColor: "#3f3f40",
-            padding: "5px",
-          }}
-          playsInline
-          muted
           ref={localVideoRef}
+          muted
+          playsInline
           autoPlay
+          className="absolute z-20 w-1/3 top-0 right-0"
         />
+
         <video
           id="remotevideo"
-          style={{
-            width: "50%",
-            height: "50%",
-            backgroundColor: "#3f3f40",
-            padding: "5px",
-            zIndex: 2,
-          }}
           ref={remoteVideoRef}
           playsInline
           autoPlay
+          className="absolute z-10 w-auto min-w-full min-h-full max-w-none"
         />
-      </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button
-          id="mike"
-          onClick={handleMike}
-          style={{
-            width: "50px",
-            margin: "10px",
-            backgroundColor: "#3f3f40",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src={
-              onMike
-                ? require(`../images/no-mute.png`)
-                : require(`../images/mute.png`)
-            }
-            width="25"
-            height="25"
-            alt="Mute On/Off"
-          />
-        </button>{" "}
-        <button
-          id="screen"
-          onClick={handleScreen}
-          style={{
-            width: "50px",
-            margin: "10px",
-            backgroundColor: "#3f3f40",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src={
-              onScreen
-                ? require(`../images/video.png`)
-                : require(`../images/no-video.png`)
-            }
-            width="25"
-            height="25"
-            alt="Screen On/Off"
-          />
-        </button>{" "}
-        <button
-          id="exit"
-          onClick={handleExit}
-          style={{
-            width: "50px",
-            margin: "10px",
-            backgroundColor: "#3f3f40",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          {" "}
-          <img
-            src={require(`../images/logout.png`)}
-            width="25"
-            height="25"
-            alt="Exit"
-          />
-        </button>
+        {/* </div> */}
+
+        <div className="z-30 flex items-center justify-center w-40 rounded-3xl space-x-5 py-2 bg-gray-200 border-4 border-cyan-700 pt-2 mt-auto mb-20">
+          <button id="mike" onClick={handleMike} className="">
+            <img
+              src={
+                onMike
+                  ? require(`../images/no-mute.png`)
+                  : require(`../images/mute.png`)
+              }
+              width="25"
+              height="25"
+              alt="Mute On/Off"
+            />
+          </button>{" "}
+          <button id="screen" onClick={handleScreen} className="">
+            <img
+              src={
+                onScreen
+                  ? require(`../images/video.png`)
+                  : require(`../images/no-video.png`)
+              }
+              width="25"
+              height="25"
+              alt="Screen On/Off"
+            />
+          </button>{" "}
+          <button id="exit" onClick={handleExit} className="">
+            <img
+              src={require(`../images/logout.png`)}
+              width="25"
+              height="25"
+              alt="Exit"
+            />
+          </button>
+        </div>
       </div>
     </div>
   );

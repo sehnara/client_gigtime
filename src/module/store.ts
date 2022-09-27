@@ -5,8 +5,11 @@ import logger from "redux-logger";
 const middleware = [...getDefaultMiddleware(), logger];
 
 const store = configureStore({
-  reducer,
-  middleware,
+  reducer:reducer,
+  middleware: getDefaultMiddleware =>
+  getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
 export type AppDispatch = typeof store.dispatch;

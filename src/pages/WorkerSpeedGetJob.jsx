@@ -1,39 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import InputValue2 from "../components/InputValue2";
+import MapRoute from "../components/Map/MapRoute";
+import NavBar from "../components/NavBar";
 import Pachinco from "../components/Pachinco";
-const mockData = [
-  138300, 138750, 138900, 140100, 141150, 141850, 143200, 144250, 144950,
-  146300, 147350, 148050, 149400, 150450, 151150, 151600, 152500, 153550,
-  154250, 154300, 154700, 155600, 156650, 157350, 157400, 157800, 158100,
-  158900, 159600, 159700, 160100, 160500, 160600, 161100, 161800, 162300,
-  162400, 162800, 163200, 163400, 164100, 164600, 165100, 165200, 165600,
-  166000, 166200, 166700, 167200, 167700, 168200, 168300, 168700, 169100,
-  169300, 169550, 171350, 172050, 172550, 173050, 173550, 174050, 174200,
-  174550,
-];
-
-const mockVisit = [
-  { id: 13761, time: "10:00", store: "범표원두 역삼점" },
-  { id: 13762, time: "11:00", store: "범표원두 역삼점" },
-  { id: 13763, time: "12:00", store: "범표원두 역삼점" },
-  { id: 13764, time: "13:00", store: "범표원두 역삼점" },
-  { id: 13765, time: "14:00", store: "범표원두 역삼점" },
-  { id: 2444, time: "15:00", store: "쏭타이 역삼점" },
-  { id: 2445, time: "16:00", store: "쏭타이 역삼점" },
-  { id: 2446, time: "17:00", store: "쏭타이 역삼점" },
-  { id: 2447, time: "18:00", store: "쏭타이 역삼점" },
-  { id: 2448, time: "19:00", store: "쏭타이 역삼점" },
-  { id: 2449, time: "20:00", store: "쏭타이 역삼점" },
-  { id: 2450, time: "21:00", store: "쏭타이 역삼점" },
-  { id: 13773, time: "22:00", store: "범표원두 역삼점" },
-];
 
 const setTimes = (start, end) => {
   const arr = [];
-  if (start !== "" && start !== "") {
+  if (start !== "" && end !== "") {
     for (
       let i = Number(start.split(":")[0]);
       i <= Number(end.split(":")[0]);
@@ -52,6 +29,7 @@ const setTimes = (start, end) => {
 };
 
 const WorkerSpeedGetJob = () => {
+  const navigation = useNavigate();
   const [isPopUp, setIsPopUp] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [recruitData, setRecruitData] = useState({
@@ -69,8 +47,8 @@ const WorkerSpeedGetJob = () => {
 
   const getDatas = async () => {
     await axios
-      .post("http://localhost:4000/worker/suggestion", {
-        worker_id: 1, //sessionStorage.getItem("worker_id"),
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/suggestion`, {
+        worker_id: sessionStorage.getItem("worker_id"),
         work_date: recruitData.end_date,
         start_times: setTimes(recruitData.start_time, recruitData.end_time),
         type: recruitData.type,
@@ -100,6 +78,8 @@ const WorkerSpeedGetJob = () => {
           className="flex bg-black/[.8] absolute w-full h-full "
         >
           <Pachinco
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
             result={result}
             moneys={result.p_history}
             speed={80}
@@ -107,8 +87,20 @@ const WorkerSpeedGetJob = () => {
           />
         </div>
       )}
-      <Header title="바로알바" />
-      <div className="mx-8">
+      <NavBar mode="WORKER" />
+      <Header title="바로알바" worker={true} />
+      <div className="p-8 bg-slate-200">
+        <p className="text-xl">
+          최적의 <span className="text-cyan-500 font-bold">알바 경로</span>를
+        </p>
+        <p className="text-xl">추천해드립니다.</p>
+        <p className="bg-white text-sm mt-4 rounded-md p-4">
+          추천 받을 날짜와 시간만 설정하면{" "}
+          <span className="text-cyan-500">가장 높은 수익</span>이 기대되는 알바
+          시간표를 추천해드립니다.
+        </p>
+      </div>
+      <div className="mx-8 my-4">
         <InputValue2
           mode="SELECT"
           label={"알바유형"}
@@ -118,22 +110,22 @@ const WorkerSpeedGetJob = () => {
           dict_value={recruitData["type"]}
           options={[
             "알바유형 선택",
-            "음식점",
+            "설거지",
             "서빙",
             "청소",
             "음료제조",
-            "문서작업",
-            "번역",
-            "질서유지",
-            "경비",
+            "전단지",
+            "배달",
+            "고객관리",
+            "홍보",
             "주방보조",
-            "운송",
+            "포장",
             "판매",
-            "이벤트",
-            "편의점",
-            "건성용역",
-            "베이비시터",
-            "술집",
+            "심부름",
+            "카운터",
+            "계산",
+            "재료관리",
+            "매장관리",
           ]}
         />
         <InputValue2
@@ -209,22 +201,15 @@ const WorkerSpeedGetJob = () => {
           dict_value={recruitData["price"]}
         />
         <Button
-          title={"바로알바 견적내기"}
-          onClickEvent={() => setIsPopUp(!isPopUp)}
+          title={`바로알바 견적내기`}
+          onClickEvent={() => {
+            setIsPopUp(!isPopUp);
+          }}
         />
+        <div className="pb-24 "></div>
       </div>
     </div>
   );
 };
 
 export default WorkerSpeedGetJob;
-
-//    {
-//     "worker_id": 1,
-//     "work_date": "2022-08-20",
-//     "start_times": [
-//         "10:00",
-//         "11:00",
-//        ...
-//         ]
-// }

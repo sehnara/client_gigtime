@@ -17,12 +17,11 @@ const CardButton = ({
   setIsClick,
   onClickEvent,
 }: CardButtonProps) => {
-  
   const onClick = () => {
     onClickEvent && onClickEvent();
-    setIsClick!(true);
-    // console.log("여기")
+    setIsClick && setIsClick!(true);
   };
+
   return (
     <button
       onClick={onClick}

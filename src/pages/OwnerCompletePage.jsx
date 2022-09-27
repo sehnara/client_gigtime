@@ -4,48 +4,63 @@ import Button from "../components/Button";
 import dog from "../images/dog.png";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setOwnerEmail, setOwnerName } from "../module/slices/owner";
+import {
+  setOwnerEmail,
+  setOwnerName,
+} from "../module/slices/owner";
 import axios from "axios";
 
 function OwnerCompletePage() {
   const navigate = useNavigate();
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(setOwnerName(state.sign.name));
     dispatch(setOwnerEmail(state.sign.email));
   }, []);
 
+  async function backgroundImageUpload(id) {
+        // 해당 이미지 파일을 리덕스에 담고 CompletePage에서 진행해야할 것 같음.
+        let file = state.owner.background;
+        let data=  new FormData();
+        if (file) {
+            data.append('background', file);
+        }
+
+        data.append('id', id);
+        await axios.post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage/imageUpload/background`, data).then((res) => {
+            if (res.data.state === 'success') {
+                console.log('good')
+            }
+        });
+        
+    };
+
   async function onClickToRecruit() {
     await axios
-      .post("http://localhost:4000/owner/signup", state.owner)
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/signup`, state.owner)
       .then(function (response) {
-        console.log("response >>", response.data);
         if (response.data["result"] === "success") {
           sessionStorage.setItem("owner_id", response.data["owner_id"]);
-          navigate("/owner/recruit");
-        } else {
-          // console.log(response.data);
-        }
+
+          backgroundImageUpload(response.data["owner_id"]).then(()=>{navigate("/owner/recruit");});
+        } 
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  console.log("!!!!@!#", state.owner);
 
   async function onClickToHome() {
     await axios
-      .post("http://localhost:4000/owner/signup", state.owner)
+      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/signup`, state.owner)
       .then(function (response) {
         if (response.data["result"] === "success") {
           sessionStorage.setItem("owner_id", response.data["owner_id"]);
-          navigate("/owner/mypage");
-        } else {
-          // console.log(response.data["owner_id"]);
-        }
+          backgroundImageUpload(response.data["owner_id"]).then(()=>{ navigate("/owner/mypage");});
+         
+        } 
       })
       .catch(function (error) {
         console.log(error);
@@ -56,8 +71,7 @@ function OwnerCompletePage() {
     <div className="h-screen pt-40">
       <div className="m-8">
         <h2 className="text-3xl font-bold">
-          <span className="text-cyan-500">바로알바</span>
-          의
+          <span className="text-cyan-500">바로알바</span>의
         </h2>
         <h2 className="text-3xl font-bold">가족이 되신것을</h2>
         <h2 className="text-3xl font-bold">환영합니다!</h2>
