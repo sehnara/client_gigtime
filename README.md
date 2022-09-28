@@ -1,6 +1,7 @@
 # 바로알바(Client)
 
 ## Description
+- '구인난' 문제 해결을 위해 1시간 단위 아르바이트 모집 방식 제시
 
 ## Contributor
 - @KantWang (Wang Gyeongup)
@@ -19,8 +20,5 @@
 
 ```
 $ npm run dev
-```
-
-```
 $ npm run build
 ```
