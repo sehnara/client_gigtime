@@ -21,10 +21,15 @@
 #### 05:58-06:19 : 팀소개 및 마무리
 
 ## Tech Requirement
+
 - Create-react-app
 - react.js
 - PWA
-- 
+- Firebase(Firebase Cloud Messaging)
+- WebRtc
+- SocketIO(Chatting)
+- KaKao Map API
+
 
 ## Script
 ```
