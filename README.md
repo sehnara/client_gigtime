@@ -15,11 +15,12 @@
 ![KakaoTalk_20220808_203639678](https://user-images.githubusercontent.com/68607512/193293686-78ae08f6-7d08-4e05-9dd7-aae9e35d9e92.png)
 
 ## Presentation
+<img src="https://www.youtube.com/watch?v=EM6j4d8KUIQ&t=1s"/>
 - 00:58-04:15 : 시연 
 - 04:15-04:48 : 기술 스택
 - 04:49-05:57 : 프로젝트 진행 중 어려웠던 점
 - 05:58-06:19 : 팀소개 및 마무리
-<img src="https://www.youtube.com/watch?v=EM6j4d8KUIQ&t=1s">
+
 
 
 ## Tech Requirement
