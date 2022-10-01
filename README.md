@@ -3,6 +3,15 @@
 ## Description
 - '구인난' 문제 해결을 위해 1시간 단위 아르바이트 모집 방식 제시
 
+## Tech Requirement
+- Create-react-app
+- react.js
+- PWA
+- Firebase(Firebase Cloud Messaging)
+- WebRtc
+- SocketIO(Chatting)
+- KaKao Map API
+
 ## Contributor
 - @KantWang (Wang Gyeongup)
 - @jhw607 (Jang Hyewon)
@@ -19,16 +28,6 @@
 #### 04:15-04:48 : 기술 스택
 #### 04:49-05:57 : 프로젝트 진행 중 어려웠던 점
 #### 05:58-06:19 : 팀소개 및 마무리
-
-## Tech Requirement
-
-- Create-react-app
-- react.js
-- PWA
-- Firebase(Firebase Cloud Messaging)
-- WebRtc
-- SocketIO(Chatting)
-- KaKao Map API
 
 
 ## Script
