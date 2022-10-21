@@ -100,16 +100,6 @@ const WorkerNearWorkPage = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div>
-      <button
-        onClick={() => navigate("/worker/speed")}
-        className="flex justify-center items-center  bg-cyan-500 text-3xl font-extrabold rounded-full w-16 h-16  text-white fixed bottom-0 right-0 m-4 "
-      >
-        <AiOutlinePlus />
-      </button>
-      <NavBar />
-=======
     <div
       className={`bg-yellow-400 ${
         stores.length === 0 || stores.length === 1 || stores.length === 2
@@ -119,7 +109,6 @@ const WorkerNearWorkPage = () => {
     >
       <Header title="알바 신청" worker={true} />
       <NavBar mode={"WORKER"} />
->>>>>>> 0d207291781a956ec879a810cae94c86e4c71390
       {/* 상단 */}
       <div className="bg-slate-100">
         <div className=" p-4 flex justify-between items-center">

@@ -12,7 +12,6 @@ const OwnerInterviewTimeTable = () => {
   const [expiredResult, setExpiredResult] = useState([]);
   // 1.
   const [isClick, setIsClick] = useState(false);
-  console.log(">>>>>>>", isClick);
 
   // 2. 버튼 클릭 시 axios 설정 => if(res.data === 'success') setIsClick(true)
   const onClickAllow = async (id) => {
@@ -107,10 +106,6 @@ const OwnerInterviewTimeTable = () => {
         owner_id: ownerId,
       })
       .then(function (res) {
-<<<<<<< HEAD
-        console.log(">>>>>", res.data);
-=======
->>>>>>> 0d207291781a956ec879a810cae94c86e4c71390
         setNowResult(res.data["now"]);
         setWaitResult(res.data["wait"]);
         setWillResult(res.data["will"]);

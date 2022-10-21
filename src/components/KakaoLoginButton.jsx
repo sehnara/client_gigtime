@@ -95,7 +95,12 @@ function KakaoLoginButton() {
 
   return (
     <div className="mt-10">
-      <a id="custom-login-btn" onClick={kakaoLogin}>
+      <a
+        id="custom-login-btn"
+        onClick={() => {
+          navigate("/worker/home");
+        }}
+      >
         <img
           src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
           width="190"

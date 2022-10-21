@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import Header from "../components/Header";
-import magnifier from "../images/Magnifier.png";
+import magnifier from "../images/man.png";
 import Button from "../components/Button";
 import MapContainer from "../components/Map/MapContainer.jsx";
 import axios from "axios";
@@ -232,14 +232,14 @@ const OwnerAngelPage = () => {
                   <option className="text-gray-300">
                     알바 유형을 선택해주세요
                   </option>
-                  {angelData.types !== [] &&
+                  {/* {angelData.types !== [] &&
                     angelData.types.map((i, index) => {
                       return (
                         <option key={index} value={i}>
                           {i}
                         </option>
                       );
-                    })}
+                    })} */}
                 </select>
                 {/* 시작시간 */}
                 <label className="text-sm font-bold text-white mb-4">
