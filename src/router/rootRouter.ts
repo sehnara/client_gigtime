@@ -2,10 +2,10 @@ import LoginPage from "../pages/Login/view";
 import SignUpPage from "../pages/Signup/view";
 import SignUpStorePage from "../pages/Owner/SignUpStore/view";
 import SignUpAddressPage from "../pages/Owner/SignUpAddress/view";
-import OwnerJobTypePage from "../pages/Owner/SignUpJobs/view";
-import OwnerUploadPage from "../pages/Owner/SignUpDescription/view";
-import OwnerWagePage from "../pages/OwnerWagePage";
-// import OwnerCompletePage from "../pages/OwnerCompletePage";
+import SignUpJobs from "../pages/Owner/SignUpJobs/view";
+import SignUpDescription from "../pages/Owner/SignUpDescription/view";
+import SignUpWage from "../pages/Owner/SignUpWage/view";
+import SignUpComplete from "../pages/Owner/SignUpComplete/view";
 
 // import OwnerMyPage from "../pages/OwnerMyPage";
 // import WorkerLocationPage from "../pages/WorkerLocationPage";
@@ -36,10 +36,10 @@ const RootRouter: RouterInterface[] = [
   { path: "/signUp", element: SignUpPage },
   { path: "/owner/storename", element: SignUpStorePage },
   { path: "/owner/storelocation", element: SignUpAddressPage },
-  { path: "/owner/jobtype", element: OwnerJobTypePage },
-  { path: "/owner/upload", element: OwnerUploadPage },
-  { path: "/owner/wage", element: OwnerWagePage },
-  //   { path: "/owner/complete", element: OwnerCompletePage },
+  { path: "/owner/jobtype", element: SignUpJobs },
+  { path: "/owner/upload", element: SignUpDescription },
+  { path: "/owner/wage", element: SignUpWage },
+    { path: "/owner/complete", element: SignUpComplete },
   //   { path: "/owner/mypage", element: OwnerMyPage },
   //   { path: "/owner/recruit", element: OwnerRecruitNoticePage },
   //   { path: "/owner/qrCode", element: OwnerQrCode },

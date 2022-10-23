@@ -6,7 +6,7 @@ import { jobType } from ".";
 import { setStorejob } from "../../../module/slices/owner";
 import { useSelector, useDispatch } from "react-redux";
 
-const OwnerJobTypePage = () => {
+const SignUpJobs = () => {
 
   const [pick, setPick] = useState(jobType);
   const [select, setSelect] = useState([]);
@@ -49,4 +49,4 @@ const OwnerJobTypePage = () => {
   );
 };
 
-export default OwnerJobTypePage;
+export default SignUpJobs;

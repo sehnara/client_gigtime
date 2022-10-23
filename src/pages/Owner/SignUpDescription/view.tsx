@@ -7,7 +7,7 @@ import SignUpForm from '../../../components/Forms/SignUp/view';
 import { setDescription, setBackground } from '../../../module/slices/owner';
 import { useSelector, useDispatch } from 'react-redux';
 
-function OwnerUploadPage() {
+function SignUpDescription() {
     const [value, setValue] = useState('');
     const [image, setImage] = useState<any>('');
     const [background, setBackgroundImage] = useState(null);
@@ -79,4 +79,4 @@ function OwnerUploadPage() {
     );
 }
 
-export default OwnerUploadPage;
+export default SignUpDescription;
