@@ -1,12 +1,13 @@
 import LoginPage from "../pages/Login/view";
-// import LoginPage from "../pages/LoginPage";
-// import OwnerStoreNamePage from "../pages/OwnerStoreNamePage";
-// import OwnerStoreLocationPage from "../pages/OwnerStoreLocationPage";
-// import OwnerJobTypePage from "../pages/OwnerJobTypePage";
-// import OwnerMyPage from "../pages/OwnerMyPage";
+import SignUpPage from "../pages/Signup/view";
+import SignUpStorePage from "../pages/Owner/SignUpStore/view";
+import SignUpAddressPage from "../pages/Owner/SignUpAddress/view";
+import OwnerJobTypePage from "../pages/Owner/SignUpJobs/view";
+import OwnerUploadPage from "../pages/Owner/SignUpDescription/view";
+import OwnerWagePage from "../pages/OwnerWagePage";
 // import OwnerCompletePage from "../pages/OwnerCompletePage";
-// import OwnerUploadPage from "../pages/OwnerUploadPage";
-// import OwnerWagePage from "../pages/OwnerWagePage";
+
+// import OwnerMyPage from "../pages/OwnerMyPage";
 // import WorkerLocationPage from "../pages/WorkerLocationPage";
 // import WorkerDistancePage from "../pages/WorkerDistancePage";
 // import WorkerHomePage from "../pages/WorkerHomePage";
@@ -32,19 +33,19 @@ interface RouterInterface {
 
 const RootRouter: RouterInterface[] = [
   { path: "/*", element: LoginPage },
-  // { path: "/login", element: LoginPage },
-  //   { path: "/owner/storename", element: OwnerStoreNamePage },
-  //   { path: "/owner/storelocation", element: OwnerStoreLocationPage },
-  //   { path: "/owner/jobtype", element: OwnerJobTypePage },
-  //   { path: "/owner/upload", element: OwnerUploadPage },
-  //   { path: "/owner/wage", element: OwnerWagePage },
+  { path: "/signUp", element: SignUpPage },
+  { path: "/owner/storename", element: SignUpStorePage },
+  { path: "/owner/storelocation", element: SignUpAddressPage },
+  { path: "/owner/jobtype", element: OwnerJobTypePage },
+  { path: "/owner/upload", element: OwnerUploadPage },
+  { path: "/owner/wage", element: OwnerWagePage },
   //   { path: "/owner/complete", element: OwnerCompletePage },
   //   { path: "/owner/mypage", element: OwnerMyPage },
   //   { path: "/owner/recruit", element: OwnerRecruitNoticePage },
   //   { path: "/owner/qrCode", element: OwnerQrCode },
   //   { path: "/worker/distance", element: WorkerDistancePage },
   // { path: "/worker/home", element: WorkerHomePage },
-  //   { path: "/worker/location", element: WorkerLocationPage },
+    // { path: "/worker/location", element: WorkerLocationPage },
   //   { path: "/worker/interview", element: WorkerInterviewPage },
   //   { path: "/worker/nearWork", element: WorkerNearWorkPage },
   //   { path: "/worker/reserveWork", element: WorkerReserveWorkPage },

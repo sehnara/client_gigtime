@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import Header from "../components/Header";
 import magnifier from "../images/man.png";
-import Button from "../components/Button";
+import Button from "../components/Buttons/Normal/view";
 import MapContainer from "../components/Map/MapContainer.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

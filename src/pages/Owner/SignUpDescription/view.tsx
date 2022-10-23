@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Button from '../components/Buttons/Normal/view';
-import Header from '../components/Header/view';
-import SignUpForm from '../components/Forms/SignUp/view';
-import owner from '../images/owner.png';
-import { setDescription, setBackground } from '../module/slices/owner';
+import Button from '../../../components/Buttons/Normal/view';
+import Header from '../../../components/Header/view';
+import SignUpForm from '../../../components/Forms/SignUp/view';
+import { setDescription, setBackground } from '../../../module/slices/owner';
 import { useSelector, useDispatch } from 'react-redux';
 
 function OwnerUploadPage() {
     const [value, setValue] = useState('');
-    const [image, setImage] = useState(owner);
+    const [image, setImage] = useState<any>('');
     const [background, setBackgroundImage] = useState(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
 
-    const encodeFileToBase64 = (fileBlob) => {
+    const encodeFileToBase64 = (fileBlob:any) => {
         const reader = new FileReader();
 
         reader.readAsDataURL(fileBlob);
@@ -24,8 +23,7 @@ function OwnerUploadPage() {
         return new Promise((resolve) => {
             reader.onload = () => {
                 setImage(reader.result);
-
-                resolve();
+                // resolve();
             };
         });
     };
@@ -36,7 +34,7 @@ function OwnerUploadPage() {
         navigate('/owner/wage');
     }
 
-    const backgroundImageChangedHandler = (event) => {
+    const backgroundImageChangedHandler = (event:any) => {
         let imageFile = event.target.files[0];
         console.log(event.target.files);
 
@@ -57,30 +55,25 @@ function OwnerUploadPage() {
         <>
             <Header title="회원가입" />
             <div id="search" className="m-8 mt-10">
-                <div className="mb-4">
-                    <p className="text-lg font-bold">사장님의 매장을</p>
-                    <p className="text-lg font-bold">조금 더 알려주세요.</p>
-                </div>
-                <div className="flex p-1">
-                    <img className="object-cover w-20 mr-5" src={image} />
-                    <div className="pt-2">
-                        <p className="text-lg mb-1 font-bold">{state.owner.store_name}</p>
-                        <p className="text-slate-500">{state.owner.location}</p>
-                    </div>
-                </div>
-                <SignUpForm placeHorder={'한 줄 소개 입력'} value={value} setValue={setValue} />
+                <p className="text-sm mb-4">매장 소개 및 매장 프로필 사진 입력해주세요</p>
+                <SignUpForm title={'매장 소개'}placeholder ={''} value={''} setValue={() => {}} />
             </div>
+
             <div id="search" className="m-8">
                 <div className="mb-4">
-                    <p className="text-lg font-bold mb-1">매장사진 등록</p>
-                    <p className="text-slate-500">등록하신 사진이 알바 모집공고에 노출됩니다.</p>
+                    <p className="text-sm mb-1">매장 프로필 사진</p>
+                    <p className="text-xs text-red-500 text-slate-500">*등록하신 사진이 알바 모집공고에 노출됩니다.</p>
 
-                    <input type="file" onChange={backgroundImageChangedHandler} />
-                    {/* <Button title="업로드" width={300} height={50} onClickEvent={backgroundImageUploadHandler} /> */}
-                    {/* <img width="100vh" height="100vh" alt="logo" src={`${background}`} /> */}
+                    <div className='mt-4'>
+                        <input className="text-xs" type="file" onChange={backgroundImageChangedHandler} />
+                        {
+                            background === null ? <p></p> : <img width="100vh" height="100vh" alt="logo" src={`${background}`} />
+                        }
+                        
+                    </div>
                 </div>
                 <img className="object-cover w-full" src={image} />
-                <Button onClickEvent={onClickToNext} title="완료" />
+                <Button onClickEvent={onClickToNext} title="다음" />
             </div>
         </>
     );

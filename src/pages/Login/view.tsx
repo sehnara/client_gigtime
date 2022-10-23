@@ -1,5 +1,4 @@
-import React from "react";
-import InputLogin from "../../components/InputLogin/view";
+import InputLogin from "../../components/Forms/Login/view";
 
 const LoginPage = () => {
   return (

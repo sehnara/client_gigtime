@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "./Button";
+// import Button from "./Button";
 
 type PachincoType = {
   moneys: number[];
@@ -61,7 +61,7 @@ const Pachinco = ({
         )}
       </div>
       <div className="w-2/4">
-        {moneys.length === 0 ? (
+        {/* {moneys.length === 0 ? (
           <Button
             title={"나가기"}
             onClickEvent={() => {
@@ -79,7 +79,7 @@ const Pachinco = ({
           />
         ) : (
           <></>
-        )}
+        )} */}
       </div>
     </div>
   );

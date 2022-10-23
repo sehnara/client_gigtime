@@ -15,5 +15,6 @@ root.render(
     <App />
   </Provider>
 );
+
 serviceWorkerRegistration.register();
 reportWebVitals();
