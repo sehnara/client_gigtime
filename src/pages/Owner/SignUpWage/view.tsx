@@ -1,22 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+
 import Button from "../../../components/Buttons/Normal/view";
 import Header from "../../../components/Header/view";
 import SignUpForm from "../../../components/Forms/SignUp/view";
-import { setMinimumWage } from "../../../module/slices/owner";
-import { useSelector, useDispatch } from "react-redux";
+import { SignUpState } from "../../../context/signUp";
 
 function SignUpWage() {
-  const [value, setValue] = useState("");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-
-  function onClickToNext() {
-    // dispatch(setMinimumWage(value));/
-    navigate("/owner/complete");
-  }
-
+  
   return (
     <>
       <Header title="회원가입" />
@@ -30,10 +22,10 @@ function SignUpWage() {
         <SignUpForm
           title=""
           placeholder={"최저시급 입력하기"}
-          value={value}
-          setValue={setValue}
+          mode="pay"
+          state={SignUpState}
         />
-        <Button onClickEvent={onClickToNext} title="회원가입 완료" />
+        <Button onClickEvent={()=>navigate("/owner/complete")} title="회원가입 완료" />
       </div>
     </>
   );

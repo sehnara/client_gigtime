@@ -6,16 +6,16 @@ import SignUpJobs from "../pages/Owner/SignUpJobs/view";
 import SignUpDescription from "../pages/Owner/SignUpDescription/view";
 import SignUpWage from "../pages/Owner/SignUpWage/view";
 import SignUpComplete from "../pages/Owner/SignUpComplete/view";
+import OwnerMyPage from "../pages/OwnerMyPage";
+import OwnerRecruitNoticePage from "../pages/OwnerRecruitNoticePage";
 
-// import OwnerMyPage from "../pages/OwnerMyPage";
-// import WorkerLocationPage from "../pages/WorkerLocationPage";
-// import WorkerDistancePage from "../pages/WorkerDistancePage";
-// import WorkerHomePage from "../pages/WorkerHomePage";
+import SignUpLocation from "../pages/Worker/SignUpLocation/view";
+import SignUpDistance from "../pages/Worker/SignUpDistance/view";
+import WorkerHomePage from "../pages/WorkerHomePage";
 // import WorkerInterviewPage from "../pages/WorkerInterviewPage";
 // import WorkerNearWorkPage from "../pages/WorkerNearWorkPage.jsx";
 // import WorkerReserveWorkPage from "../pages/WorkerReserveWorkPage.jsx";
 // import WorkMyPage from "../pages/WorkMyPage";
-// import OwnerRecruitNoticePage from "../pages/OwnerRecruitNoticePage";
 // import WorkerSpeedGetJob from "../pages/WorkerSpeedGetJob";
 // import WorkerSpeedResultPage from "../pages/WorkerSpeedResultPage";
 // import CommonInterviewPage from "../pages/CommonInterviewPage";
@@ -39,13 +39,13 @@ const RootRouter: RouterInterface[] = [
   { path: "/owner/jobtype", element: SignUpJobs },
   { path: "/owner/upload", element: SignUpDescription },
   { path: "/owner/wage", element: SignUpWage },
-    { path: "/owner/complete", element: SignUpComplete },
-  //   { path: "/owner/mypage", element: OwnerMyPage },
-  //   { path: "/owner/recruit", element: OwnerRecruitNoticePage },
+  { path: "/owner/complete", element: SignUpComplete },
+  { path: "/owner/mypage", element: OwnerMyPage },
+  { path: "/owner/recruit", element: OwnerRecruitNoticePage },
   //   { path: "/owner/qrCode", element: OwnerQrCode },
-  //   { path: "/worker/distance", element: WorkerDistancePage },
-  // { path: "/worker/home", element: WorkerHomePage },
-    // { path: "/worker/location", element: WorkerLocationPage },
+  { path: "/worker/location", element: SignUpLocation },
+    { path: "/worker/distance", element: SignUpDistance },
+  { path: "/worker/home", element: WorkerHomePage },
   //   { path: "/worker/interview", element: WorkerInterviewPage },
   //   { path: "/worker/nearWork", element: WorkerNearWorkPage },
   //   { path: "/worker/reserveWork", element: WorkerReserveWorkPage },

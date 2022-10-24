@@ -7,7 +7,6 @@ import {HeaderProps} from './interface'
 const Header = ({
     title,
     onClickEvent,
-    worker
   }: HeaderProps): JSX.Element => {
 
     const navigate = useNavigate()
@@ -22,29 +21,12 @@ const Header = ({
         <AiOutlineArrowLeft
             className="text-gray-600 text-xl opacity-0"
         />
-      {/* {isLast ? (
-        <div className="h-4 w-4"></div>
-      ) : worker ? (
-        <button onClick={() => navigate("/worker/mypage")}>
-          <BiUserCircle className="text-2xl text-gray-500" />
-        </button>
-      ) : isSignUp ? (
-        <div>
-          <AiOutlineQuestionCircle className="text-2xl text-gray-500" />
-        </div>
-      ) : (
-        <button onClick={() => navigate("/owner/mypage")}>
-          <BiUserCircle className="text-2xl text-gray-500" />
-        </button>
-      )} */}
     </div>
   );
 };
 
 Header.defaultProps = {
     onClickEvent: "NONE",
-    isLast: false,
-    isFirst: false,
   };
   
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Buttons/Normal/view";
-import dog from "../images/dog.png";
+
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
@@ -75,10 +75,10 @@ function SignUpComplete() {
         <h2 className="text-3xl font-bold">환영합니다!</h2>
       </div>
       <div className="ml-8 mr-8 pt-1">
-        <Button title="모집공고 작성" onClickEvent={onClickToRecruit} />
+        <Button title="모집공고 작성" onClickEvent={()=>{navigate('/owner/recruit')}} />
         <button
           className="mt-2 font-bold w-full text-gray-500"
-          onClick={onClickToHome}
+          onClick={()=>{navigate('/owner/mypage')}}
         >
           홈으로
         </button>

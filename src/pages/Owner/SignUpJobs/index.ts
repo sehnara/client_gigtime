@@ -1,4 +1,4 @@
-export const jobType = [
+export const jobs = [
     {
       id: '1',
       name: '설거지',

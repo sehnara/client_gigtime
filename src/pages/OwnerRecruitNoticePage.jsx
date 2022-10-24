@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
+import Button from "../components/Buttons/Normal/view";
 import Header from "../components/Header";
 import InputValue2 from "../components/InputValue2";
 import NavBar from "../components/NavBar";

@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 
 function SignUpButton() {
-  
+
   const navigate = useNavigate();
-  function goNext(title: string):void {
+  
+  const goNext = (title: string):void => {
     if (title === "사장님") {
       navigate("/owner/storename");
     } else {

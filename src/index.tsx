@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import {RecoilRoot} from 'recoil'
 import { Provider } from "react-redux";
 import store from "./module/store";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
@@ -12,9 +13,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <App />
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
   </Provider>
 );
+
 
 serviceWorkerRegistration.register();
 reportWebVitals();
