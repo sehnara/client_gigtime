@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar/view";
 import Header from "../components/Header";
 import magnifier from "../images/man.png";
 import Button from "../components/Buttons/Normal/view";

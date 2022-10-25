@@ -9,6 +9,7 @@ import NavBar from "../components/NavBar";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BsPhone } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
+
 const WorkerInterviewPage = () => {
   const navigate = useNavigate();
   const [date, setDate] = useState<string | null>(null);

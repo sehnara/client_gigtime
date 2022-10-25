@@ -1,0 +1,1 @@
+export type ANGEL_STATE = "NONE" | "POSTING" | "SEARCHING" | "RESULT";

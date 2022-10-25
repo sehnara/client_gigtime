@@ -1,13 +1,12 @@
 import axios from "axios";
-import React, { useRef, useState, useEffect } from "react";
-import Header from "../components/Header";
-import TabBar from "../components/TabBar";
-import OwnerInterviewTimeTable from "./InOwnerMypages/OwnerInterviewTimeTable";
-import MyGigWorker from "./InOwnerMypages/MyGigWorker";
-import RecruitTable from "./InOwnerMypages/RecruitTable";
-import NavBar from "../components/NavBar";
+import { useRef, useState, useEffect } from "react";
+import Header from "../../../components/Header/view";
+import TabBar from "../../../components/Tabbar/view";
+import NavBar from "../../../components/Navbar/view";
 
-export type ANGEL_STATE = "NONE" | "POSTING" | "SEARCHING" | "RESULT";
+import WorkerList from "../../Owner/Mypage/WorkerList/view";
+import OwnerInterviewTimeTable from "../../InOwnerMypages/OwnerInterviewTimeTable";
+import RecruitTable from "../../InOwnerMypages/RecruitTable";
 
 const OwnerMyPage = () => {
   const [storename, setStorename] = useState("");
@@ -34,31 +33,32 @@ const OwnerMyPage = () => {
   //   watchScroll();
   // }, []);
 
-  const getData = async () => {
-    await axios
-      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage`, {
-        owner_id: ownerId,
-      })
-      .then(function (res: any) {
-        setStorename(res.data["store"]);
-        setName(res.data["name"]);
-      })
-      .catch(function (err: any) {
-        console.log(err);
-      });
-  };
-  const setMenu = (data: string) => {
-    setTab(data);
-  };
-  // [처음 데이터 받아올 때, 1]
-  useEffect(() => {
-    getData();
-  }, []);
+//   const getData = async () => {
+//     await axios
+//       .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/mypage`, {
+//         owner_id: ownerId,
+//       })
+//       .then(function (res: any) {
+//         setStorename(res.data["store"]);
+//         setName(res.data["name"]);
+//       })
+//       .catch(function (err: any) {
+//         console.log(err);
+//       });
+//   };
+
+//   const setMenu = (data: string) => {
+//     setTab(data);
+//   };
+  
+//   useEffect(() => {
+//     getData();
+//   }, []);
 
   return (
     <div className="h-screen overflow-scroll" ref={boxRef}>
-      <NavBar mode="OWNER" />
-      <Header title="마이 페이지" worker={false} />
+      <NavBar mode="OWNER"/>
+      <Header title="마이 페이지"/>
       <div className="">
         <div className="px-8 py-4 flex justify-between items-center  bg-slate-100">
           <h1 className="text-lg font-bold">{storename}</h1>
@@ -66,19 +66,20 @@ const OwnerMyPage = () => {
             <span className="font-bold text-cyan-600">{name}</span>님
           </h1>
         </div>
-        {/* TAB BAR  */}
+
         <TabBar
           tab={tab}
           menu={["모집내역", "면접관리", "나의 알바생"]}
-          setTab={setMenu}
+          setTab={setTab}
           ScrollActive={ScrollActive}
         />
+
         {tab === "면접관리" ? (
           <OwnerInterviewTimeTable />
         ) : tab === "모집내역" ? (
           <RecruitTable />
         ) : (
-          <MyGigWorker />
+          <WorkerList />
         )}
       </div>
     </div>

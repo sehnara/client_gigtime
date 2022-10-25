@@ -1,17 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import NavBarProps from "./interface";
+
 import { AiOutlineHome, AiOutlineUsergroupAdd } from "react-icons/ai";
 import { MdOutlineQrCodeScanner } from "react-icons/md";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { BsChatDots } from "react-icons/bs";
 import { FiZap } from "react-icons/fi";
 
-import { useNavigate } from "react-router-dom";
-import { ANGEL_STATE } from "../context/types/AngelState"
-type NavBarProps = {
-  mode?: "WORKER" | "OWNER";
-  angelUseState?: any;
-  isAngel?: ANGEL_STATE;
-};
 
 const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
   const navigate = useNavigate();
@@ -27,9 +23,9 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             className="text-2xl flex flex-col items-center"
           >
             <AiOutlineUsergroupAdd className="text-2xl" />
-
             <p className="text-xs">면접</p>
           </button>
+
           <button
             onClick={() => {
               navigate("/worker/nearWork");
@@ -39,6 +35,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             <RiMoneyDollarCircleLine className="text-2xl" />
             <p className="text-xs">알바</p>
           </button>
+
           <button
             onClick={() => {
               navigate("/worker/qrCode");
@@ -48,6 +45,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             <MdOutlineQrCodeScanner className="border-2 border-cyan-600 bg-cyan-500 p-3 w-16 h-16 rounded-full text-white absolute bottom-6 shadow-lg shadow-slate-300" />
             <p className="text-xs">출첵</p>
           </button>
+
           <button
             onClick={() => navigate("/worker/speed")}
             className="text-2xl flex flex-col items-center"
@@ -55,6 +53,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             <FiZap className="text-2xl" />
             <p className="text-xs">추천</p>
           </button>
+
           <button
             onClick={() => {
               navigate("/chatlist");
@@ -75,6 +74,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             <AiOutlineHome className="text-2xl" />
             <p className="text-xs">홈</p>
           </button>
+
           <button
             onClick={() => {
               navigate("/owner/recruit");
@@ -84,6 +84,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             <AiOutlineUsergroupAdd className="text-2xl" />
             <p className="text-xs">모집</p>
           </button>
+
           <button
             onClick={() => {
               navigate("/owner/qrCode");
@@ -93,6 +94,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             <MdOutlineQrCodeScanner className="border-2 border-cyan-600 bg-cyan-500 p-3 w-16 h-16 rounded-full text-white absolute bottom-6 shadow-lg shadow-slate-300" />
             <p className="text-xs">출첵</p>
           </button>
+
           <button
             onClick={() => {
               navigate("/owner/angel");
@@ -102,6 +104,7 @@ const NavBar = ({ mode, angelUseState, isAngel }: NavBarProps) => {
             <FiZap className="text-2xl" />
             <p className="text-xs">천사</p>
           </button>
+          
           <button
             onClick={() => {
               navigate("/chatlist");

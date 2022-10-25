@@ -6,8 +6,11 @@ import SignUpJobs from "../pages/Owner/SignUpJobs/view";
 import SignUpDescription from "../pages/Owner/SignUpDescription/view";
 import SignUpWage from "../pages/Owner/SignUpWage/view";
 import SignUpComplete from "../pages/Owner/SignUpComplete/view";
-import OwnerMyPage from "../pages/OwnerMyPage";
+import MyPage from "../pages/Owner/Mypage/view";
 import OwnerRecruitNoticePage from "../pages/OwnerRecruitNoticePage";
+// import OwnerQrCode from "../pages/OwnerQrCode";
+// import OwnerAngelResult from "../pages/WorkerAngelResult";
+// import OwnerAngelPage from "../pages/OwnerAngelPage";
 
 import SignUpLocation from "../pages/Worker/SignUpLocation/view";
 import SignUpDistance from "../pages/Worker/SignUpDistance/view";
@@ -20,11 +23,8 @@ import WorkerHomePage from "../pages/WorkerHomePage";
 // import WorkerSpeedResultPage from "../pages/WorkerSpeedResultPage";
 // import CommonInterviewPage from "../pages/CommonInterviewPage";
 // import WorkerQrCode from "../pages/WorkerQrCode";
-// import OwnerQrCode from "../pages/OwnerQrCode";
-// import OwnerAngelResult from "../pages/WorkerAngelResult";
 // import ChatListPage from "../pages/ChatListPage";
 // import ChatRoomPage from "../pages/ChatRoomPage";
-// import OwnerAngelPage from "../pages/OwnerAngelPage";
 
 interface RouterInterface {
   path: string;
@@ -40,7 +40,7 @@ const RootRouter: RouterInterface[] = [
   { path: "/owner/upload", element: SignUpDescription },
   { path: "/owner/wage", element: SignUpWage },
   { path: "/owner/complete", element: SignUpComplete },
-  { path: "/owner/mypage", element: OwnerMyPage },
+  { path: "/owner/mypage", element: MyPage },
   { path: "/owner/recruit", element: OwnerRecruitNoticePage },
   //   { path: "/owner/qrCode", element: OwnerQrCode },
   { path: "/worker/location", element: SignUpLocation },

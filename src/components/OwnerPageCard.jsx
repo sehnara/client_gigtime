@@ -4,7 +4,6 @@ import man from "../images/man.png";
 import clock from "../images/clock.png";
 import question from "../images/question.png";
 import CardButton from "./CardButton";
-import GigWorker from "./GigWorker";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -53,7 +52,7 @@ function OwnerPageCard({
             : "flex-col"
         } p-4 mb-8`}
       >
-        <GigWorker name={name} />
+        <p>{name}</p>
         {mode === "EXPIRED" && (
           <p className="pl-32 text-red-400 font-bold">만료</p>
         )}
