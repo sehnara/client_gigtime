@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useRef, useState, useEffect } from "react";
-import DanChoo from "../components/DanChoo";
 import TabBar from "../components/TabBar";
 import NavBar from "../components/NavBar";
 import dogHeart from "../images/dog_heart.png";
@@ -10,7 +9,7 @@ import WorkTimeTable from "./InWorkerMyPages/WorkTimeTable";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import Header from "../components/Header";
-import Empty from "../components/Empty";
+import Empty from "../components/Empty/view";
 
 const data = [
   { time: 49, text: "바로알바로 일 한 시간" },

@@ -2,7 +2,7 @@ import { faTruckMedical } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
-import Empty from "./Empty";
+import Empty from "./Empty/view";
 
 type MODE = "WORKER" | "OWNER";
 

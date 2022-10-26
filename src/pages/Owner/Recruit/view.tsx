@@ -1,13 +1,16 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Buttons/Normal/view";
-import Header from "../components/Header";
-import InputValue2 from "../components/InputValue2";
-import NavBar from "../components/NavBar";
 
-const OwnerRecruitNoticePage = () => {
-  const navigate = useNavigate();
+import Button from "../../../components/Buttons/Normal/view";
+import Header from "../../../components/Header/view";
+import NavBar from "../../../components/Navbar/view";
+import InputValue2 from "../../../components/InputValue2";
+
+const Recruitpage = () => {
+    const navigate = useNavigate();
+    const owner_id = sessionStorage.getItem("owner_id");
+
   const [recruitData, setRecruitData] = useState({
     store_name: "",
     address: "",
@@ -19,7 +22,7 @@ const OwnerRecruitNoticePage = () => {
     end_time: "",
     price: 0,
   });
-  const owner_id = sessionStorage.getItem("owner_id");
+
   const [postData, setPostData] = useState({
     owner_id: owner_id,
     store_name: "",
@@ -31,6 +34,7 @@ const OwnerRecruitNoticePage = () => {
     end_time: "",
     price: 0,
   });
+
   const setValue = (_key, _value) => {
     setRecruitData({ ...recruitData, [_key]: _value });
   };
@@ -54,35 +58,33 @@ const OwnerRecruitNoticePage = () => {
   };
 
   const onEnroll = async () => {
-    if (
-      postData.type.split(" ")[0] === "기입" ||
-      postData.type === undefined ||
-      postData.start_time.split(" ")[0] === "기입" ||
-      postData.start_time === "" ||
-      postData.end_time.split(" ")[0] === "기입" ||
-      postData.end_time === ""
-    ) {
-      alert("모집 공고 정보 기입을 완료해주세요.");
-      return;
-    }
+    // if (
+    //   postData.type.split(" ")[0] === "기입" ||
+    //   postData.type === undefined ||
+    //   postData.start_time.split(" ")[0] === "기입" ||
+    //   postData.start_time === "" ||
+    //   postData.end_time.split(" ")[0] === "기입" ||
+    //   postData.end_time === ""
+    // ) {
+    //   alert("모집 공고 정보 기입을 완료해주세요.");
+    //   return;
+    // }
 
-    await axios
-      .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/employment`, postData)
-      .then((res) => {
-        if (res.data === "success") {
-          alert("모집 공고 완료했습니다.");
-        }
+    // await axios
+    //   .post(`${process.env.REACT_APP_ROUTE_PATH}/owner/employment`, postData)
+    //   .then((res) => {
+    //     if (res.data === "success") {
+    //       alert("모집 공고 완료했습니다.");
+    //     }
         navigate("/owner/mypage");
-      });
+      // });
   };
-
-  console.log("EEEEEEE", postData);
 
   useEffect(() => {
     setPostData({
       ...postData,
       store_name: recruitData.store_name,
-      type: recruitData.type,
+      type: recruitData.types,
       description: recruitData.description,
       start_date: recruitData.start_date,
       end_date: recruitData.end_date,
@@ -100,8 +102,7 @@ const OwnerRecruitNoticePage = () => {
     <div className="pb-16">
       <Header title={"모집공고"} />
       <NavBar mode="OWNER" />
-      
-        {/* 알바유형 */}
+      <div>
         <InputValue2
           mode="SELECT"
           label={"알바유형"}
@@ -120,7 +121,6 @@ const OwnerRecruitNoticePage = () => {
           dict_value={recruitData["description"]}
         />
       </div>
-      {/* --------------------------------------------- */}
 
       <div className="mx-8 ">
         {/* 시작날짜 */}
@@ -197,4 +197,4 @@ const OwnerRecruitNoticePage = () => {
   );
 };
 
-export default OwnerRecruitNoticePage;
+export default Recruitpage;

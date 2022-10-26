@@ -3,8 +3,8 @@ import axios from "axios";
 import { QrReader } from "react-qr-reader";
 import { AiOutlineExpand } from "react-icons/ai";
 
-import NavBar from "../components/Navbar/view";
-import Header from "../components/Navbar/view";
+import NavBar from "../../../components/Navbar/view";
+import Header from "../../../components/Header/view";
 
 const OwnerQrCode = () => {
   const [data, setData] = useState("");
@@ -12,7 +12,6 @@ const OwnerQrCode = () => {
 
   const postData = async () => {
     const worker_id = Number(data.split(":")[1]);
-
     await axios
       .post("/owner/qrCode", {
         owner_id: sessionStorage.getItem("owner_id"),
@@ -31,8 +30,8 @@ const OwnerQrCode = () => {
 
   return (
     <div>
+      <Header title="출근 확인" />
       <NavBar mode="OWNER" />
-      <Header title="QR출근" />
       <div className="relative">
         <QrReader
           onResult={(result, error) => {

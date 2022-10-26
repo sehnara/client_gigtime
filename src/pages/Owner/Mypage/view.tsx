@@ -6,7 +6,7 @@ import NavBar from "../../../components/Navbar/view";
 
 import WorkerList from "../../Owner/Mypage/WorkerList/view";
 import OwnerInterviewTimeTable from "../../InOwnerMypages/OwnerInterviewTimeTable";
-import RecruitTable from "../../InOwnerMypages/RecruitTable";
+import RecruitPage from "../../Owner/Mypage/Recruit/view";
 
 const OwnerMyPage = () => {
   const [storename, setStorename] = useState("");
@@ -77,7 +77,7 @@ const OwnerMyPage = () => {
         {tab === "면접관리" ? (
           <OwnerInterviewTimeTable />
         ) : tab === "모집내역" ? (
-          <RecruitTable />
+          <RecruitPage />
         ) : (
           <WorkerList />
         )}

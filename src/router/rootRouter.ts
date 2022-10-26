@@ -7,14 +7,14 @@ import SignUpDescription from "../pages/Owner/SignUpDescription/view";
 import SignUpWage from "../pages/Owner/SignUpWage/view";
 import SignUpComplete from "../pages/Owner/SignUpComplete/view";
 import MyPage from "../pages/Owner/Mypage/view";
-import OwnerRecruitNoticePage from "../pages/OwnerRecruitNoticePage";
-// import OwnerQrCode from "../pages/OwnerQrCode";
-// import OwnerAngelResult from "../pages/WorkerAngelResult";
-// import OwnerAngelPage from "../pages/OwnerAngelPage";
+import Recruit from "../pages/Owner/Recruit/view";
+import OwnerQrCode from "../pages/Owner/QRReader/view";
+import OwnerAngelResult from "../pages/WorkerAngelResult";
+import OwnerAngelPage from "../pages/OwnerAngelPage";
 
 import SignUpLocation from "../pages/Worker/SignUpLocation/view";
 import SignUpDistance from "../pages/Worker/SignUpDistance/view";
-import WorkerHomePage from "../pages/WorkerHomePage";
+// import WorkerHomePage from "../pages/WorkerHomePage";
 // import WorkerInterviewPage from "../pages/WorkerInterviewPage";
 // import WorkerNearWorkPage from "../pages/WorkerNearWorkPage.jsx";
 // import WorkerReserveWorkPage from "../pages/WorkerReserveWorkPage.jsx";
@@ -41,11 +41,13 @@ const RootRouter: RouterInterface[] = [
   { path: "/owner/wage", element: SignUpWage },
   { path: "/owner/complete", element: SignUpComplete },
   { path: "/owner/mypage", element: MyPage },
-  { path: "/owner/recruit", element: OwnerRecruitNoticePage },
-  //   { path: "/owner/qrCode", element: OwnerQrCode },
+  { path: "/owner/recruit", element: Recruit },
+  { path: "/owner/qrCode", element: OwnerQrCode },
+    { path: "/owner/angel", element: OwnerAngelPage },
+
   { path: "/worker/location", element: SignUpLocation },
     { path: "/worker/distance", element: SignUpDistance },
-  { path: "/worker/home", element: WorkerHomePage },
+  // { path: "/worker/home", element: WorkerHomePage },
   //   { path: "/worker/interview", element: WorkerInterviewPage },
   //   { path: "/worker/nearWork", element: WorkerNearWorkPage },
   //   { path: "/worker/reserveWork", element: WorkerReserveWorkPage },
@@ -54,7 +56,6 @@ const RootRouter: RouterInterface[] = [
   //   { path: "/worker/speed/result", element: WorkerSpeedResultPage },
   //   { path: "/worker/qrCode", element: WorkerQrCode },
   //   { path: "/worker/AngelResult", element: OwnerAngelResult },
-  //   { path: "/owner/angel", element: OwnerAngelPage },
   //    {path : "/interview", element : CommonInterviewPage socket={socket}},
   //    {path : "/chatlist", element : ChatListPage socket={socket}},
   //    {path : "/chatroom", element : ChatRoomPage socket={socket}},

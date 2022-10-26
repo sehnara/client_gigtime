@@ -28,12 +28,14 @@ const InputValue2 = ({
   return (
     <div className={`mb-${margin_bottom}`}>
       {label && <label className="text-sm font-bold ">{label}</label>}
+
       <div
         className={`w-full rounded-lg border ${
           mode === "TIME" ? "border-white" : "border-gray-300"
         } mt-2`}
       >
-        {mode === "NORMAL" ? (
+        {
+        mode === "NORMAL" ? (
           <input
             id="input"
             className={`w-full rounded-md h-10 outline-gray-200 indent-2 ${
@@ -43,7 +45,8 @@ const InputValue2 = ({
             onChange={(e) => setValue(dict_key, e.target.value)}
             placeholder={title}
           />
-        ) : mode === "SELECT" ? (
+        ) 
+        : mode === "SELECT" ? (
           <select
             name="알바유형 선택"
             id="input"
@@ -60,13 +63,15 @@ const InputValue2 = ({
                 );
               })}
           </select>
-        ) : mode === "DATE" ? (
+        ) 
+        : mode === "DATE" ? (
           <input
             type="date"
             className={`w-full rounded-lg h-10 outline-gray-300 px-2`}
             onChange={(e) => setValue(dict_key, e.target.value)}
           />
-        ) : (
+        ) 
+        : (
           <div className="flex justify-between space-x-2">
             <select
               name="알바유형 선택"

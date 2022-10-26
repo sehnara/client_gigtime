@@ -21,17 +21,23 @@ const RecruitList = ({
 
   return (
     <div className="mb-8 ">
-      {mode === "WORKER" ? (
+      {mode === "WORKER" 
+      ? 
+      (
         <div>
           <div className="flex space-x-2 items-center">
-            {date == undefined ? (
-              <Empty text={"예약한 일거리가 없습니다."} margin={4} />
-            ) : (
+            {date == undefined 
+            ? 
+              (
+                <Empty text={"예약한 일거리가 없습니다."} margin={4} />
+              ) 
+            : (
               <div className="flex space-x-2">
                 <AiOutlineCalendar />
                 <p className="text-xs ">{`${year}년 ${month}월 ${day}일 ${yoil}요일`}</p>
               </div>
-            )}
+              )
+            }
           </div>
           <div className="flex space-x-2 mt-4">
             <p className="font-bold text-xl">{store}</p>
@@ -40,17 +46,25 @@ const RecruitList = ({
             <p className="text-xs">{address}</p>
           </div>
         </div>
-      ) : (
+      ) 
+      : 
+      (
         <div className="flex space-x-2 items-center">
-          {date == undefined ? (
+          {date == undefined 
+          ? 
+          (
             <Empty text={"모집 내역이 없습니다."} margin={4} />
-          ) : (
+          ) 
+          : 
+          (
             <div className="flex space-x-2 items-center mb-1 justify-between w-full">
               <div className="flex space-x-2 items-center ">
                 <AiOutlineCalendar className="text-sm" />
                 <p className="text-sm font-bold">{`${year}년 ${month}월 ${day}일 ${yoil}요일`}</p>
               </div>
-              {date !== undefined && (
+              {date !== undefined 
+              && 
+              (
                 <p className="text-sm text-gray-500 pr-2">
                   총
                   <span className="text-cyan-500 font-bold text-sm">
@@ -63,48 +77,55 @@ const RecruitList = ({
           )}
         </div>
       )}
-      {/* --------------------------------------------------------------------- */}
       <div
         className={`w-full  rounded-xl ${
           date === undefined ? "" : "shadow-xl"
         } pb-1`}
       >
-        {mode === "WORKER" ? (
+        {
+          mode === "WORKER" 
+        ? (
           ""
-        ) : (
+        ) 
+        :
+        (
           <p className="text-center pt-4 text-lg font-bold pb-2">{type}</p>
         )}
-        {isStretch
-          ? datas.map((e) => {
-              e = e.split(",");
-              return mode === "WORKER" ? (
-                <div
-                  key={e}
-                  className="space-x-4 px-4 border-b-2 border-gray-100"
-                >
-                  <p className="py-2 text-center text-sm">{`${e[0]}~${
-                    e[0].split(":")[0] * 1 + 1
-                  }:00`}</p>
-                </div>
-              ) : (
-                <div
-                  key={e}
-                  className="flex justify-between space-x-4 px-4 border-b-2 border-gray-100 "
-                >
-                  <p className="py-2 w-1/3 text-center text-sm ">{`${e[0]}~${
-                    e[0].split(":")[0] * 1 + 1
-                  }:00`}</p>
-                  <p className="py-2 w-1/3 text-sm text-center">{`${e[1]}원`}</p>
-                  <p className="py-2 w-1/3 text-center font-bold  text-sm">
-                    {e[2] === "null" ? (
-                      <span className=" text-red-400 font-bold">매칭 전</span>
-                    ) : (
-                      <span className="font-bold text-blue-500">{e[2]}</span>
-                    )}
-                  </p>
-                </div>
-              );
-            })
+        {
+          isStretch
+          ? 
+          datas.map((e) => {
+            e = e.split(",");
+            return mode === "WORKER" ? (
+              <div
+                key={e}
+                className="space-x-4 px-4 border-b-2 border-gray-100"
+              >
+                <p className="py-2 text-center text-sm">{`${e[0]}~${
+                  e[0].split(":")[0] * 1 + 1
+                }:00`}</p>
+              </div>
+            )
+            : 
+            (
+              <div
+                key={e}
+                className="flex justify-between space-x-4 px-4 border-b-2 border-gray-100 "
+              >
+                <p className="py-2 w-1/3 text-center text-sm ">{`${e[0]}~${
+                  e[0].split(":")[0] * 1 + 1
+                }:00`}</p>
+                <p className="py-2 w-1/3 text-sm text-center">{`${e[1]}원`}</p>
+                <p className="py-2 w-1/3 text-center font-bold  text-sm">
+                  {e[2] === "null" ? (
+                    <span className=" text-red-400 font-bold">매칭 전</span>
+                  ) : (
+                    <span className="font-bold text-blue-500">{e[2]}</span>
+                  )}
+                </p>
+              </div>
+            );
+          })
           : datas.map((e) => {
               if (datas.indexOf(e) < 3) {
                 e = e.split(",");
