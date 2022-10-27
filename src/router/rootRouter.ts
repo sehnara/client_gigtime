@@ -9,12 +9,12 @@ import SignUpComplete from "../pages/Owner/SignUpComplete/view";
 import MyPage from "../pages/Owner/Mypage/view";
 import Recruit from "../pages/Owner/Recruit/view";
 import OwnerQrCode from "../pages/Owner/QRReader/view";
-import OwnerAngelResult from "../pages/WorkerAngelResult";
-import OwnerAngelPage from "../pages/OwnerAngelPage";
+// import OwnerAngelResult from "../pages/WorkerAngelResult";
+// import OwnerAngelPage from "../pages/OwnerAngelPage";
 
 import SignUpLocation from "../pages/Worker/SignUpLocation/view";
 import SignUpDistance from "../pages/Worker/SignUpDistance/view";
-// import WorkerHomePage from "../pages/WorkerHomePage";
+import MainPage from "../pages/Worker/Main/view";
 // import WorkerInterviewPage from "../pages/WorkerInterviewPage";
 // import WorkerNearWorkPage from "../pages/WorkerNearWorkPage.jsx";
 // import WorkerReserveWorkPage from "../pages/WorkerReserveWorkPage.jsx";
@@ -43,11 +43,11 @@ const RootRouter: RouterInterface[] = [
   { path: "/owner/mypage", element: MyPage },
   { path: "/owner/recruit", element: Recruit },
   { path: "/owner/qrCode", element: OwnerQrCode },
-    { path: "/owner/angel", element: OwnerAngelPage },
+    // { path: "/owner/angel", element: OwnerAngelPage },
 
   { path: "/worker/location", element: SignUpLocation },
-    { path: "/worker/distance", element: SignUpDistance },
-  // { path: "/worker/home", element: WorkerHomePage },
+  { path: "/worker/distance", element: SignUpDistance },
+  { path: "/worker/home", element: MainPage },
   //   { path: "/worker/interview", element: WorkerInterviewPage },
   //   { path: "/worker/nearWork", element: WorkerNearWorkPage },
   //   { path: "/worker/reserveWork", element: WorkerReserveWorkPage },

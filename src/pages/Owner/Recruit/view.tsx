@@ -102,7 +102,7 @@ const Recruitpage = () => {
     <div className="pb-16">
       <Header title={"모집공고"} />
       <NavBar mode="OWNER" />
-      <div>
+      <div className="mx-8 ">
         <InputValue2
           mode="SELECT"
           label={"알바유형"}
@@ -112,7 +112,6 @@ const Recruitpage = () => {
           dict_value={recruitData["types"]}
           options={recruitData["types"]}
         />
-        {/* 상세설명 */}
         <InputValue2
           title="해당 공고에 대한 설명 부탁드려요."
           label={"상세설명"}
@@ -120,10 +119,6 @@ const Recruitpage = () => {
           dict_key={"description"}
           dict_value={recruitData["description"]}
         />
-      </div>
-
-      <div className="mx-8 ">
-        {/* 시작날짜 */}
         <InputValue2
           mode="DATE"
           label={"시작날짜"}
@@ -132,7 +127,6 @@ const Recruitpage = () => {
           dict_key={"start_date"}
           dict_value={recruitData["start_date"]}
         />
-        {/* 종료날짜 */}
         <InputValue2
           mode="DATE"
           label={"종료날짜"}
@@ -141,7 +135,6 @@ const Recruitpage = () => {
           dict_key={"end_date"}
           dict_value={recruitData["end_date"]}
         />
-        {/* 근무 시간 */}
         <InputValue2
           mode="TIME"
           label="근무시간"
@@ -179,8 +172,6 @@ const Recruitpage = () => {
           ]}
           setValue={setValue}
         />
-
-        {/* 시급 설정 */}
         <InputValue2
           title="시급을 설정해주세요."
           label={"시급설정"}

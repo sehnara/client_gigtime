@@ -4,7 +4,7 @@ import AddressProps from "./interface";
 import { useRecoilState } from "recoil";
 import DaumPostcode from "react-daum-postcode";
 
-const AddressSearch = ({ mode,state } : AddressProps) => {
+const AddressSearch = ({ mode,state, label } : AddressProps) => {
   const [sign, setSign] = useRecoilState(state)
 
   const handleComplete = (data:any) => {
@@ -24,7 +24,9 @@ const AddressSearch = ({ mode,state } : AddressProps) => {
     setSign({...sign, [mode] : fullAddress})
   };
   
-  return (<div>
+  return (
+  <div>
+    {label && <p className="text-xs font-bold text-slate-500 ml-1 mb-2">{label}</p>}
     <p className="mb-4 border-2 p-1 rounded-4 h-10 overflow-hidden">{
       sign.address.length >= 24 
       ? sign.address.slice(0,25) 

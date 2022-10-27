@@ -1,5 +1,4 @@
 import React from "react";
-import GigWorker from "../../components/GigWorker";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -44,7 +43,8 @@ const MyGigWorker = () => {
           <div className="w-full h-full rounded-xl shadow-lg shadow-black-500 mr-2 mb-2 text-center flex flex-col p-4">
             {workers &&
               workers.map((el, index) => (
-                <GigWorker key={index} name={el} bottomBorder="border-b-2" />
+                <></>
+                // <GigWorker key={index} name={el} bottomBorder="border-b-2" />
               ))}
           </div>
         </div>

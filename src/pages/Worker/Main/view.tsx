@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import StoreCard from "../components/StoreCard";
-import { useDispatch, useSelector } from "react-redux";
-import man from "../images/worker.png";
-import axios from "axios";
-import { setCurrentOrder } from "../module/slices/order";
-import { setStoreId } from "../module/slices/store";
-import NavBar from "../components/NavBar";
-import Empty from "../components/Empty";
-import { HiOutlineLocationMarker } from "react-icons/hi";
-import Header from "../components/Header";
 import { useCallback } from "react";
+import axios from "axios";
 
-const WorkerHomePage = () => {
+import StoreCard from "../../../components/StoreCard";
+import NavBar from "../../../components/Navbar/view";
+import Empty from "../../../components/Empty/view";
+import Header from "../../../components/Header/view";
+
+// import { useDispatch, useSelector } from "react-redux";
+// import { setCurrentOrder } from "../module/slices/order";
+// import { setStoreId } from "../module/slices/store";
+import man from "../../../images/man.png";
+
+const Home = () => {
   const navigate = useNavigate();
-  const state = useSelector((state) => state);
+//   const state = useSelector((state) => state);
   const loc = state.sign.location.split(" ");
   const locName = `${loc[0]} ${loc[1]} ${loc[2]}`;
   const [loca, setLoc] = useState("");
@@ -24,10 +25,10 @@ const WorkerHomePage = () => {
 
   const [stores, setStores] = useState([]);
   const [cursor, setCursor] = useState(0);
-  const dispatch = useDispatch();
+//   const dispatch = useDispatch();
 
-  const onNextPage = (e) => {
-    dispatch(setStoreId(e));
+  const onNextPage = (e:any) => {
+    // dispatch(setStoreId(e));
     sessionStorage.setItem("store_id", e);
     navigate("/worker/interview");
   };
@@ -72,14 +73,6 @@ const WorkerHomePage = () => {
       document.body.scrollTop
     );
     let clientHeight = document.documentElement.clientHeight;
-    // console.log(
-    //   "scrollHeight : ",
-    //   scrollHeight,
-    //   "scrollTop : ",
-    //   scrollTop,
-    //   "clientHeight : ",
-    //   clientHeight
-    // );
 
     if (scrollTop + clientHeight + 120 >= scrollHeight) {
       axios
@@ -92,7 +85,7 @@ const WorkerHomePage = () => {
             return;
           }
           setCursor(res.data[res.data.length - 1].store_id);
-          setStores((list) => [...list, ...res.data]);
+        //   setStores((list) => [...list, ...res.data]);
         });
     }
   }, [stores]);
@@ -108,7 +101,7 @@ const WorkerHomePage = () => {
 
   return (
     <div className="font-sans bg-cyan-500 h-screen">
-      <Header title="주변 가게" worker={true} isFirst={true} />
+      <Header title="주변 가게" />
       <NavBar mode="WORKER" />
       {/* 상단 */}
       <div className="bg-slate-100">
@@ -143,30 +136,35 @@ const WorkerHomePage = () => {
           있어요.
         </h1>
         <div>
-          {notFound ? (
+          {notFound 
+          ? (
             <div className=" text-center font-bold pt-28">
               <p className="animate-pulse text-lg">
                 면접 가능한 가게가 없습니다
               </p>
             </div>
-          ) : stores && stores.length !== 0 ? (
-            stores.map((store, index) => {
-              return (
-                <StoreCard
-                  key={index}
-                  store={store.name}
-                  distance={store.distance}
-                  jobs={[]}
-                  storeImage={`${process.env.REACT_APP_S3_PATH}${store.background_image}`}
-                  minPay={store.minimum_wage}
-                  ment={store.description}
-                  onClickEvent={() => {
-                    onNextPage(store.store_id);
-                  }}
-                />
-              );
-            })
-          ) : (
+          ) 
+          : (
+        //   stores && stores.length !== 0 
+        //   ? (
+        //     stores.map((store, index) => {
+        //       return (
+        //         <StoreCard
+        //           key={index}
+        //           store={store.name}
+        //           distance={store.distance}
+        //           jobs={[]}
+        //           storeImage={`${process.env.REACT_APP_S3_PATH}${store.background_image}`}
+        //           minPay={store.minimum_wage}
+        //           ment={store.description}
+        //           onClickEvent={() => {
+        //             onNextPage(store.store_id);
+        //           }}
+        //         />
+        //       );
+        //     })
+        //   ) 
+        //   : (
             <Empty text={"주변 일거리를 불러오는 중입니다."} margin={10} />
           )}
         </div>
@@ -175,4 +173,4 @@ const WorkerHomePage = () => {
   );
 };
 
-export default WorkerHomePage;
+export default Home;

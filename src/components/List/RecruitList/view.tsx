@@ -5,7 +5,7 @@ import Empty from "../../Empty/view";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 
-import { gettimeData } from "../../../services/date";
+import { gettimeData } from "../../../utils/date";
 
 const RecruitList = ({
   date,

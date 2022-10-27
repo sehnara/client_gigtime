@@ -117,7 +117,6 @@ const OwnerInterviewTimeTable = () => {
     setIsClick(false);
   }, [isClick]);
 
-  console.log("2222222222", isClick);
 
   return (
     <div className="px-8">

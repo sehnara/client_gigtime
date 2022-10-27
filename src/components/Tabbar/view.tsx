@@ -2,12 +2,11 @@ import { useRef } from "react";
 import TabBarProps from "./interface";
 
 const TabBar = 
-    ({ menu, tab, setTab, ScrollActive }: TabBarProps) => 
+    ({ menu, tab, setTab }: TabBarProps) => 
 {
   const tabRef = useRef(1);
-  
   return (
-    <div className={ScrollActive ? "flex space-x-2 border-b-2 justify-between items-center bg-white top-0 fixed w-full" : "flex space-x-2 border-b-2 justify-between items-center bg-white"}>
+    <div className={"flex space-x-2 border-b-2 justify-between items-center bg-white"}>
       {menu.map((e) => {
         tabRef.current += 1;
         return tab === e 

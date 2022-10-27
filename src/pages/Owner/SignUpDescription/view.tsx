@@ -5,7 +5,7 @@ import axios from 'axios';
 import Button from '../../../components/Buttons/Normal/view';
 import Header from '../../../components/Header/view';
 import SignUpForm from '../../../components/Forms/SignUp/view';
-import {backgroundImageChangedHandler, encodeFileToBase64} from '../../../services/file'
+import {backgroundImageChangedHandler, encodeFileToBase64} from '../../../utils/file'
 import { useRecoilState } from 'recoil';
 import { SignUpState } from '../../../context/signUp';
 
