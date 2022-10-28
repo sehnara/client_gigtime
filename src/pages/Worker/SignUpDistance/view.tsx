@@ -7,14 +7,22 @@ import Map from "../../../components/Map/Map";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { SignUpWorkerState } from "../../../context/signUpWork";
+import SignUp from "../../../services/signup";
+import config from "../../../config";
 
 const WorkerDistancePage = () => {
   const navigate = useNavigate();
+  const signUp = new SignUp(config.SERVER_URL)
   const [sign, setSign] = useRecoilState(SignUpWorkerState)
 
   const onChangeDistance = (e: any) => {
     setSign({...sign, distance : e.target.value})
   };
+
+  const onSignUp = () => {
+    signUp.signUpWorker(sign)
+    navigate("/*")
+  }
 
 //   const setSignData = async () => {
 //     await axios
@@ -55,10 +63,14 @@ const WorkerDistancePage = () => {
           address={'판교'}
           range={sign.distance}
         />
-        <Button title={"완료"} onClickEvent={()=>{navigate("/worker/home")}} />
+        <Button title={"완료"} onClickEvent={onSignUp} />
       </div>
     </div>
   );
 };
 
 export default WorkerDistancePage;
+function signUpWorker(sign: any) {
+  throw new Error("Function not implemented.");
+}
+

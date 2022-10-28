@@ -1,3 +1,15 @@
+import SignDataType from "../../../context/interfaces/SignUpType"
+
+export function checkEmptyForm(signData : SignDataType){
+    const {category} = signData
+    if(category.length === 0){
+      return false
+    }
+    else{
+      return true
+    }
+}
+
 export const jobs = [
     {
       id: '1',

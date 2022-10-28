@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import NavBar from "../components/Navbar/view";
-import Header from "../components/Header";
+import Header from "../components/Header/view";
 import magnifier from "../images/man.png";
 import Button from "../components/Buttons/Normal/view";
 import MapContainer from "../components/Map/MapContainer.jsx";

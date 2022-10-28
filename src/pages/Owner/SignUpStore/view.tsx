@@ -1,18 +1,26 @@
-import React, { useState } from "react";
-import axios from "axios";
-
-import { useNavigate } from "react-router-dom";
-
 import Header from "../../../components/Header/view";
 import SignUpForm from "../../../components/Forms/SignUp/view";
 import Button from "../../../components/Buttons/Normal/view";
-import { SignUpState } from '../../../context/signUp';
+
+import { useNavigate } from "react-router-dom";
+import { SignUpState } from "../../../context/signUp";
+import { checkEmptyForm } from ".";
+import { useRecoilValue } from "recoil";
+import SignDataType from "../../../context/interfaces/SignUpType";
 
 const SignUpStorePage = () => {
+  
   const navigate = useNavigate();
-
-  function goNext() {
-    navigate('/owner/storelocation');
+  const signData = useRecoilValue<SignDataType>(SignUpState)
+  
+  function goNextStep() {
+    const isFulfilled = checkEmptyForm(signData)
+    if(isFulfilled){
+      navigate('/owner/storelocation');
+    }
+    else{
+      alert('아래 정보를 모두 기입해주세요')
+    }
   } 
 
   return (
@@ -49,7 +57,7 @@ const SignUpStorePage = () => {
             state={SignUpState}
         />
 
-        <Button title="다음" onClickEvent={()=>{goNext()}}/>
+        <Button title="다음" onClickEvent={goNextStep}/>
       </div>
     </>
   );

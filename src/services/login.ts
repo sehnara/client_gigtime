@@ -2,6 +2,7 @@ import axios from "axios";
 
 export default class Login {
     baseURL: string;
+    
     constructor(baseURL:string){
         this.baseURL = baseURL
     }

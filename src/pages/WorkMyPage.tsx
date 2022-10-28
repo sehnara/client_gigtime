@@ -1,14 +1,13 @@
 import axios from "axios";
 import React, { useRef, useState, useEffect } from "react";
-import TabBar from "../components/TabBar";
-import NavBar from "../components/NavBar";
-import dogHeart from "../images/dog_heart.png";
+import TabBar from "../components/Tabbar/view";
+import NavBar from "../components/Navbar/view";
 import InterviewTimeTable from "./InWorkerMyPages/InterviewTimeTable";
 import WinStores from "./InWorkerMyPages/WinStores";
 import WorkTimeTable from "./InWorkerMyPages/WorkTimeTable";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
-import Header from "../components/Header";
+import Header from "../components/Header/view";
 import Empty from "../components/Empty/view";
 
 const data = [
@@ -69,7 +68,7 @@ const WorkMyPage = () => {
 
   return (
     <div className="h-screen overflow-scroll" ref={boxRef}>
-      <Header title="마이페이지" worker={true} />
+      <Header title="마이페이지"/>
       {/* TAB BAR  */}
       <NavBar mode="WORKER" />
       <TabBar

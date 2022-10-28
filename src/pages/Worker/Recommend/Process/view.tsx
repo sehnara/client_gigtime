@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import Button from "./Button";
+import ProcessType from "./interface";
+import Button from "../../../../components/Buttons/Normal/view";
 
-type PachincoType = {
-  moneys: number[];
-  visits: any[];
-  speed?: number;
-  result?: {};
-  setIsOpen?: (e: boolean) => void;
-  isOpen?: boolean;
-};
-
-const Pachinco = ({
+const WorkerRecommendProcess = ({
   result,
   moneys,
   speed,
   visits,
   setIsOpen,
   isOpen,
-}: PachincoType) => {
+}: ProcessType) => {
   const [prevMoney, setPrevMoney] = useState<number>(0);
   const [money, setMoney] = useState<number>(0);
   const [sec, setSec] = useState<number>(0);
@@ -60,8 +52,9 @@ const Pachinco = ({
           `${money}원`
         )}
       </div>
+      
       <div className="w-2/4">
-        {/* {moneys.length === 0 ? (
+        {moneys.length === 0 ? (
           <Button
             title={"나가기"}
             onClickEvent={() => {
@@ -79,14 +72,14 @@ const Pachinco = ({
           />
         ) : (
           <></>
-        )} */}
+        )}
       </div>
     </div>
   );
 };
 
-Pachinco.defaultProps = {
+WorkerRecommendProcess.defaultProps = {
   speed: 1000,
 };
 
-export default Pachinco;
+export default WorkerRecommendProcess;

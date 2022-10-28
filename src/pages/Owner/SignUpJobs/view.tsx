@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { jobs } from ".";
+import { SignUpState } from "../../../context/signUp";
+import { jobs, checkEmptyForm } from ".";
+import SignDataType from "../../../context/interfaces/SignUpType";
 
 import Button from "../../../components/Buttons/Normal/view";
 import Header from "../../../components/Header/view";
-import { SignUpState } from "../../../context/signUp";
 
 
 const SignUpJobs = () => {
   const navigate = useNavigate()
   const [sign, setSign] = useRecoilState(SignUpState)
+
+  function goNextStep() {
+    const isFulfilled = checkEmptyForm(sign)
+    if(isFulfilled){
+      navigate('/owner/upload');
+    }
+    else{
+      alert('희망하는 직무를 하나 이상 선택해주세요')
+    }
+  } 
   
   return (
     <>
@@ -23,12 +34,12 @@ const SignUpJobs = () => {
               <button 
                 key={el.id} 
                 onClick={() => { 
-                  !sign.category.map(e => e.name).includes(el.name)
+                  !sign.category.map((e:any )=> e.name).includes(el.name)
                     ? setSign({...sign, category : [...sign.category, el]})
-                    : setSign({...sign, category : sign.category.filter(e => e.name !== el.name)})
+                    : setSign({...sign, category : sign.category.filter((e:any )=> e.name !== el.name)})
                 }}
                 className={
-                  sign.category.map(e=> e.name).includes(el.name) 
+                  sign.category.map((e:any )=> e.name).includes(el.name) 
                   ? "text-xs font-bold bg-cyan-500 text-white px-4 h-7 py-1 rounded-2xl mr-3 mb-3" :
                    "text-xs bg-gray-200 px-4 h-7 py-1 rounded-2xl mr-3 mb-3"
                 }
@@ -36,7 +47,7 @@ const SignUpJobs = () => {
             )}
           </div>
         </div>
-        <Button title="다음" onClickEvent={()=>{navigate('/owner/upload')}}/>
+        <Button title="다음" onClickEvent={goNextStep}/>
       </div>
     </>
   );

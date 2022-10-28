@@ -8,10 +8,22 @@ import SignUpForm from '../../../components/Forms/SignUp/view';
 import {backgroundImageChangedHandler, encodeFileToBase64} from '../../../utils/file'
 import { useRecoilState } from 'recoil';
 import { SignUpState } from '../../../context/signUp';
+import { checkEmptyForm } from '.';
 
 function SignUpDescription() {
     const navigate = useNavigate();
     const [sign, setSign] = useRecoilState(SignUpState)
+
+    function goNextStep() {
+        const isFulfilled = checkEmptyForm(sign)
+        if(isFulfilled){
+          navigate('/owner/wage');
+        }
+        else{
+          alert('아래 정보를 모두 기입해주세요')
+        }
+      } 
+
     return (
         <>
             <Header title="회원가입" />
@@ -38,7 +50,7 @@ function SignUpDescription() {
                     </div>
                 </div>
                 <img className="object-cover w-full" src={sign.profile} />
-                <Button onClickEvent={()=>{navigate('/owner/wage')}} title="다음" />
+                <Button onClickEvent={goNextStep} title="다음" />
             </div>
         </>
     );

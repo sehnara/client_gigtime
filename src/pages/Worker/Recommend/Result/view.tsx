@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import Button from "../components/Button";
-import Header from "../components/Header";
-import { AiOutlineArrowDown } from "react-icons/ai";
 import axios from "axios";
-import MapRoute from "../components/Map/MapRoute";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { BiTimeFive } from "react-icons/bi";
 import { RiPinDistanceLine } from "react-icons/ri";
 import { GiReceiveMoney } from "react-icons/gi";
 
+import Button from "../../../../components/Buttons/Normal/view";
+import Header from "../../../../components/Header/view";
+import MapRoute from "../../../../components/Map/MapRoute";
+
+
 const WorkerSpeedResultPage = () => {
-  const location = useLocation();
+  const navigate = useNavigate();
+  const location  = useLocation();
   const result = location.state.result;
   const loc = location.state.visits;
   const totalPrice = location.state.totalPrice;
-  const navigate = useNavigate();
 
-  function setStarts(arr) {
+  function setStarts(arr:any[]) {
     const starts = [0];
     for (let i = 1; i < arr.length; i++) {
       if (arr[i].store !== arr[i - 1].store) {
@@ -26,7 +27,7 @@ const WorkerSpeedResultPage = () => {
     return starts;
   }
 
-  function getDurations(arr) {
+  function getDurations(arr:any[]) {
     const durations = [];
     let time = 0;
     for (let i = 1; i < arr.length; i++) {
@@ -43,23 +44,23 @@ const WorkerSpeedResultPage = () => {
     return durations;
   }
 
-  const onReserve = async () => {
-    await axios
-      .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/suggestion/submit`, {
-        worker_id: sessionStorage.getItem("worker_id"),
-        hourly_order_id: loc.map((i) => i.id),
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .then(() => {
-        navigate("/worker/home");
-      });
-  };
+//   const onReserve = async () => {
+//     await axios
+//       .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/suggestion/submit`, {
+//         worker_id: sessionStorage.getItem("worker_id"),
+//         hourly_order_id: loc.map((i) => i.id),
+//       })
+//       .then((res) => {
+//         console.log(res.data);
+//       })
+//       .then(() => {
+//         navigate("/worker/home");
+//       });
+//   };
 
   return (
     <div className="h-full w-full">
-      <Header title={"바로알바 신청하기"} worker={true} />
+      <Header title={"바로알바 신청하기"} />
       <MapRoute
         locations={setStarts(loc).map((i) => loc[i])}
         durations={getDurations(loc)}
@@ -88,11 +89,12 @@ const WorkerSpeedResultPage = () => {
             </div>
           </p>
         </div>
+
         <Button
-          title={"알바신청하기"}
-          className="mt-4"
+          title={"신청하기"}
           onClickEvent={() => {
-            onReserve();
+            // onReserve();
+            navigate("/worker/home");
           }}
         />
       </div>

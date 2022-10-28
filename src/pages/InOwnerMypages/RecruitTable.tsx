@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import List from "../../components/List";
-import NotFound from "../../components/NotFound";
+// import NotFound from "/components/NotFound";
 
 // const mockDict = [
 //   [
@@ -42,7 +42,8 @@ const RecruitTable = () => {
   return (
     <div className="m-8 mb-36">
       {data === undefined ? (
-        <NotFound title={"아직 모집내역이 없어요!"} />
+        // <NotFound title={"아직 모집내역이 없어요!"} />
+        <></>
       ) : (
         data.map((e) => {
           keyRef.current += 1;

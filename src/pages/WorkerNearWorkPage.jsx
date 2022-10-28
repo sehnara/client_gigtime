@@ -8,8 +8,8 @@ import {
   setCurrentOrder,
   setCurrentType,
 } from "../module/slices/order";
-import Empty from "../components/Empty";
-import NavBar from "../components/NavBar";
+import Empty from "../components/Empty/view";
+import NavBar from "../components/Navbar/view";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useCallback } from "react";
 import Header from "../components/Header";

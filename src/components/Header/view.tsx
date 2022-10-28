@@ -1,16 +1,13 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Navigate, useNavigate } from "react-router-dom";
-import { BiUserCircle } from "react-icons/bi";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import {HeaderProps} from './interface'
 
 const Header = ({
     title,
     onClickEvent,
   }: HeaderProps): JSX.Element => {
+  const navigate = useNavigate()
 
-    const navigate = useNavigate()
-  
   return (
     <div className="px-4 py-4 flex items-center justify-between bg-white">
         <AiOutlineArrowLeft
@@ -28,6 +25,5 @@ const Header = ({
 Header.defaultProps = {
     onClickEvent: "NONE",
   };
-  
 
 export default Header;

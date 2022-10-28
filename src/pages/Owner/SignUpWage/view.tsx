@@ -1,13 +1,31 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue} from 'recoil'
 
 import Button from "../../../components/Buttons/Normal/view";
 import Header from "../../../components/Header/view";
 import SignUpForm from "../../../components/Forms/SignUp/view";
 import { SignUpState } from "../../../context/signUp";
+import SignUp from "../../../services/signup";
+import config from "../../../config";
+import { checkEmptyForm } from ".";
+import SignDataType from "../../../context/interfaces/SignUpType";
 
 function SignUpWage() {
   const navigate = useNavigate();
+  const signData = useRecoilValue<SignDataType>(SignUpState)
+  const signUp = new SignUp(config.SERVER_URL)
+
+  const onSignUp = async () => {
+    const isFulfilled = checkEmptyForm(signData)
+    if(isFulfilled){
+      signUp.signUpOwner(signData)
+      await navigate("/owner/complete")
+    }
+    else{
+      alert('아래 정보를 모두 기입해주세요')
+    }
+  }
   
   return (
     <>
@@ -25,7 +43,7 @@ function SignUpWage() {
           mode="pay"
           state={SignUpState}
         />
-        <Button onClickEvent={()=>navigate("/owner/complete")} title="회원가입 완료" />
+        <Button onClickEvent={onSignUp} title="회원가입 완료" />
       </div>
     </>
   );

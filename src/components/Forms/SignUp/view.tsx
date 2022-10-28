@@ -10,6 +10,7 @@ const SignUpForm = (
             <p className="text-xs font-bold text-slate-500 ml-1 mb-2">{title}</p>
             <div className="w-full rounded-lg border mb-4 text-sm">
                 <input 
+                    type={mode === 'password' ? 'password' :'text'}
                     className="w-full rounded-lg h-10 outline-gray-300 indent-2 text-sm" 
                     placeholder={placeholder}
                     value={sign[mode]}

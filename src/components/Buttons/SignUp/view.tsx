@@ -1,10 +1,7 @@
-import React from "react";
 import { positions } from ".";
 import { useNavigate } from "react-router-dom";
 
-
 function SignUpButton() {
-
   const navigate = useNavigate();
   
   const goNext = (title: string):void => {
