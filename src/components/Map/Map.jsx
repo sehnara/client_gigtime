@@ -48,7 +48,28 @@ const Map = ({ level, width, height, address, range }) => {
     drawCircle();
   }, [range]);
 
-  return <div id="myMap" className={`w-${width} h-${height}`}></div>;
+  return (
+    <div id="myMap" className={`w-${width} h-${height}`}>
+      <p>h</p>
+      <p>g</p>
+      <p>h</p>
+      <p>g</p>
+      <p>h</p>
+      <p>g</p>
+      <p>h</p>
+      <p>g</p>
+      <p>h</p>
+      <p>g</p>
+      <p>h</p>
+      <p>g</p>
+      <p>h</p>
+      <p>g</p>
+      <p>h</p>
+      <p>g</p>
+      <p>h</p>
+      <p>g</p>
+    </div>
+  );
 };
 
 export default Map;

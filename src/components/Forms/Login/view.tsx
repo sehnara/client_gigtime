@@ -1,17 +1,26 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoginForm from ".";
 
 const InputLogin = (): JSX.Element => {
+  const navigate = useNavigate()
+
   const [id, setId] = useState<string>('')
   const [pwd, setPwd] = useState<string>('')
   const login = new LoginForm()
 
-  const onSubmit = () => {
-    login.onLogin(id, pwd)  
+  const onSubmit = async () => {
+    const isWorker = await login.onLogin(id, pwd)
+    if(isWorker){
+      navigate('./worker/home')
+    }
+    else{
+      navigate('./owner/mypage')
+    }
   };
 
   const goSignUpPage = ()=>{
-    login.goSignUpPage()
+    navigate('./signUp')
   }
 
   return (

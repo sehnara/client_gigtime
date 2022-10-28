@@ -4,7 +4,6 @@ import Button from "../../../components/Buttons/Normal/view";
 import Header from "../../../components/Header/view";
 import Map from "../../../components/Map/Map";
 
-import axios from "axios";
 import { useRecoilState } from "recoil";
 import { SignUpWorkerState } from "../../../context/signUpWork";
 import SignUp from "../../../services/signup";
@@ -19,24 +18,26 @@ const WorkerDistancePage = () => {
     setSign({...sign, distance : e.target.value})
   };
 
-  const onSignUp = () => {
-    signUp.signUpWorker(sign)
-    navigate("/*")
+  function checkEmptyForm(){
+    const {distance} = sign
+    if(!distance || distance === '0'){
+      return false
+    }
+    else{
+      return true
+    }
   }
 
-//   const setSignData = async () => {
-//     await axios
-//       .post(`${process.env.REACT_APP_ROUTE_PATH}/worker/signup`, signData)
-//       .then((res) => {
-//         sessionStorage.setItem("worker_id", res.data);
-//       })
-//       .then(() => {
-//         navigate("/worker/home");
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
-//   };
+  function goNextStep(){
+    const isFulfilled = checkEmptyForm()
+    if(isFulfilled){
+      signUp.signUpWorker(sign)
+      navigate("/")
+    }
+    else{
+      alert('아래 정보를 모두 기입해주세요')
+    }
+  }
 
   return (
     <div className="font-sans">
@@ -63,7 +64,7 @@ const WorkerDistancePage = () => {
           address={'판교'}
           range={sign.distance}
         />
-        <Button title={"완료"} onClickEvent={onSignUp} />
+        <Button title={"완료"} onClickEvent={goNextStep} />
       </div>
     </div>
   );

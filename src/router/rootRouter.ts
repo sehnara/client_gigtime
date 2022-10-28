@@ -46,9 +46,9 @@ const RootRouter: RouterInterface[] = [
   { path: "/owner/qrCode", element: OwnerQrCode },
     // { path: "/owner/angel", element: OwnerAngelPage },
 
+  { path: "/worker/home", element: MainPage },
   { path: "/worker/location", element: SignUpLocation },
   { path: "/worker/distance", element: SignUpDistance },
-  { path: "/worker/home", element: MainPage },
     // { path: "/worker/interview", element: WorkerInterviewPage },
     // { path: "/worker/nearWork", element: WorkerNearWorkPage },
   //   { path: "/worker/reserveWork", element: WorkerReserveWorkPage },

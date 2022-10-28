@@ -8,11 +8,13 @@ import StoreCard from "../../../components/StoreCard";
 import NavBar from "../../../components/Navbar/view";
 import Empty from "../../../components/Empty/view";
 import Header from "../../../components/Header/view";
+import jwtDecode from "jwt-decode";
 
 
 const Home = () => {
   const navigate = useNavigate();
-  const {address, distance, userName} = JSON.parse(localStorage.getItem("user")!)
+  console.log(jwtDecode(localStorage.getItem("token")!))
+  const {address, distance, username} = jwtDecode(localStorage.getItem("token")!)
   const [notFound, setIsNotFound] = useState(false);
 
   const [stores, setStores] = useState([]);
@@ -109,7 +111,7 @@ const Home = () => {
 
       <div className="p-8 py-0 bg-cyan-500 pb-24">
         <h1 className="text-lg font-bold mb-4 text-right pt-4">
-          <span className="text-2xl text-white">{userName} </span>님을 기다리고
+          <span className="text-2xl text-white">{username} </span>님을 기다리고
           있어요.
         </h1>
         <div>
